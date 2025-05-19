@@ -1,9 +1,11 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { EVENT_QUERY } from "@/sanity/lib/queries";
+import { PortableText } from "next-sanity";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { dataFormattata } from "@/sanity/lib/date";
 import { urlFor } from "@/sanity/lib/image";
+import { components } from "@/sanity/portableTextComponent";
 import Image from "next/image";
 
 export default async function Page({
@@ -37,7 +39,15 @@ export default async function Page({
 				/>
 			) : null}
 			<h1 className="text-4xl font-bold text-balance">{evento?.eventName}</h1>
-			<h2 className="text-3xl text-balance">{evento?.eventDescription}</h2>
+			{evento?.eventDescription ? (
+				<div className="prose">
+					<PortableText
+						value={evento?.eventDescription}
+						components={components}
+					/>
+				</div>
+			) : null}
+
 			<p>{dataFormattata(evento?.data)}</p>
 			<hr />
 			<Link href="/eventi">&larr; Torna agli eventi</Link>

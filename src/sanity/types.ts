@@ -68,6 +68,38 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type BlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+  _type: "image";
+  _key: string;
+}>;
+
 export type Home = {
   _id: string;
   _type: "home";
@@ -155,7 +187,7 @@ export type Eventi = {
   _rev: string;
   eventName?: string;
   eventType?: "escursione" | "conferenza";
-  eventDescription?: string;
+  eventDescription?: BlockContent;
   slug?: Slug;
   data?: string;
   immagine?: {
@@ -179,6 +211,12 @@ export type Eventi = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "speaker";
   }>;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityImageCrop = {
@@ -238,13 +276,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Home | Navbar | Speaker | Eventi | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | BlockContent | Home | Navbar | Speaker | Eventi | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -294,14 +326,14 @@ export type EVENT_QUERYResult = {
     _type: "image";
   } | null;
   data: string | null;
-  eventDescription: string | null;
+  eventDescription: BlockContent | null;
 } | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'eventi' && defined(slug.current)][0...12]\n    {\n  _id , data ,slug , eventName, eventType , immagine\n, speakers}": EVENTS_QUERYResult;
+    "*[_type == 'eventi' && defined(slug.current)][0...12]\n    {\n  _id , data ,slug , eventName, eventType , immagine, speakers}": EVENTS_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  eventName, immagine, data, eventDescription}": EVENT_QUERYResult;
   }
 }

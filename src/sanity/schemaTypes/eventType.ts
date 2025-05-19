@@ -27,7 +27,7 @@ export const event = defineType({
 		defineField({
 			name: "eventDescription",
 			title: "Descrizione Evento", // titolo nell'editor
-			type: "text",
+			type: "blockContent",
 			validation: (e) => e.required(),
 		}),
 		defineField({
