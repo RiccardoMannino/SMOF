@@ -45,7 +45,24 @@ export const event = defineType({
 			name: "immagine",
 			title: "Immagine Evento",
 			type: "image",
+			options: {
+				hotspot: true,
+			},
+			fields: [
+				{
+					name: "alt",
+					type: "string",
+					title: "Testo alternativo",
+					validation: (rule) =>
+						rule.custom((value, context) => {
+							const parent = context?.parent as { asset?: { _ref?: string } };
 
+							return !value && parent?.asset?._ref
+								? "Alt text is required when an image is present"
+								: true;
+						}),
+				},
+			],
 			validation: (e) => e.required(),
 		}),
 		defineField({
