@@ -154,29 +154,6 @@ export type Navbar = {
     _type: "Menu";
     _key: string;
   }>;
-  navbarCta?: string;
-};
-
-export type Speaker = {
-  _id: string;
-  _type: "speaker";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  speakerName?: string;
-  speakerBio?: string;
-  speakerImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
 };
 
 export type Eventi = {
@@ -204,13 +181,34 @@ export type Eventi = {
     _type: "image";
   };
   biglietto?: string;
-  speakers?: Array<{
+  speakers?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    _key: string;
     [internalGroqTypeReferenceTo]?: "speaker";
-  }>;
+  };
+};
+
+export type Speaker = {
+  _id: string;
+  _type: "speaker";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  speakerName?: string;
+  speakerBio?: string;
+  speakerImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type Slug = {
@@ -276,15 +274,52 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | BlockContent | Home | Navbar | Speaker | Eventi | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | BlockContent | Home | Navbar | Eventi | Speaker | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
-// Query: *[_type == 'eventi' && defined(slug.current)][0...12]    {  _id , data ,slug , eventName, eventType , immagine, speakers}
+// Query: *[_type == 'eventi' && defined(slug.current)][0...12]    {  _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{    speakerName,    speakerBio,    speakerImage  }}
 export type EVENTS_QUERYResult = Array<{
   _id: string;
   data: string | null;
   slug: Slug | null;
+  eventName: string | null;
+  eventType: "conferenza" | "escursione" | null;
+  eventDescription: BlockContent | null;
+  immagine: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  speakers: {
+    speakerName: string | null;
+    speakerBio: string | null;
+    speakerImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+}>;
+// Variable: EVENT_QUERY
+// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, eventType, immagine, data, eventDescription, speakers->{    speakerName,    speakerBio,    speakerImage  }}
+export type EVENT_QUERYResult = {
+  _id: string;
   eventName: string | null;
   eventType: "conferenza" | "escursione" | null;
   immagine: {
@@ -300,40 +335,37 @@ export type EVENTS_QUERYResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
-  speakers: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "speaker";
-  }> | null;
-}>;
-// Variable: EVENT_QUERY
-// Query: *[_type == 'eventi' && slug.current == $slug][0]{  eventName, immagine, data, eventDescription}
-export type EVENT_QUERYResult = {
-  eventName: string | null;
-  immagine: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
   data: string | null;
   eventDescription: BlockContent | null;
+  speakers: {
+    speakerName: string | null;
+    speakerBio: string | null;
+    speakerImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
 } | null;
+// Variable: EVENTS_SLUGS_QUERY
+// Query: *[_type == "eventi" && defined(slug.current)]{   "slug": slug.current}
+export type EVENTS_SLUGS_QUERYResult = Array<{
+  slug: string | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'eventi' && defined(slug.current)][0...12]\n    {\n  _id , data ,slug , eventName, eventType , immagine, speakers}": EVENTS_QUERYResult;
-    "*[_type == 'eventi' && slug.current == $slug][0]{\n  eventName, immagine, data, eventDescription}": EVENT_QUERYResult;
+    "*[_type == 'eventi' && defined(slug.current)][0...12]\n    {\n  _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }}": EVENTS_QUERYResult;
+    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }}": EVENT_QUERYResult;
+    "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
   }
 }

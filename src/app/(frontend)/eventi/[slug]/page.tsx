@@ -41,6 +41,7 @@ export default async function Page({
 			<h1 className="text-4xl font-bold text-balance">{evento?.eventName}</h1>
 			{evento?.eventDescription ? (
 				<div className="prose">
+					<span>Data evento: {dataFormattata(evento?.data)}</span>
 					<PortableText
 						value={evento?.eventDescription}
 						components={components}
@@ -48,7 +49,6 @@ export default async function Page({
 				</div>
 			) : null}
 
-			<p>{dataFormattata(evento?.data)}</p>
 			<hr />
 			<Link href="/eventi">&larr; Torna agli eventi</Link>
 		</main>

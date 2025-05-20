@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 import { DocumentTextIcon } from "@sanity/icons";
 
@@ -71,10 +71,10 @@ export const event = defineType({
 		}),
 		defineField({
 			name: "speakers",
-			title: "Speakers",
-			type: "array",
+			title: "Speakers", //  titolo nell'editor
+			type: "reference",
+			to: [{ type: "speaker" }],
 			validation: (e) => e.required(),
-			of: [defineArrayMember({ type: "reference", to: [{ type: "speaker" }] })],
 		}),
 	],
 });
