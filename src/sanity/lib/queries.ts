@@ -15,9 +15,24 @@ export const EVENT_QUERY =
     speakerName,
     speakerBio,
     speakerImage
+  }, relatedEvents[]{
+    _key, // nessario per il drag and drop
+    ...@->{_id, eventName, slug} // get fields from the referenced event
   }}`);
 
 export const EVENTS_SLUGS_QUERY =
 	defineQuery(`*[_type == "eventi" && defined(slug.current)]{ 
   "slug": slug.current
+}`);
+
+export const PAGE_QUERY =
+	defineQuery(`*[_type == "page" && slug.current == $slug][0]{
+  ...,
+  content[]{
+    ...,
+    _type == "faqs" => {
+      ...,
+      faqs[]->
+    }
+  }
 }`);

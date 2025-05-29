@@ -6,6 +6,7 @@ import Link from "next/link";
 import { dataFormattata } from "@/sanity/lib/date";
 import { urlFor } from "@/sanity/lib/image";
 import { components } from "@/sanity/portableTextComponent";
+import { RelatedEvents } from "@/components/RelatedEvents";
 import Image from "next/image";
 
 export default async function Page({
@@ -48,7 +49,11 @@ export default async function Page({
 					/>
 				</div>
 			) : null}
-
+			<RelatedEvents
+				relatedEvents={evento.relatedEvents}
+				documentId={evento._id}
+				documentType="eventi"
+			/>
 			<hr />
 			<Link href="/eventi">&larr; Torna agli eventi</Link>
 		</main>

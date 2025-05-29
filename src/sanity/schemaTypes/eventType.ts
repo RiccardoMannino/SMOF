@@ -31,6 +31,12 @@ export const event = defineType({
 			validation: (e) => e.required(),
 		}),
 		defineField({
+			name: "relatedEvents",
+			title: "Eventi Correlati",
+			type: "array",
+			of: [{ type: "reference", to: { type: "eventi" } }],
+		}),
+		defineField({
 			name: "slug",
 			type: "slug",
 			options: { source: "eventName" },

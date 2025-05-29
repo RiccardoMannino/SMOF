@@ -68,6 +68,168 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type SplitImage = {
+  _type: "splitImage";
+  orientation?: "imageLeft" | "imageRight";
+  title?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type Hero = {
+  _type: "hero";
+  title?: string;
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type Features = {
+  _type: "features";
+  title?: string;
+  features?: Array<{
+    title?: string;
+    text?: string;
+    _type: "feature";
+    _key: string;
+  }>;
+};
+
+export type Faqs = {
+  _type: "faqs";
+  title?: string;
+  faqs?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "faq";
+  }>;
+};
+
+export type Faq = {
+  _id: string;
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
+export type PageBuilder = Array<{
+  _key: string;
+} & Hero | {
+  _key: string;
+} & SplitImage | {
+  _key: string;
+} & Features | {
+  _key: string;
+} & Faqs>;
+
+export type Page = {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  content?: PageBuilder;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type BlockContent = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -165,6 +327,13 @@ export type Eventi = {
   eventName?: string;
   eventType?: "escursione" | "conferenza";
   eventDescription?: BlockContent;
+  relatedEvents?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "eventi";
+  }>;
   slug?: Slug;
   data?: string;
   immagine?: {
@@ -274,7 +443,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | BlockContent | Home | Navbar | Eventi | Speaker | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Home | Navbar | Eventi | Speaker | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -317,7 +486,7 @@ export type EVENTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: EVENT_QUERY
-// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, eventType, immagine, data, eventDescription, speakers->{    speakerName,    speakerBio,    speakerImage  }}
+// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, eventType, immagine, data, eventDescription, speakers->{    speakerName,    speakerBio,    speakerImage  }, relatedEvents[]{    _key, // nessario per il drag and drop    ...@->{_id, eventName, slug} // get fields from the referenced event  }}
 export type EVENT_QUERYResult = {
   _id: string;
   eventName: string | null;
@@ -353,19 +522,167 @@ export type EVENT_QUERYResult = {
       _type: "image";
     } | null;
   } | null;
+  relatedEvents: Array<{
+    _key: string;
+    _id: string;
+    eventName: string | null;
+    slug: Slug | null;
+  }> | null;
 } | null;
 // Variable: EVENTS_SLUGS_QUERY
 // Query: *[_type == "eventi" && defined(slug.current)]{   "slug": slug.current}
 export type EVENTS_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
+// Variable: PAGE_QUERY
+// Query: *[_type == "page" && slug.current == $slug][0]{  ...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
+export type PAGE_QUERYResult = {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  content: Array<{
+    _key: string;
+    _type: "faqs";
+    title?: string;
+    faqs: Array<{
+      _id: string;
+      _type: "faq";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      title?: string;
+      body?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }>;
+    }> | null;
+  } | {
+    _key: string;
+    _type: "features";
+    title?: string;
+    features?: Array<{
+      title?: string;
+      text?: string;
+      _type: "feature";
+      _key: string;
+    }>;
+  } | {
+    _key: string;
+    _type: "hero";
+    title?: string;
+    text?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }>;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | {
+    _key: string;
+    _type: "splitImage";
+    orientation?: "imageLeft" | "imageRight";
+    title?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  }> | null;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'eventi' && defined(slug.current)][0...12]\n    {\n  _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }}": EVENTS_QUERYResult;
-    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }}": EVENT_QUERYResult;
+    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // nessario per il drag and drop\n    ...@->{_id, eventName, slug} // get fields from the referenced event\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
   }
 }

@@ -1,3 +1,4 @@
+// funzione per formattare la data in questo formato esempio: 31 maggio 2025 alle ore 18:06
 export function dataFormattata(data: string | null) {
 	return new Date(data as string).toLocaleString("it-IT", {
 		day: "2-digit",
