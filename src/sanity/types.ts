@@ -68,6 +68,20 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  homePage?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "page";
+  };
+};
+
 export type SplitImage = {
   _type: "splitImage";
   orientation?: "imageLeft" | "imageRight";
@@ -443,7 +457,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Home | Navbar | Eventi | Speaker | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Home | Navbar | Eventi | Speaker | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
