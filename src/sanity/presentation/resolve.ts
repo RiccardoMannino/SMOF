@@ -5,7 +5,7 @@ import {
 
 export const resolve: PresentationPluginOptions["resolve"] = {
 	locations: {
-		// Add more locations for other event types
+		// Add more locations per altri tipi di eventi
 		page: defineLocations({
 			select: {
 				title: "title",

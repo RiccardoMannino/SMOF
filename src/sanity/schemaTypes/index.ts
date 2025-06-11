@@ -1,6 +1,5 @@
 import { type SchemaTypeDefinition } from "sanity";
 import { event } from "./eventType";
-import { home } from "./homeType";
 import { navbar } from "./navbarTypes";
 import { speaker } from "./speakerType";
 import { blockContentType } from "./blockContentType";
@@ -12,13 +11,13 @@ import { featuresType } from "./blocks/featuresType";
 import { heroType } from "./blocks/heroType";
 import { siteSettingsType } from "./siteSettingsType";
 import { splitImageType } from "./blocks/splitImageType";
+import { staffType } from "./blocks/staffType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
 		event,
 		speaker,
 		navbar,
-		home,
 		blockContentType,
 		pageType,
 		pageBuilderType,
@@ -28,5 +27,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		heroType,
 		splitImageType,
 		siteSettingsType,
+		staffType,
 	],
 };

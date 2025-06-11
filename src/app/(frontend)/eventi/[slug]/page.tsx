@@ -27,7 +27,7 @@ export default async function Page({
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12">
 			{evento?.immagine ? (
 				<Image
-					className="w-full aspect-[800/300]"
+					className="w-full aspect-[800/300] rounded-2xl"
 					src={urlFor(evento?.immagine)
 						.width(800)
 						.height(300)
@@ -39,7 +39,9 @@ export default async function Page({
 					height="300"
 				/>
 			) : null}
-			<h1 className="text-4xl font-bold text-balance">{evento?.eventName}</h1>
+			<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard text-balance">
+				{evento?.eventName}
+			</h1>
 			{evento?.eventDescription ? (
 				<div className="prose">
 					<span>Data evento: {dataFormattata(evento?.data)}</span>

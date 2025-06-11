@@ -9,30 +9,30 @@ export const event = defineType({
 	title: "Eventi",
 	fields: [
 		defineField({
-			name: "eventName",
+			name: "eventName", // nome usato nella query
 			title: "Nome Evento", // titolo nell'editor
 			type: "string",
 			validation: (e) => e.required(),
 		}),
 		defineField({
-			name: "eventType",
+			name: "eventType", // nome usato nella query
 			title: "Tipo Evento", // titolo nell'editor
 			type: "string",
 			options: {
-				list: ["escursione", "conferenza"],
+				list: ["escursione", "conferenza"], // tipo evento
 				layout: "dropdown",
 			},
 			validation: (e) => e.required(),
 		}),
 		defineField({
-			name: "eventDescription",
+			name: "eventDescription", // nome usato nella query
 			title: "Descrizione Evento", // titolo nell'editor
 			type: "blockContent",
 			validation: (e) => e.required(),
 		}),
 		defineField({
-			name: "relatedEvents",
-			title: "Eventi Correlati",
+			name: "relatedEvents", // nome usato nella query
+			title: "Eventi Correlati", // titolo nell'editor
 			type: "array",
 			of: [{ type: "reference", to: { type: "eventi" } }],
 		}),
@@ -42,13 +42,13 @@ export const event = defineType({
 			options: { source: "eventName" },
 		}),
 		defineField({
-			name: "data",
+			name: "data", // nome usato nella query
 			title: "Data evento",
 			type: "datetime",
 			validation: (e) => e.required(),
 		}),
 		defineField({
-			name: "immagine",
+			name: "immagine", // nome usato nella query
 			title: "Immagine Evento",
 			type: "image",
 			options: {
@@ -72,11 +72,11 @@ export const event = defineType({
 			validation: (e) => e.required(),
 		}),
 		defineField({
-			name: "biglietto",
+			name: "biglietto", // nome usato nella query
 			type: "url",
 		}),
 		defineField({
-			name: "speakers",
+			name: "speakers", // nome usato nella query
 			title: "Speakers", //  titolo nell'editor
 			type: "reference",
 			to: [{ type: "speaker" }],

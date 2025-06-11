@@ -8,7 +8,7 @@ export const pageType = defineType({
 	icon: DocumentIcon,
 	fields: [
 		defineField({
-			name: "title",
+			name: "title", //nome usato nella query
 			type: "string",
 		}),
 		defineField({

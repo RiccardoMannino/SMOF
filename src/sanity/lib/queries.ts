@@ -16,8 +16,8 @@ export const EVENT_QUERY =
     speakerBio,
     speakerImage
   }, relatedEvents[]{
-    _key, // nessario per il drag and drop
-    ...@->{_id, eventName, slug} // get fields from the referenced event
+    _key, // necessario per il drag and drop
+    ...@->{_id, eventName, slug} // ricevi i campo dall  evento referente
   }}`);
 
 export const EVENTS_SLUGS_QUERY =
@@ -36,3 +36,22 @@ export const PAGE_QUERY =
     }
   }
 }`);
+
+export const LIST_PAGE_QUERY = defineQuery(`*[_type == 'page']{
+  title,
+  _id,
+  "slug":slug.current
+} `);
+
+export const HOME_PAGE_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
+    homePage->{
+      ...,
+      content[]{
+        ...,
+        _type == "faqs" => {
+          ...,
+          faqs[]->
+        }
+      }      
+    }
+  }`);

@@ -25,11 +25,15 @@ export const heroType = defineType({
 		}),
 		defineField({
 			name: "text",
-			type: "blockContent",
+			type: "blockContent", // text editor
 		}),
 		defineField({
-			name: "image",
-			type: "image",
+			name: "images", // nome usato nella query
+			title: "Immagini", // titolo nell'editor
+			type: "array", // tipo del field
+			of: [{ type: "image", options: { hotspot: true } }],
+			validation: (Rule) => Rule.required().min(1).max(6),
+			description: "Inserisci fino a 6 immagini per il carosello.",
 		}),
 	],
 });

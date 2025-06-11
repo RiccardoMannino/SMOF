@@ -8,13 +8,13 @@ export const structure: StructureResolver = (S) =>
 			S.documentTypeListItem("eventi").title("Eventi"),
 			S.documentTypeListItem("speaker").title("Ospiti"),
 			S.divider(),
-			S.documentTypeListItem("page").title("Pages"),
+			S.documentTypeListItem("page").title("Pagine"),
 			S.documentTypeListItem("faq").title("FAQs"),
 			S.divider(),
 			S.listItem()
 				.id("siteSettings")
 				.schemaType("siteSettings")
-				.title("Site Settings")
+				.title("Impostazioni Sito")
 				.child(
 					S.editor()
 						.id("siteSettings")

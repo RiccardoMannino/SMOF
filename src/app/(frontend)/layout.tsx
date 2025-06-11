@@ -4,6 +4,7 @@ import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { Header } from "@/components/Header";
 import "../globals.css";
 import { SanityLive } from "@/sanity/lib/live";
+import { Footer } from "@/components/Footer";
 
 export default async function FrontendLayout({
 	children,
@@ -11,9 +12,10 @@ export default async function FrontendLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<section className="bg-white min-h-screen">
+		<section className="bg-forest min-h-screen">
 			<Header />
 			{children}
+			<Footer />
 			<SanityLive />
 			{(await draftMode()).isEnabled && (
 				<>

@@ -15,11 +15,13 @@ export function Speaker({ speakers }: SpeakerProps) {
 					width={80}
 					height={80}
 					alt={speakers.speakerName || ""}
-					className="bg-pink-50 size-10 shadow-inner rounded-full"
+					className=" size-10 shadow-inner rounded-full"
 				/>
 			) : null}
 			{speakers?.speakerName ? (
-				<p className="text-base text-slate-700">{speakers.speakerName}</p>
+				<p className="text-sm sm:text-base text-chocolate font-semibold">
+					{speakers.speakerName}
+				</p>
 			) : null}
 		</div>
 	) : null;

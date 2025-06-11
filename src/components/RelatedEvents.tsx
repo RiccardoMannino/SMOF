@@ -39,7 +39,7 @@ export function RelatedEvents({
 		return null;
 	}
 	return (
-		<aside className="border-t">
+		<aside className="border-t flex flex-col gap-5">
 			<h2>Eventi correlati</h2>
 			<div className="not-prose text-balance">
 				<ul
@@ -54,7 +54,7 @@ export function RelatedEvents({
 					{events.map((event) => (
 						<li
 							key={event._key}
-							className="p-4 bg-blue-50 sm:w-1/3 flex-shrink-0"
+							className="p-4 bg-blue-50 w-fit flex-shrink-0 rounded-2xl"
 							data-sanity={createDataAttribute({
 								...createDataAttributeConfig,
 								id: documentId,

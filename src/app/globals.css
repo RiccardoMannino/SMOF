@@ -1,2 +1,161 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+/* === LIGHT THEME === */
+@theme {
+	--color-sand: #faf1e6; /* Sfondo principale chiaro */
+	--color-ivory: #fdf6ec; /* Sfondo secondario */
+	--color-olive: #2f4f4f; /* Testo principale */
+	--color-chocolate: #4e3b31; /* Testo secondario */
+	--color-rust: #c1440e; /* Accenti / CTA */
+	--color-mustard: #ffab00; /* Evidenziazioni */
+	--color-burnt: #d9822b; /* Hover su CTA */
+	--color-forest: #4e6a4e; /* Sfondo scuro per sezioni */
+	--color-earth: #8b5e3c; /* Bordi / separatori */
+	--color-sun: #ffc857; /* Elementi in evidenza */
+	--color-background: #fffdf7; /* Sfondo base pagina */
+}
+
+/* === UTILITY CLASSES === */
+@layer utilities {
+	/* === Background Colors === */
+	.bg-sand {
+		background-color: var(--color-sand);
+	}
+	.bg-ivory {
+		background-color: var(--color-ivory);
+	}
+	.bg-forest {
+		background-color: var(--color-forest);
+	}
+	.bg-earth {
+		background-color: var(--color-earth);
+	}
+	.bg-sun {
+		background-color: var(--color-sun);
+	}
+
+	/* === Text Colors === */
+	.text-olive {
+		color: var(--color-olive);
+	}
+	.text-chocolate {
+		color: var(--color-chocolate);
+	}
+	.text-rust {
+		color: var(--color-rust);
+	}
+	.text-mustard {
+		color: var(--color-mustard);
+	}
+	.text-burnt {
+		color: var(--color-burnt);
+	}
+	.text-forest {
+		color: var(--color-forest);
+	}
+	.text-sun {
+		color: var(--color-sun);
+	}
+
+	/* === Border Colors === */
+	.border-earth {
+		border-color: var(--color-earth);
+	}
+	.border-forest {
+		border-color: var(--color-forest);
+	}
+	.border-rust {
+		border-color: var(--color-rust);
+	}
+	.border-sun {
+		border-color: var(--color-sun);
+	}
+
+	/* === Hover States === */
+	.hover\:bg-burnt:hover {
+		background-color: var(--color-burnt);
+	}
+	.hover\:bg-sun:hover {
+		background-color: var(--color-sun);
+	}
+	.hover\:text-mustard:hover {
+		color: var(--color-mustard);
+	}
+	.hover\:text-burnt:hover {
+		color: var(--color-burnt);
+	}
+
+	@media (max-width: 480px) {
+		/* === Layout === */
+		.mobile\:max-w-full {
+			max-width: 100%;
+		}
+		.mobile\:w-full {
+			width: 100%;
+		}
+		.mobile\:grid-cols-1 {
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+		}
+		.mobile\:flex-col {
+			flex-direction: column;
+		}
+		.mobile\:items-start {
+			align-items: flex-start;
+		}
+
+		/* === Spacing === */
+		.mobile\:p-2 {
+			padding: 0.5rem;
+		}
+		.mobile\:p-4 {
+			padding: 1rem;
+		}
+		.mobile\:px-4 {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+		.mobile\:py-2 {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+		.mobile\:gap-2 {
+			gap: 0.5rem;
+		}
+		.mobile\:space-y-2 > :not([hidden]) ~ :not([hidden]) {
+			--tw-space-y-reverse: 0;
+			margin-top: 0.5rem;
+			margin-bottom: 0;
+		}
+
+		/* === Typography === */
+		.mobile\:text-xs {
+			font-size: 0.75rem; /* 12px */
+		}
+		.mobile\:text-sm {
+			font-size: 0.875rem; /* 14px */
+		}
+		.mobile\:text-base {
+			font-size: 1rem; /* 16px */
+		}
+		.mobile\:text-center {
+			text-align: center;
+		}
+
+		/* === Visibility === */
+		.mobile\:hidden {
+			display: none;
+		}
+		.mobile\:block {
+			display: block;
+		}
+	}
+}

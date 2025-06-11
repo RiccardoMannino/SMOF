@@ -19,11 +19,11 @@ export default defineConfig({
 	basePath: "/studio",
 	projectId,
 	dataset,
-	// Add and edit the content schema in the './sanity/schemaTypes' folder
+	// Aggiungi e modifica il content schema nella cartella './sanity/schemaTypes'
 	schema,
 	plugins: [
 		structureTool({ structure }),
-		// Vision is for querying with GROQ from inside the Studio
+		// Vision è per il querying con GROQ dall'interno dello Studio
 		// https://www.sanity.io/docs/the-vision-plugin
 		visionTool({ defaultApiVersion: apiVersion }),
 		presentationTool({
