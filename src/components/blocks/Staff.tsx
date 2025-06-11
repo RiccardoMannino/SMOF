@@ -21,7 +21,7 @@ export function Staff({ ...props }: StaffProps) {
 							alt={`${nome}`}
 							width={400}
 							height={400}
-							className=" rounded-3xl object-contain "
+							className=" rounded-3xl object-cover"
 						/>
 					))
 				: null}
