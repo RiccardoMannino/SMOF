@@ -37,11 +37,16 @@ export const PAGE_QUERY =
   }
 }`);
 
-export const LIST_PAGE_QUERY = defineQuery(`*[_type == 'page']{
-  title,
-  _id,
-  "slug":slug.current
-} `);
+export const LIST_PAGE_QUERY = defineQuery(`
+  *[_type == "page"]
+  {
+    title,
+    _id,
+    "slug": slug.current,
+    "Home": slug.current == "/"
+  }
+  | order(Home desc, title asc)
+`);
 
 export const HOME_PAGE_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
     homePage->{

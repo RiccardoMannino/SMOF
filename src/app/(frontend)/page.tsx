@@ -21,7 +21,7 @@ export default async function Page() {
 					documentType={page?.homePage._type}
 					content={page?.homePage.content}
 				/>
-				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard ">
+				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
 					Ultimi Eventi
 				</h1>
 				{/*Tutti gli eventi */}

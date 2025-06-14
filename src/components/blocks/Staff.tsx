@@ -12,7 +12,6 @@ export function Staff({ ...props }: StaffProps) {
 
 	return (
 		<section>
-			{nome} , {descrizione}
 			{immagini
 				? immagini?.map((image) => (
 						<Image
@@ -25,6 +24,8 @@ export function Staff({ ...props }: StaffProps) {
 						/>
 					))
 				: null}
+			<p>{nome}</p>
+			<p>{descrizione}</p>
 		</section>
 	);
 }

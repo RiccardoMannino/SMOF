@@ -43,6 +43,11 @@ export default async function Page({
 			documentId={page._id}
 			documentType={page._type}
 			content={page.content}
+			className={
+				`${(await params).slug}` === "chi-siamo"
+					? "grid grid-flow-row sm:grid-flow-col gap-10 p-5"
+					: ""
+			}
 		/>
 	) : null;
 }

@@ -19,5 +19,8 @@ export const components: PortableTextComponents = {
 					height="400"
 				/>
 			) : null,
+		// block: (props) => props.value ? (
+		//
+		// )
 	},
 };

@@ -25,7 +25,7 @@ export const heroType = defineType({
 		}),
 		defineField({
 			name: "text",
-			type: "blockContent", // text editor
+			type: "text", // testo
 		}),
 		defineField({
 			name: "images", // nome usato nella query

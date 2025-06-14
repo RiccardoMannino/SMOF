@@ -14,6 +14,7 @@ type PageBuilderProps = {
 	content: NonNullable<PAGE_QUERYResult>["content"];
 	documentId: string;
 	documentType: string;
+	className?: string;
 };
 
 const { projectId, dataset, stega } = client.config();
@@ -27,6 +28,7 @@ export function PageBuilder({
 	content,
 	documentId,
 	documentType,
+	className,
 }: PageBuilderProps) {
 	const blocks = useOptimistic<
 		NonNullable<PAGE_QUERYResult>["content"] | undefined,
@@ -52,7 +54,7 @@ export function PageBuilder({
 				type: documentType,
 				path: "content",
 			}).toString()}
-			className="flex flex-col mb-10"
+			className={className}
 		>
 			{blocks.map((block) => {
 				const DragHandle = ({ children }: { children: React.ReactNode }) => (
@@ -63,6 +65,7 @@ export function PageBuilder({
 							type: documentType,
 							path: `content[_key=="${block._key}"]`,
 						}).toString()}
+						className={`${block._type === "staff" ? "grid grid-flow-col" : ""}`}
 					>
 						{children}
 					</div>
