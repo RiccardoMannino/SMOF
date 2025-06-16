@@ -57,7 +57,9 @@ export default async function Page({
 				documentType="eventi"
 			/>
 			<hr />
-			<Link href="/eventi">&larr; Torna agli eventi</Link>
+			<Link href="/eventi" className="font-semibold text-mustard">
+				&larr; Torna agli eventi
+			</Link>
 		</main>
 	);
 }

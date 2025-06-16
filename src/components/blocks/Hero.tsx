@@ -48,6 +48,7 @@ export function Hero({ images, text }: HeroProps) {
 		const prevIndex = (index - 1 + totalSlides) % totalSlides;
 		setIndex(prevIndex);
 		scrollToSlide(prevIndex);
+		console.log(prevIndex);
 	};
 
 	// effetto utilizzato per fare andare in autoplay lo slider e stopparlo all'hover dell'immagine
