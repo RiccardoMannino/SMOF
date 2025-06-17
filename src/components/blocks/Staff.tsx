@@ -13,8 +13,8 @@ export type StaffProps = Extract<
 export function Staff({ ...props }: StaffProps) {
 	const { nome, descrizione, immagini } = props;
 
-	// Stato per l'immagine attiva (può essere di tipo `any` o `typeof immagini[0]`)
-	type ImageType = StaffProps["immagini"] extends (infer U)[] ? U : null;
+	// typo che non può essere null o undefined cioè non nullable
+	type ImageType = NonNullable<StaffProps["immagini"]>[number];
 
 	// Stato per aprire/chiudere
 	const [active, setActive] = useState<ImageType | null>(null);
@@ -33,7 +33,7 @@ export function Staff({ ...props }: StaffProps) {
 
 	return (
 		<div>
-			{open && (
+			{open && active && (
 				<div
 					onClick={handleClose}
 					className="fixed top-0 left-0 w-full h-full z-50 bg-zinc-500/70 flex items-center justify-center"
@@ -56,7 +56,7 @@ export function Staff({ ...props }: StaffProps) {
 			)}
 			<div className="relative ">
 				{immagini
-					? immagini?.map((image) => (
+					? immagini.map((image) => (
 							<Image
 								key={image._key}
 								src={urlFor(image).width(400).height(400).url()}
