@@ -2,21 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type Sezioni = [
-	{
-		titolo: string;
-		link: [
-			{
-				nome: string;
-				href: string;
-				icona?: React.ReactNode;
-			},
-		];
-	},
-];
+type Sezione = {
+	titolo: string;
+	link: { nome: string; href: string; icona?: React.JSX.Element }[];
+}[];
 
 export function Footer() {
-	const sezioni: Sezioni = [
+	const sezioni: Sezione = [
 		{
 			titolo: "Pagine",
 			link: [
@@ -126,7 +118,7 @@ export function Footer() {
 													href={`${sezione.titolo === "Social" ? voce.href : `/${voce.href?.toLowerCase().replace(" ", "-")}`}`}
 													className="text-sm text-chocolate  hover:text-burnt transition-colors"
 												>
-													{voce.icona ? voce.icona : voce.nome}
+													{sezione.titolo === "Social" ? voce.icona : voce.nome}
 												</Link>
 											</li>
 										))
