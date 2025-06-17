@@ -40,22 +40,23 @@ export function Staff({ ...props }: StaffProps) {
 				<motion.div
 					initial={false}
 					onClick={handleClose}
-					className="fixed top-0 left-0 w-full h-full z-50 bg-zinc-500/70 flex items-center justify-center"
+					className="fixed top-0 left-0 w-full h-full z-70 bg-zinc-500/70 flex items-center justify-center "
 				>
-					<div className="p-5 bg-ivory rounded shadow max-w-[90%] max-h-[90%] flex flex-col gap-5">
+					<div
+						onClick={(e) => e.stopPropagation()}
+						className="p-5 bg-ivory overflow-y-auto scrollbar-hide rounded shadow max-w-[90%] max-h-[90%]  flex flex-col gap-5"
+					>
 						<p className="text-center font-bold">{nome}</p>
 						<Image
-							src={urlFor(active).width(1200).height(800).url()}
+							src={urlFor(active).url()}
 							alt={`${nome}`}
 							width={1200}
 							height={800}
-							className="w-full sm:w-1/2 self-center rounded-xl h-4/5"
+							className="w-full sm:w-1/2 object-contain sm:h-1/2 self-center cursor-pointer rounded-2xl"
 						/>
-						<div className="flex h-fit flex-col overflow-y-scroll scrollbar-hide ">
-							<p className="text-center whitespace-pre-line font-semibold ">
-								{descrizione}
-							</p>
-						</div>
+						<p className="text-center whitespace-pre-line font-semibold ">
+							{descrizione}
+						</p>
 					</div>
 				</motion.div>
 				//fine modale

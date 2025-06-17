@@ -12,7 +12,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 
 	return (
 		<>
-			<div onClick={() => setOpen(!open)} className="md:hidden block">
+			<div onClick={() => setOpen(!open)} className="hidden max-[899px]:block">
 				<button className="relative z-60 rounded  hover:cursor-pointer ">
 					<motion.svg
 						xmlns="http://www.w3.org/2000/svg"

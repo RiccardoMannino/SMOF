@@ -23,7 +23,7 @@ export async function Header() {
 				/>
 			</Link>
 			<ButtonMenu list={pages} />
-			<ul className="hidden md:flex items-center gap-4 font-semibold text-chocolate">
+			<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold text-chocolate">
 				{pages?.map((page) => (
 					<li key={page._id}>
 						<Link
