@@ -22,7 +22,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 			className="group rounded-lg w-fit"
 			href={`/eventi/${props.slug!.current}`}
 		>
-			<Card className="border-0 dark:bg-forest bg-ivory shadow-md transition-colors">
+			<Card className="border-0 bg-ivory shadow-md transition-colors">
 				<CardHeader>
 					<CardTitle className="flex justify-between">
 						<h2 className="text-2xl sm:text-3xl  w-fit text-pretty font-semibold text-olive group-hover:text-chocolate transition-colors relative">

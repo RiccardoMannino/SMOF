@@ -171,6 +171,7 @@ export type Page = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  intestazione?: string;
   slug?: Slug;
   content?: PageBuilder;
   mainImage?: {
@@ -463,7 +464,7 @@ export type EVENTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: EVENT_QUERY
-// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, eventType, immagine, data, eventDescription, speakers->{    speakerName,    speakerBio,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall  evento referente  }}
+// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, eventType, immagine, data, eventDescription, speakers->{    speakerName,    speakerBio,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
 export type EVENT_QUERYResult = {
   _id: string;
   eventName: string | null;
@@ -520,6 +521,7 @@ export type PAGE_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  intestazione?: string;
   slug?: Slug;
   content: Array<{
     _key: string;
@@ -661,6 +663,7 @@ export type HOME_PAGE_QUERYResult = {
     _updatedAt: string;
     _rev: string;
     title?: string;
+    intestazione?: string;
     slug?: Slug;
     content: Array<{
       _key: string;
@@ -789,7 +792,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'eventi' && defined(slug.current)][0...12]\n    {\n  _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }}": EVENTS_QUERYResult;
-    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall  evento referente\n  }}": EVENT_QUERYResult;
+    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerBio,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
     "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
     "\n  *[_type == \"page\"]\n  {\n    title,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, title asc)\n": LIST_PAGE_QUERYResult;

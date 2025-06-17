@@ -12,6 +12,10 @@ export const pageType = defineType({
 			type: "string",
 		}),
 		defineField({
+			name: "intestazione", //nome usato nella query
+			type: "text",
+		}),
+		defineField({
 			name: "slug",
 			type: "slug",
 			options: {

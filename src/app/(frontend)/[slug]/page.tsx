@@ -39,15 +39,21 @@ export default async function Page({
 	}
 
 	return page?.content ? (
-		<PageBuilder
-			documentId={page._id}
-			documentType={page._type}
-			content={page.content}
-			className={
-				`${(await params).slug}` === "chi-siamo"
-					? "grid grid-flow-row sm:grid-flow-col gap-10 p-5"
-					: ""
-			}
-		/>
+		<>
+			<h1 className="text-3xl mb-10 sm:mb-0 sm:text-4xl lg:text-6xl lg:mb-20  xl:text-8xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10 ">
+				{page.intestazione}
+			</h1>
+
+			<PageBuilder
+				documentId={page._id}
+				documentType={page._type}
+				content={page.content}
+				className={
+					`${(await params).slug}` === "chi-siamo"
+						? "grid grid-rows-2 sm:grid-cols-4 gap-10 p-5"
+						: ""
+				}
+			/>
+		</>
 	) : null;
 }

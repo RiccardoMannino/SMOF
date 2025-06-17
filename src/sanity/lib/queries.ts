@@ -17,7 +17,7 @@ export const EVENT_QUERY =
     speakerImage
   }, relatedEvents[]{
     _key, // necessario per il drag and drop
-    ...@->{_id, eventName, slug} // ricevi i campo dall  evento referente
+    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente
   }}`);
 
 export const EVENTS_SLUGS_QUERY =
