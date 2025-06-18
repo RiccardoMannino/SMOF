@@ -44,8 +44,17 @@ export function Staff({ ...props }: StaffProps) {
 				>
 					<div
 						onClick={(e) => e.stopPropagation()}
-						className="p-5 bg-ivory overflow-y-auto scrollbar-hide rounded shadow max-w-[90%] sm:max-h-[90%] max-h-dvh flex flex-col gap-5"
+						className="relative p-5 bg-ivory overflow-y-auto scrollbar-hide rounded shadow max-w-[90%] sm:max-h-[90%] max-h-dvh flex flex-col gap-5"
 					>
+						<button className="self-end" onClick={handleClose}>
+							<Image
+								width={50}
+								height={50}
+								src="https://img.icons8.com/ios/50/close-window--v1.png"
+								alt="close-window--v1"
+								className="sm:h-12 sm:w-12 h-7 w-7 hover:cursor-pointer "
+							/>
+						</button>
 						<p className="text-center font-bold">{nome}</p>
 						<Image
 							src={urlFor(active).url()}
