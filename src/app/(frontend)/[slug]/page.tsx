@@ -50,7 +50,7 @@ export default async function Page({
 				content={page.content}
 				className={
 					`${(await params).slug}` === "chi-siamo"
-						? "grid grid-rows-2 sm:grid-cols-4 gap-10 p-5"
+						? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5"
 						: ""
 				}
 			/>
