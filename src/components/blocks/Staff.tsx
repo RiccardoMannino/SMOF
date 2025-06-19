@@ -5,6 +5,7 @@ import { PAGE_QUERYResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { useLockBodyScroll } from "@/app/hooks/useLockBodyScroll";
 
 export type StaffProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -21,6 +22,8 @@ export function Staff({ ...props }: StaffProps) {
 	const [active, setActive] = useState<ImageType | null>(null);
 
 	const open = active !== null;
+
+	useLockBodyScroll(open);
 
 	// Apre la modale e imposta l'immagine attiva
 	const handleImage = (image: ImageType) => {
@@ -44,7 +47,7 @@ export function Staff({ ...props }: StaffProps) {
 				>
 					<div
 						onClick={(e) => e.stopPropagation()}
-						className="relative p-5 bg-ivory overflow-y-auto scrollbar-hide rounded shadow max-w-[90%] sm:max-h-[90%] max-h-dvh flex flex-col gap-5"
+						className="absolute p-5 bg-ivory overflow-y-auto scrollbar-hide rounded shadow max-w-[90%] sm:max-h-[90%] h-dvh flex flex-col gap-5 z-71"
 					>
 						<button className="self-end" onClick={handleClose}>
 							<Image
@@ -52,7 +55,7 @@ export function Staff({ ...props }: StaffProps) {
 								height={50}
 								src="https://img.icons8.com/ios/50/close-window--v1.png"
 								alt="close-window--v1"
-								className="sm:h-12 sm:w-12 h-7 w-7 hover:cursor-pointer "
+								className="sm:h-10 sm:w-10 h-7 w-7 hover:cursor-pointer "
 							/>
 						</button>
 						<p className="text-center font-bold">{nome}</p>
