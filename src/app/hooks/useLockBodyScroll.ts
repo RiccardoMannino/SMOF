@@ -1,13 +1,34 @@
 import { useEffect } from "react";
 
-export function useLockBodyScroll(open: boolean) {
+export function useMenuLockBodyScroll(
+	open: boolean,
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+) {
 	useEffect(() => {
-		if (!open) return;
+		const mediaQuery = window.matchMedia("(max-width: 899px)");
 
-		const original = (document.body.style.overflow = "scroll");
-		document.body.style.overflow = "hidden";
-		return () => {
-			document.body.style.overflow = original;
+		// Funzione per controllare e aggiornare stato + scroll
+		const handleChange = () => {
+			if (mediaQuery.matches && open) {
+				// Siamo mobile + menu aperto: blocca scroll
+				document.body.style.overflow = "hidden";
+			} else {
+				// Non siamo mobile: chiudi menu e sblocca scroll
+				setOpen(false);
+				document.body.style.overflow = "";
+			}
 		};
-	}, [open]);
+
+		// Controlla subito
+		handleChange();
+
+		// Aggiungi listener per quando cambia la viewport
+		mediaQuery.addEventListener("change", handleChange);
+
+		// Cleanup: rimuovi listener e sblocca scroll
+		return () => {
+			mediaQuery.removeEventListener("change", handleChange);
+			document.body.style.overflow = "";
+		};
+	}, [open, setOpen]);
 }

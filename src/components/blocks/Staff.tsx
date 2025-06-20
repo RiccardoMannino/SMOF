@@ -5,7 +5,6 @@ import { PAGE_QUERYResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { useLockBodyScroll } from "@/app/hooks/useLockBodyScroll";
 
 export type StaffProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -22,8 +21,6 @@ export function Staff({ ...props }: StaffProps) {
 	const [active, setActive] = useState<ImageType | null>(null);
 
 	const open = active !== null;
-
-	useLockBodyScroll(open);
 
 	// Apre la modale e imposta l'immagine attiva
 	const handleImage = (image: ImageType) => {
@@ -43,30 +40,21 @@ export function Staff({ ...props }: StaffProps) {
 				<motion.div
 					initial={false}
 					onClick={handleClose}
-					className="fixed top-0 left-0 w-full h-full z-70 bg-zinc-500/70 flex items-center justify-center "
+					className="fixed top-0 left-0 w-full h-full z-70 bg-[#000]/70 flex items-center justify-center "
 				>
 					<div
 						onClick={(e) => e.stopPropagation()}
-						className="absolute p-5 bg-ivory overflow-y-auto scrollbar-hide rounded shadow max-w-[90%] sm:max-h-[90%] h-dvh flex flex-col gap-5 z-71"
+						className=" p-5 bg-ivory overflow-y-auto scrollbar-hide rounded max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:max-h-[35rem] sm:max-h-[40rem] gap-2 z-71"
 					>
-						<button className="self-end" onClick={handleClose}>
-							<Image
-								width={50}
-								height={50}
-								src="https://img.icons8.com/ios/50/close-window--v1.png"
-								alt="close-window--v1"
-								className="sm:h-10 sm:w-10 h-7 w-7 hover:cursor-pointer "
-							/>
-						</button>
 						<p className="text-center font-bold">{nome}</p>
 						<Image
 							src={urlFor(active).url()}
 							alt={`${nome}`}
 							width={1200}
 							height={800}
-							className="w-full sm:w-1/2 object-contain sm:h-1/2 self-center cursor-pointer rounded-2xl"
+							className="w-full  object-contain sm:h-1/2 self-center cursor-pointer rounded-2xl"
 						/>
-						<p className="text-center whitespace-pre-line font-semibold ">
+						<p className="text-center whitespace-pre-line font-semibold w-fit">
 							{descrizione}
 						</p>
 					</div>

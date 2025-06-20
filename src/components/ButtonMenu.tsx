@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { LIST_PAGE_QUERYResult } from "@/sanity/types";
-import { useLockBodyScroll } from "@/app/hooks/useLockBodyScroll";
+import { useMenuLockBodyScroll } from "@/app/hooks/useLockBodyScroll";
 
 type PageProps = LIST_PAGE_QUERYResult;
 
 export default function ButtonMenu({ list }: { list: PageProps }) {
 	const [open, setOpen] = useState(false);
 
-	useLockBodyScroll(open);
+	useMenuLockBodyScroll(open, setOpen);
 
 	return (
 		<>
