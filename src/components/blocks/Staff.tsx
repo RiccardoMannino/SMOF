@@ -44,7 +44,7 @@ export function Staff({ ...props }: StaffProps) {
 				>
 					<div
 						onClick={(e) => e.stopPropagation()}
-						className=" p-5 bg-ivory overflow-y-auto scrollbar-hide rounded max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:max-h-[35rem] sm:max-h-[40rem] gap-2 z-71"
+						className=" p-5 bg-ivory overflow-y-auto rounded max-sm:max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:h-[75%] sm:max-h-[40rem] gap-2 z-71 min-[500px]:h-[80%]"
 					>
 						<p className="text-center font-bold">{nome}</p>
 						<Image
