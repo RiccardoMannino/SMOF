@@ -40,7 +40,7 @@ export function Staff({ ...props }: StaffProps) {
 				<motion.div
 					initial={false}
 					onClick={handleClose}
-					className="fixed top-0 left-0 w-full h-full z-70 bg-[#000]/70 flex items-center justify-center "
+					className="fixed top-0 left-0 w-full h-full z-70 bg-[#000]/75 flex items-center justify-center "
 				>
 					<div
 						onClick={(e) => e.stopPropagation()}
