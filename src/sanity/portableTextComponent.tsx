@@ -15,8 +15,8 @@ export const components: PortableTextComponents = {
 						.auto("format")
 						.url()}
 					alt={props?.value?.alt || ""}
-					width="600"
-					height="400"
+					width={600}
+					height={400}
 				/>
 			) : null,
 		// block: (props) => props.value ? (

@@ -40,7 +40,7 @@ export function RelatedEvents({
 	}
 	return (
 		<aside className="border-t flex flex-col gap-5">
-			<h2>Eventi correlati</h2>
+			<h2 className="text-mustard">Eventi correlati</h2>
 			<div className="not-prose text-balance">
 				<ul
 					className="flex flex-col sm:flex-row gap-0.5"

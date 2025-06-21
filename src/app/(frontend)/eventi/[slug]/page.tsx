@@ -43,7 +43,7 @@ export default async function Page({
 				{evento?.eventName}
 			</h1>
 			{evento?.eventDescription ? (
-				<div className="prose">
+				<div className="prose text-mustard">
 					<span>Data evento: {dataFormattata(evento?.data)}</span>
 					<PortableText
 						value={evento?.eventDescription}
