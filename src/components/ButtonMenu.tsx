@@ -57,7 +57,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 				</button>
 			</div>
 			<motion.div
-				className={`${(open && "fixed left-0 top-0 z-50 md:hidden inline-flex w-screen") || "fixed md:w-0 w-screen right-0 top-0 z-50 "}`}
+				className={`${(open && "fixed left-0 top-0 z-50 hidden max-[899px]:inline-flex max-[899px]:w-screen") || "fixed max-md:w-0 w-screen right-0 top-0 z-50 "}`}
 				animate={{ x: open ? 0 : -1000 }}
 				initial={false}
 				transition={{
@@ -75,7 +75,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 						},
 						closed: { opacity: 0 },
 					}}
-					className="flex h-dvh w-full flex-col items-center  justify-center bg-ivory text-center text-sm"
+					className="flex h-dvh flex-col items-center  justify-center bg-ivory text-center text-sm w-full"
 				>
 					{list.map((link) => (
 						<motion.li

@@ -8,7 +8,8 @@ export function useMenuLockBodyScroll(
 		const mediaQuery = window.matchMedia("(max-width: 899px)");
 
 		// Funzione per controllare e aggiornare stato + scroll
-		const handleChange = () => {
+
+		const handleChangeQuery = () => {
 			if (mediaQuery.matches && open) {
 				// Siamo mobile + menu aperto: blocca scroll
 				document.body.style.overflow = "hidden";
@@ -19,15 +20,16 @@ export function useMenuLockBodyScroll(
 			}
 		};
 
-		// Controlla subito
-		handleChange();
+		// esegue la funzione
+		handleChangeQuery();
 
 		// Aggiungi listener per quando cambia la viewport
-		mediaQuery.addEventListener("change", handleChange);
+		mediaQuery.addEventListener("change", handleChangeQuery);
 
 		// Cleanup: rimuovi listener e sblocca scroll
 		return () => {
-			mediaQuery.removeEventListener("change", handleChange);
+			mediaQuery.addEventListener("change", handleChangeQuery);
+
 			document.body.style.overflow = "";
 		};
 	}, [open, setOpen]);
