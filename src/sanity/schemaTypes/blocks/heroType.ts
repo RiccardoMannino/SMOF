@@ -32,8 +32,8 @@ export const heroType = defineType({
 			title: "Immagini", // titolo nell'editor
 			type: "array", // tipo del field
 			of: [{ type: "image", options: { hotspot: true } }],
-			validation: (Rule) => Rule.required().min(1).max(6),
-			description: "Inserisci fino a 6 immagini per il carosello.",
+			validation: (Rule) => Rule.required().min(1),
+			description: "Inserisci le immagini per il carosello.",
 		}),
 	],
 });
