@@ -44,7 +44,7 @@ export function Staff({ ...props }: StaffProps) {
 				>
 					<div
 						onClick={(e) => e.stopPropagation()}
-						className=" p-5 bg-ivory overflow-y-auto rounded max-sm:max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:h-[75%] sm:max-h-[40rem] gap-2 z-71 min-[500px]:h-[80%]"
+						className=" p-5 bg-ivory overflow-y-auto rounded-2xl max-sm:max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:h-[75%] sm:max-h-[40rem] gap-2 z-71 min-[500px]:h-[80%]"
 					>
 						<p className="text-center font-bold">{nome}</p>
 						<Image
@@ -52,7 +52,7 @@ export function Staff({ ...props }: StaffProps) {
 							alt={`${nome}`}
 							width={1200}
 							height={800}
-							className="w-full  object-contain sm:h-1/2 self-center cursor-pointer rounded-2xl"
+							className="w-full object-contain sm:h-1/2 self-center cursor-pointer rounded-2xl"
 						/>
 						<p className="text-center whitespace-pre-line font-semibold w-fit">
 							{descrizione}
@@ -62,7 +62,7 @@ export function Staff({ ...props }: StaffProps) {
 				//fine modale
 			)}
 			{/* card che al click triggerano la funzione che fa aprire la modale */}
-			<div className="relative flex-col flex gap-4 bg-ivory text-chocolate p-5 rounded-2xl hover:bg-ivory/90 transition-colors text-xl sm:text-2xl lg:text-3xl xl:text-4xl tracking-tight">
+			<div className="relative flex-col flex gap-4 bg-ivory text-chocolate p-5 rounded-2xl hover:bg-ivory/90 transition-colors text-xl sm:text-2xl lg:text-3xl xl:text-4xl tracking-tight max-sm:w-80 max-sm:self-center">
 				{immagini
 					? immagini.map((image) => (
 							<Image
@@ -71,7 +71,7 @@ export function Staff({ ...props }: StaffProps) {
 								alt={`${nome}`}
 								width={400}
 								height={400}
-								className="rounded-2xl cursor-pointer w-full"
+								className="rounded-2xl cursor-pointer object-cover max-sm:w-80 w-full max-sm:h-80 "
 								onClick={() => handleImage(image)}
 							/>
 						))

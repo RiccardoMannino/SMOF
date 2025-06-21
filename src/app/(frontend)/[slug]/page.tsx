@@ -40,7 +40,7 @@ export default async function Page({
 
 	return page?.content ? (
 		<>
-			<h1 className="text-3xl mb-10 sm:mb-0 sm:text-4xl lg:text-6xl lg:mb-20  xl:text-8xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10 ">
+			<h1 className="text-3xl mb-10 sm:mb-3 sm:text-4xl lg:text-6xl lg:mb-20  xl:text-8xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10 ">
 				{page.intestazione}
 			</h1>
 
@@ -50,7 +50,7 @@ export default async function Page({
 				content={page.content}
 				className={
 					`${(await params).slug}` === "chi-siamo"
-						? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5"
+						? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5 max-sm:place-content-center "
 						: ""
 				}
 			/>
