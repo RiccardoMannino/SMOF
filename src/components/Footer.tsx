@@ -88,7 +88,7 @@ export function Footer() {
 
 					<div className="overflow-hidden rounded-lg border border-earth/40 shadow-sm w-full ">
 						<iframe
-							className="w-full h-96"
+							className="w-full h-80"
 							src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=it&amp;q=San%20Martino%20delle%20Scale+(SMOF)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
 							loading="lazy"
 							allowFullScreen
