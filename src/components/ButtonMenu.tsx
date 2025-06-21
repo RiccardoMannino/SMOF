@@ -75,7 +75,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 						},
 						closed: { opacity: 0 },
 					}}
-					className="flex h-dvh flex-col items-center  justify-center bg-ivory text-center text-sm w-full"
+					className={`flex h-dvh  flex-col items-center justify-center bg-ivory text-center text-sm w-full ${!open && "hidden"}`}
 				>
 					{list.map((link) => (
 						<motion.li
