@@ -7,7 +7,7 @@ export const components: PortableTextComponents = {
 		image: (props) =>
 			props.value ? (
 				<Image
-					className="rounded-lg  w-full h-auto object-contain"
+					className="rounded-lg w-full h-auto object-cover"
 					src={urlFor(props.value)
 						.width(600)
 						.height(400)
@@ -19,8 +19,5 @@ export const components: PortableTextComponents = {
 					height={400}
 				/>
 			) : null,
-		// block: (props) => props.value ? (
-		//
-		// )
 	},
 };

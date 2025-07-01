@@ -29,7 +29,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 							<span className="relative z-[1]">{eventName}</span>
 							<span className="bg-mustard z-0 absolute inset-0 rounded-lg opacity-0 transition-all group-hover:opacity-100 group-hover:scale-y-110 group-hover:scale-x-105 scale-75" />
 						</h2>
-						<span className=" flex bg-chocolate/10 text-chocolate rounded-full px-2 py-1 leading-none whitespace-nowrap text-sm font-semibold  items-center  w-fit">
+						<span className=" flex bg-chocolate/10 text-chocolate rounded-full px-2 py-1 leading-none whitespace-nowrap text-sm font-semibold items-center  w-fit">
 							{eventType}
 						</span>
 					</CardTitle>

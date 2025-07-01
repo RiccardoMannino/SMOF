@@ -1747,13 +1747,6 @@
         },
         "optional": true
       },
-      "speakerBio": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "speakerImage": {
         "type": "objectAttribute",
         "value": {

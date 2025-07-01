@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 @plugin "@tailwindcss/typography";
 
 .scrollbar-hide {
@@ -30,7 +33,6 @@
 		font-weight: 600;
 	}
 
-	/* Nunito per il corpo - morbido come la natura */
 	body {
 		font-family: var(--font-family-nunito);
 		font-weight: 400;

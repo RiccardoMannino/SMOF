@@ -6,7 +6,9 @@ export function useMenuLockBodyScroll(
 ) {
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(max-width: 899px)");
-
+		//abort controller ci aiuta e interrompe i processi come i listener
+		const controller = new AbortController();
+		const signal = controller.signal;
 		// Funzione per controllare e aggiornare stato + scroll
 
 		const handleChangeQuery = () => {
@@ -24,13 +26,13 @@ export function useMenuLockBodyScroll(
 		handleChangeQuery();
 
 		// Aggiungi listener per quando cambia la viewport
-		mediaQuery.addEventListener("change", handleChangeQuery);
+		mediaQuery.addEventListener("change", handleChangeQuery, {
+			signal: signal,
+		});
 
-		// Cleanup: rimuovi listener e sblocca scroll
+		// Cleanup: rimuove i listener con abort control
 		return () => {
-			mediaQuery.addEventListener("change", handleChangeQuery);
-
-			document.body.style.overflow = "";
+			controller.abort();
 		};
 	}, [open, setOpen]);
 }

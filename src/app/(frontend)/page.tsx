@@ -25,7 +25,7 @@ export default async function Page() {
 					Ultimi Eventi
 				</h1>
 				{/*Tutti gli eventi */}
-				<div className="flex flex-col md:flex-row gap-24 py-12">
+				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12">
 					{eventi.map((event) => (
 						<EventCard key={event._id} {...event} />
 					))}

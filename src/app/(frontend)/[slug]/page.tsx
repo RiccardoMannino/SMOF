@@ -3,6 +3,7 @@ import { EventCard } from "@/components/EventCard";
 import { PageBuilder } from "@/components/PageBuilder";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY, EVENTS_QUERY } from "@/sanity/lib/queries";
+import { ChevronLeftIcon } from "@sanity/icons";
 
 export default async function Page({
 	params,
@@ -28,12 +29,25 @@ export default async function Page({
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard  transition-colors">
 					Eventi
 				</h1>
-				<div className="flex flex-col md:flex-row gap-24 py-12">
+				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12">
 					{eventi.map((event) => (
 						<EventCard key={event._id} {...event} />
 					))}
 				</div>
-				<Link href="/">&larr; Torna alla home</Link>
+				<Link
+					href="/"
+					className="flex gap-2 items-center text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard"
+				>
+					<ChevronLeftIcon className="hover:-translate-x-1.5 transition-all  rounded-full" />
+					Torna alla home
+				</Link>
+				{/* <Icon
+					href="/"
+					icon={
+						<ChevronLeftIcon className="hover:-translate-x-1.5 transition-all  rounded-full" />
+					}
+					testo="torna alla home"
+				/> */}
 			</main>
 		);
 	}

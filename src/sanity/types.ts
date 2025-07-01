@@ -288,7 +288,6 @@ export type Speaker = {
   _updatedAt: string;
   _rev: string;
   speakerName?: string;
-  speakerBio?: string;
   speakerImage?: {
     asset?: {
       _ref: string;
@@ -448,7 +447,7 @@ export type EVENTS_QUERYResult = Array<{
   } | null;
   speakers: {
     speakerName: string | null;
-    speakerBio: string | null;
+    speakerBio: null;
     speakerImage: {
       asset?: {
         _ref: string;
@@ -486,7 +485,7 @@ export type EVENT_QUERYResult = {
   eventDescription: BlockContent | null;
   speakers: {
     speakerName: string | null;
-    speakerBio: string | null;
+    speakerBio: null;
     speakerImage: {
       asset?: {
         _ref: string;

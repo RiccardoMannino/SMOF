@@ -6,7 +6,7 @@ export const structure: StructureResolver = (S) =>
 		.title("SMOF")
 		.items([
 			S.documentTypeListItem("eventi").title("Eventi"),
-			S.documentTypeListItem("speaker").title("Ospiti"),
+			S.documentTypeListItem("speaker").title("Speaker"),
 			S.divider(),
 			S.documentTypeListItem("page").title("Pagine"),
 			S.documentTypeListItem("faq").title("FAQs"),
