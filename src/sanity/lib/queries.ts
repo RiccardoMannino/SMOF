@@ -18,7 +18,6 @@ export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{
   _id , eventName, eventType, immagine, data, eventDescription, speakers->{
     speakerName,
-    speakerBio,
     speakerImage
   }, relatedEvents[]{
     _key, // necessario per il drag and drop

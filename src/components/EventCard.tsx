@@ -48,7 +48,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 					) : null}
 				</CardContent>
 				<CardFooter className="flex-col gap-3 items-start">
-					<Speaker speakers={speakers} />
+					<Speaker speaker={speakers} />
 					<span className="text-sm sm:text-base text-chocolate font-semibold">
 						{dataFormattata(data)}
 					</span>
