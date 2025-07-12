@@ -13,9 +13,19 @@
  */
 
 // Source: schema.json
-export type BigliettoGiornaliero = {
+export type Festival = {
   _id: string;
-  _type: "biglietto giornaliero";
+  _type: "festival";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  biglietto?: string;
+  prezzo?: string;
+};
+
+export type Giornaliero = {
+  _id: string;
+  _type: "giornaliero";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -441,7 +451,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = BigliettoGiornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Eventi | Speaker | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Eventi | Speaker | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -492,14 +502,6 @@ export type TICKET_QUERYResult = Array<{
 // Variable: DAILY_TICKET_QUERY
 // Query: *[]
 export type DAILY_TICKET_QUERYResult = Array<{
-  _id: string;
-  _type: "biglietto giornaliero";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  bigliettoGiorno?: string;
-  Prezzo?: string;
-} | {
   _id: string;
   _type: "biglietto";
   _createdAt: string;
@@ -583,6 +585,22 @@ export type DAILY_TICKET_QUERYResult = Array<{
     _type: "image";
     _key: string;
   }>;
+} | {
+  _id: string;
+  _type: "festival";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  biglietto?: string;
+  prezzo?: string;
+} | {
+  _id: string;
+  _type: "giornaliero";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  bigliettoGiorno?: string;
+  Prezzo?: string;
 } | {
   _id: string;
   _type: "page";

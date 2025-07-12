@@ -1,6 +1,6 @@
 [
   {
-    "name": "biglietto giornaliero",
+    "name": "festival",
     "type": "document",
     "attributes": {
       "_id": {
@@ -13,7 +13,58 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "biglietto giornaliero"
+          "value": "festival"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "biglietto": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "prezzo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "giornaliero",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "giornaliero"
         }
       },
       "_createdAt": {
