@@ -20,7 +20,7 @@ export function Event(props: NonNullable<EVENT_QUERYResult>) {
 					<span>{dataFormattata(data)}</span>
 				</div>
 				<Title>{eventName}</Title>
-				<Speaker speakers={speakers} />
+				<Speaker speaker={speakers} />
 			</header>
 			{immagine ? (
 				<figure className="lg:col-span-4 flex flex-col gap-2 items-start">
