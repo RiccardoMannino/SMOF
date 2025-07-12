@@ -5,16 +5,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/Card";
-import { sanityFetch } from "@/sanity/lib/live";
-import { TICKET_QUERY } from "@/sanity/lib/queries";
+// import { sanityFetch } from "@/sanity/lib/live";
+// import { TICKET_QUERY } from "@/sanity/lib/queries";
 import { CheckIcon } from "lucide-react";
 import React from "react";
 
 export default async function page() {
-	const { data: ticket } = await sanityFetch({
-		// query dei ticket
-		query: TICKET_QUERY,
-	});
+	// const { data: ticket } = await sanityFetch({
+	// 	// query dei ticket
+	// 	query: TICKET_QUERY,
+	// });
 	return (
 		<main className="container mx-auto bg-forest h-full min-h-screen">
 			<h1 className="text-2xl  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
@@ -56,7 +56,7 @@ export default async function page() {
 							<CardTitle>
 								<h2 className="text-2xl">Ticket Fest</h2>
 								<h3 className="text-3xl font-bold">
-									€200 <span className="font-normal">per tutti i giorni</span>
+									€150 <span className="font-normal">per tutti i giorni</span>
 								</h3>
 							</CardTitle>
 						</CardHeader>
