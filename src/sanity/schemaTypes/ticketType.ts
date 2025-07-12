@@ -1,0 +1,23 @@
+import { TicketIcon } from "lucide-react";
+import { defineField, defineType } from "sanity";
+
+export const biglietto = defineType({
+	name: "biglietto",
+	title: "Biglietto Singolo Evento",
+	type: "document",
+	icon: TicketIcon,
+	fields: [
+		defineField({
+			name: "biglietto", // nome usato nella query
+			title: "Nome Ticket ", // titolo nell'editor
+			type: "string",
+			validation: (e) => e.required(),
+		}),
+		defineField({
+			name: "prezzo",
+			title: "Prezzo",
+			type: "string",
+			validation: (e) => e.required(),
+		}),
+	],
+});

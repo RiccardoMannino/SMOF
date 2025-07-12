@@ -34,6 +34,10 @@ export const splitImageType = defineType({
 			type: "string",
 		}),
 		defineField({
+			name: "testo",
+			type: "text",
+		}),
+		defineField({
 			name: "image",
 			type: "image",
 		}),

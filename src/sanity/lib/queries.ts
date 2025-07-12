@@ -5,9 +5,14 @@ export const EVENTS_QUERY =
     {
   _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{
     speakerName,
-    speakerBio,
     speakerImage
   }}`);
+
+export const TICKET_QUERY = defineQuery(`*[_type == "biglietto"]{
+  _id , prezzo, biglietto 
+}`);
+
+export const DAILY_TICKET_QUERY = defineQuery(`*[]`);
 
 export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{

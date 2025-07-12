@@ -9,3 +9,9 @@ export function dataFormattata(data: string | null) {
 		hour12: false,
 	});
 }
+
+export function dataProva(data: string | null) {
+	return new Date(data as string).toLocaleString("it-IT", {
+		year: "numeric",
+	});
+}

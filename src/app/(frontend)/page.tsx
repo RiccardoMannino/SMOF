@@ -21,14 +21,18 @@ export default async function Page() {
 					documentType={page?.homePage._type}
 					content={page?.homePage.content}
 				/>
+				{/* TODO: creare blocchi da usare anche al di fuori del page builder tipo eventi e quindi modificabili */}
+				<section></section>
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
 					Ultimi Eventi
 				</h1>
 				{/*Tutti gli eventi */}
 				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12">
-					{eventi.map((event) => (
-						<EventCard key={event._id} {...event} />
-					))}
+					{eventi
+						.filter((el) => el.data?.includes("2025"))
+						.map((event) => (
+							<EventCard key={event._id} {...event} />
+						))}
 				</div>
 			</main>
 		</>

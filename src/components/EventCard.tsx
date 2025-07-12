@@ -12,7 +12,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "./Card";
+} from "./ui/Card";
 
 export function EventCard(props: EVENTS_QUERYResult[0]) {
 	const { speakers, immagine, data, eventType, eventName } = props;

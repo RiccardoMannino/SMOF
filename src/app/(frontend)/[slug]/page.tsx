@@ -5,6 +5,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY, EVENTS_QUERY } from "@/sanity/lib/queries";
 import { ChevronLeftIcon } from "@sanity/icons";
 
+import { dataProva } from "@/sanity/lib/date";
+
 export default async function Page({
 	params,
 }: {
@@ -23,16 +25,21 @@ export default async function Page({
 
 	console.log("pagina attuale:", (await params).slug);
 
+	// Pagina Eventi
 	if ((await params).slug === `eventi`) {
 		return (
 			<main className="container mx-auto bg-forest grid grid-cols-1 gap-6 p-12">
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard  transition-colors">
 					Eventi
 				</h1>
+				<span>Edizione</span>
+
 				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12">
-					{eventi.map((event) => (
-						<EventCard key={event._id} {...event} />
-					))}
+					{eventi
+						.filter((ev) => dataProva(ev.data)?.includes("2025"))
+						.map((event) => (
+							<EventCard key={event._id} {...event} />
+						))}
 				</div>
 				<Link
 					href="/"
@@ -41,13 +48,6 @@ export default async function Page({
 					<ChevronLeftIcon className="hover:-translate-x-1.5 transition-all  rounded-full" />
 					Torna alla home
 				</Link>
-				{/* <Icon
-					href="/"
-					icon={
-						<ChevronLeftIcon className="hover:-translate-x-1.5 transition-all  rounded-full" />
-					}
-					testo="torna alla home"
-				/> */}
 			</main>
 		);
 	}

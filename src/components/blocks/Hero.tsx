@@ -17,6 +17,7 @@ export function Hero({ images, text }: HeroProps) {
 	const [hover, setHover] = useState(false);
 
 	const containerRef = useRef<HTMLDivElement>(null);
+	// ref che ci serve per l'intervallo di tempo da una slide all'altra
 	const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
 	// slide totali : se la lunghezza dello slider è null o undefined ritorna 0
@@ -24,6 +25,7 @@ export function Hero({ images, text }: HeroProps) {
 
 	//  funzione per lo scroll del container
 	const scrollToSlide = (i: number) => {
+		// containare che scorre in modo fluido grazie allo smooth
 		containerRef.current?.scrollTo({
 			left: containerRef.current.clientWidth * i,
 			behavior: "smooth",
@@ -39,8 +41,8 @@ export function Hero({ images, text }: HeroProps) {
 
 	// funzione che ci serve per stoppare lo slider all'hover vedi sotto
 	const stop = useCallback(() => {
-		const nextIndex = index % totalSlides;
-		setIndex(nextIndex);
+		const stoptIndex = index % totalSlides;
+		setIndex(stoptIndex);
 	}, [index, totalSlides]);
 
 	// funzione per andare indietro di pagina
@@ -48,7 +50,7 @@ export function Hero({ images, text }: HeroProps) {
 		const prevIndex = (index - 1 + totalSlides) % totalSlides;
 		setIndex(prevIndex);
 		scrollToSlide(prevIndex);
-		console.log(prevIndex);
+		// console.log(prevIndex);
 	};
 
 	// effetto utilizzato per fare andare in autoplay lo slider e stopparlo all'hover dell'immagine
@@ -77,7 +79,7 @@ export function Hero({ images, text }: HeroProps) {
 		<div className="relative w-full overflow-hidden ">
 			<button
 				onClick={prev}
-				className="absolute sm:left-[52%] left-4 top-[62%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color"
+				className={`absolute ${(!text && "left-[1%]") || " sm:left-[52%]"}   left-4 top-[62%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
 			>
 				<ChevronLeftIcon className="h-4 w-4 md:h-8 md:w-8" />
 			</button>
@@ -88,14 +90,16 @@ export function Hero({ images, text }: HeroProps) {
 				<ChevronRightIcon className="h-4 w-4 md:h-8 md:w-8 " />
 			</button>
 			{/* Carosello sulla destra e Testo di benvenuto a sinistra */}
-			<div className="grid-cols-1 justify-center sm:grid-cols-2 grid max-h-max w-full ">
-				<div className="w-full ">
+			<div
+				className={`${text ? "grid-cols-2" : ""} justify-center max-lg:grid-cols-1 grid max-h-max w-full `}
+			>
+				<div className={`w-full ${!text && "hidden"} `}>
 					{text ? (
 						<motion.h1
 							initial={{ transform: "translateX(-300px)" }}
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
-							className="scroll-m-20 text-balance text-3xl mb-7 sm:mb-0 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold break-words"
+							className=" text-balance text-3xl mb-7 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold break-words"
 						>
 							{text}
 						</motion.h1>
@@ -109,7 +113,7 @@ export function Hero({ images, text }: HeroProps) {
 					onMouseLeave={() => {
 						setHover(false);
 					}}
-					className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl"
+					className={`flex mb-10 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl`}
 				>
 					{images.map((image) => (
 						<motion.div

@@ -8,28 +8,37 @@ type SplitImageProps = Extract<
 	{ _type: "splitImage" }
 >;
 
-export function SplitImage({ title, image, orientation }: SplitImageProps) {
+export function SplitImage({
+	title,
+	testo,
+	image,
+	orientation,
+}: SplitImageProps) {
 	return (
 		<section
-			className="container mx-auto flex gap-8 py-16 data-[orientation='imageRight']:flex-row-reverse"
+			className="bg-ivory max-sm:p-5 p-10 mt-10 rounded-2xl flex gap-8 py-16 data-[orientation='imageRight']:flex-row-reverse max-lg:flex-col "
 			data-orientation={stegaClean(orientation) || "imageLeft"}
 		>
 			{image ? (
 				<Image
-					className="rounded-xl w-2/3 h-auto"
+					className="rounded-xl h-auto"
 					src={urlFor(image).width(800).height(600).url()}
 					width={800}
 					height={600}
 					alt=""
 				/>
 			) : null}
-			<div className="w-1/3 flex items-center">
-				{title ? (
-					<h2 className="text-3xl mx-auto md:text-5xl lg:text-8xl font-light text-pink-500 text-pretty max-w-3xl">
-						{title}
-					</h2>
+			<div className="w-1/3 max-lg:w-full flex flex-col gap-3">
+				{title && testo ? (
+					<>
+						<h2 className="text-3xl max-sm:text-center mx-auto md:text-5xl lg:text-6xl font-light text-chocolate text-pretty max-w-3xl">
+							{title}
+						</h2>
+						<p className="whitespace-pre-line">{testo}</p>
+					</>
 				) : null}
 			</div>
+			{/*TODO: bottone per il tipo */}
 		</section>
 	);
 }

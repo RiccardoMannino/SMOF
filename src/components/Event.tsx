@@ -16,7 +16,7 @@ export function Event(props: NonNullable<EVENT_QUERYResult>) {
 		<article className="grid lg:grid-cols-12 gap-y-12">
 			<header className="lg:col-span-12 flex flex-col gap-4 items-start">
 				<div className="flex gap-4 items-center">
-					{eventType}
+					<span>{eventType}</span>
 					<span>{dataFormattata(data)}</span>
 				</div>
 				<Title>{eventName}</Title>

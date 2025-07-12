@@ -6,12 +6,15 @@ import { blockContentType } from "./blockContentType";
 import { pageType } from "./pageType";
 import { pageBuilderType } from "./pageBuilderType";
 import { faqType } from "./faqType";
+import { biglietto } from "./ticketType";
 import { faqsType } from "./blocks/faqsType";
 import { featuresType } from "./blocks/featuresType";
 import { heroType } from "./blocks/heroType";
 import { siteSettingsType } from "./siteSettingsType";
 import { splitImageType } from "./blocks/splitImageType";
 import { staffType } from "./blocks/staffType";
+import { bigliettoGiornaliero } from "./dailyTicketType";
+import { festivalTicket } from "./festivalTicket";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -28,5 +31,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		splitImageType,
 		siteSettingsType,
 		staffType,
+		biglietto,
+		bigliettoGiornaliero,
+		festivalTicket,
 	],
 };

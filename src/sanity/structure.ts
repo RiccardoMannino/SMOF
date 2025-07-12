@@ -22,11 +22,21 @@ export const structure: StructureResolver = (S) =>
 						.documentId("siteSettings")
 				),
 			S.divider(),
+			S.documentTypeListItem("biglietto").title("Biglietti Singolo Evento"),
+			S.documentTypeListItem("giornaliero").title("Biglietto Giornaliero"),
+			S.documentTypeListItem("festival").title("Biglietto Festival"),
 			...S.documentTypeListItems().filter(
 				(item) =>
 					item.getId() &&
-					!["eventi", "speaker", "page", "faq", "siteSettings"].includes(
-						item.getId()!
-					)
+					![
+						"eventi",
+						"speaker",
+						"page",
+						"faq",
+						"siteSettings",
+						"biglietto",
+						"festival",
+						"giornaliero",
+					].includes(item.getId()!)
 			),
 		]);
