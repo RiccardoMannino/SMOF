@@ -15,6 +15,7 @@ import { splitImageType } from "./blocks/splitImageType";
 import { staffType } from "./blocks/staffType";
 import { bigliettoGiornaliero } from "./dailyTicketType";
 import { festivalTicket } from "./festivalTicket";
+import { galleryType } from "./galleryType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -34,5 +35,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		biglietto,
 		bigliettoGiornaliero,
 		festivalTicket,
+		galleryType,
 	],
 };

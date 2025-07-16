@@ -57,7 +57,10 @@ export default async function Page({
 				documentType="eventi"
 			/>
 			<hr />
-			<Link href="/eventi" className="font-semibold text-mustard">
+			<Link
+				href="/eventi"
+				className="font-semibold text-mustard text-2xl sm:text-3xl md:text-4xl"
+			>
 				&larr; Torna agli eventi
 			</Link>
 		</main>

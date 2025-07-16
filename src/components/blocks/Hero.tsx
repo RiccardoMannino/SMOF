@@ -99,7 +99,7 @@ export function Hero({ images, text }: HeroProps) {
 							initial={{ transform: "translateX(-300px)" }}
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
-							className=" text-balance text-3xl mb-7 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold break-words"
+							className=" text-balance text-3xl max-lg:text-center mb-7 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold break-words"
 						>
 							{text}
 						</motion.h1>

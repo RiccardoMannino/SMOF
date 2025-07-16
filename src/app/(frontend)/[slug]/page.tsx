@@ -6,6 +6,7 @@ import { PAGE_QUERY, EVENTS_QUERY } from "@/sanity/lib/queries";
 import { ChevronLeftIcon } from "@sanity/icons";
 
 import { dataProva } from "@/sanity/lib/date";
+import { notFound } from "next/navigation";
 
 export default async function Page({
 	params,
@@ -54,7 +55,7 @@ export default async function Page({
 
 	return page?.content ? (
 		<>
-			<h1 className="text-3xl mb-10 sm:mb-3 sm:text-4xl lg:text-6xl lg:mb-20  xl:text-8xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10 ">
+			<h1 className="text-3xl mb-10 sm:mb-3 sm:text-4xl lg:text-6xl lg:mb-20 xl:text-8xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10 ">
 				{page.intestazione}
 			</h1>
 
@@ -69,5 +70,7 @@ export default async function Page({
 				}
 			/>
 		</>
-	) : null;
+	) : (
+		notFound()
+	);
 }

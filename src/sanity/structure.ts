@@ -25,6 +25,8 @@ export const structure: StructureResolver = (S) =>
 			S.documentTypeListItem("biglietto").title("Biglietti Singolo Evento"),
 			S.documentTypeListItem("giornaliero").title("Biglietto Giornaliero"),
 			S.documentTypeListItem("festival").title("Biglietto Festival"),
+			S.divider(),
+			S.documentTypeListItem("galleria").title("Gallerie Immagini"),
 			...S.documentTypeListItems().filter(
 				(item) =>
 					item.getId() &&
@@ -37,6 +39,7 @@ export const structure: StructureResolver = (S) =>
 						"biglietto",
 						"festival",
 						"giornaliero",
+						"galleria",
 					].includes(item.getId()!)
 			),
 		]);

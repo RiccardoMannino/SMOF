@@ -19,5 +19,11 @@ export const festivalTicket = defineType({
 			type: "string",
 			validation: (e) => e.required(),
 		}),
+		defineField({
+			name: "quantita",
+			title: "Quantità disponibile",
+			type: "number",
+			validation: (e) => e.required(),
+		}),
 	],
 });

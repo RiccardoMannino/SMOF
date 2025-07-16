@@ -18,6 +18,7 @@ export function Footer() {
 				{ nome: "Ticket", href: "ticket" },
 				{ nome: "Ospitalità", href: "ospitalità" },
 				{ nome: "Programma", href: "programma" },
+				{ nome: "Galleria", href: "galleria" },
 			],
 		},
 		{

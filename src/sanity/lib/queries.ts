@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 export const EVENTS_QUERY =
-	defineQuery(`*[_type == 'eventi' && defined(slug.current)][0...12]
+	defineQuery(`*[_type == 'eventi' && defined(slug.current)][0...120]
     {
   _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{
     speakerName,
@@ -11,8 +11,15 @@ export const EVENTS_QUERY =
 export const TICKET_QUERY = defineQuery(`*[_type == "biglietto"]{
   _id , prezzo, biglietto 
 }`);
+export const GALLERIES_QUERY =
+	defineQuery(`*[_type == "galleria" && defined(slug.current)][0...20]{
+_id , images , titolo , slug
+}`);
 
-export const DAILY_TICKET_QUERY = defineQuery(`*[]`);
+export const SINGLE_GALLERY_QUERY =
+	defineQuery(`*[_type == "galleria" && slug.current == $slug][0]{
+  _id , images , titolo 
+}`);
 
 export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{
