@@ -11,6 +11,11 @@ export const EVENTS_QUERY =
 export const TICKET_QUERY = defineQuery(`*[_type == "biglietto"]{
   _id , prezzo, biglietto 
 }`);
+
+export const PARTNER_QUERY = defineQuery(`*[_type == "partner" ]{
+  _id ,nome , tipo, link ,immagine
+}`);
+
 export const GALLERIES_QUERY =
 	defineQuery(`*[_type == "galleria" && defined(slug.current)][0...20]{
 _id , images , titolo , slug

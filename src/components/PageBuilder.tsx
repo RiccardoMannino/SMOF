@@ -30,6 +30,7 @@ export function PageBuilder({
 	documentType,
 	className,
 }: PageBuilderProps) {
+	// blocchi
 	const blocks = useOptimistic<
 		NonNullable<PAGE_QUERYResult>["content"] | undefined,
 		NonNullable<PAGE_QUERYResult>

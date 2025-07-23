@@ -22,7 +22,6 @@
 }
 
 @layer base {
-	/* Cabin per tutti gli heading - evoca baite e rifugi */
 	h1,
 	h2,
 	h3,
@@ -186,6 +185,17 @@
 		}
 		.mobile\:block {
 			display: block;
+		}
+	}
+}
+
+@theme inline {
+	--animate-scroll: scroll var(--animation-duration, 40s)
+		var(--animation-direction, forwards) linear infinite;
+
+	@keyframes scroll {
+		to {
+			transform: translate(calc(-50% - 0.5rem));
 		}
 	}
 }

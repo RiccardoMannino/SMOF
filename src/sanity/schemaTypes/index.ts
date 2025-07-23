@@ -16,9 +16,11 @@ import { staffType } from "./blocks/staffType";
 import { bigliettoGiornaliero } from "./dailyTicketType";
 import { festivalTicket } from "./festivalTicket";
 import { galleryType } from "./galleryType";
+import { partner } from "./partnerType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
+		partner,
 		event,
 		speaker,
 		navbar,

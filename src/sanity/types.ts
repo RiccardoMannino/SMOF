@@ -359,6 +359,29 @@ export type Speaker = {
   };
 };
 
+export type Partner = {
+  _id: string;
+  _type: "partner";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  nome?: string;
+  tipo?: string;
+  link?: string;
+  immagine?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -477,7 +500,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Eventi | Speaker | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Eventi | Speaker | Partner | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -524,6 +547,26 @@ export type TICKET_QUERYResult = Array<{
   _id: string;
   prezzo: string | null;
   biglietto: string | null;
+}>;
+// Variable: PARTNER_QUERY
+// Query: *[_type == "partner" ]{  _id ,nome , tipo, link ,immagine}
+export type PARTNER_QUERYResult = Array<{
+  _id: string;
+  nome: string | null;
+  tipo: string | null;
+  link: string | null;
+  immagine: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
 }>;
 // Variable: GALLERIES_QUERY
 // Query: *[_type == "galleria" && defined(slug.current)][0...20]{_id , images , titolo , slug}
@@ -895,6 +938,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
     "*[_type == \"biglietto\"]{\n  _id , prezzo, biglietto \n}": TICKET_QUERYResult;
+    "*[_type == \"partner\" ]{\n  _id ,nome , tipo, link ,immagine\n}": PARTNER_QUERYResult;
     "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;

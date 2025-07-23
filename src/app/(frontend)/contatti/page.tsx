@@ -24,19 +24,17 @@ export default function Page() {
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-center max-sm:mb-5 mb-20 text-mustard">
 					Contatti
 				</h1>
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 h-full w-full">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 h-full w-full bg-ivory text-chocolate rounded-2xl p-4">
+					<h2 className="text-2xl sm:text-3xl md:text-4xl max-sm:mt-5 mt-20 font-bold">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
+						quia. Quod, quibusdam ab! Maiores, voluptatibus vel libero veniam
+						non quam suscipit eos tenetur sint, dolore blanditiis. Iste non
+						voluptatum officia. Lorem ipsum dolor sit amet consectetur
+						adipisicing elit. Iste minus et reprehenderit quas nesciunt illo,
+						vitae consequatur facilis quaerat deserunt eum sed eius ut, eos
+						voluptates veritatis exercitationem rerum ad!
+					</h2>
 					<div>
-						<h2 className="text-2xl sm:text-3xl md:text-4xl max-sm:mt-5 mt-20 font-bold pl-4 text-mustard">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Molestias, quia. Quod, quibusdam ab! Maiores, voluptatibus vel
-							libero veniam non quam suscipit eos tenetur sint, dolore
-							blanditiis. Iste non voluptatum officia. Lorem ipsum dolor sit
-							amet consectetur adipisicing elit. Iste minus et reprehenderit
-							quas nesciunt illo, vitae consequatur facilis quaerat deserunt eum
-							sed eius ut, eos voluptates veritatis exercitationem rerum ad!
-						</h2>
-					</div>
-					<div className="bg-ivory text-chocolate rounded-2xl">
 						<h2 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold pl-4">
 							Per informazioni Compila il Form
 						</h2>
@@ -70,7 +68,7 @@ export default function Page() {
 							/>
 							<input
 								type="submit"
-								className="border-2 border-chocolate rounded p-2 w-fit hover:cursor-pointer"
+								className="border-2 border-chocolate rounded p-2 w-fit hover:cursor-pointer hover:text-ivory hover:bg-chocolate transition-colors"
 							/>
 						</form>
 					</div>

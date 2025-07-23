@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
-import { LIST_PAGE_QUERY } from "@/sanity/lib/queries";
+import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import ButtonMenu from "./ButtonMenu";
-
-// import { ThemeToggle } from "./ThemeToogle";
 
 export async function Header() {
 	const { data: pages } = await sanityFetch({
 		query: LIST_PAGE_QUERY,
+	});
+
+	const { data: galleria } = await sanityFetch({
+		query: GALLERIES_QUERY,
 	});
 
 	return (
@@ -30,7 +32,17 @@ export async function Header() {
 							className="hover:text-rust transition-colors"
 							href={`/${page.slug}`}
 						>
-							{page.title}
+							{page.title === "galleria"
+								? galleria.map((el) => (
+										<Link
+											key={el._id}
+											href={`/galleria/${el.slug?.current}`}
+											className="text-mustard font-semibold flex flex-col "
+										>
+											<h1>{el.titolo}</h1>
+										</Link>
+									))
+								: page.title}
 						</Link>
 					</li>
 				))}

@@ -132,7 +132,7 @@ export function Footer() {
 			</div>
 
 			<p className="text-sm text-center text-chocolate  mt-10">
-				© SMOF 2025. Tutti i diritti riservati.
+				© San Martino Outdoor Fest. Tutti i diritti riservati.
 			</p>
 		</footer>
 	);

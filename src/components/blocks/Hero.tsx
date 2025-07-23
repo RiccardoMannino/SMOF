@@ -50,7 +50,6 @@ export function Hero({ images, text }: HeroProps) {
 		const prevIndex = (index - 1 + totalSlides) % totalSlides;
 		setIndex(prevIndex);
 		scrollToSlide(prevIndex);
-		// console.log(prevIndex);
 	};
 
 	// effetto utilizzato per fare andare in autoplay lo slider e stopparlo all'hover dell'immagine
@@ -72,20 +71,20 @@ export function Hero({ images, text }: HeroProps) {
 		};
 	}, [index, totalSlides, next, hover, stop]);
 
-	// se non ci sono immagini ritorna nullo
+	// se non ci sono immagini ritorna null
 	if (!images || images.length === 0) return null;
 
 	return (
 		<div className="relative w-full overflow-hidden ">
 			<button
 				onClick={prev}
-				className={`absolute ${(!text && "left-[1%]") || " sm:left-[52%]"}   left-4 top-[62%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
+				className={`absolute ${(!text && "left-[1%]") || "sm:left-4"} lg:left-[52%] top-[60%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
 			>
 				<ChevronLeftIcon className="h-4 w-4 md:h-8 md:w-8" />
 			</button>
 			<button
 				onClick={next}
-				className="absolute right-4 top-[62%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 transition-colors hover:cursor-pointer"
+				className="absolute right-4 top-[60%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 transition-colors hover:cursor-pointer"
 			>
 				<ChevronRightIcon className="h-4 w-4 md:h-8 md:w-8 " />
 			</button>
