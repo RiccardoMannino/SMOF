@@ -33,11 +33,6 @@ export default async function Page({
 
 	console.log("pagina attuale:", (await params).slug);
 
-	const partnerRaggruppati = Object.groupBy(
-		partner,
-		(pa) => pa?.tipo as string
-	);
-
 	// Pagina Eventi
 	if ((await params).slug === `eventi`) {
 		return (
@@ -67,6 +62,10 @@ export default async function Page({
 
 	//Pagina Partner
 	if ((await params).slug === `partner`) {
+		const partnerRaggruppati = Object.groupBy(
+			partner,
+			(pa) => pa?.tipo as string
+		);
 		return (
 			<main className="container mx-auto bg-forest grid grid-cols-1 gap-6 p-12 ">
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard max-sm:text-center">

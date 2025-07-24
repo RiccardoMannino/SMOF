@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { SINGLE_GALLERY_QUERYResult } from "@/sanity/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -15,14 +15,10 @@ export const ParallaxScroll = ({
 	className?: string;
 }) => {
 	const gridRef = useRef<HTMLDivElement>(null);
-	const { scrollYProgress } = useScroll({
-		container: gridRef,
-		offset: ["start start", "end start"],
-	});
-
-	const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -200]);
-	const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 200]);
-	const translateThird = useTransform(scrollYProgress, [0, 1], [0, -200]);
+	// const { scrollYProgress } = useScroll({
+	// 	container: gridRef,
+	// 	offset: ["start start", "end start"],
+	// });
 
 	return (
 		<div
@@ -35,7 +31,7 @@ export const ParallaxScroll = ({
 			>
 				<div className="grid gap-10">
 					{immagini?.images?.slice(0, 4).map((im, index) => (
-						<motion.div style={{ y: translateFirst }} key={"grid-1" + index}>
+						<motion.div key={"grid-1" + index}>
 							<Image
 								src={urlFor(im)
 									.width(400)
@@ -54,7 +50,7 @@ export const ParallaxScroll = ({
 
 				<div className="grid gap-10">
 					{immagini?.images?.slice(5, 9).map((im, index) => (
-						<motion.div style={{ y: translateSecond }} key={"grid-2" + index}>
+						<motion.div key={"grid-2" + index}>
 							<Image
 								src={urlFor(im)
 									.width(400)
@@ -72,7 +68,7 @@ export const ParallaxScroll = ({
 				</div>
 				<div className="grid gap-10">
 					{immagini?.images?.slice(9, 13).map((im, index) => (
-						<motion.div style={{ y: translateThird }} key={"grid-3" + index}>
+						<motion.div key={"grid-3" + index}>
 							<Image
 								src={urlFor(im)
 									.width(400)
