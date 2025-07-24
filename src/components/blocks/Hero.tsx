@@ -78,7 +78,7 @@ export function Hero({ images, text }: HeroProps) {
 		<div className="relative w-full overflow-hidden ">
 			<button
 				onClick={prev}
-				className={`absolute ${(!text && "left-[1%]") || "sm:left-4"} lg:left-[52%] top-[60%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
+				className={`absolute ${(!text && "left-[1%]") || "max-sm:left-3.5 sm:left-4"} lg:left-[51%] top-[60%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
 			>
 				<ChevronLeftIcon className="h-4 w-4 md:h-8 md:w-8" />
 			</button>

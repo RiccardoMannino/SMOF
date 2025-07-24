@@ -34,7 +34,7 @@ export function SplitImage({
 						<h2 className="text-3xl max-sm:text-center mx-auto md:text-5xl lg:text-6xl font-light text-chocolate text-pretty max-w-3xl">
 							{title}
 						</h2>
-						<p className="whitespace-pre-line">{testo}</p>
+						<p className=" max-sm:text-center whitespace-pre-line">{testo}</p>
 					</>
 				) : null}
 			</div>
