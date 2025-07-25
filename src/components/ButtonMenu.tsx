@@ -61,7 +61,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 				animate={{ x: open ? 0 : -1000 }}
 				initial={false}
 				transition={{
-					duration: 1,
+					duration: 0.7,
 					type: open ? "easeIn" : "easeOut",
 				}}
 			>
@@ -71,7 +71,11 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 					variants={{
 						open: {
 							opacity: 1,
-							transition: { staggerChildren: 0.5, delay: 0.5 },
+							transition: {
+								staggerChildren: 0.4,
+								delayChildren: 0.2,
+								duration: 1,
+							},
 						},
 						closed: { opacity: 0 },
 					}}
