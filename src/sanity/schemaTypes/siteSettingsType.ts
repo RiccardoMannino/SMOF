@@ -12,11 +12,6 @@ export const siteSettingsType = defineType({
 			type: "reference",
 			to: [{ type: "page" }],
 		}),
-		defineField({
-			name: "festival",
-			type: "reference",
-			to: [{ type: "page" }],
-		}),
 	],
 	preview: {
 		prepare() {

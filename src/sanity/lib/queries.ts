@@ -43,7 +43,7 @@ export const EVENTS_SLUGS_QUERY =
 
 export const PAGE_QUERY =
 	defineQuery(`*[_type == "page" && slug.current == $slug][0]{
-  ...,
+  mainImage ,...,
   content[]{
     ...,
     _type == "faqs" => {

@@ -21,6 +21,8 @@ export default async function Page({
 		params: await params,
 	});
 
+	console.log(page);
+
 	// query degli eventi
 	const { data: eventi } = await sanityFetch({
 		query: EVENTS_QUERY,
@@ -119,22 +121,43 @@ export default async function Page({
 		);
 	}
 
-	return page?.content ? (
+	return page ? (
 		<>
-			<h1 className="text-3xl mb-10 sm:mb-3 sm:text-4xl lg:text-6xl lg:mb-20 xl:text-8xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10 ">
-				{page.intestazione}
-			</h1>
+			<section className="grid grid-cols-1 gap-6 p-12 w-full">
+				{page.mainImage ? (
+					<Image
+						className="rounded-2xl relative w-full"
+						src={urlFor(page?.mainImage)
+							.width(800)
+							.height(500)
+							.quality(100)
+							.auto("format")
+							.url()}
+						alt={page?.intestazione || ""}
+						width="800"
+						height="400"
+					/>
+				) : null}
+				<h1 className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-5xl lg:mb-20 xl:text-6xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10">
+					{page.intestazione}
+				</h1>
 
-			<PageBuilder
-				documentId={page._id}
-				documentType={page._type}
-				content={page.content}
-				className={
-					`${(await params).slug}` === "chi-siamo"
-						? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5 max-sm:place-content-center"
-						: ""
-				}
-			/>
+				<p className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-5xl lg:mb-20 xl:text-6xl max-md:text-center tracking-tight text-mustard font-semibold whitespace-pre-line">
+					{page.contenuto}
+				</p>
+			</section>
+			{page.content ? (
+				<PageBuilder
+					documentId={page._id}
+					documentType={page._type}
+					content={page.content}
+					className={
+						`${(await params).slug}` === "chi-siamo"
+							? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5 max-sm:place-content-center"
+							: ""
+					}
+				/>
+			) : null}
 		</>
 	) : (
 		notFound()

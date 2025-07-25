@@ -17,14 +17,14 @@ export default async function page() {
 	// });
 	return (
 		<main className="container mx-auto bg-forest h-full min-h-screen">
-			<h1 className="text-2xl  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
+			<h1 className="text-2xl max-sm:text-center  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
 				Informazioni Ticket
 			</h1>
-			<div className="bg-ivory p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
+			<div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
 				<h1 className="text-center text-3xl sm:text-4xl mb-6">
 					Tipi di ticket
 				</h1>
-				<div className="flex  h-fit w-full gap-5 justify-center my-6 relative">
+				<div className="flex max-sm:flex-col  h-fit w-full gap-5 justify-center my-6 relative">
 					<Card className="w-full">
 						<CardHeader>
 							<CardTitle>

@@ -14,7 +14,7 @@ export default async function Page() {
 				<Link
 					key={el._id}
 					href={`/galleria/${el.slug?.current}`}
-					className="text-mustard font-semibold"
+					className="text-mustard font-semibold max-sm:first-of-type:ml-2"
 				>
 					<h1>{el.titolo}</h1>
 				</Link>

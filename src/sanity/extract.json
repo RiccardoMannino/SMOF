@@ -485,36 +485,6 @@
           "dereferencesTo": "page"
         },
         "optional": true
-      },
-      "festival": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "_ref": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              }
-            },
-            "_type": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string",
-                "value": "reference"
-              }
-            },
-            "_weak": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "boolean"
-              },
-              "optional": true
-            }
-          },
-          "dereferencesTo": "page"
-        },
-        "optional": true
       }
     }
   },
@@ -1310,6 +1280,13 @@
         "optional": true
       },
       "intestazione": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "contenuto": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

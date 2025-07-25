@@ -3,6 +3,7 @@ import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import ButtonMenu from "./ButtonMenu";
+// import { User2Icon } from "lucide-react";
 
 export async function Header() {
 	const { data: pages } = await sanityFetch({
@@ -15,6 +16,13 @@ export async function Header() {
 
 	return (
 		<header className=" flex items-center justify-between p-6 rounded-t-none rounded-b-lg bg-ivory ">
+			{/* <div className="flex justify-end mt-2 gap-2.5">
+				<span className="font-bold ">Login</span>
+				<Link href={"/login"}>
+					<User2Icon className="cursor-pointer" />
+				</Link>
+			</div> */}
+
 			<Link href="/">
 				<Image
 					src="/logo_smof.png"

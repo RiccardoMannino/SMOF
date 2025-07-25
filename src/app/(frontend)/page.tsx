@@ -31,7 +31,6 @@ export default async function Page() {
 					content={page?.homePage.content}
 					className="flex flex-col gap-5"
 				/>
-				{/* TODO: creare blocchi da usare anche al di fuori del page builder tipo eventi e quindi modificabili */}
 				<section className="my-20">
 					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
 						Ultimi Eventi

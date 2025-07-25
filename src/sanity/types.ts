@@ -100,12 +100,6 @@ export type SiteSettings = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "page";
   };
-  festival?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  };
 };
 
 export type SplitImage = {
@@ -229,6 +223,7 @@ export type Page = {
   _rev: string;
   title?: string;
   intestazione?: string;
+  contenuto?: string;
   slug?: Slug;
   content?: PageBuilder;
   mainImage?: {
@@ -656,8 +651,20 @@ export type EVENTS_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  ...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
+// Query: *[_type == "page" && slug.current == $slug][0]{  mainImage ,...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
 export type PAGE_QUERYResult = {
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   _id: string;
   _type: "page";
   _createdAt: string;
@@ -665,6 +672,7 @@ export type PAGE_QUERYResult = {
   _rev: string;
   title?: string;
   intestazione?: string;
+  contenuto?: string;
   slug?: Slug;
   content: Array<{
     _key: string;
@@ -774,18 +782,6 @@ export type PAGE_QUERYResult = {
       _key: string;
     }>;
   }> | null;
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
 } | null;
 // Variable: LIST_PAGE_QUERY
 // Query: *[_type == "page"]  {    title,    _id,    "slug": slug.current,    "Home": slug.current == "/"  }  | order(Home desc, title asc)
@@ -808,6 +804,7 @@ export type HOME_PAGE_QUERYResult = {
     _rev: string;
     title?: string;
     intestazione?: string;
+    contenuto?: string;
     slug?: Slug;
     content: Array<{
       _key: string;
@@ -943,7 +940,7 @@ declare module "@sanity/client" {
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n  mainImage ,...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
     "\n  *[_type == \"page\"]\n  {\n    title,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, title asc)\n": LIST_PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;
   }
