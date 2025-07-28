@@ -141,7 +141,7 @@ export function Footer() {
 			</div>
 
 			<p className="text-sm text-center text-chocolate  mt-10">
-				© San Martino Outdoor Fest. Tutti i diritti riservati.
+				© Effetto Outdoor - Natura e Territorio APS. Tutti i diritti riservati.
 			</p>
 		</footer>
 	);

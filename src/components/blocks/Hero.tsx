@@ -98,9 +98,9 @@ export function Hero({ images, text }: HeroProps) {
 							initial={{ transform: "translateX(-300px)" }}
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
-							className=" text-balance max-sm:whitespace-pre-line text-3xl max-lg:text-center mb-7 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold break-words"
+							className="text-[1.05rem] max-lg:text-center mb-7 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold "
 						>
-							{text}
+							{text.toUpperCase()}
 						</motion.h1>
 					) : null}
 				</div>
@@ -120,7 +120,7 @@ export function Hero({ images, text }: HeroProps) {
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
 							key={image._key}
-							className="min-w-full max-h-max  relative flex flex-row-reverse"
+							className="min-w-full max-h-max relative flex flex-row-reverse"
 						>
 							<Image
 								src={urlFor(image).width(1600).height(1200).url()}
