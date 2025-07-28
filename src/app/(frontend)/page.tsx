@@ -23,7 +23,7 @@ export default async function Page() {
 
 	return page?.homePage?.content ? (
 		<>
-			<main className="grid grid-cols-1 pt-4 px-6">
+			<main className="grid grid-cols-1 pt-4 px-4">
 				{/* hero section */}
 				<PageBuilder
 					documentId={page?.homePage._id}

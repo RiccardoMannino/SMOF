@@ -98,7 +98,7 @@ export function Hero({ images, text }: HeroProps) {
 							initial={{ transform: "translateX(-300px)" }}
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
-							className="text-[13px] max-lg:text-center mb-7 sm:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold "
+							className=" max-[360px]:text-[13px] min-[400px]:text-xl max-lg:text-center mb-7 sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold lg:mr-2"
 						>
 							{text.toUpperCase()}
 						</motion.h1>
