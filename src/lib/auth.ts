@@ -2,7 +2,9 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { createOrUpdateUser } from "./action";
 
-const authConfig = {
+import type { NextAuthConfig } from "next-auth";
+
+const authConfig: NextAuthConfig = {
 	providers: [
 		Google({
 			clientId: process.env.AUTH_GOOGLE_ID,
