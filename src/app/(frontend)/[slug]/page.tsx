@@ -143,9 +143,11 @@ export default async function Page({
 					{page.intestazione}
 				</h1>
 
-				<p className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-5xl lg:mb-20 xl:text-6xl max-md:text-center tracking-tight text-mustard font-semibold whitespace-pre-line">
-					{page.contenuto}
-				</p>
+				{page.contenuto && (
+					<p className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-5xl lg:mb-20 xl:text-6xl max-md:text-center tracking-tight text-mustard font-semibold whitespace-pre-line">
+						{page?.contenuto}
+					</p>
+				)}
 			</section>
 			{page.content ? (
 				<PageBuilder
@@ -154,7 +156,7 @@ export default async function Page({
 					content={page.content}
 					className={
 						`${(await params).slug}` === "chi-siamo"
-							? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5 max-sm:place-content-center"
+							? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5 max-sm:place-content-center mb-10"
 							: ""
 					}
 				/>

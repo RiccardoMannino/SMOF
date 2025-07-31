@@ -377,6 +377,19 @@ export type Partner = {
   };
 };
 
+export type User = {
+  _id: string;
+  _type: "user";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  email?: string;
+  profileImage?: string;
+  uid?: string;
+  subscribeNewsletter?: boolean;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -495,7 +508,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Eventi | Speaker | Partner | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Eventi | Speaker | Partner | User | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -650,6 +663,21 @@ export type EVENT_QUERYResult = {
 export type EVENTS_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
+// Variable: AUTH_USERS
+// Query: *[_type == "user"] {  _id,  name,  email,  profileImage,  uid,  subscribeNewsletter,}
+export type AUTH_USERSResult = Array<{
+  _id: string;
+  name: string | null;
+  email: string | null;
+  profileImage: string | null;
+  uid: string | null;
+  subscribeNewsletter: boolean | null;
+}>;
+// Variable: SINGLE_AUTH_USER
+// Query: *[_type == "user" && uid == $uid][0]{    email  }
+export type SINGLE_AUTH_USERResult = {
+  email: string | null;
+} | null;
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0]{  mainImage ,...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
 export type PAGE_QUERYResult = {
@@ -940,6 +968,8 @@ declare module "@sanity/client" {
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, eventType, immagine, data, eventDescription, speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
+    "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;
+    "*[_type == \"user\" && uid == $uid][0]{\n    email\n  }": SINGLE_AUTH_USERResult;
     "*[_type == \"page\" && slug.current == $slug][0]{\n  mainImage ,...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
     "\n  *[_type == \"page\"]\n  {\n    title,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, title asc)\n": LIST_PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;

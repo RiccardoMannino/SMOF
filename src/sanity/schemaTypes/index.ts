@@ -17,9 +17,11 @@ import { bigliettoGiornaliero } from "./dailyTicketType";
 import { festivalTicket } from "./festivalTicket";
 import { galleryType } from "./galleryType";
 import { partner } from "./partnerType";
+import { user } from "./userType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
+		user,
 		partner,
 		event,
 		speaker,

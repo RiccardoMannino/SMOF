@@ -41,6 +41,20 @@ export const EVENTS_SLUGS_QUERY =
   "slug": slug.current
 }`);
 
+export const AUTH_USERS = defineQuery(`*[_type == "user"] {
+  _id,
+  name,
+  email,
+  profileImage,
+  uid,
+  subscribeNewsletter,
+}`);
+
+export const SINGLE_AUTH_USER =
+	defineQuery(`*[_type == "user" && uid == $uid][0]{
+    email
+  }`);
+
 export const PAGE_QUERY =
 	defineQuery(`*[_type == "page" && slug.current == $slug][0]{
   mainImage ,...,

@@ -27,6 +27,22 @@ export const structure: StructureResolver = (S) =>
 			S.documentTypeListItem("festival").title("Biglietto Festival"),
 			S.divider(),
 			S.documentTypeListItem("galleria").title("Gallerie Immagini"),
+			S.documentTypeListItem("user").title("Tutti gli utenti autenticati"),
+			S.listItem()
+				.title("Utenti iscritti alla Newsletter ")
+				.child(
+					S.documentList()
+						.title("Newsletter Subscribers")
+						.filter('_type == "user" && subscribeNewsletter == true')
+				),
+			// Lista filtrata per non iscritti
+			S.listItem()
+				.title("Non-Subscribers")
+				.child(
+					S.documentList()
+						.title("Non-Subscribers")
+						.filter('_type == "user" && subscribeNewsletter != true')
+				),
 			S.documentTypeListItem("partner").title("Partners"),
 			...S.documentTypeListItems().filter(
 				(item) =>
@@ -42,6 +58,7 @@ export const structure: StructureResolver = (S) =>
 						"giornaliero",
 						"galleria",
 						"partner",
+						"user",
 					].includes(item.getId()!)
 			),
 		]);

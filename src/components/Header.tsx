@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { User2Icon } from "lucide-react";
 import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import ButtonMenu from "./ButtonMenu";
+import { auth } from "@/lib/auth";
 // import { User2Icon } from "lucide-react";
 
 export async function Header() {
@@ -14,47 +16,62 @@ export async function Header() {
 		query: GALLERIES_QUERY,
 	});
 
+	const session = await auth();
+
 	return (
-		<header className=" flex items-center justify-between p-6 rounded-t-none rounded-b-lg bg-ivory ">
-			{/* <div className="flex justify-end mt-2 gap-2.5">
+		<header className=" flex flex-col items-center justify-between max-sm:pt-0   p-6 rounded-t-none rounded-b-lg bg-ivory ">
+			<div className="flex justify-end gap-2.5 self-end cursor-pointer">
+				{/* {session?.user?.email ? (
+					<Image
+						src={session?.user?.image as string}
+						alt="avatar"
+						width={20}
+						height={20}
+					/>
+				) : (
+					<> */}
 				<span className="font-bold ">Login</span>
 				<Link href={"/login"}>
-					<User2Icon className="cursor-pointer" />
-				</Link>
-			</div> */}
+					<User2Icon />
+				</Link>{" "}
+				{/* </>
+				)} */}
+			</div>
 
-			<Link href="/">
-				<Image
-					src="/logo_smof.png"
-					alt="home"
-					height={50}
-					width={100}
-					className="md:w-40 md:h-20"
-				/>
-			</Link>
-			<ButtonMenu list={pages} />
-			<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
-				{pages?.map((page) => (
-					<li key={page._id}>
-						<Link
-							className="hover:text-rust transition-colors"
-							href={`/${page.slug}`}
-						>
-							{page.title === "galleria"
-								? galleria.map((el) => (
-										<Link
-											key={el._id}
-											href={`/galleria/${el.slug?.current}`}
-											className="text-mustard font-semibold flex flex-col "
-										>
-											<h1>{el.titolo}</h1>
-										</Link>
-									))
-								: page.title}
-						</Link>
-					</li>
-				))}
-			</ul>
+			<div className="flex justify-between items-center w-full">
+				<Link href="/">
+					<Image
+						src="/logo_smof.png"
+						alt="home"
+						height={50}
+						width={100}
+						className="md:w-40 md:h-20"
+					/>
+				</Link>
+				<ButtonMenu list={pages} />
+				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
+					{pages?.map((page) => (
+						<li key={page._id}>
+							<Link
+								className="hover:text-rust transition-colors"
+								href={`/${page.slug}`}
+							>
+								{page.title === "galleria"
+									? galleria.map((el) => (
+											<Link
+												key={el._id}
+												href={`/galleria/${el.slug?.current}`}
+												className="text-mustard font-semibold flex flex-col "
+											>
+												<h1>{el.titolo}</h1>
+											</Link>
+										))
+									: page.title}
+							</Link>
+						</li>
+					))}
+				</ul>
+			</div>
 		</header>
 	);
 }
