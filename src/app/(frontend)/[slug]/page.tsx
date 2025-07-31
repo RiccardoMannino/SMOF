@@ -68,6 +68,7 @@ export default async function Page({
 			partner,
 			(pa) => pa?.tipo as string
 		);
+
 		return (
 			<main className="container mx-auto bg-forest grid grid-cols-1 gap-6 p-12 ">
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard max-sm:text-center">
@@ -88,17 +89,17 @@ export default async function Page({
 								<h3 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard text-center">
 									{tipoGruppo}
 								</h3>
-								<div className="flex max-sm:flex-col gap-5 justify-center">
+								<div className="flex  max-sm:flex-col gap-5 justify-center">
 									{partnersDiQuelGruppo?.map((partnerSingolo) => (
 										<Link
 											href={partnerSingolo.link as string}
 											target="_blank"
-											className="flex bg-ivory justify-center  rounded-2xl"
+											className="flex bg-ivory items-center  rounded-2xl h-full"
 											key={partnerSingolo._id}
 										>
 											{partnerSingolo.immagine ? (
 												<Image
-													className="   hover:scale-105 transition-transform  self-center p-2 h-[12rem] w-[14rem]"
+													className=" hover:scale-105 transition-transform self-center p-2 max-sm:h-[12rem] object-contain"
 													src={urlFor(partnerSingolo?.immagine)
 														.maxWidth(200)
 														.minHeight(299)
@@ -106,7 +107,7 @@ export default async function Page({
 														.auto("format")
 														.url()}
 													alt={partnerSingolo?.nome || ""}
-													width="200"
+													width="220"
 													height="170"
 												/>
 											) : null}
