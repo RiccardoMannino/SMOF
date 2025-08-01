@@ -17,25 +17,31 @@ export async function Header() {
 	});
 
 	const session = await auth();
+	console.log(session);
 
 	return (
 		<header className=" flex flex-col items-center justify-between max-sm:pt-0   p-6 rounded-t-none rounded-b-lg bg-ivory ">
-			<div className="flex justify-end gap-2.5 self-end cursor-pointer">
-				{/* {session?.user?.email ? (
-					<Image
-						src={session?.user?.image as string}
-						alt="avatar"
-						width={20}
-						height={20}
-					/>
+			<div className="flex justify-end self-end cursor-pointer">
+				{session?.user?.email ? (
+					<>
+						<Image
+							src={session?.user?.image as string}
+							alt="avatar"
+							width={24}
+							height={24}
+							className="rounded-full mr-1"
+						/>
+						<span> {session.user.name?.toUpperCase().slice(0, 1)}</span>
+						<span>{session.user.name?.slice(1).split(" ").slice(0, 1)}</span>
+					</>
 				) : (
-					<> */}
-				<span className="font-bold ">Login</span>
-				<Link href={"/login"}>
-					<User2Icon />
-				</Link>{" "}
-				{/* </>
-				)} */}
+					<>
+						<span className="font-bold ">Login</span>
+						<Link href={"/login"}>
+							<User2Icon />
+						</Link>{" "}
+					</>
+				)}
 			</div>
 
 			<div className="flex justify-between items-center w-full">
