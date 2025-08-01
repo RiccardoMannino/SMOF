@@ -14,7 +14,7 @@ function SignInButton() {
 			}
 		>
 			<button
-				className="flex items-center gap-6 text-lg border border-primary-300 px-10 py-4 font-medium hover:cursor-pointer"
+				className="flex items-center justify-center gap-6 text-lg px-10 py-4 font-medium hover:cursor-pointer"
 				type="submit"
 			>
 				<Image
@@ -23,7 +23,7 @@ function SignInButton() {
 					height="24"
 					width="24"
 				/>
-				<span>Accedi con Google</span>
+				<span className="text-chocolate">Accedi con Google</span>
 			</button>
 		</form>
 	);

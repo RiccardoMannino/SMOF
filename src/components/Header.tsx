@@ -21,7 +21,7 @@ export async function Header() {
 
 	return (
 		<header className=" flex flex-col items-center justify-between max-sm:pt-0   p-6 rounded-t-none rounded-b-lg bg-ivory ">
-			<div className="flex justify-end self-end cursor-pointer">
+			<div className="flex justify-end self-end cursor-pointer gap-2.5">
 				{session?.user?.email ? (
 					<>
 						<Image
@@ -31,8 +31,10 @@ export async function Header() {
 							height={24}
 							className="rounded-full mr-1"
 						/>
-						<span> {session.user.name?.toUpperCase().slice(0, 1)}</span>
-						<span>{session.user.name?.slice(1).split(" ").slice(0, 1)}</span>
+						<p>
+							{session.user.name?.toUpperCase().slice(0, 1)}
+							<span>{session.user.name?.slice(1).split(" ").slice(0, 1)}</span>
+						</p>
 					</>
 				) : (
 					<>
