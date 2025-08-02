@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
-import { User2Icon } from "lucide-react";
+import { LogOutIcon, User2Icon } from "lucide-react";
 import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import ButtonMenu from "./ButtonMenu";
 import { auth } from "@/lib/auth";
+import { signOutAction } from "@/lib/action";
 // import { User2Icon } from "lucide-react";
 
 export async function Header() {
@@ -17,31 +18,40 @@ export async function Header() {
 	});
 
 	const session = await auth();
-	console.log(session);
 
 	return (
-		<header className=" flex flex-col items-center justify-between max-sm:pt-0   p-6 rounded-t-none rounded-b-lg bg-ivory ">
-			<div className="flex justify-end self-end cursor-pointer gap-2.5">
+		<header className=" flex flex-col items-center justify-between  p-6 rounded-t-none rounded-b-lg bg-ivory ">
+			<div className="hidden min-[899px]:flex justify-end self-end cursor-pointer gap-2.5 w-fit">
 				{session?.user?.email ? (
 					<>
-						<Image
-							src={session?.user?.image as string}
-							alt="avatar"
-							width={24}
-							height={24}
-							className="rounded-full mr-1"
-						/>
-						<p>
-							{session.user.name?.toUpperCase().slice(0, 1)}
-							<span>{session.user.name?.slice(1).split(" ").slice(0, 1)}</span>
-						</p>
+						<div className="flex">
+							<Image
+								src={session?.user?.image as string}
+								alt="avatar"
+								width={24}
+								height={24}
+								className="rounded-full mr-1"
+							/>
+							<p>
+								{session.user.name?.toUpperCase().slice(0, 1)}
+								<span>
+									{session.user.name?.slice(1).split(" ").slice(0, 1)}
+								</span>
+							</p>
+						</div>
+						<form action={signOutAction} className="">
+							<button type="submit" className="cursor-pointer flex gap-1">
+								<span>Esci</span>
+								<LogOutIcon />
+							</button>
+						</form>
 					</>
 				) : (
 					<>
-						<span className="font-bold ">Login</span>
-						<Link href={"/login"}>
+						<Link className="flex gap-1" href={"/login"}>
+							<span className="font-bold">Login</span>
 							<User2Icon />
-						</Link>{" "}
+						</Link>
 					</>
 				)}
 			</div>
@@ -56,7 +66,7 @@ export async function Header() {
 						className="md:w-40 md:h-20"
 					/>
 				</Link>
-				<ButtonMenu list={pages} />
+				<ButtonMenu list={pages} session={session} />
 				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
 					{pages?.map((page) => (
 						<li key={page._id}>

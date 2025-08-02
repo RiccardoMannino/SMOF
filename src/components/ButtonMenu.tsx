@@ -2,20 +2,59 @@
 
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import { User2Icon } from "lucide-react";
 import Link from "next/link";
 import { LIST_PAGE_QUERYResult } from "@/sanity/types";
 import { useMenuLockBodyScroll } from "@/app/hooks/useLockBodyScroll";
+import { Session } from "next-auth";
+import Image from "next/image";
 
 type PageProps = LIST_PAGE_QUERYResult;
 
-export default function ButtonMenu({ list }: { list: PageProps }) {
+export default function ButtonMenu({
+	list,
+	session,
+}: {
+	list: PageProps;
+	session: Session | null;
+}) {
 	const [open, setOpen] = useState(false);
 
 	useMenuLockBodyScroll(open, setOpen);
 
 	return (
 		<>
-			<div onClick={() => setOpen(!open)} className="hidden max-[899px]:block">
+			<motion.div
+				onClick={() => setOpen(!open)}
+				className={`hidden max-[899px]:flex max-[899px]:items-center ${(open && "justify-between") || "justify-start"}  max-[899px]:gap-2`}
+				initial={{ x: "20%" }}
+				animate={{ width: open ? "80%" : "" }}
+				transition={{
+					duration: 0.7,
+					type: open ? "easeIn" : "easeOut",
+				}}
+			>
+				{session?.user?.email ? (
+					<div className="flex gap-1 z-60">
+						<Image
+							src={session?.user?.image as string}
+							alt="avatar"
+							width={24}
+							height={24}
+							className="rounded-full mr-1"
+						/>
+						<p>
+							{session.user.name?.toUpperCase().slice(0, 1)}
+							<span>{session.user.name?.slice(1).split(" ").slice(0, 1)}</span>
+						</p>
+					</div>
+				) : (
+					<Link className="flex gap-1 z-60" href={"/login"}>
+						<span className="font-bold">Login</span>
+						<User2Icon />
+					</Link>
+				)}
+
 				<button className="relative z-60 rounded  hover:cursor-pointer ">
 					<motion.svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +94,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 						)}
 					</motion.svg>
 				</button>
-			</div>
+			</motion.div>
 			<motion.div
 				className={`${(open && "fixed left-0 top-0 z-50 hidden max-[899px]:inline-flex max-[899px]:w-screen") || "fixed max-md:w-0 w-screen right-0 top-0 z-50 "}`}
 				animate={{ x: open ? 0 : -1000 }}
@@ -96,7 +135,7 @@ export default function ButtonMenu({ list }: { list: PageProps }) {
 							}}
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.95 }}
-							className="my-2 w-fit rounded-md p-2 text-2xl font-semibold text-chocolate transition-colors duration-700  hover:text-rust"
+							className="my-1.5 w-fit rounded-md p-2 text-2xl font-semibold text-chocolate transition-colors duration-700  hover:text-rust"
 							key={link.slug}
 						>
 							{link.slug ? (

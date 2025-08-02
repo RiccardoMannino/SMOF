@@ -23,20 +23,19 @@ const authConfig: NextAuthConfig = {
 			});
 
 			try {
-				const result = await createOrUpdateUser({
-					uid: user.id,
+				const stableUid = account?.providerAccountId || user.id;
+
+				await createOrUpdateUser({
+					uid: stableUid,
 					name: user.name || "",
 					email: user.email || "",
 					image: user.image || "",
 				});
 
-				console.log("Utente salvato con successo:", result);
 				return true;
 			} catch (error) {
 				console.error("Errore nel salvare su Sanity:", error);
-				// Puoi decidere se bloccare il login o permetterlo comunque
-				// return false; // Blocca il login
-				return true; // Permette il login anche se Sanity fallisce
+				return false;
 			}
 		},
 		async session({ session, token }) {

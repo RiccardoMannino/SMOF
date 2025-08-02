@@ -1,14 +1,22 @@
-import React from "react";
 import SignInButton from "@/components/SignInButton";
+import { auth } from "@/lib/auth";
 
-export default function page() {
+export default async function page() {
+	const session = await auth();
+
 	return (
 		<section className=" flex justify-center items-center h-[30rem]">
 			<div className="flex flex-col gap-10 mt-10 items-center justify-center bg-ivory rounded-2xl">
-				<h2 className="text-3xl font-semibold w-full text-center text-chocolate ">
-					Accedi
-				</h2>
-				<SignInButton />
+				{!session ? (
+					<>
+						<h2 className="text-3xl font-semibold w-full text-center text-chocolate ">
+							Accedi
+						</h2>
+						<SignInButton />
+					</>
+				) : (
+					<p className="p-2">Sei già autenticato!</p>
+				)}
 			</div>
 		</section>
 	);

@@ -17,7 +17,7 @@ export async function createOrUpdateUser(userData: User & Uid) {
 			`*[_type == "user" && uid == $uid][0]`,
 			{ uid }
 		);
-
+		console.log(existingUser);
 		if (existingUser) {
 			// Se esiste, aggiorna solo i campi necessari
 			console.log("Utente esistente trovato, aggiornamento in corso...");

@@ -75,8 +75,8 @@ export default async function Page({
 					I nostri Partners
 				</h1>
 				<h2 className="max-sm:text-center text-xl sm:text-2xl md:text-3xl  font-bold text-mustard">
-					Un ringraziamento speciale ai collaboratori e sostenitori dell&apos;
-					San Martino Outdoor Fest
+					Un ringraziamento speciale ai collaboratori e sostenitori del San
+					Martino Outdoor Fest
 				</h2>
 
 				<div className="grid grid-col-1 grid-flow-row gap-5  ">
