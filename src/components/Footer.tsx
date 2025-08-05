@@ -137,9 +137,19 @@ export function Footer() {
 				</div>
 			</div>
 
-			<p className="text-sm text-center text-chocolate  mt-10">
-				© Effetto Outdoor - Natura e Territorio APS. Tutti i diritti riservati.
-			</p>
+			<div className="flex flex-col">
+				<p className="text-sm text-center text-chocolate  mt-10">
+					© Effetto Outdoor - Natura e Territorio APS. Tutti i diritti
+					riservati.
+				</p>
+				<Link
+					href="https://www.riccardomannino.it"
+					target="_blank"
+					className="text-sm text-center text-chocolate  mt-5 hover:text-burnt transition-colors"
+				>
+					Sviluppato da Riccardo Mannino
+				</Link>
+			</div>
 		</footer>
 	);
 }

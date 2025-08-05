@@ -56,16 +56,7 @@ export async function Header() {
 				)}
 			</div>
 
-			<div className="flex justify-between items-center w-full">
-				<Link href="/">
-					<Image
-						src="/logo_smof.png"
-						alt="home"
-						height={50}
-						width={100}
-						className="md:w-40 md:h-20"
-					/>
-				</Link>
+			<div className="flex  items-center justify-between w-full">
 				<ButtonMenu list={pages} session={session} />
 				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
 					{pages?.map((page) => (
