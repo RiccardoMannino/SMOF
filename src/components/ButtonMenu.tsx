@@ -64,7 +64,11 @@ export default function ButtonMenu({
 						</>
 					) : (
 						<>
-							<Link className="flex gap-1 z-60 " href={"/login"}>
+							<Link
+								className="flex gap-1 z-60 "
+								href={"/login"}
+								onClick={() => setOpen(false)}
+							>
 								<span className="font-bold">Login</span>
 								<User2Icon />
 							</Link>

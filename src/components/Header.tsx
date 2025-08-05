@@ -6,7 +6,6 @@ import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import ButtonMenu from "./ButtonMenu";
 import { auth } from "@/lib/auth";
 import { signOutAction } from "@/lib/action";
-// import { User2Icon } from "lucide-react";
 
 export async function Header() {
 	const { data: pages } = await sanityFetch({
