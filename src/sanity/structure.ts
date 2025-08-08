@@ -33,6 +33,7 @@ export const structure: StructureResolver = (S) =>
 				.child(
 					S.documentList()
 						.title("Newsletter Subscribers")
+						.apiVersion("v2025-02-19")
 						.filter('_type == "user" && subscribeNewsletter == true')
 				),
 			// Lista filtrata per non iscritti
@@ -41,6 +42,7 @@ export const structure: StructureResolver = (S) =>
 				.child(
 					S.documentList()
 						.title("Non-Subscribers")
+						.apiVersion("v2025-02-19")
 						.filter('_type == "user" && subscribeNewsletter != true')
 				),
 			S.documentTypeListItem("partner").title("Partners"),

@@ -6,7 +6,10 @@ import {
 	PARTNER_QUERY,
 } from "@/sanity/lib/queries";
 import { EventCard } from "@/components/EventCard";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
+import { auth } from "@/lib/auth";
+import { readClient } from "@/sanity/lib/client";
 
 export default async function Page() {
 	const { data: page } = await sanityFetch({
@@ -21,6 +24,19 @@ export default async function Page() {
 		query: PARTNER_QUERY,
 	});
 
+	const session = await auth();
+	const userEmail = session?.user?.email;
+
+	let existingUser = null;
+
+	// Verifica se l'utente è autenticato e ha un'email
+	if (userEmail) {
+		existingUser = await readClient.fetch(
+			`*[_type == "user" && email == $email][0]`,
+			{ email: userEmail }
+		);
+	}
+
 	return page?.homePage?.content ? (
 		<>
 			<main className="grid grid-cols-1 pt-4 px-4">
@@ -31,6 +47,21 @@ export default async function Page() {
 					content={page?.homePage.content}
 					className="flex flex-col gap-5"
 				/>
+
+				<section className="my-20 flex justify-center">
+					<div className="bg-ivory p-5 rounded-2xl flex flex-col w-fit justify-center">
+						{session?.user?.email ? (
+							<NewsletterForm
+								isSubscribed={!!existingUser.subscribeNewsletter}
+							/>
+						) : (
+							<h1 className="text-2xl sm:text-3xl md:text-4xl text-center font-bold text-chocolate ">
+								Accedi per poterti iscrivere alla Newsletter e rimanere
+								aggiornato sui nostri eventi
+							</h1>
+						)}
+					</div>
+				</section>
 				<section className="my-20">
 					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
 						Ultimi Eventi

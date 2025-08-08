@@ -1,10 +1,17 @@
 "use server";
+
 import { readClient, writeClient } from "@/sanity/lib/client";
 import { signIn, signOut } from "./auth";
 import { User } from "next-auth";
+import { auth } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
+// tute le action (comprese quelle di stripe)
 
 type Uid = {
 	uid: string | undefined;
+	subscribeNewsletter?: boolean;
 };
 
 export async function createOrUpdateUser(userData: User & Uid) {
@@ -50,6 +57,42 @@ export async function createOrUpdateUser(userData: User & Uid) {
 	} catch (error) {
 		console.error("Errore dettagliato nella gestione utente:", error);
 		throw error;
+	}
+}
+
+export async function updateNewsletterSubscription(subscribe) {
+	try {
+		// Ottieni la sessione corrente
+		const session = await auth();
+
+		if (!session?.user) {
+			throw new Error("Utente non autenticato");
+		}
+
+		const userEmail = session.user.email;
+		console.log("Aggiornamento per utente:", userEmail);
+
+		// Trova l'utente tramite email (più affidabile dell'ID)
+		const existingUser = await readClient.fetch(
+			`*[_type == "user" && email == $email][0]`,
+			{ email: userEmail }
+		);
+
+		if (!existingUser) {
+			throw new Error("Utente non trovato nel database");
+		}
+
+		// Aggiorna solo il campo subscribeNewsletter
+		const result = await writeClient
+			.patch(existingUser._id)
+			.set({
+				subscribeNewsletter: subscribe,
+			})
+			.commit();
+
+		console.log("✅ Newsletter subscription aggiornata:", result);
+	} catch (error) {
+		console.error("❌ Errore nell'aggiornamento newsletter:", error);
 	}
 }
 

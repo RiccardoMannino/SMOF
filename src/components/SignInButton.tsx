@@ -23,7 +23,7 @@ function SignInButton() {
 					height="24"
 					width="24"
 				/>
-				<span className="text-chocolate">Accedi con Google</span>
+				<span className="text-chocolate font-semibold">Accedi con Google</span>
 			</button>
 		</form>
 	);

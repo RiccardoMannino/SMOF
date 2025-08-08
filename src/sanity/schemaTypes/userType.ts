@@ -29,7 +29,7 @@ export const user = defineType({
 		}),
 		defineField({
 			name: "subscribeNewsletter",
-			title: "Subscribe to Newsletter",
+			title: "Iscritto alla Newsletter",
 			type: "boolean",
 			initialValue: false,
 		}),

@@ -6,10 +6,13 @@ export default async function page() {
 
 	return (
 		<section className=" flex justify-center items-center h-[30rem]">
-			<div className="flex flex-col gap-10 mt-10 items-center justify-center bg-ivory rounded-2xl">
+			<div className="flex flex-col gap-6 mt-10 items-center justify-center bg-ivory rounded-2xl">
 				{!session ? (
 					<>
-						<h2 className="text-3xl font-semibold w-full text-center text-chocolate ">
+						<h2
+							className="text-3xl font-semibold w-full text-center text-chocolate mt-2.5
+						"
+						>
 							Accedi
 						</h2>
 						<SignInButton />
