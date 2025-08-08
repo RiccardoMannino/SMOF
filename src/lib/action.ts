@@ -60,7 +60,7 @@ export async function createOrUpdateUser(userData: User & Uid) {
 	}
 }
 
-export async function updateNewsletterSubscription(subscribe) {
+export async function updateNewsletterSubscription(subscribe: boolean) {
 	try {
 		// Ottieni la sessione corrente
 		const session = await auth();
