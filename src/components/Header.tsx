@@ -23,13 +23,13 @@ export async function Header() {
 			<div className="hidden min-[899px]:flex justify-end self-end cursor-pointer gap-2.5 w-fit">
 				{session?.user?.email ? (
 					<>
-						<div className="flex">
+						<Link href="/utente" className="flex items-center">
 							<Image
 								src={session?.user?.image as string}
 								alt="avatar"
 								width={24}
 								height={24}
-								className="rounded-full mr-1"
+								className="rounded-full mr-1 cursor-pointer"
 							/>
 							<p>
 								{session.user.name?.toUpperCase().slice(0, 1)}
@@ -37,7 +37,7 @@ export async function Header() {
 									{session.user.name?.slice(1).split(" ").slice(0, 1)}
 								</span>
 							</p>
-						</div>
+						</Link>
 						<form action={signOutAction} className="">
 							<button type="submit" className="cursor-pointer flex gap-1">
 								<span>Esci</span>

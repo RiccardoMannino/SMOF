@@ -4,10 +4,14 @@ import { readClient, writeClient } from "@/sanity/lib/client";
 import { signIn, signOut } from "./auth";
 import { User } from "next-auth";
 import { auth } from "@/lib/auth";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import Stripe from "stripe";
+import { revalidatePath, revalidateTag } from "next/cache";
 
-// tute le action (comprese quelle di stripe)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+	apiVersion: "2025-06-30.basil",
+});
+
+// tutte le action (comprese quelle di stripe)
 
 type Uid = {
 	uid: string | undefined;
@@ -91,15 +95,80 @@ export async function updateNewsletterSubscription(subscribe: boolean) {
 			.commit();
 
 		console.log("✅ Newsletter subscription aggiornata:", result);
+		revalidatePath("/utente");
+		revalidatePath("/");
+
+		revalidateTag("newsletter-status");
+		if (userEmail) revalidateTag(`newsletter-status:${userEmail}`);
+
+		return { ok: true };
 	} catch (error) {
 		console.error("❌ Errore nell'aggiornamento newsletter:", error);
 	}
 }
 
 export async function signInAction() {
-	await signIn("google", { redirectTo: "/ticket" });
+	await signIn("google", { redirectTo: "/utente" });
 }
 
 export async function signOutAction() {
 	await signOut({ redirectTo: "/" });
+}
+
+export async function purchaseTicket(ticketId: string, quantity: number) {
+	// 1. Controllo autenticazione
+	const session = await auth();
+	if (!session?.user) {
+		throw new Error("Utente non autenticato");
+	}
+
+	// 2. Recupera il biglietto da Sanity
+	const ticket = await readClient.fetch(
+		`*[_type in ["biglietto", "festival", "giornaliero"] && _id == $id][0]`,
+		{ id: ticketId }
+	);
+
+	if (!ticket) {
+		throw new Error("Biglietto non trovato");
+	}
+
+	if (ticket.quantita < quantity) {
+		throw new Error("Quantità richiesta non disponibile");
+	}
+
+	// 3. Gestione campo prezzo e nome biglietto
+	const price =
+		typeof ticket.prezzo === "string"
+			? parseFloat(ticket.prezzo)
+			: typeof ticket.Prezzo === "string"
+				? parseFloat(ticket.Prezzo)
+				: 0;
+
+	const ticketName = ticket.biglietto ?? ticket.bigliettoGiorno ?? "Biglietto";
+
+	// 4. Crea sessione Stripe
+	const stripeSession = await stripe.checkout.sessions.create({
+		line_items: [
+			{
+				price_data: {
+					currency: "eur",
+					product_data: {
+						name: ticketName,
+					},
+					unit_amount: Math.round(price * 100),
+				},
+				quantity,
+			},
+		],
+		mode: "payment",
+		success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?ticketId=${ticketId}&quantity=${quantity}`,
+		cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`,
+		customer_email: session.user.email ?? undefined,
+		// payment_method_types non serve più, Stripe lo gestisce in automatico
+	});
+
+	// 5. Aggiorna quantità su Sanity (scalata)
+	await writeClient.patch(ticket._id).dec({ quantita: quantity }).commit();
+
+	return stripeSession.url;
 }

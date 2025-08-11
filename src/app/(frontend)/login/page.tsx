@@ -1,16 +1,18 @@
 import SignInButton from "@/components/SignInButton";
 import { auth } from "@/lib/auth";
+import Image from "next/image";
 
 export default async function page() {
 	const session = await auth();
 
 	return (
 		<section className=" flex justify-center items-center h-[30rem]">
-			<div className="flex flex-col gap-6 mt-10 items-center justify-center bg-ivory rounded-2xl">
+			<div className="flex flex-col gap-6 p-2 items-center justify-center bg-ivory rounded-2xl">
+				<Image src={"/logo_smof.png"} alt="smof" width={100} height={120} />
 				{!session ? (
 					<>
 						<h2
-							className="text-3xl font-semibold w-full text-center text-chocolate mt-2.5
+							className="text-3xl font-semibold w-full text-center text-chocolate 
 						"
 						>
 							Accedi
@@ -18,7 +20,9 @@ export default async function page() {
 						<SignInButton />
 					</>
 				) : (
-					<p className="p-2">Sei già autenticato!</p>
+					<h2 className="p-2 text-3xl font-semibold w-full text-center text-chocolate ">
+						Sei già autenticato!
+					</h2>
 				)}
 			</div>
 		</section>

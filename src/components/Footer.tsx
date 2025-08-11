@@ -122,7 +122,7 @@ export function Footer() {
 									? sezione.link.map((voce) => (
 											<li key={voce.nome}>
 												<Link
-													target={`${sezione.titolo === "Social" && "_blank"}`}
+													target={`${(sezione.titolo === "Social" && "_blank") || ""}`}
 													href={`${sezione.titolo === "Social" ? voce.href : `/${voce.href?.toLowerCase().replace(" ", "-")}`}`}
 													className={`text-sm text-chocolate  hover:text-burnt transition-colors `}
 												>

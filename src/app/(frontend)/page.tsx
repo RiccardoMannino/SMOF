@@ -8,8 +8,7 @@ import {
 import { EventCard } from "@/components/EventCard";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
-import { auth } from "@/lib/auth";
-import { readClient } from "@/sanity/lib/client";
+import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
 
 export default async function Page() {
 	const { data: page } = await sanityFetch({
@@ -24,18 +23,9 @@ export default async function Page() {
 		query: PARTNER_QUERY,
 	});
 
-	const session = await auth();
-	const userEmail = session?.user?.email;
+	const { session, isSubscribed } = await getNewsletterStatus();
 
-	let existingUser = null;
-
-	// Verifica se l'utente è autenticato e ha un'email
-	if (userEmail) {
-		existingUser = await readClient.fetch(
-			`*[_type == "user" && email == $email][0]`,
-			{ email: userEmail }
-		);
-	}
+	console.log("sottoscritto alla newsletter:", isSubscribed);
 
 	return page?.homePage?.content ? (
 		<>
@@ -47,12 +37,14 @@ export default async function Page() {
 					content={page?.homePage.content}
 					className="flex flex-col gap-5"
 				/>
-
+				{/* Newsletter Section */}
 				<section className="my-20 flex justify-center">
 					<div className="bg-ivory p-5 rounded-2xl flex flex-col w-fit justify-center">
 						{session?.user?.email ? (
 							<NewsletterForm
-								isSubscribed={!!existingUser.subscribeNewsletter}
+								context="home"
+								subscribe={isSubscribed}
+								key={String(isSubscribed)}
 							/>
 						) : (
 							<h1 className="text-2xl sm:text-3xl md:text-4xl text-center font-bold text-chocolate ">
