@@ -9,7 +9,7 @@ export default async function page() {
 		<section className=" flex justify-center items-center h-[30rem]">
 			<div className="flex flex-col gap-6 p-2 items-center justify-center bg-ivory rounded-2xl">
 				<Image src={"/logo_smof.png"} alt="smof" width={100} height={120} />
-				{!session ? (
+				{!session?.user?.email ? (
 					<>
 						<h2
 							className="text-3xl font-semibold w-full text-center text-chocolate 
