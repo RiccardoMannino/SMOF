@@ -1,6 +1,7 @@
 import SignInButton from "@/components/SignInButton";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function page() {
 	const session = await auth();
@@ -20,9 +21,17 @@ export default async function page() {
 						<SignInButton />
 					</>
 				) : (
-					<h2 className="p-2 text-3xl font-semibold w-full text-center text-chocolate ">
-						Sei già autenticato!
-					</h2>
+					<>
+						<h2 className="p-2 text-3xl font-semibold w-full text-center text-chocolate ">
+							Sei già autenticato!
+						</h2>
+						<Link
+							href={"/"}
+							className="text-3xl font-semibold w-full text-center text-chocolate"
+						>
+							Torna alla home
+						</Link>
+					</>
 				)}
 			</div>
 		</section>
