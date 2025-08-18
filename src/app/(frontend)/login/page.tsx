@@ -1,5 +1,6 @@
 import SignInButton from "@/components/SignInButton";
 import { auth } from "@/lib/auth";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,6 +30,7 @@ export default async function page() {
 							href={"/"}
 							className="text-3xl font-semibold w-full text-center text-chocolate"
 						>
+							<ArrowLeft />
 							Torna alla home
 						</Link>
 					</>

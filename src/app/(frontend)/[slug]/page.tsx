@@ -139,12 +139,12 @@ export default async function Page({
 						height="400"
 					/>
 				) : null}
-				<h1 className="text-2xl mb-8 sm:mb-3 sm:text-3xl lg:text-5xl lg:mb-20 xl:text-6xl tracking-tight text-mustard font-bold whitespace-pre-line text-center mt-10">
+				<h1 className="text-2xl mb-8 sm:mb-3 sm:text-3xl lg:text-4xl lg:mb-20 xl:text-6xl tracking-tight text-mustard font-bold text-center mt-10">
 					{page.intestazione}
 				</h1>
 
 				{page.contenuto && (
-					<p className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-5xl lg:mb-20 xl:text-6xl max-md:text-center tracking-tight text-mustard font-semibold whitespace-pre-line">
+					<p className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-4xl lg:mb-20 xl:text-6xl max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5 font-semibold whitespace-pre-line">
 						{page?.contenuto}
 					</p>
 				)}
