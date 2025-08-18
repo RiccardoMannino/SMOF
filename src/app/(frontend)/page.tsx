@@ -59,9 +59,9 @@ export default async function Page() {
 						Ultimi Eventi
 					</h1>
 					{/*Tutti gli eventi */}
-					<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center">
+					<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center place-items-center">
 						{eventi
-							.filter((el) => el.data?.includes("2025"))
+							//.filter((el) => el.data?.includes("2025"))
 							.map((event) => (
 								<EventCard key={event._id} {...event} />
 							))}

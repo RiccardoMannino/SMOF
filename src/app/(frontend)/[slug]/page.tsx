@@ -44,7 +44,7 @@ export default async function Page({
 				</h1>
 				<span>Edizione</span>
 
-				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12">
+				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center">
 					{eventi
 						.filter((ev) => dataProva(ev.data)?.includes("2025"))
 						.map((event) => (
@@ -124,27 +124,26 @@ export default async function Page({
 
 	return page ? (
 		<>
-			<section className="grid grid-cols-1 gap-6 p-12 w-full">
+			<section className="grid grid-cols-1 gap-6 p-12 place-items-center">
 				{page.mainImage ? (
 					<Image
-						className="rounded-2xl relative w-full"
+						className="rounded-2xl"
 						src={urlFor(page?.mainImage)
-							.width(800)
-							.height(500)
-							.quality(100)
+							// .width(2200)
+							// .height(900)
 							.auto("format")
 							.url()}
 						alt={page?.intestazione || ""}
-						width="800"
-						height="400"
+						width="1800"
+						height="480"
 					/>
 				) : null}
-				<h1 className="text-2xl mb-8 sm:mb-3 sm:text-3xl lg:text-4xl lg:mb-20 xl:text-6xl tracking-tight text-mustard font-bold text-center mt-10">
+				<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl tracking-tight text-mustard font-bold text-center mt-10">
 					{page.intestazione}
 				</h1>
 
 				{page.contenuto && (
-					<p className="text-2xl mb-10 sm:mb-3 sm:text-3xl lg:text-4xl lg:mb-20 xl:text-6xl max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5 font-semibold whitespace-pre-line">
+					<p className="text-xl mb-10 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5 font-semibold whitespace-pre-line">
 						{page?.contenuto}
 					</p>
 				)}

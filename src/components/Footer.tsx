@@ -46,10 +46,6 @@ export function Footer() {
 					href: "https://www.instagram.com/effetto.outdoor/",
 					icona: (
 						<InstagramIcon />
-						/* The `<svg>` element you provided is creating an icon for Instagram. It consists of a series of
-						`<path>` elements that define the shape of the icon. The `strokeWidth`, `fill`, `xmlns`,
-						`className`, and `width` attributes are used to style and define the properties of the SVG
-						icon. */
 						// <svg
 						// 	strokeWidth="1"
 						// 	fill="#d9822b"
