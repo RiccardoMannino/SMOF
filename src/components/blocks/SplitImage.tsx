@@ -33,14 +33,13 @@ export function SplitImage({
 			<div className="w-1/2 max-lg:w-full flex flex-col gap-3">
 				{title && testo ? (
 					<>
-						<h2 className="text-3xl max-sm:text-center mx-auto md:text-5xl lg:text-6xl font-light text-chocolate text-pretty max-w-3xl">
+						<h2 className="text-3xl max-sm:text-center mx-auto md:text-5xl lg:text-6xl font-light  text-pretty max-w-3xl smof">
 							{title}
 						</h2>
 						<p className=" max-sm:text-center whitespace-pre-line">{testo}</p>
 					</>
 				) : null}
 			</div>
-			{/*TODO: bottone per il tipo */}
 		</section>
 	);
 }

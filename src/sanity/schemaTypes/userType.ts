@@ -33,5 +33,18 @@ export const user = defineType({
 			type: "boolean",
 			initialValue: false,
 		}),
+		defineField({
+			name: "role",
+			title: "Ruolo",
+			type: "string",
+			options: {
+				list: [
+					{ title: "User", value: "user" },
+					{ title: "Admin", value: "admin" },
+				],
+				layout: "dropdown",
+			},
+			initialValue: "user",
+		}),
 	],
 });

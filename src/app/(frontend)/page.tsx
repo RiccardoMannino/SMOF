@@ -9,6 +9,8 @@ import { EventCard } from "@/components/EventCard";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
 import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 export default async function Page() {
 	const { data: page } = await sanityFetch({
@@ -30,6 +32,22 @@ export default async function Page() {
 	return page?.homePage?.content ? (
 		<>
 			<main className="grid grid-cols-1 pt-4 px-4">
+				{/* top section */}
+				<section className="mb-8 p-12 flex flex-col">
+					{page.homePage?.mainImage ? (
+						<Image
+							className="rounded-2xl "
+							src={urlFor(page?.homePage?.mainImage).auto("format").url()}
+							alt={page?.homePage.intestazione || ""}
+							width="1800"
+							height="480"
+						/>
+					) : null}
+					<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-6xl tracking-tight font-bold text-center mt-10 text-[#1f73ac">
+						{page.homePage.intestazione}
+					</h1>
+				</section>
+
 				{/* hero section */}
 				<PageBuilder
 					documentId={page?.homePage._id}

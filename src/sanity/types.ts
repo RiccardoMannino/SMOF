@@ -388,6 +388,7 @@ export type User = {
   profileImage?: string;
   uid?: string;
   subscribeNewsletter?: boolean;
+  role?: "user" | "admin";
 };
 
 export type SanityImagePaletteSwatch = {

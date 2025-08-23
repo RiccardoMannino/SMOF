@@ -92,18 +92,21 @@ export function Hero({ images, text }: HeroProps) {
 			<div
 				className={`${text ? "grid-cols-2" : ""} justify-center max-lg:grid-cols-1 grid max-h-max w-full `}
 			>
+				{/* testo hero section */}
 				<div className={`w-full ${!text && "hidden"} `}>
 					{text ? (
 						<motion.h1
 							initial={{ transform: "translateX(-300px)" }}
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
-							className=" max-[360px]:text-[13px] min-[400px]:text-xl max-lg:text-center mb-7 sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold lg:mr-2"
+							className="max-[360px]:text-[13px] min-[400px]:text-xl max-lg:text-center mb-7 sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl tracking-tight text-mustard font-bold lg:mr-2 "
 						>
 							{text.toUpperCase()}
 						</motion.h1>
 					) : null}
 				</div>
+
+				{/* container contenente il carosello */}
 				<div
 					ref={containerRef}
 					onMouseEnter={() => {

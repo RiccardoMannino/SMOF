@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap");
+@import url("https://fonts.cdnfonts.com/css/berlin-sans-fb");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -15,10 +17,15 @@
 
 @layer theme {
 	:root {
-		/* Font tematici per trekking */
-		--font-family-cabin: "Cabin", sans-serif;
-		--font-family-nunito: "Nunito", sans-serif;
+		/* Font */
+		/* --font-family-cabin: "Cabin", sans-serif;
+		--font-family-nunito: "Nunito", sans-serif; */
+		--font-family-berlin: "Berlin Sans FB", sans-serif;
 	}
+}
+
+.smof {
+	color: #1f73ac;
 }
 
 @layer base {
@@ -28,12 +35,12 @@
 	h4,
 	h5,
 	h6 {
-		font-family: var(--font-family-cabin);
+		font-family: var(--font-family-berlin);
 		font-weight: 600;
 	}
 
 	body {
-		font-family: var(--font-family-nunito);
+		font-family: var(--font-family-berlin);
 		font-weight: 400;
 	}
 }

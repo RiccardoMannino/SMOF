@@ -4,7 +4,7 @@ import { readClient, writeClient } from "@/sanity/lib/client";
 import { signIn, signOut } from "./auth";
 import { User } from "next-auth";
 import { auth } from "@/lib/auth";
-import Stripe from "stripe";
+
 import { revalidatePath, revalidateTag } from "next/cache";
 
 // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -53,6 +53,7 @@ export async function createOrUpdateUser(userData: User & Uid) {
 				email,
 				profileImage,
 				subscribeNewsletter: false,
+				role: "user",
 			});
 
 			console.log("Nuovo utente creato:", result);
@@ -105,6 +106,14 @@ export async function updateNewsletterSubscription(subscribe: boolean) {
 	} catch (error) {
 		console.error("❌ Errore nell'aggiornamento newsletter:", error);
 	}
+}
+
+export async function getAuthenticatedUser() {
+	const user = await writeClient.fetch(`*[_type == "user"][0]`);
+
+	const disconnection = user === null ? signOutAction() : user;
+
+	return { disconnection, user };
 }
 
 export async function signInAction() {

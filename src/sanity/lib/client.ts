@@ -9,6 +9,7 @@
 
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../env";
+import { useCurrentUser } from "sanity";
 
 // Client per SCRITTURA (create, update, delete)
 export const writeClient = createClient({
