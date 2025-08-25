@@ -8,8 +8,19 @@ export const EVENTS_QUERY =
     speakerImage
   }}`);
 
+// Biglietto singolo evento
 export const TICKET_QUERY = defineQuery(`*[_type == "biglietto"]{
   _id , prezzo, biglietto 
+}`);
+
+// Biglietto giornaliero
+export const DAILY_TICKET_QUERY = defineQuery(`*[type == "giornaliero"]{
+  prezzo , quantita, bigliettoGiorno
+}`);
+
+// Biglietto evento
+export const FESTIVAL_TICKET_QUERY = defineQuery(`*[type == "festival"]{
+  prezzo, quantita, biglietto 
 }`);
 
 export const PARTNER_QUERY = defineQuery(`*[_type == "partner" ]{
@@ -41,6 +52,7 @@ export const EVENTS_SLUGS_QUERY =
   "slug": slug.current
 }`);
 
+// utenti autenticati
 export const AUTH_USERS = defineQuery(`*[_type == "user"] {
   _id,
   name,
@@ -50,6 +62,7 @@ export const AUTH_USERS = defineQuery(`*[_type == "user"] {
   subscribeNewsletter,
 }`);
 
+// si golo utente autenticato
 export const SINGLE_AUTH_USER =
 	defineQuery(`*[_type == "user" && uid == $uid][0]{
     email

@@ -1,10 +1,7 @@
-import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
-import { NewsletterForm } from "@/components/NewsletterForm";
-
 import { notFound } from "next/navigation";
-
-import { SessionGuard } from "@/components/SessionGuard";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { getCurrentUserRole } from "@/lib/getUserRole";
+import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
 
 export default async function UtentePage() {
 	const { isSubscribed } = await getNewsletterStatus();
@@ -15,7 +12,9 @@ export default async function UtentePage() {
 
 	return (
 		<section className="max-w-2xl mx-auto my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
-			<h1 className="text-3xl font-bold text-chocolate mb-6">Area Utente</h1>
+			<h1 className="text-3xl font-bold text-chocolate mb-6">
+				{role === "admin" ? "Pannello Admin" : "Area Utente"}
+			</h1>
 			<div className="mb-8">
 				{role === "admin" ? (
 					<h2 className="text-xl font-semibold text-rust mb-3">

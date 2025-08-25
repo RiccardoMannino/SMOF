@@ -2,9 +2,9 @@ import { TicketIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export const bigliettoGiornaliero = defineType({
+	name: "giornaliero",
 	type: "document",
 	icon: TicketIcon,
-	name: "giornaliero",
 	title: "Biglietto Giornaliero",
 	fields: [
 		defineField({

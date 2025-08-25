@@ -66,7 +66,7 @@ export default async function Page() {
 							/>
 						) : (
 							<h1 className="text-2xl sm:text-3xl md:text-4xl text-center font-bold text-chocolate ">
-								Accedi per poterti iscrivere alla Newsletter e rimanere
+								Accedi per poterti iscrivere alla Newsletter e <br /> rimanere
 								aggiornato sui nostri eventi
 							</h1>
 						)}
