@@ -227,14 +227,14 @@
           "type": "string"
         }
       },
-      "bigliettoGiorno": {
+      "biglietto": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
         "optional": true
       },
-      "Prezzo": {
+      "prezzo": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

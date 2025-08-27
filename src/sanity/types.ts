@@ -53,8 +53,8 @@ export type Giornaliero = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  bigliettoGiorno?: string;
-  Prezzo?: string;
+  biglietto?: string;
+  prezzo?: string;
   quantita?: number;
 };
 
@@ -551,12 +551,19 @@ export type EVENTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: TICKET_QUERY
-// Query: *[_type == "biglietto"]{  _id , prezzo, biglietto }
+// Query: *[_type == "biglietto"]{  _id , prezzo, biglietto , quantita}
 export type TICKET_QUERYResult = Array<{
   _id: string;
   prezzo: string | null;
   biglietto: string | null;
+  quantita: number | null;
 }>;
+// Variable: DAILY_TICKET_QUERY
+// Query: *[type == "giornaliero"]{  prezzo , quantita, bigliettoGiorno}
+export type DAILY_TICKET_QUERYResult = Array<never>;
+// Variable: FESTIVAL_TICKET_QUERY
+// Query: *[type == "festival"]{  prezzo, quantita, biglietto }
+export type FESTIVAL_TICKET_QUERYResult = Array<never>;
 // Variable: PARTNER_QUERY
 // Query: *[_type == "partner" ]{  _id ,nome , tipo, link ,immagine}
 export type PARTNER_QUERYResult = Array<{
@@ -963,7 +970,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data ,slug , eventName, eventType, eventDescription, immagine, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
-    "*[_type == \"biglietto\"]{\n  _id , prezzo, biglietto \n}": TICKET_QUERYResult;
+    "*[_type == \"biglietto\"]{\n  _id , prezzo, biglietto , quantita\n}": TICKET_QUERYResult;
+    "*[type == \"giornaliero\"]{\n  prezzo , quantita, bigliettoGiorno\n}": DAILY_TICKET_QUERYResult;
+    "*[type == \"festival\"]{\n  prezzo, quantita, biglietto \n}": FESTIVAL_TICKET_QUERYResult;
     "*[_type == \"partner\" ]{\n  _id ,nome , tipo, link ,immagine\n}": PARTNER_QUERYResult;
     "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;

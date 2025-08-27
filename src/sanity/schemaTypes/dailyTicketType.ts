@@ -8,13 +8,13 @@ export const bigliettoGiornaliero = defineType({
 	title: "Biglietto Giornaliero",
 	fields: [
 		defineField({
-			name: "bigliettoGiorno",
+			name: "biglietto",
 			title: "Nome Ticket",
 			type: "string",
 			validation: (e) => e.required(),
 		}),
 		defineField({
-			name: "Prezzo",
+			name: "prezzo",
 			title: "Prezzo",
 			type: "string",
 			validation: (e) => e.required(),

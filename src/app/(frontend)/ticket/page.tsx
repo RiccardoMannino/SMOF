@@ -1,3 +1,5 @@
+import React from "react";
+import { TicketPurchaseButton } from "@/components/TicketPurchaseButton";
 import {
 	Card,
 	CardContent,
@@ -5,16 +7,64 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/Card";
-// import { sanityFetch } from "@/sanity/lib/live";
-// import { TICKET_QUERY } from "@/sanity/lib/queries";
+import { writeClient } from "@/sanity/lib/client";
 import { CheckIcon } from "lucide-react";
-import React from "react";
+
+type Ticket = {
+	_id: string;
+	_type: string;
+	biglietto: string;
+	prezzo: string;
+	quantita: number;
+};
+
+async function getTickets() {
+	// Biglietti giornalieri
+	const dailyTicket = await writeClient.fetch(
+		`*[_type == "giornaliero" && quantita > 0][0..2]{ 
+      _id, 
+      _type,
+      biglietto, 
+      prezzo, 
+      quantita,
+    }`
+	);
+
+	// Biglietti festival completo
+	const festTicket = await writeClient.fetch(
+		`*[_type == "festival" && quantita > 0][0]{ 
+      _id, 
+      _type,
+      biglietto, 
+      prezzo, 
+      quantita,
+    }`
+	);
+
+	// Biglietti singolo eventi
+
+	const singleEvent = await writeClient.fetch(
+		`*[_type == "biglietto" && quantita > 0][0...50]{ 
+      _id, 
+      _type,
+      biglietto, 
+      prezzo, 
+      quantita,
+    }`
+	);
+
+	return {
+		dailyTicket,
+		festTicket,
+		singleEvent,
+	};
+}
 
 export default async function page() {
-	// const { data: ticket } = await sanityFetch({
-	// 	// query dei ticket
-	// 	query: TICKET_QUERY,
-	// });
+	const tickets = await getTickets();
+
+	console.log("tutti i ticket: ", tickets);
+
 	return (
 		<main className="container mx-auto bg-forest h-full min-h-screen">
 			<h1 className="text-2xl max-sm:text-center  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
@@ -107,6 +157,92 @@ export default async function page() {
 					</Card>
 				</div>
 			</div>
+
+			{/* Ticket Giornalieri */}
+			<section className="max-w-4xl mx-auto my-10 p-8">
+				<h1 className="text-3xl font-bold text-mustard mb-6">
+					Biglietti Eventi Singoli
+				</h1>
+				{tickets.singleEvent ? (
+					<div className="grid gap-8 md:grid-cols-2">
+						{tickets?.singleEvent?.map((ticket: Ticket) => (
+							<div
+								key={`${ticket._type}-${ticket._id}`}
+								className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
+							>
+								<h2 className="text-xl font-semibold text-rust mb-2">
+									{ticket.biglietto}
+								</h2>
+								<p className="text-chocolate text-lg font-bold mb-4">
+									€{ticket.prezzo}
+								</p>
+								{ticket.quantita > 0 && (
+									<TicketPurchaseButton ticket={ticket} />
+								)}
+							</div>
+						))}
+					</div>
+				) : (
+					<p className="text-center text-chocolate">
+						Nessun biglietto disponibile al momento.
+					</p>
+				)}
+			</section>
+			<section className="max-w-4xl mx-auto my-10 p-8">
+				<h1 className="text-3xl font-bold text-mustard mb-6">
+					Biglietti Giornalieri
+				</h1>
+				{tickets.dailyTicket ? (
+					<div className="grid gap-8 md:grid-cols-2">
+						{tickets?.dailyTicket?.toReversed().map((ticket: Ticket) => (
+							<div
+								key={`${ticket._type}-${ticket._id}`}
+								className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
+							>
+								<h2 className="text-xl font-semibold text-rust mb-2">
+									{ticket.biglietto}
+								</h2>
+								<p className="text-chocolate text-lg font-bold mb-4">
+									€{ticket.prezzo}
+								</p>
+								{ticket.quantita > 0 && (
+									<TicketPurchaseButton ticket={ticket} />
+								)}
+							</div>
+						))}
+					</div>
+				) : (
+					<p className="text-center text-chocolate">
+						Nessun biglietto disponibile al momento.
+					</p>
+				)}
+			</section>
+			{/* Ticket Festival */}
+			<section className="max-w-4xl mx-auto my-10 p-8">
+				<h1 className="text-3xl font-bold text-mustard mb-6">
+					Biglietto Festival
+				</h1>
+
+				{tickets.festTicket ? (
+					<div className="grid gap-8 md:grid-cols-2">
+						<div className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20">
+							<h2 className="text-xl font-semibold text-rust mb-2">
+								{tickets.festTicket.biglietto}
+							</h2>
+							<p className="text-chocolate text-lg font-bold mb-4">
+								€{tickets.festTicket.prezzo}
+							</p>
+							{tickets.festTicket.quantita > 0 && (
+								<TicketPurchaseButton ticket={tickets.festTicket} />
+							)}
+						</div>
+					</div>
+				) : (
+					<p className="text-center text-chocolate">
+						Nessun biglietto disponibile al momento.
+					</p>
+				)}
+			</section>
 		</main>
 	);
 }

@@ -10,7 +10,7 @@ export const EVENTS_QUERY =
 
 // Biglietto singolo evento
 export const TICKET_QUERY = defineQuery(`*[_type == "biglietto"]{
-  _id , prezzo, biglietto 
+  _id , prezzo, biglietto , quantita
 }`);
 
 // Biglietto giornaliero
