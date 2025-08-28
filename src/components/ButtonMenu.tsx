@@ -128,7 +128,7 @@ export default function ButtonMenu({
 				initial={false}
 				transition={{
 					duration: 0.7,
-					type: open ? "easeIn" : "easeOut",
+					ease: open ? "easeIn" : "easeOut",
 				}}
 			>
 				<motion.ul
