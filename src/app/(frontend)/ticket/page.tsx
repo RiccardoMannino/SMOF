@@ -21,7 +21,7 @@ type Ticket = {
 async function getTickets() {
 	// Biglietti giornalieri
 	const dailyTicket = await writeClient.fetch(
-		`*[_type == "giornaliero" && quantita > 0][0..2]{ 
+		`*[_type == "giornaliero" && quantita >= 0][0..2]{ 
       _id, 
       _type,
       biglietto, 
@@ -32,7 +32,7 @@ async function getTickets() {
 
 	// Biglietti festival completo
 	const festTicket = await writeClient.fetch(
-		`*[_type == "festival" && quantita > 0][0]{ 
+		`*[_type == "festival" && quantita >= 0][0]{ 
       _id, 
       _type,
       biglietto, 
@@ -44,7 +44,7 @@ async function getTickets() {
 	// Biglietti singolo eventi
 
 	const singleEvent = await writeClient.fetch(
-		`*[_type == "biglietto" && quantita > 0][0...50]{ 
+		`*[_type == "biglietto" && quantita >= 0][0...50]{ 
       _id, 
       _type,
       biglietto, 
@@ -174,9 +174,7 @@ export default async function page() {
 								<p className="text-chocolate text-lg font-bold mb-4">
 									€{ticket.prezzo}
 								</p>
-								{ticket.quantita > 0 && (
-									<TicketPurchaseButton ticket={ticket} />
-								)}
+								<TicketPurchaseButton ticket={ticket} />
 							</div>
 						))}
 					</div>
@@ -203,7 +201,13 @@ export default async function page() {
 							<p className="text-chocolate text-lg font-bold mb-4">
 								€{ticket.prezzo}
 							</p>
-							{ticket.quantita > 0 && <TicketPurchaseButton ticket={ticket} />}
+							{ticket.quantita > 0 ? (
+								<TicketPurchaseButton ticket={ticket} />
+							) : (
+								<p className="text-center text-mustard">
+									Nessun biglietto disponibile al momento.
+								</p>
+							)}
 						</div>
 					))}
 				</div>
@@ -214,7 +218,8 @@ export default async function page() {
 					Biglietto Festival
 				</h1>
 
-				{tickets.festTicket ? (
+				{/* Visto che è un singolo ticket non lo mappiamo */}
+				{tickets.festTicket && (
 					<div className="grid gap-8 md:grid-cols-2">
 						<div className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20">
 							<h2 className="text-xl font-semibold text-rust mb-2">
@@ -223,15 +228,15 @@ export default async function page() {
 							<p className="text-chocolate text-lg font-bold mb-4">
 								€{tickets.festTicket.prezzo}
 							</p>
-							{tickets.festTicket.quantita > 0 && (
+							{tickets.festTicket.quantita > 0 ? (
 								<TicketPurchaseButton ticket={tickets.festTicket} />
+							) : (
+								<p className="text-center text-mustard">
+									Nessun biglietto disponibile al momento.
+								</p>
 							)}
 						</div>
 					</div>
-				) : (
-					<p className="text-center text-mustard">
-						Nessun biglietto disponibile al momento.
-					</p>
 				)}
 			</section>
 		</main>
