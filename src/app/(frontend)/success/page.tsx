@@ -11,17 +11,15 @@ export default async function SuccessPage({
 	console.log("sessionId pagina success:", sessionId);
 
 	const response = await fetch(
-		`http://localhost:3000/api/create-checkout/${sessionId}`
+		`http://localhost:3000/api/create-checkout/success?session_id=${sessionId}`
 	);
-	if (!response.ok)
-		throw new Error("Impossibile recuperare i dettagli del pagamento");
+
+	if (!response.ok) {
+		throw new Error(`Error: ${response.status} - ${await response.text()}`);
+	}
 
 	const data = await response.json();
-	console.log(data);
-
-	// if (loading) {
-	// 	return <div className="text-center p-8">Caricamento...</div>;
-	// }
+	console.log("data:", data);
 
 	if (!sessionId) {
 		return (
@@ -48,35 +46,35 @@ export default async function SuccessPage({
 				<h2 className="text-xl mb-4">Dettagli dell&apos;ordine:</h2>
 
 				<div className="mb-4">
-					{data.customer_name && (
+					{data.session.customer_name && (
 						<p>
 							{/* Nome acquirente */}
-							<strong>Nome:</strong> {data.customer_name}
+							<strong>Nome:</strong> {data.session.customer_name}
 						</p>
 					)}
-					{data.customer_email && (
+					{data.session.customer_email && (
 						<p>
 							{/* Email acquirente */}
-							<strong>Email:</strong> {data.customer_email}
+							<strong>Email:</strong> {data.session.customer_email}
 						</p>
 					)}
 					<p>
 						<strong>Stato del pagamento:</strong>{" "}
-						{data.payment_status === "paid" ? "Pagato" : ""}
+						{data.session.payment_status === "paid" ? "Pagato" : ""}
 					</p>
-					{data.amount_total && (
+					<p>Biglietto Acquistato : {data.session.metadata}</p>
+					<p>Quantità: {data.session.quantita}</p>
+					{data.session.amount_total && (
 						<p>
-							{/* Totale */}
 							<strong>Totale pagato:</strong>{" "}
-							{(data.amount_total / 100).toFixed(2)}€
+							{(data.session.amount_total / 100).toFixed(2)}€
 						</p>
 					)}
-					<p>Biglietto Acquistato : {data.metadata}</p>
 				</div>
 			</div>
 
 			<div className="text-center">
-				<Link href="/" className="text-mustard hover:underline">
+				<Link href="/" className="text-mustard">
 					Torna alla home
 				</Link>
 			</div>

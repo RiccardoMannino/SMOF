@@ -63,8 +63,6 @@ async function getTickets() {
 export default async function page() {
 	const tickets = await getTickets();
 
-	console.log("tutti i ticket: ", tickets);
-
 	return (
 		<main className="container mx-auto bg-forest h-full min-h-screen">
 			<h1 className="text-2xl max-sm:text-center  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
@@ -192,30 +190,23 @@ export default async function page() {
 				<h1 className="text-3xl font-bold text-mustard mb-6">
 					Biglietti Giornalieri
 				</h1>
-				{tickets.dailyTicket ? (
-					<div className="grid gap-8 md:grid-cols-2">
-						{tickets?.dailyTicket?.toReversed().map((ticket: Ticket) => (
-							<div
-								key={`${ticket._type}-${ticket._id}`}
-								className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
-							>
-								<h2 className="text-xl font-semibold text-rust mb-2">
-									{ticket.biglietto}
-								</h2>
-								<p className="text-chocolate text-lg font-bold mb-4">
-									€{ticket.prezzo}
-								</p>
-								{ticket.quantita > 0 && (
-									<TicketPurchaseButton ticket={ticket} />
-								)}
-							</div>
-						))}
-					</div>
-				) : (
-					<p className="text-center text-chocolate">
-						Nessun biglietto disponibile al momento.
-					</p>
-				)}
+
+				<div className="grid gap-8 md:grid-cols-2">
+					{tickets?.dailyTicket?.toReversed().map((ticket: Ticket) => (
+						<div
+							key={`${ticket._type}-${ticket._id}`}
+							className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
+						>
+							<h2 className="text-xl font-semibold text-rust mb-2">
+								{ticket.biglietto}
+							</h2>
+							<p className="text-chocolate text-lg font-bold mb-4">
+								€{ticket.prezzo}
+							</p>
+							{ticket.quantita > 0 && <TicketPurchaseButton ticket={ticket} />}
+						</div>
+					))}
+				</div>
 			</section>
 			{/* Ticket Festival */}
 			<section className="max-w-4xl mx-auto my-10 p-8">
@@ -238,7 +229,7 @@ export default async function page() {
 						</div>
 					</div>
 				) : (
-					<p className="text-center text-chocolate">
+					<p className="text-center text-mustard">
 						Nessun biglietto disponibile al momento.
 					</p>
 				)}

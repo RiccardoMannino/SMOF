@@ -1,12 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-
-// Inizializza Stripe una sola volta all'esterno del componente
-// const stripePromise = loadStripe(
-// 	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-// );
 
 type Ticket = {
 	_id: string;

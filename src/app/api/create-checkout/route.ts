@@ -9,7 +9,6 @@ export async function POST(req: Request) {
 		const body = await req.json();
 		const { ticketId, ticketType, quantity } = body;
 
-		console.log(ticketType);
 		// Definisci un mapping dei tipi di biglietti supportati
 		const supportedTicketTypes = ["giornaliero", "biglietto", "festival"];
 
@@ -74,9 +73,10 @@ export async function POST(req: Request) {
 			success_url: `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/ticket`,
 			metadata: {
-				ticketId,
-				ticketType,
+				ticketId: ticketId,
+				ticketType: ticketType,
 				name: ticket.biglietto,
+				quantita: quantity,
 			},
 		} as Stripe.Checkout.SessionCreateParams);
 

@@ -23,7 +23,7 @@ export const biglietto = defineType({
 			name: "quantita",
 			title: "Quantità disponibile",
 			type: "number",
-			validation: (e) => e.required(),
+			validation: (e) => e.required().min(0),
 		}),
 	],
 });
