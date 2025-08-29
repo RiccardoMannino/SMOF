@@ -59,6 +59,7 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 					max={ticket.quantita}
 					value={quantity}
 					onChange={(e) => setQuantity(Number(e.target.value))}
+					disabled={ticket.quantita === 0}
 					className="w-16 p-2 border border-chocolate rounded"
 				/>
 				<span className="text-sm text-gray-500">

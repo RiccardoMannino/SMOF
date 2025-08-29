@@ -134,7 +134,7 @@ export default async function Page({
 						height="480"
 					/>
 				) : null}
-				<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl tracking-tight text-mustard font-bold text-center mt-10">
+				<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl tracking-tight text-mustard font-bold text-center mt-10 ">
 					{page.intestazione}
 				</h1>
 

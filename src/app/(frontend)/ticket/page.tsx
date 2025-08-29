@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/Card";
 import { writeClient } from "@/sanity/lib/client";
 import { CheckIcon } from "lucide-react";
+import { auth } from "@/lib/auth";
 
 type Ticket = {
 	_id: string;
@@ -61,6 +62,7 @@ async function getTickets() {
 }
 
 export default async function page() {
+	const sessione = await auth();
 	const tickets = await getTickets();
 
 	return (
@@ -157,88 +159,78 @@ export default async function page() {
 			</div>
 
 			{/* Ticket Giornalieri */}
-			<section className="max-w-4xl mx-auto my-10 p-8">
-				<h1 className="text-3xl font-bold text-mustard mb-6">
-					Biglietti Eventi Singoli
-				</h1>
-				{tickets.singleEvent ? (
-					<div className="grid gap-8 md:grid-cols-2">
-						{tickets?.singleEvent?.map((ticket: Ticket) => (
-							<div
-								key={`${ticket._type}-${ticket._id}`}
-								className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
-							>
-								<h2 className="text-xl font-semibold text-rust mb-2">
-									{ticket.biglietto}
-								</h2>
-								<p className="text-chocolate text-lg font-bold mb-4">
-									€{ticket.prezzo}
-								</p>
-								<TicketPurchaseButton ticket={ticket} />
+			{sessione?.user?.email ? (
+				<>
+					<section className="max-w-4xl mx-auto my-10 p-8">
+						<h1 className="text-3xl font-bold text-mustard mb-6">
+							Biglietti Eventi Singoli
+						</h1>
+						{tickets.singleEvent && (
+							<div className="grid gap-8 md:grid-cols-2">
+								{tickets?.singleEvent?.map((ticket: Ticket) => (
+									<div
+										key={`${ticket._type}-${ticket._id}`}
+										className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
+									>
+										<h2 className="text-xl font-semibold text-rust mb-2">
+											{ticket.biglietto}
+										</h2>
+										<p className="text-chocolate text-lg font-bold mb-4">
+											€{ticket.prezzo}
+										</p>
+										<TicketPurchaseButton ticket={ticket} />
+									</div>
+								))}
 							</div>
-						))}
-					</div>
-				) : (
-					<p className="text-center text-chocolate">
-						Nessun biglietto disponibile al momento.
-					</p>
-				)}
-			</section>
-			<section className="max-w-4xl mx-auto my-10 p-8">
-				<h1 className="text-3xl font-bold text-mustard mb-6">
-					Biglietti Giornalieri
-				</h1>
+						)}
+					</section>
+					<section className="max-w-4xl mx-auto my-10 p-8">
+						<h1 className="text-3xl font-bold text-mustard mb-6">
+							Biglietti Giornalieri
+						</h1>
 
-				<div className="grid gap-8 md:grid-cols-2">
-					{tickets?.dailyTicket?.toReversed().map((ticket: Ticket) => (
-						<div
-							key={`${ticket._type}-${ticket._id}`}
-							className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
-						>
-							<h2 className="text-xl font-semibold text-rust mb-2">
-								{ticket.biglietto}
-							</h2>
-							<p className="text-chocolate text-lg font-bold mb-4">
-								€{ticket.prezzo}
-							</p>
-							{ticket.quantita > 0 ? (
-								<TicketPurchaseButton ticket={ticket} />
-							) : (
-								<p className="text-center text-mustard">
-									Nessun biglietto disponibile al momento.
-								</p>
-							)}
+						<div className="grid gap-8 md:grid-cols-2">
+							{tickets?.dailyTicket?.toReversed().map((ticket: Ticket) => (
+								<div
+									key={`${ticket._type}-${ticket._id}`}
+									className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20"
+								>
+									<h2 className="text-xl font-semibold text-rust mb-2">
+										{ticket.biglietto}
+									</h2>
+									<p className="text-chocolate text-lg font-bold mb-4">
+										€{ticket.prezzo}
+									</p>
+									<TicketPurchaseButton ticket={ticket} />
+								</div>
+							))}
 						</div>
-					))}
-				</div>
-			</section>
-			{/* Ticket Festival */}
-			<section className="max-w-4xl mx-auto my-10 p-8">
-				<h1 className="text-3xl font-bold text-mustard mb-6">
-					Biglietto Festival
-				</h1>
+					</section>
 
-				{/* Visto che è un singolo ticket non lo mappiamo */}
-				{tickets.festTicket && (
-					<div className="grid gap-8 md:grid-cols-2">
-						<div className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20">
-							<h2 className="text-xl font-semibold text-rust mb-2">
-								{tickets.festTicket.biglietto}
-							</h2>
-							<p className="text-chocolate text-lg font-bold mb-4">
-								€{tickets.festTicket.prezzo}
-							</p>
-							{tickets.festTicket.quantita > 0 ? (
-								<TicketPurchaseButton ticket={tickets.festTicket} />
-							) : (
-								<p className="text-center text-mustard">
-									Nessun biglietto disponibile al momento.
-								</p>
-							)}
-						</div>
-					</div>
-				)}
-			</section>
+					{/* Ticket Festival */}
+					<section className="max-w-4xl mx-auto my-10 p-8">
+						<h1 className="text-3xl font-bold text-mustard mb-6">
+							Biglietto Festival
+						</h1>
+
+						{/* Visto che è un singolo ticket non lo mappiamo */}
+						{tickets.festTicket && (
+							<div className="grid gap-8 md:grid-cols-2">
+								<div className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20">
+									<h2 className="text-xl font-semibold text-rust mb-2">
+										{tickets.festTicket.biglietto}
+									</h2>
+									<p className="text-chocolate text-lg font-bold mb-4">
+										€{tickets.festTicket.prezzo}
+									</p>
+
+									<TicketPurchaseButton ticket={tickets.festTicket} />
+								</div>
+							</div>
+						)}
+					</section>
+				</>
+			) : null}
 		</main>
 	);
 }

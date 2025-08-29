@@ -1,5 +1,5 @@
 // app/api/create-checkout/success/route.ts
-import { client, writeClient } from "@/sanity/lib/client";
+import { writeClient } from "@/sanity/lib/client";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -7,10 +7,11 @@ export async function GET(req: Request) {
 	try {
 		const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-		// Ottieni il session_id dai parametri di query
 		const { searchParams } = new URL(req.url);
+		// Ottieni il session_id dai parametri di query
 		const sessionId = searchParams.get("session_id");
 
+		// se non esiste il session_id blocca la richiesta
 		if (!sessionId) {
 			return NextResponse.json(
 				{ message: "Session ID mancante" },
@@ -23,7 +24,7 @@ export async function GET(req: Request) {
 			expand: ["line_items", "payment_intent"],
 		});
 
-		// Verifica che la sessione sia stata pagata
+		// Verifica lo stato di pagamento
 		if (session.payment_status !== "paid") {
 			return NextResponse.json(
 				{ message: "Il pagamento non è stato completato" },
@@ -31,8 +32,8 @@ export async function GET(req: Request) {
 			);
 		}
 
-		// query ticket
-		const ticket = await client.fetch(
+		// query ticket : ricava il tipo di ticket e il suo id
+		const ticket = await writeClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{ 
         _id,
         biglietto, 
@@ -46,6 +47,7 @@ export async function GET(req: Request) {
 		);
 
 		// sincronizzazione quantità eventi disponibili
+
 		try {
 			await writeClient
 				.patch(ticket._id)
@@ -56,8 +58,6 @@ export async function GET(req: Request) {
 							: ticket.quantita,
 				})
 				.commit();
-
-			// return prova;
 		} catch (sanityError) {
 			console.error(
 				"Errore nell'aggiornamento del database Sanity:",
@@ -79,7 +79,7 @@ export async function GET(req: Request) {
 				amount_total: session.amount_total,
 				metadata: session.metadata?.name,
 				customer_name: session.customer_details?.name,
-				quantita: session.metadata?.quantita,
+				quantita: Number(session.metadata?.quantita),
 				ticketId: session.metadata?.ticketId,
 				ticketType: session.metadata?.ticketType,
 			},

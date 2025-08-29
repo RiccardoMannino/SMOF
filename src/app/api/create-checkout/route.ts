@@ -1,7 +1,7 @@
 // app/api/create-checkout/route.ts
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { client, writeClient } from "@/sanity/lib/client";
+import { client } from "@/sanity/lib/client";
 
 export async function POST(req: Request) {
 	try {
