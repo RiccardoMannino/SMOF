@@ -10,6 +10,8 @@ export default async function UtentePage() {
 	// se non esiste l'utente
 	if (!session?.user) return notFound();
 
+	//TODO: gestire pagina utente per mostrare i biglietti acquistati
+
 	return (
 		<section className="max-w-2xl mx-auto my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
 			<h1 className="text-3xl font-bold text-chocolate mb-6">

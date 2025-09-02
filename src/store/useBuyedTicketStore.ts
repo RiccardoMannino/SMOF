@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 type userTickeStore = {
+	utente: string;
 	_id: string;
 	_type: string;
 	biglietto: string;
@@ -10,17 +11,20 @@ type userTickeStore = {
 
 type actionTicketStore = {
 	updateId: (_id: userTickeStore["_id"]) => void;
+	updateBiglietto: (biglietto: userTickeStore["biglietto"]) => void;
 };
 
 // TODO: continuare lo store per aggiornare i biglietti comprati per utente
 
 export const useBuyedTicketStore = create<userTickeStore & actionTicketStore>(
 	(set) => ({
+		utente: "",
 		_id: "",
 		_type: "",
 		biglietto: "",
 		prezzo: "",
 		quantita: 0,
 		updateId: (_id) => set(() => ({ _id: _id })),
+		updateBiglietto: (biglietto) => set(() => ({ biglietto: biglietto })),
 	})
 );

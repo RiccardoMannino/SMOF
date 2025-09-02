@@ -1,9 +1,9 @@
-// /app/(frontend)/success/success.tsx
 "use client";
 
+import Link from "next/link";
 import { success } from "@/lib/success";
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
+import { useBuyedTicketStore } from "@/store/useBuyedTicketStore";
 
 export default function Success({
 	sessionId,
@@ -12,8 +12,6 @@ export default function Success({
 }) {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["session", sessionId],
-		// Important: Don't define a new queryFn here - this would make a new API call
-		// Instead, rely on the prefetched data from the server component
 		staleTime: Infinity, // Previene il refetch
 		refetchOnMount: false, // non refetchare al mount
 		refetchOnWindowFocus: false, // non refetchare quando la finestra riacquisisce il focus
@@ -21,17 +19,19 @@ export default function Success({
 		queryFn: () => success(sessionId),
 	});
 
+	const bigliettoStore = useBuyedTicketStore(
+		(state) => (state.biglietto = data?.session.metadata)
+	);
+	console.log(bigliettoStore);
+
 	if (isLoading) return <div>Caricamento in corso...</div>;
 
 	if (error) {
 		return (
-			<div className="text-center p-8">
+			<div className="text-center p-8 text-mustard">
 				<h1 className="text-2xl font-bold mb-4">Errore</h1>
-				<p>{(error as Error).message}</p>
-				<Link
-					href="/"
-					className="text-mustard hover:underline mt-4 inline-block"
-				>
+				<p className="">{(error as Error).message}</p>
+				<Link href="/" className="hover:underline mt-4 inline-block">
 					Torna alla home
 				</Link>
 			</div>
@@ -61,7 +61,7 @@ export default function Success({
 						{data?.session?.payment_status === "paid" ? "Pagato" : ""}
 					</p>
 
-					<p>Biglietto Acquistato: {data?.session?.metadata}</p>
+					<p>Biglietto Acquistato: {bigliettoStore}</p>
 					<p>Quantità: {data?.session?.quantita}</p>
 
 					<p>

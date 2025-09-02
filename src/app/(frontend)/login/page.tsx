@@ -28,7 +28,7 @@ export default async function page() {
 						</h2>
 						<Link
 							href={"/"}
-							className="text-3xl font-semibold w-full text-center text-chocolate"
+							className="text-3xl flex items-center font-semibold w-full text-center text-chocolate"
 						>
 							<ArrowLeft />
 							Torna alla home

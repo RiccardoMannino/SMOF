@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import "../globals.css";
 import { SanityLive } from "@/sanity/lib/live";
 import { Footer } from "@/components/Footer";
-import { SessionGuard } from "@/components/SessionGuard";
+// import { SessionGuard } from "@/components/SessionGuard";
 
 export default async function FrontendLayout({
 	children,
@@ -13,19 +13,19 @@ export default async function FrontendLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<SessionGuard>
-			<section className="bg-forest min-h-screen">
-				<Header />
-				{children}
-				<Footer />
-				<SanityLive />
-				{(await draftMode()).isEnabled && (
-					<>
-						<DisableDraftMode />
-						<VisualEditing />
-					</>
-				)}
-			</section>
-		</SessionGuard>
+		// <SessionGuard>
+		<section className="bg-forest min-h-screen">
+			<Header />
+			{children}
+			<Footer />
+			<SanityLive />
+			{(await draftMode()).isEnabled && (
+				<>
+					<DisableDraftMode />
+					<VisualEditing />
+				</>
+			)}
+		</section>
+		// </SessionGuard>
 	);
 }

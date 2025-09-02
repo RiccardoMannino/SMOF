@@ -2,8 +2,11 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { client } from "@/sanity/lib/client";
+import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
+	const sessione = await auth();
+
 	try {
 		const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 		const body = await req.json();
@@ -61,6 +64,7 @@ export async function POST(req: Request) {
 						},
 						unit_amount: priceInCents, // Prezzo in centesimi
 					},
+
 					// adjustable_quantity: {
 					// 	enabled: true,
 					// 	minimum: 1,
@@ -69,6 +73,7 @@ export async function POST(req: Request) {
 					quantity: quantity,
 				},
 			],
+			customer_email: sessione?.user?.email,
 			mode: "payment",
 			success_url: `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/ticket`,
@@ -79,8 +84,6 @@ export async function POST(req: Request) {
 				quantita: quantity,
 			},
 		} as Stripe.Checkout.SessionCreateParams);
-
-		// Aggiornamento quantità biglietti Sanity
 
 		return NextResponse.json({ url: session.url });
 	} catch (error) {
