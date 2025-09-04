@@ -5,10 +5,12 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY, EVENTS_QUERY, PARTNER_QUERY } from "@/sanity/lib/queries";
 import { ChevronLeftIcon } from "@sanity/icons";
 
-import { dataProva } from "@/sanity/lib/date";
+import { dataFormattata, dataProva } from "@/sanity/lib/date";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import { CustomSelect } from "@/components/CustomSelect";
+import { readClient } from "@/sanity/lib/client";
 
 export default async function Page({
 	params,
@@ -21,12 +23,18 @@ export default async function Page({
 		params: await params,
 	});
 
-	console.log(page);
+	// console.log(page);
 
 	// query degli eventi
 	const { data: eventi } = await sanityFetch({
 		query: EVENTS_QUERY,
 	});
+
+	const dateEventi = Array.from(
+		new Set(eventi.map((date) => dataProva(date.data)))
+	);
+
+	console.log("anni date eventi,", dateEventi);
 
 	// query dei partner
 	const { data: partner } = await sanityFetch({
@@ -42,14 +50,9 @@ export default async function Page({
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard transition-colors">
 					Eventi
 				</h1>
-				<span>Edizione</span>
 
-				<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center">
-					{eventi
-						.filter((ev) => dataProva(ev.data)?.includes("2025"))
-						.map((event) => (
-							<EventCard key={event._id} {...event} />
-						))}
+				<div className="flex flex-col md:grid  md:grid-flow-row  md:gap-6 gap-24 py-12 items-center w-full">
+					<CustomSelect data={dateEventi} eventi={eventi} />
 				</div>
 				<Link
 					href="/"
