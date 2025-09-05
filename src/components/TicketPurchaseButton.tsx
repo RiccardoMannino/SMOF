@@ -1,5 +1,6 @@
 "use client";
 
+import { ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
 
 type Ticket = {
@@ -81,6 +82,16 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 					: ticket.quantita < 1
 						? "Esaurito"
 						: `Acquista - €${ticket.prezzo}`}
+			</button>
+			<button
+				className={`flex items-center justify-center gap-2 py-2 px-4 rounded ${
+					isLoading || ticket.quantita < 1
+						? "bg-gray-300 text-gray-500 cursor-not-allowed"
+						: "bg-chocolate text-ivory hover:bg-rust transition-all hover:cursor-pointer"
+				}`}
+				disabled={isLoading || ticket.quantita < 1 || quantity < 1}
+			>
+				Aggiungi al Carrello <ShoppingCartIcon />
 			</button>
 		</div>
 	);

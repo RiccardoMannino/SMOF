@@ -6,7 +6,7 @@ import { EVENT_QUERYResult } from "@/sanity/types";
 import { Title } from "@/components/Title";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import { dataFormattata } from "@/sanity/lib/date";
+import { dataFormattata } from "@/lib/date";
 
 export function Event(props: NonNullable<EVENT_QUERYResult>) {
 	const { eventName, data, speakers, immagine, eventDescription, eventType } =

@@ -10,7 +10,8 @@ export function dataFormattata(data: string | null) {
 	});
 }
 
-export function dataProva(data: string | null) {
+// funzione che restituisce solo l'anno
+export function dataAnno(data: string | null) {
 	return new Date(data as string).toLocaleString("it-IT", {
 		year: "numeric",
 	});

@@ -1,6 +1,6 @@
 "use client";
 
-import { dataProva } from "@/sanity/lib/date";
+import { dataAnno } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
 import { EVENTS_QUERYResult } from "@/sanity/types";
@@ -38,7 +38,8 @@ export function CustomSelect({
 
 	//  Filtro eventi
 	const filteredEvents = eventi.filter((event) => {
-		const isYearMatch = dataProva(event.data) === select;
+		//filtro dell'anno
+		const isYearMatch = dataAnno(event.data) === select;
 
 		// Controlla se almeno una checkbox è selezionata
 		const anyTypeSelected = Object.values(type).some(Boolean);

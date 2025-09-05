@@ -5,12 +5,11 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY, EVENTS_QUERY, PARTNER_QUERY } from "@/sanity/lib/queries";
 import { ChevronLeftIcon } from "@sanity/icons";
 
-import { dataFormattata, dataProva } from "@/sanity/lib/date";
+import { dataAnno } from "@/lib/date";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { CustomSelect } from "@/components/CustomSelect";
-import { readClient } from "@/sanity/lib/client";
 
 export default async function Page({
 	params,
@@ -31,7 +30,7 @@ export default async function Page({
 	});
 
 	const dateEventi = Array.from(
-		new Set(eventi.map((date) => dataProva(date.data)))
+		new Set(eventi.map((date) => dataAnno(date.data)))
 	);
 
 	console.log("anni date eventi,", dateEventi);
