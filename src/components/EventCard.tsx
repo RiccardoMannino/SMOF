@@ -19,7 +19,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 
 	return (
 		<Link
-			className="group rounded-lg w-fit"
+			className="group rounded-lg w-fit max-lg:self-center"
 			href={`/eventi/${props.slug!.current}`}
 		>
 			<Card className="border-0 bg-ivory shadow-md transition-colors">
@@ -33,7 +33,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 							{eventType}
 						</span>
 					</CardTitle>
-					{/* <CardDescription>Card Description</CardDescription> */}
+
 					<CardAction></CardAction>
 				</CardHeader>
 				<CardContent>

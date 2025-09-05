@@ -36,6 +36,10 @@ export default async function Page({
 
 	console.log("anni date eventi,", dateEventi);
 
+	const tipiEventi = Array.from(new Set(eventi.map((tipo) => tipo.eventType)));
+
+	console.log("tipi di eventi", tipiEventi);
+
 	// query dei partner
 	const { data: partner } = await sanityFetch({
 		query: PARTNER_QUERY,
@@ -46,13 +50,13 @@ export default async function Page({
 	// Pagina Eventi
 	if ((await params).slug === `eventi`) {
 		return (
-			<main className="container mx-auto bg-forest grid grid-cols-1 gap-6 p-12">
+			<main className="container mx-auto bg-forest grid grid-cols-1  gap-6 p-12">
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard transition-colors">
 					Eventi
 				</h1>
 
-				<div className="flex flex-col md:grid  md:grid-flow-row  md:gap-6 gap-24 py-12 items-center w-full">
-					<CustomSelect data={dateEventi} eventi={eventi} />
+				<div className="flex flex-col md:grid  md:grid-flow-row  gap-24 py-12 items-center w-full">
+					<CustomSelect data={dateEventi} eventi={eventi} tipo={tipiEventi} />
 				</div>
 				<Link
 					href="/"
