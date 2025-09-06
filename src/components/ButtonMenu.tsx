@@ -147,7 +147,7 @@ export default function ButtonMenu({
 							opacity: 0,
 						},
 					}}
-					className={`flex h-dvh flex-col items-center justify-center bg-ivory text-center text-sm w-full ${!open && "hidden"}`}
+					className={`flex h-dvh flex-col items-center max-sm:justify-end justify-center bg-ivory text-center text-sm w-full ${!open && "hidden"}`}
 				>
 					{/* voci menù */}
 					{list.map((link) => (
