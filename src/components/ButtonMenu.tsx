@@ -165,7 +165,7 @@ export default function ButtonMenu({
 							}}
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.95 }}
-							className="my-1.5 w-fit rounded-md p-2 text-2xl font-semibold text-chocolate transition-colors duration-700  hover:text-rust"
+							className="my-1 w-fit rounded-md p-2 text-2xl font-semibold text-chocolate transition-colors duration-700  hover:text-rust"
 							key={link.slug}
 						>
 							{link.slug ? (
