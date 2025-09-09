@@ -4,6 +4,7 @@ import Link from "next/link";
 import { success } from "@/lib/success";
 import { useQuery } from "@tanstack/react-query";
 import { useBuyedTicketStore } from "@/store/useBuyedTicketStore";
+import { useEffect } from "react";
 
 export default function Success({
 	sessionId,
@@ -19,10 +20,31 @@ export default function Success({
 		queryFn: () => success(sessionId),
 	});
 
-	const bigliettoStore = useBuyedTicketStore(
-		(state) => (state.biglietto = data?.session.metadata)
-	);
-	console.log(bigliettoStore);
+	// funzione proveniente dallo store per l'aggiunta degli ordini
+	const aggiungiOrdine = useBuyedTicketStore((state) => state.aggiungiOrdine);
+
+	useEffect(() => {
+		// La logica si esegue solo se i dati esistono e non ci sono errori.
+		if (data && !error) {
+			const newOrder = {
+				orderId: data?.session?.id, // id ordine di stripe
+				date: new Date().toISOString(), // data e ora di acquisto
+				// dati biglietto
+				items: [
+					{
+						_id: data?.session?.ticketId,
+						_type: data?.session?.ticketType,
+						name: data?.session?.metadata,
+						price: (data?.session?.amount_total / 100).toFixed(2),
+						quantity: data?.session?.quantita,
+					},
+				],
+			};
+
+			// Chiamiamo l'azione dello store per salvare l'ordine
+			aggiungiOrdine(newOrder);
+		}
+	}, [data, error, aggiungiOrdine]);
 
 	if (isLoading) return <div>Caricamento in corso...</div>;
 
@@ -61,7 +83,7 @@ export default function Success({
 						{data?.session?.payment_status === "paid" ? "Pagato" : ""}
 					</p>
 
-					<p>Biglietto Acquistato: {bigliettoStore}</p>
+					<p>Biglietto Acquistato: {data?.session.metadata}</p>
 					<p>Quantità: {data?.session?.quantita}</p>
 
 					<p>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
-import { LogOutIcon, User2Icon } from "lucide-react";
+import { LogOutIcon, ShoppingCart, User2Icon } from "lucide-react";
 import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import ButtonMenu from "./ButtonMenu";
 import { auth } from "@/lib/auth";
@@ -38,9 +38,12 @@ export async function Header() {
 								</span>
 							</p>
 						</Link>
+						<Link href={""}>
+							<ShoppingCart />
+						</Link>
 						<form action={signOutAction} className="">
 							<button type="submit" className="cursor-pointer flex gap-1">
-								<span>Esci</span>
+								<span>{}Esci</span>
 								<LogOutIcon />
 							</button>
 						</form>

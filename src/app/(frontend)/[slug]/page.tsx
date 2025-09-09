@@ -29,6 +29,7 @@ export default async function Page({
 		query: EVENTS_QUERY,
 	});
 
+	// elimina i doppioni degli anni di tutti gli eventi
 	const dateEventi = Array.from(
 		new Set(eventi.map((date) => dataAnno(date.data)))
 	);

@@ -68,7 +68,7 @@ export function CustomSelect({
 				{tipo.map((t, idx) => (
 					<div key={idx} className="flex items-center gap-1">
 						<input
-							className="accent-chocolate"
+							className="accent-chocolate hover:cursor-pointer"
 							key={idx}
 							type="checkbox"
 							checked={type[t as string]}

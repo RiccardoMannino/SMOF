@@ -108,14 +108,6 @@ export async function updateNewsletterSubscription(subscribe: boolean) {
 	}
 }
 
-export async function getAuthenticatedUser() {
-	const user = await writeClient.fetch(`*[_type == "user"][0]`);
-
-	const disconnection = user === null ? signOutAction() : user;
-
-	return { disconnection, user };
-}
-
 export async function signInAction() {
 	await signIn("google", { redirectTo: "/utente" });
 }

@@ -3,14 +3,13 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 import { getCurrentUserRole } from "@/lib/getUserRole";
 import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
 
+import Utente from "./utente";
 export default async function UtentePage() {
 	const { isSubscribed } = await getNewsletterStatus();
 	const { session, role } = await getCurrentUserRole();
 
 	// se non esiste l'utente
 	if (!session?.user) return notFound();
-
-	//TODO: gestire pagina utente per mostrare i biglietti acquistati
 
 	return (
 		<section className="max-w-2xl mx-auto my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
@@ -27,9 +26,8 @@ export default async function UtentePage() {
 						<h2 className="text-xl font-semibold text-rust mb-3">
 							Biglietti acquistati
 						</h2>
-						{/* Sostituisci con la lista reale dei biglietti */}
-						<div className="bg-mustard/20 rounded p-4 text-chocolate">
-							<p>Nessun biglietto acquistato.</p>
+						<div className="bg-mustard/20 rounded p-4 text-chocolate overflow-y-scroll">
+							<Utente />
 						</div>
 						<div>
 							<h2 className="text-xl font-semibold text-rust mb-3">

@@ -1,30 +1,48 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-type userTickeStore = {
-	utente: string;
-	_id: string;
-	_type: string;
-	biglietto: string;
-	prezzo: string;
-	quantita: number;
+// Definizione del tipo per un singolo articolo acquistato
+type OggettoAcquistato = {
+	_id: string; // ID del prodotto/biglietto
+	_type: string; // Tipo di documento Sanity
+	name: string; // Nome del biglietto/prodotto
+	price: string; // Prezzo unitario
+	quantity: number; // Quantità acquistata
 };
 
-type actionTicketStore = {
-	updateId: (_id: userTickeStore["_id"]) => void;
-	updateBiglietto: (biglietto: userTickeStore["biglietto"]) => void;
+// Definizione del tipo per un intero acquisto/ordine
+type Ordine = {
+	orderId?: string; // ID unico dell'ordine
+	date?: string; // Data e ora dell'acquisto
+	items: OggettoAcquistato[]; // Array di articoli acquistati
 };
 
-// TODO: continuare lo store per aggiornare i biglietti comprati per utente
+// Definizione del tipo per lo stato dello store
+type UserStoreState = {
+	userId: string | null; // ID dell'utente
+	ordine: Ordine[]; // Array degli ordini dell'utente
+};
 
-export const useBuyedTicketStore = create<userTickeStore & actionTicketStore>(
-	(set) => ({
-		utente: "",
-		_id: "",
-		_type: "",
-		biglietto: "",
-		prezzo: "",
-		quantita: 0,
-		updateId: (_id) => set(() => ({ _id: _id })),
-		updateBiglietto: (biglietto) => set(() => ({ biglietto: biglietto })),
-	})
+// Definizione del tipo per le azioni dello store
+type UserStoreActions = {
+	setUserId: (id: string) => void;
+	aggiungiOrdine: (orderData: Ordine) => void;
+};
+
+export const useBuyedTicketStore = create<UserStoreState & UserStoreActions>()(
+	persist(
+		(set, get) => ({
+			userId: null,
+			ordine: [],
+
+			setUserId: (id) => set({ userId: id }),
+			aggiungiOrdine: (newOrder) =>
+				set((state) => ({
+					ordine: [...state.ordine, newOrder],
+				})),
+		}),
+		{
+			name: "user-ticket-storage",
+		}
+	)
 );

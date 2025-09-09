@@ -17,6 +17,7 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 
 	const handlePurchase = async () => {
 		setIsLoading(true);
+
 		try {
 			// Crea una sessione di checkout
 			const response = await fetch("/api/create-checkout", {
