@@ -1,5 +1,6 @@
 "use client";
 
+import { useCartStore } from "@/store/useCartStore";
 import { ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -14,6 +15,9 @@ type Ticket = {
 export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [quantity, setQuantity] = useState(1);
+	const aggiungiOrdine = useCartStore((state) => state.aggiungiArticolo);
+	const carrello = useCartStore((state) => state.carrello);
+	const carrelloVuoto = useCartStore((state) => state.svuotaCarrello);
 
 	const handlePurchase = async () => {
 		setIsLoading(true);
@@ -46,6 +50,21 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 		} finally {
 			setIsLoading(false);
 		}
+	};
+
+	const handleAddCart = () => {
+		const nuovoOggetto = {
+			id: ticket._id,
+			nome: ticket.biglietto,
+			prezzo: ticket.prezzo,
+			quantita: quantity,
+		};
+
+		aggiungiOrdine(nuovoOggetto);
+	};
+
+	const clearCart = () => {
+		carrelloVuoto(carrello);
 	};
 
 	return (
@@ -84,7 +103,9 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 						? "Esaurito"
 						: `Acquista - €${ticket.prezzo}`}
 			</button>
+
 			<button
+				onClick={handleAddCart}
 				className={`flex items-center justify-center gap-2 py-2 px-4 rounded ${
 					isLoading || ticket.quantita < 1
 						? "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -93,6 +114,13 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 				disabled={isLoading || ticket.quantita < 1 || quantity < 1}
 			>
 				Aggiungi al Carrello <ShoppingCartIcon />
+			</button>
+
+			<button
+				className="bg-chocolate text-ivory hover:bg-rust transition-all hover:cursor-pointer py-2 px-4 rounded"
+				onClick={clearCart}
+			>
+				Svuota Carrello
 			</button>
 		</div>
 	);

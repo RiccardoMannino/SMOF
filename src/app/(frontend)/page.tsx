@@ -33,7 +33,7 @@ export default async function Page() {
 		<>
 			<main className="grid grid-cols-1 pt-4 px-4">
 				{/* top section */}
-				<section className="mb-8 p-12 flex flex-col">
+				<section className="mb-8 md:p-8 flex flex-col">
 					{page.homePage?.mainImage ? (
 						<Image
 							className="rounded-2xl "
@@ -78,15 +78,13 @@ export default async function Page() {
 					</h1>
 					{/*Tutti gli eventi */}
 					<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center place-items-center">
-						{eventi
-							//.filter((el) => el.data?.includes("2025"))
-							.map((event) => (
-								<EventCard key={event._id} {...event} />
-							))}
+						{eventi.map((event) => (
+							<EventCard key={event._id} {...event} />
+						))}
 					</div>
 				</section>
 				<div className="flex justify-center mb-20">
-					<InfiniteMovingCards image={partner} />
+					<InfiniteMovingCards image={partner} speed="normal" />
 				</div>
 			</main>
 		</>

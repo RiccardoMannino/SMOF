@@ -29,16 +29,17 @@ export default async function Page({
 		query: EVENTS_QUERY,
 	});
 
-	// elimina i doppioni degli anni di tutti gli eventi
+	// elimina i doppioni degli anni di tutti gli eventi, fattibile anche con la GROQ di sanity
 	const dateEventi = Array.from(
 		new Set(eventi.map((date) => dataAnno(date.data)))
 	);
 
-	console.log("anni date eventi,", dateEventi);
+	// console.log("anni date eventi,", dateEventi);
 
+	// Tipi eventi non duplicati , fattibile anche con la GROQ di sanity
 	const tipiEventi = Array.from(new Set(eventi.map((tipo) => tipo.eventType)));
 
-	console.log("tipi di eventi", tipiEventi);
+	// console.log("tipi di eventi", tipiEventi);
 
 	// query dei partner
 	const { data: partner } = await sanityFetch({

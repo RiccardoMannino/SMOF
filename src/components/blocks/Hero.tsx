@@ -123,7 +123,7 @@ export function Hero({ images, text }: HeroProps) {
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
 							key={image._key}
-							className="min-w-full max-h-max relative flex flex-row-reverse"
+							className="min-w-full max-h-max relative flex flex-row-reverse "
 						>
 							<Image
 								src={urlFor(image).width(1600).height(1200).url()}
@@ -131,7 +131,7 @@ export function Hero({ images, text }: HeroProps) {
 								quality={90}
 								width={800}
 								height={600}
-								className="object-cover w-full"
+								className="object-cover w-full "
 							/>
 						</motion.div>
 					))}

@@ -17,6 +17,7 @@ export function CustomSelect({
 	const validTypes = tipo.filter((t) => t !== null) as string[];
 
 	const [select, setSelect] = useState(data.at(0));
+
 	const [type, setType] = useState(
 		validTypes.reduce(
 			(acc, currentType) => {
