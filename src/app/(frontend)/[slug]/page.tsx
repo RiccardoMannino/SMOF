@@ -22,8 +22,6 @@ export default async function Page({
 		params: await params,
 	});
 
-	// console.log(page);
-
 	// query degli eventi
 	const { data: eventi } = await sanityFetch({
 		query: EVENTS_QUERY,
@@ -34,12 +32,8 @@ export default async function Page({
 		new Set(eventi.map((date) => dataAnno(date.data)))
 	);
 
-	// console.log("anni date eventi,", dateEventi);
-
 	// Tipi eventi non duplicati , fattibile anche con la GROQ di sanity
 	const tipiEventi = Array.from(new Set(eventi.map((tipo) => tipo.eventType)));
-
-	// console.log("tipi di eventi", tipiEventi);
 
 	// query dei partner
 	const { data: partner } = await sanityFetch({
@@ -70,8 +64,10 @@ export default async function Page({
 		);
 	}
 
-	//Pagina Partner
+	// Pagina Partner
+
 	if ((await params).slug === `partner`) {
+		// raggruppa i partner per tipo
 		const partnerRaggruppati = Object.groupBy(
 			partner,
 			(pa) => pa?.tipo as string
@@ -86,7 +82,7 @@ export default async function Page({
 					Un ringraziamento speciale ai collaboratori e sostenitori del San
 					Martino Outdoor Fest
 				</h2>
-
+				{/* renderizza per ogni tipo di partner i partner appartenenti */}
 				<div className="grid grid-col-1 grid-flow-row gap-5  ">
 					{Object.entries(partnerRaggruppati).map(
 						([tipoGruppo, partnersDiQuelGruppo]) => (
@@ -142,7 +138,7 @@ export default async function Page({
 						height="480"
 					/>
 				) : null}
-				<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl tracking-tight text-mustard font-bold text-center mt-10 ">
+				<h1 className="text-3xl mb-8 sm:mb-3 lg:text-4xl lg:mb-20 xl:text-5xl tracking-tight text-mustard font-bold text-center mt-10">
 					{page.intestazione}
 				</h1>
 

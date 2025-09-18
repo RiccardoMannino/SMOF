@@ -39,30 +39,32 @@ export default async function Page({
 					height="300"
 				/>
 			) : null}
-			<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard text-balance">
-				{evento?.eventName}
-			</h1>
-			{evento?.eventDescription ? (
-				<div className="prose text-mustard">
-					<span>Data evento: {dataFormattata(evento?.data)}</span>
-					<PortableText
-						value={evento?.eventDescription}
-						components={components}
-					/>
-				</div>
-			) : null}
-			<RelatedEvents
-				relatedEvents={evento.relatedEvents}
-				documentId={evento._id}
-				documentType="eventi"
-			/>
-			<hr />
-			<Link
-				href="/eventi"
-				className="font-semibold text-mustard text-2xl sm:text-3xl md:text-4xl"
-			>
-				&larr; Torna agli eventi
-			</Link>
+			<div className="flex flex-col gap-2 bg-ivory rounded-2xl p-5 text-chocolate">
+				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold  text-balance">
+					{evento?.eventName}
+				</h1>
+				{evento?.eventDescription ? (
+					<div className="prose ">
+						<span>Data evento: {dataFormattata(evento?.data)}</span>
+						<PortableText
+							value={evento?.eventDescription}
+							components={components}
+						/>
+					</div>
+				) : null}
+				<RelatedEvents
+					relatedEvents={evento.relatedEvents}
+					documentId={evento._id}
+					documentType="eventi"
+				/>
+				<hr />
+				<Link
+					href="/eventi"
+					className="font-semibold  text-2xl sm:text-3xl md:text-4xl"
+				>
+					&larr; Torna agli eventi
+				</Link>
+			</div>
 		</main>
 	);
 }

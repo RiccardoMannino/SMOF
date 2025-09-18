@@ -15,6 +15,8 @@ type Ticket = {
 export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [quantity, setQuantity] = useState(1);
+
+	// store carrello
 	const aggiungiOrdine = useCartStore((state) => state.aggiungiArticolo);
 	const carrello = useCartStore((state) => state.carrello);
 	const carrelloVuoto = useCartStore((state) => state.svuotaCarrello);
@@ -52,6 +54,7 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 		}
 	};
 
+	// Aggiungi oggetto al carrello
 	const handleAddCart = () => {
 		const nuovoOggetto = {
 			id: ticket._id,
@@ -63,6 +66,7 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 		aggiungiOrdine(nuovoOggetto);
 	};
 
+	// Svuota carrello
 	const clearCart = () => {
 		carrelloVuoto(carrello);
 	};
