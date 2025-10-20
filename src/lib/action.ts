@@ -7,7 +7,6 @@ import { auth } from "@/lib/auth";
 import { supabase } from "./supabase";
 
 import { revalidatePath, revalidateTag } from "next/cache";
-import { toast } from "react-toastify";
 
 // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 // 	apiVersion: "2025-06-30.basil",
