@@ -10,7 +10,7 @@ const authConfig: NextAuthConfig = {
 		url: process.env.NEXT_PUBLIC_SUPABASE_URL as string,
 
 		// 🚨 CHIAVE SEGRETA (Service Role Key) - Fondamentale per l'adapter V5!
-		secret: process.env.SUPABASE_SERVICE_ROLE_KEY as string,
+		secret: process.env.SUPABASE_KEY as string,
 	}),
 	providers: [
 		Google({
