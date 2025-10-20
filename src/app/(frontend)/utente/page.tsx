@@ -35,7 +35,7 @@ export default async function UtentePage() {
 							</h2>
 							<div className="bg-mustard/20 rounded p-4 flex flex-col items-center w-full">
 								<NewsletterForm
-									key={String(isSubscribed)} // forza remount quando cambia
+									key={String(isSubscribed)}
 									context="utente"
 									subscribe={isSubscribed}
 								/>
