@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type IFormInput = {
@@ -19,27 +19,39 @@ export default function Page() {
 	const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
 	return (
-		<section className="container mx-auto mb-14 max-sm:mb-5">
+		<section className="container mx-auto mb-14 max-sm:mb-8 max-w-5xl px-2 ">
 			<div className="max-h-max">
-				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-center max-sm:mb-5 mb-20 text-mustard">
+				<h1 className="text-2xl sm:text-3xl md:text-5xl mt-20 font-bold text-center max-sm:mb-5 mb-20 text-mustard">
 					Contatti
 				</h1>
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 h-full w-full bg-ivory text-chocolate rounded-2xl p-4">
-					<h2 className="text-2xl sm:text-3xl md:text-4xl max-sm:mt-5 mt-20 font-bold">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
-						quia. Quod, quibusdam ab! Maiores, voluptatibus vel libero veniam
-						non quam suscipit eos tenetur sint, dolore blanditiis. Iste non
-						voluptatum officia. Lorem ipsum dolor sit amet consectetur
-						adipisicing elit. Iste minus et reprehenderit quas nesciunt illo,
-						vitae consequatur facilis quaerat deserunt eum sed eius ut, eos
-						voluptates veritatis exercitationem rerum ad!
-					</h2>
-					<div>
-						<h2 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold pl-4">
+				<div className="grid grid-cols-1  max-sm:place-items-center sm:grid-cols-[350px_1fr] gap-8 h-full w-full bg-ivory text-chocolate rounded-2xl p-4">
+					<div className="mt-20 flex flex-col gap-3 pl-4 max-sm:mt-5">
+						<Image
+							src={"/logo_smof.png"}
+							width={200}
+							alt="logo"
+							height={200}
+							className="max-sm:w-[160px] max-sm:h-[70px] max-sm:self-center mb-2"
+						/>
+						<div className="flex flex-col gap-3 font-medium">
+							<p>
+								Effetto Outdoor – natura e territorio APS ETS Via Ninnì Cassarà
+								8,San Martino delle Scale-Monreale (PA)
+							</p>
+
+							<p>effettooutdoor@gmail.com</p>
+							<p>PEC effettooutdoor@postecertifica.it</p>
+							<p>C.F. 97386790824</p>
+							<p>cell. +39 3396178587</p>
+							<p>cell. +39 3932802378 (segreteria)</p>
+						</div>
+					</div>
+					<div className="w-fit">
+						<h2 className="text-2xl max-sm:text-center sm:text-3xl md:text-4xl mt-20 font-bold pl-4">
 							Per informazioni Compila il Form
 						</h2>
 						<form
-							onSubmit={handleSubmit(onSubmit)}
+							onSubmit={() => handleSubmit(onSubmit)}
 							className="flex flex-col h-full p-4 gap-4 font-semibold"
 						>
 							<label>Nome</label>
@@ -64,12 +76,14 @@ export default function Page() {
 							<label>Messaggio</label>
 							<textarea
 								className="border-2 border-chocolate rounded p-2"
-								{...register("messaggio")}
+								{...(register("messaggio"), { required: true })}
 							/>
-							<input
+							<button
 								type="submit"
 								className="border-2 border-chocolate rounded p-2 w-fit hover:cursor-pointer hover:text-ivory hover:bg-chocolate transition-colors"
-							/>
+							>
+								Invia messaggio
+							</button>
 						</form>
 					</div>
 				</div>

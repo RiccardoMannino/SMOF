@@ -29,6 +29,7 @@ export default function Success({
 			const newOrder = {
 				orderId: data?.session?.id, // id ordine di stripe
 				date: new Date().toISOString(), // data e ora di acquisto
+
 				// dati biglietto
 				items: [
 					{

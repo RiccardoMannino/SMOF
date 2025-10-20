@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { getCurrentUserRole } from "@/lib/getUserRole";
 import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
-
 import Utente from "./utente";
+
 export default async function UtentePage() {
 	const { isSubscribed } = await getNewsletterStatus();
 	const { session, role } = await getCurrentUserRole();
@@ -12,7 +12,7 @@ export default async function UtentePage() {
 	if (!session?.user) return notFound();
 
 	return (
-		<section className="max-w-2xl mx-auto my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
+		<section className="max-w-2xl sm:mx-auto max-sm:mx-[1rem] my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
 			<h1 className="text-3xl font-bold text-chocolate mb-6">
 				{role === "admin" ? "Pannello Admin" : "Area Utente"}
 			</h1>
@@ -30,7 +30,7 @@ export default async function UtentePage() {
 							<Utente />
 						</div>
 						<div>
-							<h2 className="text-xl font-semibold text-rust mb-3">
+							<h2 className="text-xl font-semibold text-rust my-3">
 								Newsletter
 							</h2>
 							<div className="bg-mustard/20 rounded p-4 flex flex-col items-center w-full">

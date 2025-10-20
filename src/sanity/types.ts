@@ -238,6 +238,7 @@ export type Page = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  ordine?: number;
 };
 
 export type BlockContent = Array<{
@@ -818,11 +819,13 @@ export type PAGE_QUERYResult = {
       _key: string;
     }>;
   }> | null;
+  ordine?: number;
 } | null;
 // Variable: LIST_PAGE_QUERY
-// Query: *[_type == "page"]  {    title,    _id,    "slug": slug.current,    "Home": slug.current == "/"  }  | order(Home desc, title asc)
+// Query: *[_type == "page"]  {    title,    ordine,    _id,    "slug": slug.current,    "Home": slug.current == "/"  }  | order(Home desc, ordine asc)
 export type LIST_PAGE_QUERYResult = Array<{
   title: string | null;
+  ordine: number | null;
   _id: string;
   slug: string | null;
   Home: boolean | false;
@@ -962,6 +965,7 @@ export type HOME_PAGE_QUERYResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    ordine?: number;
   } | null;
 } | null;
 
@@ -981,7 +985,7 @@ declare module "@sanity/client" {
     "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;
     "*[_type == \"user\" && uid == $uid][0]{\n    email\n  }": SINGLE_AUTH_USERResult;
     "*[_type == \"page\" && slug.current == $slug][0]{\n  mainImage ,...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
-    "\n  *[_type == \"page\"]\n  {\n    title,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, title asc)\n": LIST_PAGE_QUERYResult;
+    "\n  *[_type == \"page\"]\n  {\n    title,\n    ordine,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, ordine asc)\n": LIST_PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;
   }
 }

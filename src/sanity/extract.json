@@ -1377,6 +1377,13 @@
           }
         },
         "optional": true
+      },
+      "ordine": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
       }
     }
   },

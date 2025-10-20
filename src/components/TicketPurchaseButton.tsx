@@ -1,25 +1,37 @@
 "use client";
+import { toast, UpdateOptions } from "react-toastify";
 
-import { useCartStore } from "@/store/useCartStore";
+import { createCart } from "@/lib/action";
+
 import { ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
+import { error } from "console";
 
 type Ticket = {
 	_id: string;
 	_type: string;
 	biglietto: string;
-	prezzo: string;
+	prezzo: number;
 	quantita: number;
 };
 
-export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
+type nuovoOggetto = {
+	id_biglietto: string;
+	email: string | null | undefined;
+	nome: string;
+	prezzo: number;
+	quantita: number;
+};
+
+export function TicketPurchaseButton({
+	ticket,
+	email,
+}: {
+	ticket: Ticket;
+	email: string | null | undefined;
+}) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [quantity, setQuantity] = useState(1);
-
-	// store carrello
-	const aggiungiOrdine = useCartStore((state) => state.aggiungiArticolo);
-	const carrello = useCartStore((state) => state.carrello);
-	const carrelloVuoto = useCartStore((state) => state.svuotaCarrello);
 
 	const handlePurchase = async () => {
 		setIsLoading(true);
@@ -43,7 +55,6 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 					data.message || "Errore durante la creazione del checkout"
 				);
 			}
-
 			// Ottieni la URL della sessione e reindirizza
 			window.location.href = data.url;
 		} catch (error) {
@@ -55,21 +66,51 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 	};
 
 	// Aggiungi oggetto al carrello
-	const handleAddCart = () => {
-		const nuovoOggetto = {
-			id: ticket._id,
+	function handleAddCart() {
+		const nuovoOggetto: nuovoOggetto = {
+			// id: ticket._id,
+			id_biglietto: ticket._id,
+			email: email,
 			nome: ticket.biglietto,
 			prezzo: ticket.prezzo,
 			quantita: quantity,
 		};
 
-		aggiungiOrdine(nuovoOggetto);
-	};
+		createCart(
+			email,
+			nuovoOggetto,
+			nuovoOggetto.id_biglietto,
+			nuovoOggetto.quantita
+		);
 
-	// Svuota carrello
-	const clearCart = () => {
-		carrelloVuoto(carrello);
-	};
+		toast.promise(
+			createCart(
+				email,
+				nuovoOggetto,
+				nuovoOggetto.id_biglietto,
+				nuovoOggetto.quantita
+			),
+			{
+				pending: "Aggiornamento carrello in corso...",
+				// ✅ Usa la proprietà 'message' ritornata dalla Server Action
+				success: {
+					render({ data }) {
+						return data.message;
+					},
+				},
+
+				error: {
+					render({ data }) {
+						// 'data' qui è l'oggetto Error lanciato: Error("Errore...")
+						// Ora puoi accedere alla proprietà 'message' di quell'oggetto.
+						const errorObject = data as Error; // Aggiungi un type assertion per sicurezza
+
+						return `Operazione fallita: ${errorObject.message || errorObject.toString() || "Errore generico"}`;
+					},
+				},
+			}
+		);
+	}
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -105,27 +146,23 @@ export function TicketPurchaseButton({ ticket }: { ticket: Ticket }) {
 					? "Caricamento..."
 					: ticket.quantita < 1
 						? "Esaurito"
-						: `Acquista - €${ticket.prezzo}`}
+						: `Acquista Subito - €${Number(ticket.prezzo) * quantity}`}
 			</button>
 
-			<button
-				onClick={handleAddCart}
-				className={`flex items-center justify-center gap-2 py-2 px-4 rounded ${
-					isLoading || ticket.quantita < 1
-						? "bg-gray-300 text-gray-500 cursor-not-allowed"
-						: "bg-chocolate text-ivory hover:bg-rust transition-all hover:cursor-pointer"
-				}`}
-				disabled={isLoading || ticket.quantita < 1 || quantity < 1}
-			>
-				Aggiungi al Carrello <ShoppingCartIcon />
-			</button>
-
-			<button
-				className="bg-chocolate text-ivory hover:bg-rust transition-all hover:cursor-pointer py-2 px-4 rounded"
-				onClick={clearCart}
-			>
-				Svuota Carrello
-			</button>
+			{/* aggiungere toast con l'esito dell'aggiunta al carrello */}
+			<form action={handleAddCart} className="">
+				<button
+					type="submit"
+					className={`w-full flex items-center justify-center gap-2 py-2 px-4 rounded ${
+						isLoading || ticket.quantita < 1
+							? "bg-gray-300 text-gray-500 cursor-not-allowed"
+							: "bg-chocolate text-ivory hover:bg-rust transition-all hover:cursor-pointer "
+					}`}
+					disabled={isLoading || ticket.quantita < 1 || quantity < 1}
+				>
+					Aggiungi al Carrello <ShoppingCartIcon />
+				</button>
+			</form>
 		</div>
 	);
 }

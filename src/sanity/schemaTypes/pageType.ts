@@ -37,6 +37,12 @@ export const pageType = defineType({
 				hotspot: true,
 			},
 		}),
+		defineField({
+			name: "ordine",
+			type: "number",
+			description: "Inserisci un numero. I numeri più bassi appariranno prima.",
+			validation: (Rule) => Rule.required().integer(),
+		}),
 	],
 	preview: {
 		select: {

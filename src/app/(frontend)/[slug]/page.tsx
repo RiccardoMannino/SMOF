@@ -1,15 +1,13 @@
 import Link from "next/link";
-import { EventCard } from "@/components/EventCard";
-import { PageBuilder } from "@/components/PageBuilder";
-import { sanityFetch } from "@/sanity/lib/live";
-import { PAGE_QUERY, EVENTS_QUERY, PARTNER_QUERY } from "@/sanity/lib/queries";
-import { ChevronLeftIcon } from "@sanity/icons";
-
-import { dataAnno } from "@/lib/date";
-import { notFound } from "next/navigation";
-import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import { PAGE_QUERY, EVENTS_QUERY, PARTNER_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
+import { urlFor } from "@/sanity/lib/image";
+import { ChevronLeftIcon } from "@sanity/icons";
+import { PageBuilder } from "@/components/PageBuilder";
 import { CustomSelect } from "@/components/CustomSelect";
+import { dataAnno } from "@/lib/date";
 
 export default async function Page({
 	params,
@@ -143,7 +141,7 @@ export default async function Page({
 				</h1>
 
 				{page.contenuto && (
-					<p className="text-xl mb-10 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5 font-semibold whitespace-pre-line">
+					<p className="text-xl mb-10 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-5xl max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5  whitespace-pre-line">
 						{page?.contenuto}
 					</p>
 				)}
@@ -155,7 +153,7 @@ export default async function Page({
 					content={page.content}
 					className={
 						`${(await params).slug}` === "chi-siamo"
-							? "grid grid-rows-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-5 max-sm:place-content-center mb-10"
+							? "flex flex-wrap gap-10 p-5 justify-center max-w-8xl mb-10 mx-auto"
 							: ""
 					}
 				/>

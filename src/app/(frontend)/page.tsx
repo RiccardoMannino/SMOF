@@ -29,6 +29,7 @@ export default async function Page() {
 
 	console.log("sottoscritto alla newsletter:", isSubscribed);
 
+	// home page
 	return page?.homePage?.content ? (
 		<>
 			<main className="grid grid-cols-1 pt-4 px-4">
@@ -43,11 +44,7 @@ export default async function Page() {
 							height="480"
 						/>
 					) : null}
-					<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-6xl tracking-tight font-bold text-center mt-10 text-mustard">
-						{page.homePage.intestazione}
-					</h1>
 				</section>
-
 				{/* hero section */}
 				<PageBuilder
 					documentId={page?.homePage._id}
@@ -55,6 +52,9 @@ export default async function Page() {
 					content={page?.homePage.content}
 					className="flex flex-col gap-5"
 				/>
+				<h1 className="text-xl mb-8 sm:mb-3 sm:text-2xl lg:text-4xl lg:mb-20 xl:text-6xl tracking-tight font-bold text-center mt-10 text-mustard">
+					{page.homePage.intestazione}
+				</h1>
 				{/* Newsletter Section */}
 				<section className="my-20 flex justify-center">
 					<div className="bg-ivory p-5 rounded-2xl flex flex-col w-fit justify-center">
@@ -72,9 +72,11 @@ export default async function Page() {
 						)}
 					</div>
 				</section>
+				{/* Video Section */}
+				{/* Event Section */}
 				<section className="my-20">
 					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
-						Ultimi Eventi
+						Eventi
 					</h1>
 					{/*Tutti gli eventi */}
 					<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center place-items-center">
@@ -84,7 +86,7 @@ export default async function Page() {
 					</div>
 				</section>
 				<div className="flex justify-center mb-20">
-					<InfiniteMovingCards image={partner} speed="normal" />
+					<InfiniteMovingCards image={partner} speed="slow" />
 				</div>
 			</main>
 		</>

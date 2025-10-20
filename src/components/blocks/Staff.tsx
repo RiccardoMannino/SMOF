@@ -78,12 +78,12 @@ export function Staff({ ...props }: StaffProps) {
 								alt={`${nome}`}
 								width={400}
 								height={400}
-								className="rounded-2xl cursor-pointer object-cover max-sm:w-80 w-full max-sm:h-80 "
+								className="rounded-2xl cursor-pointer object-cover max-sm:w-80 self-center max-sm:h-80 h-52 w-fit  "
 								onClick={() => handleImage(image)}
 							/>
 						))
 					: null}
-				<p className="font-semibold text-center">{nome}</p>
+				<p className="text-center font-medium">{nome}</p>
 			</div>
 		</section>
 	);

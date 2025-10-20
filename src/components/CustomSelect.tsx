@@ -54,7 +54,7 @@ export function CustomSelect({
 
 	return (
 		<>
-			<div className="flex  gap-2 bg-ivory text-chocolate w-fit rounded-2xl p-2">
+			<div className="flex  gap-2 bg-ivory text-chocolate w-fit rounded-2xl p-4">
 				<p>Edizione</p>
 				<select
 					className=""

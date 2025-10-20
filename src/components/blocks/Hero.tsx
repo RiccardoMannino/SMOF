@@ -25,7 +25,7 @@ export function Hero({ images, text }: HeroProps) {
 
 	//  funzione per lo scroll del container
 	const scrollToSlide = (i: number) => {
-		// containare che scorre in modo fluido grazie allo smooth
+		// containar che scorre in modo fluido grazie allo smooth
 		containerRef.current?.scrollTo({
 			left: containerRef.current.clientWidth * i,
 			behavior: "smooth",
@@ -76,24 +76,14 @@ export function Hero({ images, text }: HeroProps) {
 
 	return (
 		<div className="relative w-full overflow-hidden ">
-			<button
-				onClick={prev}
-				className={`absolute ${(!text && "left-[1%]") || "max-sm:left-3.5 sm:left-4"} lg:left-[51%] top-[60%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
-			>
-				<ChevronLeftIcon className="h-4 w-4 md:h-8 md:w-8" />
-			</button>
-			<button
-				onClick={next}
-				className="absolute right-4 top-[60%] sm:top-1/2 -translate-y-1/2 z-10 bg-black/20 text-white p-2 rounded-full hover:bg-black/40 transition-colors hover:cursor-pointer"
-			>
-				<ChevronRightIcon className="h-4 w-4 md:h-8 md:w-8 " />
-			</button>
 			{/* Carosello sulla destra e Testo di benvenuto a sinistra */}
 			<div
-				className={`${text ? "grid-cols-2" : ""} justify-center max-lg:grid-cols-1 grid max-h-max w-full `}
+				className={`${text && "max-md:grid-cols-1 max-md:grid-rows-[120px_1fr_50px]"} grid-cols-2 justify-center grid max-h-max w-full`}
 			>
 				{/* testo hero section */}
-				<div className={`w-full ${!text && "hidden"} `}>
+				<div
+					className={`w-full ${!text && "hidden"} max-md:row-start-1 max-md:row-end-1 `}
+				>
 					{text ? (
 						<motion.h1
 							initial={{ transform: "translateX(-300px)" }}
@@ -115,7 +105,7 @@ export function Hero({ images, text }: HeroProps) {
 					onMouseLeave={() => {
 						setHover(false);
 					}}
-					className={`flex mb-10 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl`}
+					className={`flex mb-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl max-md:row-start-2 max-md:row-end-2`}
 				>
 					{images.map((image) => (
 						<motion.div
@@ -135,6 +125,20 @@ export function Hero({ images, text }: HeroProps) {
 							/>
 						</motion.div>
 					))}
+				</div>
+				<div className="flex gap-5 max-sm:gap-2 max-md:col-start-1 col-start-2 place-self-center max-md:row-start-3 max-md:row-end-3">
+					<button
+						onClick={prev}
+						className={`w-fit bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
+					>
+						<ChevronLeftIcon className="h-4 w-4 md:h-8 md:w-8" />
+					</button>
+					<button
+						onClick={next}
+						className="w-fit bg-black/20 text-white p-2 rounded-full hover:bg-black/40 transition-colors hover:cursor-pointer"
+					>
+						<ChevronRightIcon className="h-4 w-4 md:h-8 md:w-8 " />
+					</button>
 				</div>
 			</div>
 		</div>

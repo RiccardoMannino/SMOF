@@ -15,7 +15,7 @@ type Ticket = {
 	_id: string;
 	_type: string;
 	biglietto: string;
-	prezzo: string;
+	prezzo: number;
 	quantita: number;
 };
 
@@ -65,8 +65,10 @@ export default async function page() {
 	const sessione = await auth();
 	const tickets = await getTickets();
 
+	console.log("ticket", sessione?.user?.email);
+
 	return (
-		<main className="container mx-auto bg-forest h-full min-h-screen">
+		<main className="container mx-auto h-full min-h-screen">
 			<h1 className="text-2xl max-sm:text-center  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
 				Informazioni Ticket
 			</h1>
@@ -162,7 +164,7 @@ export default async function page() {
 			{sessione?.user?.email ? (
 				<>
 					<section className="max-w-4xl mx-auto my-10 p-8">
-						<h1 className="text-3xl font-bold text-mustard mb-6">
+						<h1 className="text-3xl font-bold text-mustard text-center mb-6">
 							Biglietti Eventi Singoli
 						</h1>
 						{tickets.singleEvent && (
@@ -178,14 +180,17 @@ export default async function page() {
 										<p className="text-chocolate text-lg font-bold mb-4">
 											€{ticket.prezzo}
 										</p>
-										<TicketPurchaseButton ticket={ticket} />
+										<TicketPurchaseButton
+											ticket={ticket}
+											email={sessione.user?.email}
+										/>
 									</div>
 								))}
 							</div>
 						)}
 					</section>
 					<section className="max-w-4xl mx-auto my-10 p-8">
-						<h1 className="text-3xl font-bold text-mustard mb-6">
+						<h1 className="text-3xl font-bold text-mustard mb-6 text-center">
 							Biglietti Giornalieri
 						</h1>
 
@@ -201,7 +206,10 @@ export default async function page() {
 									<p className="text-chocolate text-lg font-bold mb-4">
 										€{ticket.prezzo}
 									</p>
-									<TicketPurchaseButton ticket={ticket} />
+									<TicketPurchaseButton
+										ticket={ticket}
+										email={sessione.user?.email}
+									/>
 								</div>
 							))}
 						</div>
@@ -209,7 +217,7 @@ export default async function page() {
 
 					{/* Ticket Festival */}
 					<section className="max-w-4xl mx-auto my-10 p-8">
-						<h1 className="text-3xl font-bold text-mustard mb-6">
+						<h1 className="text-3xl font-bold text-mustard mb-6 text-center">
 							Biglietto Festival
 						</h1>
 
@@ -224,13 +232,20 @@ export default async function page() {
 										€{tickets.festTicket.prezzo}
 									</p>
 
-									<TicketPurchaseButton ticket={tickets.festTicket} />
+									<TicketPurchaseButton
+										ticket={tickets.festTicket}
+										email={sessione.user?.email}
+									/>
 								</div>
 							</div>
 						)}
 					</section>
 				</>
-			) : null}
+			) : (
+				<p className="text-center text-mustard text-2xl">
+					Accedi per poter visionare i biglietti disponibili
+				</p>
+			)}
 		</main>
 	);
 }

@@ -25,58 +25,23 @@ export default function ButtonMenu({
 
 	return (
 		<>
-			{/* Logo Smof */}
-			<Link href="/" className={`${open && "z-60"}`}>
-				<Image
-					src="/logo_smof.png"
-					alt="home"
-					height={50}
-					width={100}
-					className={`md:w-40 md:h-20`}
-				/>
-			</Link>
 			{/* tutto il div  */}
-			<motion.div
-				className={`hidden max-[899px]:flex w-full max-[899]: max-[899px]:items-center max-[899px]:gap-2 z-60 `}
-			>
-				{/* div avatar/login */}
-				<div className="flex gap-2 w-full items-center justify-end">
-					{session?.user?.email ? (
-						<>
-							<Image
-								src={session?.user?.image as string}
-								alt="avatar"
-								width={24}
-								height={24}
-								className="rounded-full mr-1"
-							/>
-							<p>
-								{session.user.name?.toUpperCase().slice(0, 1)}
-								<span>
-									{session.user.name?.slice(1).split(" ").slice(0, 1)}
-								</span>
-							</p>
-							<form action={signOutAction} className="">
-								<button type="submit" className="cursor-pointer flex gap-1">
-									<LogOutIcon />
-								</button>
-							</form>
-						</>
-					) : (
-						<>
-							<Link
-								className="flex gap-1 z-60 "
-								href={"/login"}
-								onClick={() => setOpen(false)}
-							>
-								<span className="font-bold">Login</span>
-								<User2Icon />
-							</Link>
-						</>
-					)}
-
+			<div className="flex flex-col max-[899px]:w-full">
+				<div
+					className={`flex justify-between w-full items-center ${open && "z-60"}`}
+				>
+					<Link href="/" className={``}>
+						{/* Logo Smof */}
+						<Image
+							src="/logo_smof.png"
+							alt="home"
+							height={50}
+							width={120}
+							className={`md:w-48 md:h-24`}
+						/>
+					</Link>
 					<motion.button
-						className={`z-60 rounded hover:cursor-pointer flex `}
+						className={`z-60 rounded hover:cursor-pointer hidden max-[899px]:flex `}
 						onClick={() => setOpen(!open)}
 					>
 						<motion.svg
@@ -88,6 +53,7 @@ export default function ButtonMenu({
 							animate={{ rotate: open ? 0 : 180 }}
 							transition={{ duration: 1 }}
 						>
+							{/* pulsante apertura menù */}
 							{!open ? (
 								<>
 									<path
@@ -118,9 +84,7 @@ export default function ButtonMenu({
 						</motion.svg>
 					</motion.button>
 				</div>
-				{/* pulsante apertura menù */}
-			</motion.div>
-
+			</div>
 			{/* menù a tendina */}
 			<motion.div
 				className={`${(open && "fixed left-0 top-0 z-50 hidden max-[899px]:inline-flex max-[899px]:w-screen") || "fixed max-md:w-0 w-screen right-0 top-0 z-50 "}`}

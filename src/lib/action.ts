@@ -4,18 +4,26 @@ import { readClient, writeClient } from "@/sanity/lib/client";
 import { signIn, signOut } from "./auth";
 import { User } from "next-auth";
 import { auth } from "@/lib/auth";
+import { supabase } from "./supabase";
 
 import { revalidatePath, revalidateTag } from "next/cache";
+import { toast } from "react-toastify";
 
 // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 // 	apiVersion: "2025-06-30.basil",
 // });
 
-// tutte le action (comprese quelle di stripe)
-
 type Uid = {
 	uid: string | undefined;
 	subscribeNewsletter?: boolean;
+};
+
+type nuovoOggetto = {
+	id_biglietto: string;
+	email: string | null | undefined;
+	nome: string;
+	prezzo: number;
+	quantita: number;
 };
 
 export async function createOrUpdateUser(userData: User & Uid) {
@@ -106,6 +114,92 @@ export async function updateNewsletterSubscription(subscribe: boolean) {
 	} catch (error) {
 		console.error("❌ Errore nell'aggiornamento newsletter:", error);
 	}
+}
+
+export async function createCart(
+	email: string | null | undefined,
+	updateFields: nuovoOggetto,
+	id_biglietto: string,
+	quantita: number
+) {
+	// Recupera l'oggetto esistente se presente
+	const { data, error } = await supabase
+		.from("oggetti_carrello")
+		.select("quantita")
+		.eq("email", email)
+		.eq("id_biglietto", id_biglietto);
+
+	if (error) {
+		throw new Error("Errore nella lettura del carrello");
+	}
+
+	// variabile creata per la visualizzazione del toast
+	let resultMessage = "";
+
+	if (data && data.length > 0) {
+		// L'oggetto esiste già: aggiorno la quantità
+		const nuovaQuantita = data[0]?.quantita + quantita;
+		const nuovoUpdateFields = { ...updateFields, quantita: nuovaQuantita };
+
+		//aggiorna la quantità del carrello
+		const { error: updateError } = await supabase
+			.from("oggetti_carrello")
+			.update(nuovoUpdateFields)
+			.eq("email", email)
+			.eq("id_biglietto", id_biglietto)
+			.select();
+
+		if (updateError) {
+			throw new Error("Errore nell'aggiornamento della quantità");
+		}
+
+		resultMessage = "Quantità biglietto aggiornata con successo! 🛒";
+	} else {
+		//altrimenti se l'oggetto non esiste: inserisco come nuovo elemento
+		const { error: insertError } = await supabase
+			.from("oggetti_carrello")
+			.insert(updateFields);
+
+		if (insertError) {
+			throw new Error("Errore nell'inserimento nuovo oggetto");
+		}
+
+		resultMessage = "Biglietto aggiunto al carrello! 🎉";
+	}
+
+	revalidatePath("/carrello");
+	revalidatePath("/ticket");
+
+	return { data, message: resultMessage };
+}
+
+// funzione che svuota il carrello
+export async function deleteCart(email: string | null | undefined) {
+	const { error } = await supabase
+		.from("oggetti_carrello")
+		.delete()
+		.eq("email", email);
+
+	if (error) {
+		throw new Error("Errore nella cancellazione del carrello");
+	}
+
+	revalidatePath("/carrello");
+}
+
+// funzione elimina un singolo elemento
+export async function deleteSingleItem(email: string, item: number) {
+	const { error } = await supabase
+		.from("oggetti_carrello")
+		.delete()
+		.eq("email", email)
+		.eq("id", item);
+
+	if (error) {
+		throw new Error("Errore nella cancellazione del carrello");
+	}
+
+	revalidatePath("/carrello");
 }
 
 export async function signInAction() {

@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { createOrUpdateUser } from "./action";
-
 import type { NextAuthConfig } from "next-auth";
 
 const authConfig: NextAuthConfig = {
@@ -23,7 +22,7 @@ const authConfig: NextAuthConfig = {
 			});
 
 			try {
-				const stableUid = account?.providerAccountId || user.id;
+				const stableUid = account?.providerAccountId || user?.id;
 
 				await createOrUpdateUser({
 					uid: stableUid,
