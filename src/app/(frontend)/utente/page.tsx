@@ -27,7 +27,7 @@ export default async function UtentePage() {
 							Biglietti acquistati
 						</h2>
 						<div className="bg-mustard/20 rounded p-4 text-chocolate overflow-y-scroll">
-							<Utente />
+							{/* <Utente /> */}
 						</div>
 						<div>
 							<h2 className="text-xl font-semibold text-rust my-3">
