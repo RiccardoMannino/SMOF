@@ -87,7 +87,7 @@ export default function ButtonMenu({
 			</div>
 			{/* menù a tendina */}
 			<motion.div
-				className={`${(open && "fixed left-0 top-0 z-50 hidden max-[899px]:inline-flex max-[899px]:w-screen") || "fixed max-md:w-0 w-screen right-0 top-0 z-50 "}`}
+				className={`${(open && "fixed left-0 top-0 z-50 hidden max-[899px]:inline-flex max-[899px]:w-screen ") || "fixed max-md:w-0 w-screen right-0 top-0 z-50 "}`}
 				animate={{ x: open ? 0 : -1000 }}
 				initial={false}
 				transition={{
@@ -111,7 +111,7 @@ export default function ButtonMenu({
 							opacity: 0,
 						},
 					}}
-					className={`flex h-dvh flex-col items-center max-sm:justify-center justify-center bg-ivory text-center  text-sm w-full ${!open && "hidden"}`}
+					className={`flex gap-1 h-dvh flex-col items-center max-sm:justify-center justify-center bg-ivory  text-sm w-full ${!open && "hidden"}`}
 				>
 					{/* voci menù */}
 					{list.map((link) => (
@@ -129,7 +129,7 @@ export default function ButtonMenu({
 							}}
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.95 }}
-							className="w-fit rounded-md p-2 text-xl font-medium text-chocolate transition-colors duration-700  hover:text-rust"
+							className="w-fit rounded-md p-1 text-xl font-medium text-chocolate transition-colors duration-700  hover:text-rust my-0.5"
 							key={link.slug}
 						>
 							{link.slug ? (
