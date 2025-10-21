@@ -105,7 +105,7 @@ export async function Header() {
 				)}
 			</div>
 
-			<div className="flex items-center justify-between w-full p-4 mr-2 ml-2">
+			<div className="flex max-[899px]:flex-col items-center justify-between w-full p-4 mr-2 ml-2">
 				<ButtonMenu list={pages} session={session} />
 				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
 					{pages?.map((page) => (
