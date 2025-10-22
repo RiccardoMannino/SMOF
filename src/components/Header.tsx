@@ -93,14 +93,53 @@ export async function Header() {
 						</div>
 					</div>
 				) : (
-					<div className="w-full bg-forest/80">
-						<Link
-							className="flex p-2 text-ivory justify-end gap-1"
-							href={"/login"}
-						>
-							<span className="font-bold ">Login</span>
-							<User2Icon className="text-ivory" />
-						</Link>
+					<div className="flex gap-2.5 justify-between p-2 bg-forest/50 w-full text-ivory">
+						<div className="flex gap-2">
+							<Link
+								href={
+									"https://www.facebook.com/profile.php?id=61564533287297&sk=reels_tab"
+								}
+								target="_blank"
+							>
+								<Image
+									src={FacebookWhite}
+									height={25}
+									width={25}
+									className="h-5 w-5"
+									alt="link facebook"
+								/>
+							</Link>
+							<Link
+								href={"https://www.instagram.com/effetto.outdoor/"}
+								target="_blank"
+							>
+								<Image
+									src={InstagramWhite}
+									height={25}
+									width={25}
+									className="h-5 w-5"
+									alt="link Instagram"
+								/>
+							</Link>
+							<Link href={""} target="_blank">
+								<Image
+									src={YoutubeWhite}
+									height={25}
+									width={25}
+									className="h-5 w-5"
+									alt="link canale youtube"
+								/>
+							</Link>
+						</div>
+						<div className="flex gap-2 items-center">
+							<Link
+								className="flex text-ivory justify-end gap-1"
+								href={"/login"}
+							>
+								<span className="font-bold ">Login</span>
+								<User2Icon className="text-ivory" />
+							</Link>
+						</div>
 					</div>
 				)}
 			</div>

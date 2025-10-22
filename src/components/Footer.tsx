@@ -143,8 +143,8 @@ export function Footer() {
 			</div>
 
 			<div className="flex flex-col">
-				<p className="text-sm text-center text-chocolate  mt-10">
-					© Smof by Effetto Outdoor - Natura e Territorio APS. Tutti i diritti
+				<p className="text-sm text-center text-chocolate mt-10">
+					© SMOF by Effetto Outdoor - Natura e Territorio APS. Tutti i diritti
 					riservati.
 				</p>
 				<Link
