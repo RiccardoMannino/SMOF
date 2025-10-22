@@ -64,7 +64,7 @@ export default async function Page({
 
 	// Pagina Partner
 
-	if ((await params).slug === `partner`) {
+	if ((await params).slug === `partners`) {
 		// raggruppa i partner per tipo
 		const partnerRaggruppati = Object.groupBy(
 			partner,

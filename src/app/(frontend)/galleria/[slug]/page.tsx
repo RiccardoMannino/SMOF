@@ -15,9 +15,9 @@ export default async function Page({
 
 	return (
 		<div className="flex flex-col items-center justify-center w-full">
-			<h1 className="text-2xl  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10">
+			<h3 className="text-2xl  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10">
 				{galleria?.titolo}
-			</h1>
+			</h3>
 			<ParallaxScroll className="mb-20" immagini={galleria} />
 		</div>
 	);
