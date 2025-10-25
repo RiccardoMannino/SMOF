@@ -1,4 +1,4 @@
-import { Speaker } from "@/components/Speaker";
+// import { Speaker } from "@/components/Speaker";
 import { components } from "@/sanity/portableTextComponent";
 import { PortableText } from "next-sanity";
 import { EVENT_QUERYResult } from "@/sanity/types";
@@ -9,8 +9,8 @@ import Image from "next/image";
 import { dataFormattata } from "@/lib/date";
 
 export function Event(props: NonNullable<EVENT_QUERYResult>) {
-	const { eventName, data, speakers, immagine, eventDescription, eventType } =
-		props;
+	const { eventName, data, immagine, eventDescription, eventType } = props;
+	//  speakers,
 
 	return (
 		<article className="grid lg:grid-cols-12 gap-y-12">
@@ -20,7 +20,7 @@ export function Event(props: NonNullable<EVENT_QUERYResult>) {
 					<span>{dataFormattata(data)}</span>
 				</div>
 				<Title>{eventName}</Title>
-				<Speaker speaker={speakers} />
+				{/* <Speaker speaker={speakers} /> */}
 			</header>
 			{immagine ? (
 				<figure className="lg:col-span-4 flex flex-col gap-2 items-start">
