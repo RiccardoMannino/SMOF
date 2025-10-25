@@ -32,7 +32,6 @@ export const partner = defineType({
 			options: {
 				hotspot: true,
 			},
-
 			validation: (e) => e.required(),
 		}),
 	],

@@ -8,9 +8,10 @@ export const biglietto = defineType({
 	icon: TicketIcon,
 	fields: [
 		defineField({
-			name: "biglietto", // nome usato nella query
-			title: "Nome Ticket ", // titolo nell'editor
-			type: "string",
+			name: "biglietto",
+			title: "Nome Ticket",
+			type: "reference",
+			to: [{ type: "eventi" }],
 			validation: (e) => e.required(),
 		}),
 		defineField({

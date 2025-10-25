@@ -1,11 +1,10 @@
 "use client";
-import { toast, UpdateOptions } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { createCart } from "@/lib/action";
 
 import { ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
-import { error } from "console";
 
 type Ticket = {
 	_id: string;
@@ -14,11 +13,24 @@ type Ticket = {
 	prezzo: number;
 	quantita: number;
 };
+type SingleTicket = {
+	_id: string;
+	_type: string;
+	biglietto: {
+		eventName: string;
+	};
+	prezzo: number;
+	quantita: number;
+};
 
 type nuovoOggetto = {
 	id_biglietto: string;
 	email: string | null | undefined;
-	nome: string;
+	nome:
+		| string
+		| {
+				eventName: string;
+		  };
 	prezzo: number;
 	quantita: number;
 };
@@ -27,7 +39,7 @@ export function TicketPurchaseButton({
 	ticket,
 	email,
 }: {
-	ticket: Ticket;
+	ticket: Ticket | SingleTicket;
 	email: string | null | undefined;
 }) {
 	const [isLoading, setIsLoading] = useState(false);
@@ -71,17 +83,13 @@ export function TicketPurchaseButton({
 			// id: ticket._id,
 			id_biglietto: ticket._id,
 			email: email,
-			nome: ticket.biglietto,
+			nome:
+				ticket._type === "biglietto"
+					? (ticket as SingleTicket).biglietto.eventName
+					: ticket.biglietto,
 			prezzo: ticket.prezzo,
 			quantita: quantity,
 		};
-
-		createCart(
-			email,
-			nuovoOggetto,
-			nuovoOggetto.id_biglietto,
-			nuovoOggetto.quantita
-		);
 
 		toast.promise(
 			createCart(

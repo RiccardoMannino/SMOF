@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 import { PAGE_QUERY, EVENTS_QUERY, PARTNER_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
-import { ChevronLeftIcon } from "@sanity/icons";
 import { PageBuilder } from "@/components/PageBuilder";
 import { CustomSelect } from "@/components/CustomSelect";
 import { dataAnno } from "@/lib/date";
+import { ArrowBigLeft } from "lucide-react";
 
 export default async function Page({
 	params,
@@ -53,9 +53,9 @@ export default async function Page({
 				</div>
 				<Link
 					href="/"
-					className="flex gap-2 items-center text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard"
+					className="flex gap-2 items-center text-lg sm:text-xl md:text-2xl font-semibold text-mustard"
 				>
-					<ChevronLeftIcon className="hover:-translate-x-1.5 transition-all  rounded-full" />
+					<ArrowBigLeft className="hover:-translate-x-1.5 transition-all" />
 					Torna alla home
 				</Link>
 			</main>

@@ -28,9 +28,6 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 							<span className="relative z-[1]">{eventName}</span>
 							<span className="bg-mustard z-0 absolute inset-0 rounded-lg opacity-0 transition-all group-hover:opacity-100 group-hover:scale-y-110 group-hover:scale-x-105 scale-75" />
 						</h2>
-						<span className=" flex bg-chocolate/10 text-chocolate rounded-full px-2 py-1 leading-none whitespace-nowrap text-sm font-semibold items-center  w-fit">
-							{eventType}
-						</span>
 					</CardTitle>
 
 					<CardAction></CardAction>
@@ -38,17 +35,17 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 				<CardContent>
 					{immagine ? (
 						<Image
-							src={urlFor(immagine).width(400).height(200).url()}
-							className="rounded-lg"
-							width={400}
-							height={200}
+							src={urlFor(immagine).auto("format").url()}
+							className="rounded-lg object-cover w-full"
+							width={200}
+							height={400}
 							alt={immagine.alt || eventName || ""}
 						/>
 					) : null}
 				</CardContent>
 				<CardFooter className="flex-col gap-3 items-start">
-					<Speaker speaker={speakers} />
-					<span className="text-sm sm:text-base text-chocolate font-semibold">
+					{/* <Speaker speaker={speakers} /> */}
+					<span className="text-sm sm:text-base text-olive font-semibold">
 						{dataFormattata(data)}
 					</span>
 				</CardFooter>

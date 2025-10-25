@@ -20,7 +20,7 @@ type Uid = {
 type nuovoOggetto = {
 	id_biglietto: string;
 	email: string | null | undefined;
-	nome: string;
+	nome: string | { eventName: string };
 	prezzo: number;
 	quantita: number;
 };

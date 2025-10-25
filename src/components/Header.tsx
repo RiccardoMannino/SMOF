@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
 import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
 import { signOutAction } from "@/lib/action";
-
-import { auth } from "@/lib/auth";
 
 import YoutubeWhite from "../../public/youtube-white.svg";
 import InstagramWhite from "../../public/instagram-white.svg";

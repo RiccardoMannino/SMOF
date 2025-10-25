@@ -31,8 +31,24 @@ export async function POST(req: Request) {
       }`,
 			{ ticketId, ticketType }
 		);
+		const singleTicket = await client.fetch(
+			`*[_type == $ticketType && _id == $ticketId][0]{ 
+        biglietto->{
+				eventName
+				}, 
+        prezzo, 
+        quantita 
+      }`,
+			{ ticketId, ticketType }
+		);
 
 		if (!ticket || ticket.quantita < quantity) {
+			return NextResponse.json(
+				{ message: "Biglietti non disponibili" },
+				{ status: 400 }
+			);
+		}
+		if (!singleTicket || singleTicket.quantita < quantity) {
 			return NextResponse.json(
 				{ message: "Biglietti non disponibili" },
 				{ status: 400 }
@@ -57,7 +73,10 @@ export async function POST(req: Request) {
 					price_data: {
 						currency: "eur",
 						product_data: {
-							name: ticket.biglietto,
+							name:
+								ticketType === "biglietto"
+									? singleTicket.biglietto.eventName
+									: ticket.biglietto,
 							metadata: {
 								ticketId,
 							},
@@ -80,7 +99,10 @@ export async function POST(req: Request) {
 			metadata: {
 				ticketId: ticketId,
 				ticketType: ticketType,
-				name: ticket.biglietto,
+				name:
+					ticketType === "biglietto"
+						? singleTicket.biglietto?.eventName
+						: ticket.biglietto,
 				quantita: quantity,
 			},
 		} as Stripe.Checkout.SessionCreateParams);

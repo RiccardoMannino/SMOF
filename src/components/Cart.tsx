@@ -23,6 +23,8 @@ export default async function Cart({ email }: { email: string }) {
 
 	if (!email) return;
 
+	console.log("carrello", vediCarrello);
+
 	return (
 		<>
 			<div className="min-h-fit ">
@@ -38,7 +40,7 @@ export default async function Cart({ email }: { email: string }) {
 						vediCarrello.map((nome) => (
 							<React.Fragment key={nome.id}>
 								<p className="text-center px-6 py-4 col-start-1 ">
-									{nome.nome}
+									{nome.nome ? nome.nome : nome.nome?.eventName}
 								</p>
 								<p className="text-center px-6 py-4  ">{nome.quantita}</p>
 								<p className="text-center px-6 py-4 ">€{nome.prezzo}</p>
@@ -100,7 +102,7 @@ export default async function Cart({ email }: { email: string }) {
 							desideri acquistare
 						</p>
 						<Link
-							href="/ticket"
+							href="/tickets"
 							className="bg-chocolate text-ivory hover:bg-rust transition-all hover:cursor-pointer py-2 px-4 rounded text-center text-lg"
 						>
 							Pagina Ticket
