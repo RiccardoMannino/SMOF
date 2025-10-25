@@ -1,4 +1,4 @@
-import { Speaker } from "@/components/Speaker";
+// import { Speaker } from "@/components/Speaker";
 import { EVENTS_QUERYResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
