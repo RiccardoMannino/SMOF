@@ -48,7 +48,7 @@ export default async function Page({
 					Eventi
 				</h1>
 
-				<div className="flex flex-col md:grid  md:grid-flow-row  gap-24 py-12 items-center w-full">
+				<div className="flex flex-col md:grid  md:grid-flow-row  gap-24 py-12 items-center max-sm:w-full">
 					<CustomSelect data={dateEventi} eventi={eventi} tipo={tipiEventi} />
 				</div>
 				<Link

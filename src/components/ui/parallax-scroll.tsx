@@ -26,64 +26,25 @@ export const ParallaxScroll = ({
 			ref={gridRef}
 		>
 			<div
-				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start  max-w-5xl mx-auto gap-10 pt-10  px-10"
+				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start max-w-5xl mx-auto gap-10 pt-10 px-10"
 				ref={gridRef}
 			>
-				<div className="grid gap-10">
-					{immagini?.images?.slice(0, 4).map((im, index) => (
-						<motion.div key={"grid-1" + index}>
-							<Image
-								src={urlFor(im)
-									.width(400)
-									.height(400)
-									.quality(80)
-									.auto("format")
-									.url()}
-								className="h-80 w-full object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
-								height="400"
-								width="400"
-								alt="thumbnail"
-							/>
-						</motion.div>
-					))}
-				</div>
-
-				<div className="grid gap-10">
-					{immagini?.images?.slice(5, 9).map((im, index) => (
-						<motion.div key={"grid-2" + index}>
-							<Image
-								src={urlFor(im)
-									.width(400)
-									.height(400)
-									.quality(80)
-									.auto("format")
-									.url()}
-								className="h-80 w-full object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
-								height="400"
-								width="400"
-								alt="thumbnail"
-							/>
-						</motion.div>
-					))}
-				</div>
-				<div className="grid gap-10">
-					{immagini?.images?.slice(9, 13).map((im, index) => (
-						<motion.div key={"grid-3" + index}>
-							<Image
-								src={urlFor(im)
-									.width(400)
-									.height(400)
-									.quality(80)
-									.auto("format")
-									.url()}
-								className="h-80 w-full object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
-								height="400"
-								width="400"
-								alt="thumbnail"
-							/>
-						</motion.div>
-					))}
-				</div>
+				{immagini?.images?.map((im, index) => (
+					<motion.div key={"grid-1" + index}>
+						<Image
+							src={urlFor(im)
+								.width(400)
+								.height(400)
+								.quality(80)
+								.auto("format")
+								.url()}
+							className="h-auto w-full object-cover object-left-top rounded-lg gap-10"
+							height="400"
+							width="400"
+							alt="thumbnail"
+						/>
+					</motion.div>
+				))}
 			</div>
 		</div>
 	);

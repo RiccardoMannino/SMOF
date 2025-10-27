@@ -25,8 +25,8 @@ export default async function Page({
 	}
 
 	return (
-		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 ">
-			<div className="flex max-lg:gap-10 max-sm:flex-col gap-2 bg-ivory rounded-2xl p-5 text-chocolate min-h-80">
+		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">
+			<div className="flex max-lg:gap-10 max-sm:flex-col-reverse gap-2 bg-ivory rounded-2xl p-5 text-chocolate min-h-80">
 				<div className="flex flex-col w-full">
 					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold  text-red-600">
 						{evento?.eventName}
@@ -42,7 +42,7 @@ export default async function Page({
 					) : null}
 					<div className="flex flex-col gap-2">
 						<p className="flex gap-1.5 prose">
-							<MapPin className="fill-red-500 stroke-white w-6 h-6" /> Punto
+							<MapPin className="fill-red-500 stroke-white" size={64} /> Punto
 							Raduno: {evento?.raduno}
 						</p>
 						<p className="prose">Equipaggiamento: {evento?.equipaggiamento}</p>

@@ -54,8 +54,8 @@ export function CustomSelect({
 
 	return (
 		<>
-			<div className="flex  gap-2 bg-ivory text-chocolate w-fit rounded-2xl p-4">
-				<p>Edizione</p>
+			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full rounded-2xl p-4">
+				<p className=" ">Edizione</p>
 				<select
 					className=""
 					value={select}
@@ -83,11 +83,6 @@ export function CustomSelect({
 				))}
 			</div>
 			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-4">
-				{/* {eventi
-					.filter((date) => dataProva(date.data) === select)
-					.map((event) => (
-						<EventCard key={event._id} {...event} />
-					))} */}
 				{filteredEvents.map((event) => (
 					<EventCard key={event._id} {...event} />
 				))}
