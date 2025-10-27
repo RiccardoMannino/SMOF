@@ -86,7 +86,7 @@ export function Footer() {
 		<footer className="px-6 py-12 w-full bg-ivory border-t border-earth">
 			<div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 md:place-items-end items-start gap-10">
 				{/* Logo e mappa */}
-				<div className="col-span-2 flex gap-5 flex-col relative md:flex-row lg:flex-col md:justify-between w-full">
+				<div className="col-span-2 max-sm:col-span-3 flex gap-5 flex-col relative md:flex-row lg:flex-col md:justify-between w-full">
 					<Link href="/" className="w-auto">
 						<Image
 							src="/logo_smof.png"

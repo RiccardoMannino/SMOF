@@ -126,7 +126,7 @@ export default async function Page({
 
 	return page ? (
 		<>
-			<section className="grid grid-cols-1 gap-6 p-12 place-items-center">
+			<section className="grid grid-cols-1 gap-6 p-12 max-sm:p-6 place-items-center">
 				{page.mainImage ? (
 					<Image
 						className="rounded-2xl"
