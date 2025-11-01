@@ -106,8 +106,8 @@ export async function updateNewsletterSubscription(subscribe: boolean) {
 		revalidatePath("/utente");
 		revalidatePath("/");
 
-		revalidateTag("newsletter-status");
-		if (userEmail) revalidateTag(`newsletter-status:${userEmail}`);
+		revalidateTag("newsletter-status", "max");
+		if (userEmail) revalidateTag(`newsletter-status:${userEmail}`, "max");
 
 		return { ok: true };
 	} catch (error) {
