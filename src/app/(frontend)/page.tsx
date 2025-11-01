@@ -27,7 +27,7 @@ export default async function Page() {
 
 	const { session, isSubscribed } = await getNewsletterStatus();
 
-	console.log("sottoscritto alla newsletter:", isSubscribed);
+	// console.log("sottoscritto alla newsletter:", isSubscribed);
 
 	// home page
 	return page?.homePage?.content ? (
