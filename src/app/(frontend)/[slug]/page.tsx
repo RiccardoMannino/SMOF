@@ -82,7 +82,7 @@ export default async function Page({
 				</h2>
 				{/* renderizza per ogni tipo di partner i partner appartenenti */}
 				<div className="grid grid-col-1 grid-flow-row gap-5  ">
-					{Object.entries(partnerRaggruppati).map(
+					{Object.entries(partnerRaggruppati)?.map(
 						([tipoGruppo, partnersDiQuelGruppo]) => (
 							<div
 								key={tipoGruppo}
