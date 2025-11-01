@@ -37,7 +37,7 @@ export function CustomSelect({
 		}
 	};
 
-	//  Filtro eventi
+	//  Filtro eventi //TODO: sistemazione filtri
 	const filteredEvents = eventi.filter((event) => {
 		//filtro dell'anno
 		const isYearMatch = dataAnno(event.data) === select;
@@ -86,6 +86,7 @@ export function CustomSelect({
 				))}
 			</div>
 			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-10">
+				{/* Eventi filtrabili */}
 				{filteredEvents.map((event) => (
 					<EventCard key={event._id} {...event} />
 				))}
