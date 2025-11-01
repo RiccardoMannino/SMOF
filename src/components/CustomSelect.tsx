@@ -55,17 +55,20 @@ export function CustomSelect({
 	return (
 		<>
 			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
-				<p className=" ">Edizione</p>
-				<select
-					className=""
-					value={select}
-					onChange={(e) => setSelect(e.target.value)}
-				>
-					{/* anni della select */}
-					{data.map((d, idx) => (
-						<option key={idx}>{d}</option>
-					))}
-				</select>
+				<div className="flex gap-3">
+					<p className=" ">Edizione</p>
+					<select
+						className=""
+						value={select}
+						onChange={(e) => setSelect(e.target.value)}
+					>
+						{/* anni della select */}
+						{data.map((d, idx) => (
+							<option key={idx}>{d}</option>
+						))}
+					</select>
+				</div>
+
 				{tipo.map((t, idx) => (
 					<div key={idx} className="flex items-center gap-1">
 						<input
@@ -82,7 +85,7 @@ export function CustomSelect({
 					</div>
 				))}
 			</div>
-			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-4">
+			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-10">
 				{filteredEvents.map((event) => (
 					<EventCard key={event._id} {...event} />
 				))}

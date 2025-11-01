@@ -65,7 +65,7 @@ export async function Header() {
 					</div>
 					<div className="flex gap-2 items-center">
 						<span className="font-bold max-sm:text-xs flex self-center">
-							11 - 12 - 13 settembre 2026 |
+							11 - 13 settembre 2026 |
 						</span>
 						{session?.user?.email ? (
 							<>

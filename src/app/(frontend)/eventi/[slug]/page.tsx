@@ -28,9 +28,11 @@ export default async function Page({
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">
 			<div className="flex max-lg:gap-10 max-sm:flex-col-reverse gap-2 bg-ivory rounded-2xl p-5 text-chocolate min-h-80">
 				<div className="flex flex-col w-full">
+					{/* Titolo evento */}
 					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold  text-red-600">
 						{evento?.eventName}
 					</h1>
+					{/* descrizione evento */}
 					{evento?.eventDescription ? (
 						<div className="prose mt-2">
 							<span className="font-bold">Data evento:</span>{" "}
@@ -41,6 +43,7 @@ export default async function Page({
 							/>
 						</div>
 					) : null}
+					{/* specifiche evento */}
 					{evento?.specifiche ? (
 						<div className="prose my-2">
 							<PortableText
@@ -65,6 +68,7 @@ export default async function Page({
 						</p>
 					</div>
 				</div>
+				{/* immagine evento */}
 				<div className="w-full self-center flex justify-center max-lg:self-start">
 					{evento?.immagineEvento ? (
 						<Image
@@ -76,6 +80,7 @@ export default async function Page({
 						/>
 					) : null}
 				</div>
+				{/* eventi correlati */}
 				<RelatedEvents
 					relatedEvents={evento.relatedEvents}
 					documentId={evento._id}
