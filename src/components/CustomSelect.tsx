@@ -54,7 +54,7 @@ export function CustomSelect({
 
 	return (
 		<>
-			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full rounded-2xl p-4">
+			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
 				<p className=" ">Edizione</p>
 				<select
 					className=""

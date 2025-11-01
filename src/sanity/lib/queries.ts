@@ -39,7 +39,7 @@ export const SINGLE_GALLERY_QUERY =
 
 export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{
-  _id , eventName, eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{
+  _id , eventName, specifiche ,eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{
     speakerName,
     speakerImage
   }, relatedEvents[]{

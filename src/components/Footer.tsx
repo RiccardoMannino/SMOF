@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth";
 import Facebook from "../../public/facebook.svg";
 import Instagram from "../../public/instagram.svg";
 import Youtube from "../../public/youtube.svg";
@@ -10,7 +11,9 @@ type Sezione = {
 	link: { nome: string; href: string; icona?: React.JSX.Element }[];
 }[];
 
-export function Footer() {
+export async function Footer() {
+	const session = await auth();
+
 	const sezioni: Sezione = [
 		{
 			titolo: "Pagine",
@@ -78,7 +81,12 @@ export function Footer() {
 		},
 		{
 			titolo: "Registrati / Accedi",
-			link: [{ nome: "Login", href: "login" }],
+			link: [
+				{
+					nome: `${session?.user?.email ? "Esci" : "Accedi"}`,
+					href: `${session?.user?.email ? "/" : "login"}`,
+				},
+			],
 		},
 	];
 

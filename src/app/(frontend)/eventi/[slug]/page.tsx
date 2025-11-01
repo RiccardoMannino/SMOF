@@ -33,20 +33,36 @@ export default async function Page({
 					</h1>
 					{evento?.eventDescription ? (
 						<div className="prose mt-2">
-							<span>Data evento: {dataFormattata(evento?.data)}</span>
+							<span className="font-bold">Data evento:</span>{" "}
+							{dataFormattata(evento?.data)}
 							<PortableText
 								value={evento?.eventDescription}
 								components={components}
 							/>
 						</div>
 					) : null}
+					{evento?.specifiche ? (
+						<div className="prose my-2">
+							<PortableText
+								value={evento?.specifiche}
+								components={components}
+							/>
+						</div>
+					) : null}
 					<div className="flex flex-col gap-2">
-						<p className="flex gap-1.5 prose">
-							<MapPin className="fill-red-500 stroke-white" size={64} /> Punto
-							Raduno: {evento?.raduno}
+						<p className="flex items-center gap-1.5 prose  ">
+							<MapPin className="fill-red-500 stroke-white" size={64} />{" "}
+							<span className="font-bold">Punto Raduno:</span>
+							{evento?.raduno}
 						</p>
-						<p className="prose">Equipaggiamento: {evento?.equipaggiamento}</p>
-						<p className="prose">Costo: {evento.biglietto}€</p>
+						<p className="prose">
+							<span className="font-bold">Equipaggiamento:</span>{" "}
+							{evento?.equipaggiamento}
+						</p>
+						<p className="prose">
+							<span className="font-bold">Costo:</span> {evento.biglietto}€ per
+							persona
+						</p>
 					</div>
 				</div>
 				<div className="w-full self-center flex justify-center max-lg:self-start">

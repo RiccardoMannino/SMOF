@@ -37,6 +37,11 @@ export const event = defineType({
 			validation: (e) => e.required(),
 		}),
 		defineField({
+			name: "specifiche", // nome usato nella query
+			title: "Specifiche percorso", // titolo nell'editor
+			type: "blockContent",
+		}),
+		defineField({
 			name: "eventDescription", // nome usato nella query
 			title: "Descrizione Evento", // titolo nell'editor
 			type: "blockContent",
