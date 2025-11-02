@@ -29,7 +29,7 @@ export default async function Page({
 			<div className="flex max-lg:gap-10 max-sm:flex-col-reverse gap-2 bg-ivory rounded-2xl p-5 text-chocolate min-h-80">
 				<div className="flex flex-col w-full">
 					{/* Titolo evento */}
-					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold  text-red-600">
+					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5   text-red-600">
 						{evento?.eventName}
 					</h1>
 					{/* descrizione evento */}
