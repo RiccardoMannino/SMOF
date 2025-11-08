@@ -16,7 +16,7 @@ import { structure } from "./src/sanity/structure";
 import { presentationTool } from "sanity/presentation";
 
 export default defineConfig({
-	basePath: "/studio",
+	// basePath: "/studio",
 	projectId,
 	dataset,
 	// Aggiungi e modifica il content schema nella cartella './sanity/schemaTypes'
