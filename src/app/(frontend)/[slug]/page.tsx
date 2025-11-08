@@ -1,9 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PAGE_QUERY, EVENTS_QUERY, PARTNER_QUERY } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import {
+	PAGE_QUERY,
+	EVENTS_QUERY,
+	PARTNER_QUERY,
+} from "../../../sanity/lib/queries";
+import { sanityFetch } from "../../../sanity/lib/live";
+import { urlFor } from "../../../sanity/lib/image";
 import { PageBuilder } from "@/components/PageBuilder";
 import { CustomSelect } from "@/components/CustomSelect";
 import { dataAnno } from "@/lib/date";

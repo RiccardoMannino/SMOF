@@ -7,7 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/Card";
-import { writeClient } from "@/sanity/lib/client";
+import { writeClient } from "../../../sanity/lib/client";
 import { CheckIcon } from "lucide-react";
 import { auth } from "@/lib/auth";
 

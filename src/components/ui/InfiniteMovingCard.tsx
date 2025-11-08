@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { urlFor } from "@/sanity/lib/image";
-import { PARTNER_QUERYResult } from "@/sanity/types";
+import { urlFor } from "../../sanity/lib/image";
+import { PARTNER_QUERYResult } from "../../sanity/types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";

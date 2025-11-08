@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import { PAGE_QUERYResult } from "@/sanity/types";
+import { urlFor } from "../../sanity/lib/image";
+import { PAGE_QUERYResult } from "../../sanity/types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@sanity/icons";
 
 type HeroProps = Extract<

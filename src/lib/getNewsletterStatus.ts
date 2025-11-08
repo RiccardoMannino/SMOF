@@ -1,4 +1,4 @@
-import { writeClient } from "@/sanity/lib/client";
+import { writeClient } from "../sanity/lib/client";
 import { auth } from "@/lib/auth";
 
 export async function getNewsletterStatus() {

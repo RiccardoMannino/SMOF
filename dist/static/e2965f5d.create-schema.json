@@ -1,0 +1,1102 @@
+[
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "profileImage",
+        "type": "string"
+      },
+      {
+        "readOnly": true,
+        "name": "uid",
+        "type": "string",
+        "title": "User ID"
+      },
+      {
+        "initialValue": false,
+        "name": "subscribeNewsletter",
+        "type": "boolean",
+        "title": "Iscritto alla Newsletter"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "User",
+              "value": "user"
+            },
+            {
+              "title": "Admin",
+              "value": "admin"
+            }
+          ],
+          "layout": "dropdown"
+        },
+        "initialValue": "user",
+        "name": "role",
+        "type": "string",
+        "title": "Ruolo"
+      }
+    ],
+    "name": "user",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "nome",
+        "type": "string",
+        "title": "Nome Partner"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "tipo",
+        "type": "string",
+        "title": "Tipo di partner"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "link",
+        "type": "url",
+        "title": "Link partner"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "immagine",
+        "type": "image",
+        "title": "Immagine Partner"
+      }
+    ],
+    "name": "partner",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "eventName",
+        "type": "string",
+        "title": "Nome Evento"
+      },
+      {
+        "options": {
+          "list": [
+            "escursione",
+            "conferenza",
+            "yoga"
+          ],
+          "layout": "dropdown"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "escursione",
+                  "conferenza",
+                  "yoga"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "eventType",
+        "type": "string",
+        "title": "Tipo Evento"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "raduno",
+        "type": "string",
+        "title": "Punto Raduno"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "equipaggiamento",
+        "type": "string"
+      },
+      {
+        "name": "specifiche",
+        "type": "blockContent",
+        "title": "Specifiche percorso"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "eventDescription",
+        "type": "blockContent",
+        "title": "Descrizione Evento"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "eventi"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to eventi"
+          }
+        ],
+        "name": "relatedEvents",
+        "type": "array",
+        "title": "Eventi Correlati"
+      },
+      {
+        "options": {
+          "source": "eventName"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "data",
+        "type": "datetime",
+        "title": "Data evento"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "custom"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "alt",
+            "type": "string",
+            "title": "Testo alternativo"
+          }
+        ],
+        "name": "immagine",
+        "type": "image",
+        "title": "immagine Card"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "custom"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "alt",
+            "type": "string",
+            "title": "Testo alternativo"
+          }
+        ],
+        "name": "immagineEvento",
+        "type": "image",
+        "title": "Immagine Evento "
+      },
+      {
+        "name": "biglietto",
+        "type": "number",
+        "title": "Costo biglietto"
+      }
+    ],
+    "name": "eventi",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "speakerName",
+        "type": "string",
+        "title": "Nome Speaker"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "speakerImage",
+        "type": "image",
+        "title": "Immagine Speaker"
+      }
+    ],
+    "name": "speaker",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "navbarLogo",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "voce",
+                "type": "url"
+              }
+            ],
+            "type": "object",
+            "name": "Menu"
+          }
+        ],
+        "name": "navbarLinks",
+        "type": "array"
+      }
+    ],
+    "name": "Navbar",
+    "type": "object"
+  },
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/"
+                              ],
+                              "allowRelative": false,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                }
+              ],
+              "name": "link",
+              "type": "object",
+              "title": "URL"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h1",
+            "title": "H1"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Testo alternativo"
+          }
+        ],
+        "type": "image"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "intestazione",
+        "type": "string"
+      },
+      {
+        "name": "contenuto",
+        "type": "text"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "insertMenu": {
+            "views": [
+              {
+                "name": "grid"
+              }
+            ]
+          }
+        },
+        "name": "content",
+        "type": "pageBuilder"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Inserisci un numero. I numeri più bassi appariranno prima.",
+        "name": "ordine",
+        "type": "number"
+      }
+    ],
+    "name": "page",
+    "type": "document"
+  },
+  {
+    "options": {
+      "insertMenu": {
+        "views": [
+          {
+            "name": "grid"
+          }
+        ]
+      }
+    },
+    "of": [
+      {
+        "type": "hero"
+      },
+      {
+        "type": "staff"
+      },
+      {
+        "type": "splitImage"
+      },
+      {
+        "type": "features"
+      },
+      {
+        "type": "faqs",
+        "title": "FAQs"
+      }
+    ],
+    "name": "pageBuilder",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "body",
+        "type": "blockContent"
+      }
+    ],
+    "name": "faq",
+    "type": "document",
+    "title": "FAQ"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "faq"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to faq"
+          }
+        ],
+        "name": "faqs",
+        "type": "array",
+        "title": "FAQs"
+      }
+    ],
+    "name": "faqs",
+    "type": "object",
+    "title": "FAQs"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "text",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "feature"
+          }
+        ],
+        "name": "features",
+        "type": "array"
+      }
+    ],
+    "name": "features",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Inserisci le immagini per il carosello.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "images",
+        "type": "array",
+        "title": "Immagini"
+      }
+    ],
+    "name": "hero",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "value": "imageLeft",
+              "title": "Image Left"
+            },
+            {
+              "value": "imageRight",
+              "title": "Image Right"
+            }
+          ]
+        },
+        "name": "orientation",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "testo",
+        "type": "blockContent"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      }
+    ],
+    "name": "splitImage",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "to": [
+          {
+            "type": "page"
+          }
+        ],
+        "name": "homePage",
+        "type": "reference"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "nome",
+        "type": "string",
+        "title": "nome"
+      },
+      {
+        "name": "descrizione",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Inserisci le immagini dello staff.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "immagini",
+        "type": "array"
+      }
+    ],
+    "name": "staff",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "eventi"
+          }
+        ],
+        "name": "biglietto",
+        "type": "reference",
+        "title": "Nome Ticket"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "prezzo",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "quantita",
+        "type": "number",
+        "title": "Quantità disponibile"
+      }
+    ],
+    "name": "biglietto",
+    "type": "document",
+    "title": "Biglietto Singolo Evento"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "biglietto",
+        "type": "string",
+        "title": "Nome Ticket"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "prezzo",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "quantita",
+        "type": "number",
+        "title": "Quantità disponibile"
+      }
+    ],
+    "name": "giornaliero",
+    "type": "document",
+    "title": "Biglietto Giornaliero"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "biglietto",
+        "type": "string",
+        "title": "Nome Ticket "
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "prezzo",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "quantita",
+        "type": "number",
+        "title": "Quantità disponibile"
+      }
+    ],
+    "name": "festival",
+    "type": "document",
+    "title": "Biglietto Festival"
+  },
+  {
+    "fields": [
+      {
+        "description": "Anno galleria",
+        "name": "titolo",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "titolo"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Inserisci Immagini.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "images",
+        "type": "array",
+        "title": "Immagini"
+      }
+    ],
+    "name": "galleria",
+    "type": "document"
+  }
+]

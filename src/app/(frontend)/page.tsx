@@ -1,16 +1,16 @@
 import { PageBuilder } from "@/components/PageBuilder";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "../../sanity/lib/live";
 import {
 	EVENTS_QUERY,
 	HOME_PAGE_QUERY,
 	PARTNER_QUERY,
-} from "@/sanity/lib/queries";
+} from "../../sanity/lib/queries";
 import { EventCard } from "@/components/EventCard";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
 import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "../../sanity/lib/image";
 
 export default async function Page() {
 	const { data: page } = await sanityFetch({

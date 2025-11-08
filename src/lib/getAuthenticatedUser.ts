@@ -1,4 +1,4 @@
-import { writeClient } from "@/sanity/lib/client";
+import { writeClient } from "../sanity/lib/client";
 import { signOutAction } from "./action";
 
 export async function getAuthenticatedUser() {

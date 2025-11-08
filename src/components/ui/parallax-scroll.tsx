@@ -2,10 +2,10 @@
 
 import { useRef } from "react";
 import { motion } from "motion/react";
-import { SINGLE_GALLERY_QUERYResult } from "@/sanity/types";
+import { SINGLE_GALLERY_QUERYResult } from "../../sanity/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "../../sanity/lib/image";
 
 export const ParallaxScroll = ({
 	immagini,

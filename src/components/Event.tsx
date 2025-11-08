@@ -1,10 +1,10 @@
 // import { Speaker } from "@/components/Speaker";
-import { components } from "@/sanity/portableTextComponent";
+import { components } from "../sanity/portableTextComponent";
 import { PortableText } from "next-sanity";
-import { EVENT_QUERYResult } from "@/sanity/types";
+import { EVENT_QUERYResult } from "../sanity/types";
 
 import { Title } from "@/components/Title";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "../sanity/lib/image";
 import Image from "next/image";
 import { dataFormattata } from "@/lib/date";
 

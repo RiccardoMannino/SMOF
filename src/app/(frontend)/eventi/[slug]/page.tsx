@@ -1,11 +1,11 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { EVENT_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "../../../../sanity/lib/live";
+import { EVENT_QUERY } from "../../../../sanity/lib/queries";
 import { PortableText } from "next-sanity";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { dataFormattata } from "@/lib/date";
-import { urlFor } from "@/sanity/lib/image";
-import { components } from "@/sanity/portableTextComponent";
+import { urlFor } from "../../../../sanity/lib/image";
+import { components } from "../../../../sanity/portableTextComponent";
 import { RelatedEvents } from "@/components/RelatedEvents";
 import Image from "next/image";
 import { ArrowBigLeft, MapPin } from "lucide-react";

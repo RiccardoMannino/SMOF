@@ -1,6 +1,6 @@
 "use server";
 
-import { readClient, writeClient } from "@/sanity/lib/client";
+import { readClient, writeClient } from "../sanity/lib/client";
 import { signIn, signOut } from "./auth";
 import { User } from "next-auth";
 import { auth } from "@/lib/auth";

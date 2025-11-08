@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
-import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "@/sanity/lib/queries";
+import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "../sanity/lib/queries";
 import { signOutAction } from "@/lib/action";
 
 import YoutubeWhite from "../../public/youtube-white.svg";
 import InstagramWhite from "../../public/instagram-white.svg";
 import FacebookWhite from "../../public/facebook-white.svg";
 import ButtonMenu from "./ButtonMenu";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "../sanity/lib/live";
 import { LogOutIcon, ShoppingCart, User2Icon } from "lucide-react";
 
 export async function Header() {

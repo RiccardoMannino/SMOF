@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import { PAGE_QUERYResult } from "@/sanity/types";
+import { urlFor } from "../../sanity/lib/image";
+import { PAGE_QUERYResult } from "../../sanity/types";
 import { stegaClean } from "next-sanity";
-import { components } from "@/sanity/portableTextComponent";
+import { components } from "../../sanity/portableTextComponent";
 import { PortableText } from "next-sanity";
 
 type SplitImageProps = Extract<
@@ -38,7 +38,9 @@ export function SplitImage({
 						<h2 className="text-3xl max-sm:text-center mx-auto md:text-5xl lg:text-6xl font-light  text-pretty max-w-3xl smof">
 							{title}
 						</h2>
-						<PortableText value={testo} components={components} />
+						<div>
+							<PortableText value={testo} components={components} />
+						</div>
 					</>
 				) : null}
 			</div>

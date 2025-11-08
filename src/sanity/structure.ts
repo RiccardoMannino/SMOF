@@ -1,4 +1,5 @@
 import type { StructureResolver } from "sanity/structure";
+import { apiVersion } from "./env";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
@@ -33,7 +34,7 @@ export const structure: StructureResolver = (S) =>
 				.child(
 					S.documentList()
 						.title("Newsletter Subscribers")
-						.apiVersion("v2025-02-19")
+						.apiVersion(apiVersion)
 						.filter('_type == "user" && subscribeNewsletter == true')
 				),
 			// Lista filtrata per non iscritti
@@ -42,7 +43,7 @@ export const structure: StructureResolver = (S) =>
 				.child(
 					S.documentList()
 						.title("Non-Subscribers")
-						.apiVersion("v2025-02-19")
+						.apiVersion(apiVersion)
 						.filter('_type == "user" && subscribeNewsletter != true')
 				),
 			S.documentTypeListItem("partner").title("Partners"),

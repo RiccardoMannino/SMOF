@@ -1,6 +1,6 @@
-import { GALLERIES_QUERY } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import { GALLERIES_QUERY } from "../../../sanity/lib/queries";
+import { sanityFetch } from "../../../sanity/lib/live";
+import { urlFor } from "../../../sanity/lib/image";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";

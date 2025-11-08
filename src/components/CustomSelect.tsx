@@ -3,7 +3,7 @@
 import { dataAnno } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
-import { EVENTS_QUERYResult } from "@/sanity/types";
+import { EVENTS_QUERYResult } from "../sanity/types";
 
 export function CustomSelect({
 	data,

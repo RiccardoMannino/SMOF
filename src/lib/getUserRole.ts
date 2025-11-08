@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth";
-import { writeClient } from "@/sanity/lib/client";
+import { writeClient } from "../sanity/lib/client";
 
 export async function getCurrentUserRole() {
 	const session = await auth();

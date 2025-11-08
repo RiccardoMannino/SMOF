@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { readClient } from "@/sanity/lib/client";
+import { readClient } from "../../../../sanity/lib/client";
 
 export async function GET() {
 	const session = await auth();

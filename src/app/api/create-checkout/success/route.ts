@@ -1,5 +1,5 @@
 // app/api/create-checkout/success/route.ts
-import { writeClient } from "@/sanity/lib/client";
+import { writeClient } from "../../../../sanity/lib/client";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 

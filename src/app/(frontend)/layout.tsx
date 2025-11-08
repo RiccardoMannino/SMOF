@@ -3,7 +3,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { Header } from "@/components/Header";
 import "../globals.css";
-import { SanityLive } from "@/sanity/lib/live";
+import { SanityLive } from "../../sanity/lib/live";
 import { Footer } from "@/components/Footer";
 // import { SessionGuard } from "@/components/SessionGuard";
 
