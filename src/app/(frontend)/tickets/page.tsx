@@ -76,9 +76,9 @@ export default async function page() {
 	const sessione = await auth();
 	const tickets = await getTickets();
 
-	console.log("ticket", sessione?.user?.email);
+	// console.log("ticket", sessione?.user?.email);
 
-	console.log(tickets.singleEvent);
+	console.log("ticket singoli eventi", tickets.singleEvent);
 
 	return (
 		<main className="container mx-auto h-full min-h-screen">

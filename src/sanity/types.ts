@@ -111,7 +111,37 @@ export type SplitImage = {
   _type: "splitImage";
   orientation?: "imageLeft" | "imageRight";
   title?: string;
-  testo?: string;
+  testo?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
   image?: {
     asset?: {
       _ref: string;
@@ -529,7 +559,7 @@ export type AllSanitySchemaTypes = Galleria | Festival | Giornaliero | Biglietto
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
-// Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data ,slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
+// Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
 export type EVENTS_QUERYResult = Array<{
   _id: string;
   data: string | null;
@@ -569,7 +599,7 @@ export type EVENTS_QUERYResult = Array<{
   speakers: null;
 }>;
 // Variable: TICKET_QUERY
-// Query: *[_type == "biglietto"]{  _id , prezzo, quantita ,biglietto ,}
+// Query: *[_type == "biglietto"]{  _id , prezzo, quantita , biglietto ,}
 export type TICKET_QUERYResult = Array<{
   _id: string;
   prezzo: string | null;
@@ -647,7 +677,7 @@ export type SINGLE_GALLERY_QUERYResult = {
   titolo: string | null;
 } | null;
 // Variable: EVENT_QUERY
-// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche ,eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
+// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
 export type EVENT_QUERYResult = {
   _id: string;
   eventName: string | null;
@@ -812,7 +842,37 @@ export type PAGE_QUERYResult = {
     _type: "splitImage";
     orientation?: "imageLeft" | "imageRight";
     title?: string;
-    testo?: string;
+    testo?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }>;
     image?: {
       asset?: {
         _ref: string;
@@ -946,7 +1006,37 @@ export type HOME_PAGE_QUERYResult = {
       _type: "splitImage";
       orientation?: "imageLeft" | "imageRight";
       title?: string;
-      testo?: string;
+      testo?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }>;
       image?: {
         asset?: {
           _ref: string;
@@ -998,14 +1088,14 @@ export type HOME_PAGE_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data ,slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
-    "*[_type == \"biglietto\"]{\n  _id , prezzo, quantita ,biglietto ,\n}": TICKET_QUERYResult;
+    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
+    "*[_type == \"biglietto\"]{\n  _id , prezzo, quantita , biglietto ,\n}": TICKET_QUERYResult;
     "*[type == \"giornaliero\"]{\n  prezzo , quantita, bigliettoGiorno\n}": DAILY_TICKET_QUERYResult;
     "*[type == \"festival\"]{\n  prezzo, quantita, biglietto \n}": FESTIVAL_TICKET_QUERYResult;
     "*[_type == \"partner\" ]{\n  _id ,nome , tipo, link ,immagine\n}": PARTNER_QUERYResult;
     "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
-    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche ,eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
+    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
     "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;
     "*[_type == \"user\" && uid == $uid][0]{\n    email\n  }": SINGLE_AUTH_USERResult;

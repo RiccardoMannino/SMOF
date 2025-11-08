@@ -1,10 +1,8 @@
 "use client";
-import { toast } from "react-toastify";
-
-import { createCart } from "@/lib/action";
-
-import { ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
+import { createCart } from "@/lib/action";
+import { toast } from "react-toastify";
+import { ShoppingCartIcon } from "lucide-react";
 
 type Ticket = {
 	_id: string;

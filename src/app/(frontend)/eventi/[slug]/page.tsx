@@ -9,6 +9,7 @@ import { components } from "@/sanity/portableTextComponent";
 import { RelatedEvents } from "@/components/RelatedEvents";
 import Image from "next/image";
 import { ArrowBigLeft, MapPin } from "lucide-react";
+import { auth } from "@/lib/auth";
 
 export default async function Page({
 	params,
@@ -20,9 +21,43 @@ export default async function Page({
 		params: await params,
 	});
 
+	async function handlePurchase() {
+		try {
+			// Crea una sessione di checkout
+			const response = await fetch("/api/create-checkout", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					ticketId: evento?._id,
+					ticketType: evento?.eventName,
+					quantity: 1,
+				}),
+			});
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(
+					data.message || "Errore durante la creazione del checkout"
+				);
+			}
+			// Ottieni la URL della sessione e reindirizza
+			window.location.href = data.url;
+		} catch (error) {
+			console.error("Errore:", error);
+			alert("Si è verificato un errore. Riprova più tardi.");
+		}
+	}
+
+	const session = await auth();
+
 	if (!evento) {
 		notFound();
 	}
+
+	// TODO: collegare l'evento all'acquisto da questa sezione di sito
+	console.log("params", await params);
+	console.log("evento", evento.eventName);
 
 	return (
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">
@@ -66,6 +101,15 @@ export default async function Page({
 							<span className="font-bold">Costo:</span> {evento.biglietto}€ per
 							persona
 						</p>
+						{/* TODO: aggiungere bottone di acquisto (se loggati) */}
+						{session?.user?.email ? (
+							<button
+								onClick={handlePurchase}
+								className="bg-chocolate text-ivory rounded-2xl w-fit p-2 cursor-pointer font-semibold"
+							>
+								Acquista Ticket
+							</button>
+						) : null}
 					</div>
 				</div>
 				{/* immagine evento */}

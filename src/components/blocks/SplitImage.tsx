@@ -2,6 +2,8 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PAGE_QUERYResult } from "@/sanity/types";
 import { stegaClean } from "next-sanity";
+import { components } from "@/sanity/portableTextComponent";
+import { PortableText } from "next-sanity";
 
 type SplitImageProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -30,13 +32,13 @@ export function SplitImage({
 					/>
 				) : null}
 			</div>
-			<div className="w-1/2 max-lg:w-full flex flex-col gap-3">
+			<div className="w-1/2 max-lg:w-full flex flex-col gap-6">
 				{title && testo ? (
 					<>
 						<h2 className="text-3xl max-sm:text-center mx-auto md:text-5xl lg:text-6xl font-light  text-pretty max-w-3xl smof">
 							{title}
 						</h2>
-						<p className=" max-sm:text-center whitespace-pre-line">{testo}</p>
+						<PortableText value={testo} components={components} />
 					</>
 				) : null}
 			</div>
