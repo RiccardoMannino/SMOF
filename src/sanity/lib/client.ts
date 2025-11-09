@@ -1,12 +1,3 @@
-// export const client = createClient({
-// 	projectId,
-// 	dataset,
-// 	apiVersion,
-// 	useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
-// 	stega: { studioUrl: "/studio" },
-// 	token: process.env.SANITY_API_WRITE_TOKEN,
-// });
-
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../env";
 
@@ -16,7 +7,7 @@ export const writeClient = createClient({
 	dataset,
 	apiVersion,
 	useCdn: false, // Necessario per scrivere
-	stega: { studioUrl: "/studio" },
+	stega: { studioUrl: "https://smof.sanity.studio" },
 	token: process.env.SANITY_API_WRITE_TOKEN,
 });
 
@@ -26,7 +17,7 @@ export const readClient = createClient({
 	dataset,
 	apiVersion,
 	useCdn: true, // Veloce grazie alla CDN
-	stega: { studioUrl: "/studio" },
+	stega: { studioUrl: "https://smof.sanity.studio" },
 	// Nessun token necessario per le letture pubbliche
 });
 
