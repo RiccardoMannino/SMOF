@@ -4,8 +4,8 @@
  **/
 import { defineCliConfig } from "sanity/cli";
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
-const dataset = process.env.SANITY_STUDIO_DATASE;
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID!;
+const dataset = process.env.SANITY_STUDIO_DATASET!;
 
 export default defineCliConfig({
 	deployment: {
