@@ -102,14 +102,14 @@ export default async function Page({
 							persona
 						</p>
 						{/* TODO: aggiungere bottone di acquisto (se loggati) */}
-						{session?.user?.email ? (
+						{/* {session?.user?.email ? (
 							<button
 								onClick={handlePurchase}
 								className="bg-chocolate text-ivory rounded-2xl w-fit p-2 cursor-pointer font-semibold"
 							>
 								Acquista Ticket
 							</button>
-						) : null}
+						) : null} */}
 					</div>
 				</div>
 				{/* immagine evento */}

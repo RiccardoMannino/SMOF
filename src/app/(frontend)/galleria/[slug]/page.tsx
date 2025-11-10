@@ -1,7 +1,6 @@
 import { ParallaxScroll } from "@/components/ui/parallax-scroll";
 import { sanityFetch } from "../../../../sanity/lib/live";
 import { SINGLE_GALLERY_QUERY } from "../../../../sanity/lib/queries";
-import React from "react";
 
 export default async function Page({
 	params,

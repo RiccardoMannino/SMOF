@@ -10,6 +10,7 @@ import FacebookWhite from "../../public/facebook-white.svg";
 import ButtonMenu from "./ButtonMenu";
 import { sanityFetch } from "../sanity/lib/live";
 import { LogOutIcon, ShoppingCart, User2Icon } from "lucide-react";
+import HoveredLink from "./ui/HoveredLink";
 
 export async function Header() {
 	const { data: pages } = await sanityFetch({
@@ -19,6 +20,16 @@ export async function Header() {
 	const { data: galleria } = await sanityFetch({
 		query: GALLERIES_QUERY,
 	});
+
+	const linkGalleria = galleria.map((el) => (
+		<Link
+			key={el._id}
+			href={`/galleria/${el.slug?.current}`}
+			className="hover:text-rust transition-colors font-semibold flex flex-col  "
+		>
+			<h1 className=" my-2">{el.titolo}</h1>
+		</Link>
+	));
 
 	const session = await auth();
 
@@ -124,17 +135,15 @@ export async function Header() {
 								className="hover:text-rust transition-colors"
 								href={`/${page.slug}`}
 							>
-								{page.title === "galleria"
-									? galleria.map((el) => (
-											<Link
-												key={el._id}
-												href={`/galleria/${el.slug?.current}`}
-												className="text-mustard font-semibold flex flex-col "
-											>
-												<h1>{el.titolo}</h1>
-											</Link>
-										))
-									: page.title}
+								{page.title === "Galleria" ? (
+									<>
+										<HoveredLink galleria={<>{linkGalleria}</>}>
+											{page.title}
+										</HoveredLink>
+									</>
+								) : (
+									page.title
+								)}
 							</Link>
 						</li>
 					))}

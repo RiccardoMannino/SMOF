@@ -1,0 +1,25 @@
+"use client";
+import { ReactNode, useState } from "react";
+
+export default function HoveredLink({
+	galleria,
+	children,
+}: {
+	galleria: React.JSX.Element;
+	children: ReactNode;
+}) {
+	const [active, setActive] = useState(false);
+
+	return (
+		<div
+			className=""
+			onMouseEnter={() => setActive(true)}
+			onMouseLeave={() => setActive(false)}
+		>
+			{children}
+			<div className="absolute bg-ivory rounded-2xl p-2 right-7">
+				{active && galleria}
+			</div>
+		</div>
+	);
+}
