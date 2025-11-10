@@ -131,20 +131,20 @@ export async function Header() {
 				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
 					{pages?.map((page) => (
 						<li key={page._id}>
-							<Link
-								className="hover:text-rust transition-colors"
-								href={`/${page.slug}`}
-							>
-								{page.title === "Galleria" ? (
-									<>
-										<HoveredLink galleria={<>{linkGalleria}</>}>
-											{page.title}
-										</HoveredLink>
-									</>
-								) : (
-									page.title
-								)}
-							</Link>
+							{page.title === "Galleria" ? (
+								<>
+									<HoveredLink galleria={<>{linkGalleria}</>}>
+										{page.title}
+									</HoveredLink>
+								</>
+							) : (
+								<Link
+									className="hover:text-rust transition-colors"
+									href={`/${page.slug}`}
+								>
+									{page.title}
+								</Link>
+							)}
 						</li>
 					))}
 				</ul>

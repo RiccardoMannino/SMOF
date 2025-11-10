@@ -1,5 +1,7 @@
 "use client";
+
 import { ReactNode, useState } from "react";
+import * as motion from "motion/react-client";
 
 export default function HoveredLink({
 	galleria,
@@ -17,9 +19,9 @@ export default function HoveredLink({
 			onMouseLeave={() => setActive(false)}
 		>
 			{children}
-			<div className="absolute bg-ivory rounded-2xl p-2 right-7">
+			<motion.div layout className="absolute bg-ivory rounded-2xl p-2 right-7">
 				{active && galleria}
-			</div>
+			</motion.div>
 		</div>
 	);
 }
