@@ -17,7 +17,7 @@ export default async function Page({
 
 	return (
 		<div className="flex flex-col items-center justify-center  gap-5 w-full">
-			<div className="container mx-auto flex flex-col  p-10 text-chocolate">
+			<div className="container mx-auto flex flex-col max-sm:p-6  p-10 text-chocolate">
 				<h3 className="text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10">
 					{ospitalita?.luogo}
 				</h3>
@@ -31,7 +31,7 @@ export default async function Page({
 					/>
 				) : null}
 				{ospitalita?.descrizione ? (
-					<div className="bg-ivory p-4 rounded-2xl text-2xl text-center  my-20">
+					<div className="bg-ivory p-4 rounded-2xl text-xl text-center  my-20">
 						<PortableText
 							value={ospitalita?.descrizione}
 							components={components}
