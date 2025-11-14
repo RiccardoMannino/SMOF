@@ -36,6 +36,14 @@ export const SINGLE_GALLERY_QUERY =
 	defineQuery(`*[_type == "galleria" && slug.current == $slug][0]{
   _id , images , titolo 
 }`);
+export const SINGLE_OSPITALITA_QUERY =
+	defineQuery(`*[_type == "ospitalita" && slug.current == $slug][0]{
+  _id , immagine , luogo , descrizione 
+}`);
+export const OSPITALITA_QUERY =
+	defineQuery(`*[_type == "ospitalita" && defined(slug.current)]{
+  _id , immagine , luogo , descrizione , slug
+}`);
 
 export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{

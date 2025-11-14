@@ -1,12 +1,11 @@
 import { defineField, defineType } from "sanity";
 
 import { DocumentTextIcon } from "@sanity/icons";
-import { title } from "process";
 
 export const ospitalita = defineType({
 	type: "document",
 	icon: DocumentTextIcon,
-	name: "ospitalità",
+	name: "ospitalita",
 	title: "Ospitalità",
 	fields: [
 		defineField({
@@ -15,9 +14,23 @@ export const ospitalita = defineType({
 			type: "string",
 		}),
 		defineField({
-			name: "",
-			title: "",
-			type: "",
+			name: "slug",
+			type: "slug",
+			options: { source: "luogo" },
+		}),
+		defineField({
+			name: "immagine",
+			title: "Immagine",
+			type: "image",
+			options: {
+				hotspot: true,
+			},
+		}),
+		defineField({
+			name: "descrizione", // nome usato nella query
+			title: "Descrizione località", // titolo nell'editor
+			type: "blockContent",
+			validation: (e) => e.required(),
 		}),
 	],
 });

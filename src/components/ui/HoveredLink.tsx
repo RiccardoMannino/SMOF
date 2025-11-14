@@ -4,10 +4,10 @@ import { ReactNode, useState } from "react";
 import * as motion from "motion/react-client";
 
 export default function HoveredLink({
-	galleria,
+	ospitalita,
 	children,
 }: {
-	galleria: React.JSX.Element;
+	ospitalita: React.JSX.Element;
 	children: ReactNode;
 }) {
 	const [active, setActive] = useState(false);
@@ -19,8 +19,8 @@ export default function HoveredLink({
 			onMouseLeave={() => setActive(false)}
 		>
 			{children}
-			<motion.div layout className="absolute bg-ivory rounded-2xl p-2 right-7">
-				{active && galleria}
+			<motion.div layout className="absolute bg-ivory rounded-2xl p-2 right-72">
+				{active && ospitalita}
 			</motion.div>
 		</div>
 	);

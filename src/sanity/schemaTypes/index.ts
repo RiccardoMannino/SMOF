@@ -18,6 +18,7 @@ import { festivalTicket } from "./festivalTicket";
 import { galleryType } from "./galleryType";
 import { partner } from "./partnerType";
 import { user } from "./userType";
+import { ospitalita } from "./ospitalitaTypes";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -40,5 +41,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		bigliettoGiornaliero,
 		festivalTicket,
 		galleryType,
+		ospitalita,
 	],
 };

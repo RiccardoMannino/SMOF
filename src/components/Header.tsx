@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
-import { GALLERIES_QUERY, LIST_PAGE_QUERY } from "../sanity/lib/queries";
+import {
+	GALLERIES_QUERY,
+	LIST_PAGE_QUERY,
+	OSPITALITA_QUERY,
+} from "../sanity/lib/queries";
 import { signOutAction } from "@/lib/action";
 
 import YoutubeWhite from "../../public/youtube-white.svg";
@@ -20,14 +24,17 @@ export async function Header() {
 	const { data: galleria } = await sanityFetch({
 		query: GALLERIES_QUERY,
 	});
+	const { data: ospitalita } = await sanityFetch({
+		query: OSPITALITA_QUERY,
+	});
 
-	const linkGalleria = galleria.map((el) => (
+	const linkOspitalita = ospitalita.map((el) => (
 		<Link
 			key={el._id}
-			href={`/galleria/${el.slug?.current}`}
+			href={`/ospitalita/${el.slug?.current}`}
 			className="hover:text-rust transition-colors font-semibold flex flex-col  "
 		>
-			<h1 className=" my-2">{el.titolo}</h1>
+			<h1 className=" my-2">{el.luogo}</h1>
 		</Link>
 	));
 
@@ -131,9 +138,9 @@ export async function Header() {
 				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
 					{pages?.map((page) => (
 						<li key={page._id}>
-							{page.title === "Galleria" ? (
+							{page.title === "Ospitalità" ? (
 								<>
-									<HoveredLink galleria={<>{linkGalleria}</>}>
+									<HoveredLink ospitalita={<>{linkOspitalita}</>}>
 										{page.title}
 									</HoveredLink>
 								</>

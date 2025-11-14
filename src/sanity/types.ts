@@ -13,6 +13,59 @@
  */
 
 // Source: schema.json
+export type Ospitalita = {
+  _id: string;
+  _type: "ospitalita";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  luogo?: string;
+  slug?: Slug;
+  immagine?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  descrizione?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type Galleria = {
   _id: string;
   _type: "galleria";
@@ -555,7 +608,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Speaker | Eventi | Partner | User | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Ospitalita | Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | BlockContent | Navbar | Speaker | Eventi | Partner | User | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -676,6 +729,105 @@ export type SINGLE_GALLERY_QUERYResult = {
   }> | null;
   titolo: string | null;
 } | null;
+// Variable: SINGLE_OSPITALITA_QUERY
+// Query: *[_type == "ospitalita" && slug.current == $slug][0]{  _id , immagine , luogo , descrizione }
+export type SINGLE_OSPITALITA_QUERYResult = {
+  _id: string;
+  immagine: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  luogo: string | null;
+  descrizione: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }> | null;
+} | null;
+// Variable: OSPITALITA_QUERY
+// Query: *[_type == "ospitalita" && defined(slug.current)]{  _id , immagine , luogo , descrizione , slug}
+export type OSPITALITA_QUERYResult = Array<{
+  _id: string;
+  immagine: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  luogo: string | null;
+  descrizione: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }> | null;
+  slug: Slug | null;
+}>;
 // Variable: EVENT_QUERY
 // Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
 export type EVENT_QUERYResult = {
@@ -1095,6 +1247,8 @@ declare module "@sanity/client" {
     "*[_type == \"partner\" ]{\n  _id ,nome , tipo, link ,immagine\n}": PARTNER_QUERYResult;
     "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
+    "*[_type == \"ospitalita\" && slug.current == $slug][0]{\n  _id , immagine , luogo , descrizione \n}": SINGLE_OSPITALITA_QUERYResult;
+    "*[_type == \"ospitalita\" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , slug\n}": OSPITALITA_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
     "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;
