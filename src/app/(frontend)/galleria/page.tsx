@@ -15,7 +15,7 @@ export default async function Page() {
 			<h1 className="text-2xl text-center md:text-3xl lg:text-5xl  text-mustard text-pretty mb-10">
 				Gallerie
 			</h1>
-			<div className="flex max-md:flex-col gap-4">
+			<div className="grid grid-cols-3 max-sm:grid-cols-1 gap-6">
 				{galleria.map((el) => (
 					<div
 						className="flex max-sm:flex-col w-full justify-center items-center bg-ivory rounded-2xl p-4"
