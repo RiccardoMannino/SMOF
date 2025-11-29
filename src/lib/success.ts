@@ -4,7 +4,7 @@ export const success = async (sessionId: string | string[] | undefined) => {
 	}
 
 	const response = await fetch(
-		`http://localhost:3000/api/create-checkout/success?session_id=${sessionId}`,
+		`${process.env.NEXTAUTH_URL}/api/create-checkout/success?session_id=${sessionId}`,
 		{ next: { revalidate: false } } // Disabilita la revalidazione
 	);
 
