@@ -94,8 +94,8 @@ export async function POST(req: Request) {
 			],
 			customer_email: sessione?.user?.email,
 			mode: "payment",
-			success_url: `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/ticket`,
+			success_url: `${process.env.NEXT_AUTH_URL || "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
+			cancel_url: `${process.env.NEXT_AUTH_URL || "http://localhost:3000"}/ticket`,
 			metadata: {
 				ticketId: ticketId,
 				ticketType: ticketType,

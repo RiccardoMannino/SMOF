@@ -32,7 +32,7 @@ export async function Header() {
 		<Link
 			key={el._id}
 			href={`/ospitalita/${el.slug?.current}`}
-			className="hover:text-rust transition-colors font-semibold flex flex-col  "
+			className="hover:text-rust transition-colors font-semibold flex flex-col"
 		>
 			<h1 className=" my-2">{el.luogo}</h1>
 		</Link>
