@@ -12,7 +12,7 @@ export default async function UtentePage() {
 	if (!session?.user) return notFound();
 
 	return (
-		<section className="max-w-2xl sm:mx-auto max-sm:mx-[1rem] my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
+		<section className="max-w-2xl sm:mx-auto max-sm:mx-4 my-10 p-8 rounded-lg bg-ivory shadow-lg border border-chocolate">
 			<h1 className="text-3xl font-bold text-chocolate mb-6">
 				{role === "admin" ? "Pannello Admin" : "Area Utente"}
 			</h1>
@@ -27,19 +27,19 @@ export default async function UtentePage() {
 							Biglietti acquistati
 						</h2>
 						<div className="bg-mustard/20 rounded p-4 text-chocolate overflow-y-scroll">
-							{/* <Utente /> */}
+							<Utente />
 						</div>
 						<div>
-							<h2 className="text-xl font-semibold text-rust my-3">
+							{/* <h2 className="text-xl font-semibold text-rust my-3">
 								Newsletter
-							</h2>
-							<div className="bg-mustard/20 rounded p-4 flex flex-col items-center w-full">
+							</h2> 
+							 <div className="bg-mustard/20 rounded p-4 flex flex-col items-center w-full">
 								<NewsletterForm
 									key={String(isSubscribed)}
 									context="utente"
 									subscribe={isSubscribed}
 								/>
-							</div>
+							</div> */}
 						</div>
 					</>
 				)}
