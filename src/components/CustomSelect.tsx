@@ -1,6 +1,7 @@
 "use client";
 
-import { dataAnno, dataGiornaliera } from "@/lib/date";
+import React from "react";
+import { dataGiornaliera } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
 import { EVENTS_QUERYResult } from "../sanity/types";
@@ -60,17 +61,6 @@ export function CustomSelect({
 	return (
 		<>
 			<div className="flex w-full gap-3">
-				{/* <select
-			className=""
-			value={select}
-			onChange={(e) => setSelect(e.target.value)}
-		>
-		
-			{data.map((d, idx) => (
-				<option key={idx}>{d}</option>
-			))}
-		</select> */}
-
 				<div className="flex gap-2 self-center bg-ivory p-4 rounded-2xl">
 					{data.map((d, idx) => (
 						<button
@@ -84,7 +74,7 @@ export function CustomSelect({
 				</div>
 			</div>
 			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
-				<p className=" ">Edizione</p>
+				<p className=" ">Tipo evento</p>
 
 				{tipo.map((t, idx) => (
 					<div key={idx} className="flex items-center gap-1">

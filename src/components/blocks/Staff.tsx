@@ -43,11 +43,11 @@ export function Staff({ ...props }: StaffProps) {
 						<motion.div
 							initial={false}
 							onClick={handleClose}
-							className="fixed top-0 left-0 w-full h-full z-70 bg-[#000]/75 flex items-center justify-center "
+							className="fixed top-0 left-0 w-full h-full z-70 bg-black/75 flex items-center justify-center "
 						>
 							<div
 								onClick={(e) => e.stopPropagation()}
-								className=" p-5 bg-ivory overflow-y-auto rounded-2xl max-sm:max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:h-[75%] sm:max-h-[40rem] gap-2 z-71 min-[500px]:h-[80%] scrollbar-hide"
+								className=" p-5 bg-ivory overflow-y-auto rounded-2xl max-sm:max-w-[75%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[45%] flex flex-col max-sm:h-[75%] sm:max-h-160 gap-2 z-71 min-[500px]:h-[80%] scrollbar-hide"
 							>
 								<p className="text-center font-bold">{nome}</p>
 								<Image
@@ -55,7 +55,7 @@ export function Staff({ ...props }: StaffProps) {
 									alt={`${nome}`}
 									width={1200}
 									height={800}
-									className="w-full object-contain sm:h-1/2 self-center cursor-pointer rounded-2xl"
+									className="w-full min-h-96 max-sm:min-h-64 object-contain  self-center cursor-pointer rounded-2xl"
 								/>
 								<p className="text-center whitespace-pre-line font-semibold w-fit">
 									{descrizione}

@@ -5,6 +5,8 @@
 	"scripts": {
 		"dev": "next dev --turbo",
 		"build": "next build",
+		"sanity": "sanity build",
+		"sanity deploy": "sanity deploy",
 		"start": "next start",
 		"lint": "next lint",
 		"predev": "npm run typegen",

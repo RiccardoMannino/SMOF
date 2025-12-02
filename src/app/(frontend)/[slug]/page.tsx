@@ -95,12 +95,12 @@ export default async function Page({
 								<h3 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard text-center">
 									{tipoGruppo}
 								</h3>
-								<div className="flex max-lg:grid max-sm:flex-col gap-5 justify-center">
+								<div className="flex max-md:flex-col md:flex-wrap gap-5 justify-center">
 									{partnersDiQuelGruppo?.map((partnerSingolo) => (
 										<Link
 											href={partnerSingolo.link as string}
 											target="_blank"
-											className="flex bg-ivory items-center  rounded-2xl h-full"
+											className="flex bg-ivory items-center rounded-2xl h-full"
 											key={partnerSingolo._id}
 										>
 											{partnerSingolo.immagine ? (
