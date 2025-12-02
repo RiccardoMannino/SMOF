@@ -61,12 +61,14 @@ export function CustomSelect({
 	return (
 		<>
 			<div className="flex w-full gap-3">
-				<div className="flex gap-2 self-center bg-ivory p-4 rounded-2xl">
+				<div className="flex gap-2 self-center bg-ivory p-6 rounded-2xl w-full justify-around">
 					{data.map((d, idx) => (
 						<button
 							key={idx}
 							onClick={() => setSelect(d)}
-							className={select === d ? "font-bold   " : ""}
+							className={
+								select === d ? "font-semibold bg-mustard rounded-2xl p-2  " : ""
+							}
 						>
 							<span>{d}</span>
 						</button>

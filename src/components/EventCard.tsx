@@ -18,7 +18,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 
 	return (
 		<Link
-			className="group rounded-lg max-sm:w-[90%] w-[80%] max-lg:self-center"
+			className="group rounded-lg  max-sm:w-full max-lg:self-center "
 			href={`/eventi/${props.slug?.current}`}
 		>
 			<Card className="border-0 bg-ivory shadow-md transition-colors">
@@ -32,11 +32,11 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 
 					<CardAction></CardAction>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="self-center max-sm:w-full">
 					{immagine ? (
 						<Image
 							src={urlFor(immagine).auto("format").url()}
-							className="rounded-lg object-cover w-full"
+							className="rounded-lg object-cover w-full self-center h-auto"
 							width={200}
 							height={400}
 							alt={immagine.alt || eventName || ""}
