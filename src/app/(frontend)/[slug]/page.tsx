@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -12,7 +10,7 @@ import { sanityFetch } from "../../../sanity/lib/live";
 import { urlFor } from "../../../sanity/lib/image";
 import { PageBuilder } from "@/components/PageBuilder";
 import { CustomSelect } from "@/components/CustomSelect";
-import { dataAnno } from "@/lib/date";
+import { dataAnno, dataGiornaliera } from "@/lib/date";
 import { ArrowBigLeft } from "lucide-react";
 
 export default async function Page({
@@ -33,7 +31,7 @@ export default async function Page({
 
 	// elimina i doppioni degli anni di tutti gli eventi, fattibile anche con la GROQ di sanity
 	const dateEventi = Array.from(
-		new Set(eventi.map((date) => dataAnno(date.data)))
+		new Set(eventi.map((date) => dataGiornaliera(date.data)))
 	);
 
 	// Tipi eventi non duplicati , fattibile anche con la GROQ di sanity

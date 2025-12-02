@@ -1,6 +1,6 @@
 "use client";
 
-import { dataAnno } from "@/lib/date";
+import { dataAnno, dataGiornaliera } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
 import { EVENTS_QUERYResult } from "../sanity/types";
@@ -37,37 +37,54 @@ export function CustomSelect({
 		}
 	};
 
-	//  Filtro eventi //TODO: sistemazione filtri
+	//  da studiare
 	const filteredEvents = eventi.filter((event) => {
-		//filtro dell'anno
-		const isYearMatch = dataAnno(event.data) === select;
+		// filtro per anno
+		const isYearMatch = dataGiornaliera(event.data) === select;
 
-		// Controlla se almeno una checkbox è selezionata
-		const anyTypeSelected = Object.values(type).some(Boolean);
+		// tipi selezionati (es. ["conferenza", "yoga"])
+		const selectedTypes = Object.entries(type)
+			.filter(([, value]) => value)
+			.map(([key]) => key);
 
-		// Se non ci sono tipi selezionati, filtra solo per anno.
-		// Altrimenti, filtra per anno E per tipo.
-		const isTypeMatch = !anyTypeSelected || type[event?.eventType as string];
+		// se l'anno non corrisponde, scarta subito
+		if (!isYearMatch) return false;
 
-		return isYearMatch && isTypeMatch;
+		// se nessun checkbox è selezionato, mostra tutti gli eventi di quell'anno
+		if (selectedTypes.length === 0) return true;
+
+		// altrimenti mostra solo gli eventi il cui eventType è uno di quelli selezionati
+		return selectedTypes.includes(event.eventType as string);
 	});
 
 	return (
 		<>
-			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
-				<div className="flex gap-3">
-					<p className=" ">Edizione</p>
-					<select
-						className=""
-						value={select}
-						onChange={(e) => setSelect(e.target.value)}
-					>
-						{/* anni della select */}
-						{data.map((d, idx) => (
-							<option key={idx}>{d}</option>
-						))}
-					</select>
+			<div className="flex w-full gap-3">
+				{/* <select
+			className=""
+			value={select}
+			onChange={(e) => setSelect(e.target.value)}
+		>
+		
+			{data.map((d, idx) => (
+				<option key={idx}>{d}</option>
+			))}
+		</select> */}
+
+				<div className="flex gap-2 self-center bg-ivory p-4 rounded-2xl">
+					{data.map((d, idx) => (
+						<button
+							key={idx}
+							onClick={() => setSelect(d)}
+							className={select === d ? "font-bold   " : ""}
+						>
+							<span>{d}</span>
+						</button>
+					))}
 				</div>
+			</div>
+			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
+				<p className=" ">Edizione</p>
 
 				{tipo.map((t, idx) => (
 					<div key={idx} className="flex items-center gap-1">

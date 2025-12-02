@@ -19,6 +19,7 @@ export const readClient = createClient({
 	useCdn: true, // Veloce grazie alla CDN
 	stega: { studioUrl: "https://smof.sanity.studio" },
 	// Nessun token necessario per le letture pubbliche
+	token: process.env.SANITY_API_READ_TOKEN,
 });
 
 // Client principale - alias per retrocompatibilità

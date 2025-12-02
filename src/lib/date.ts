@@ -16,3 +16,12 @@ export function dataAnno(data: string | null) {
 		year: "numeric",
 	});
 }
+
+export function dataGiornaliera(data: string | null) {
+	return new Date(data as string).toLocaleDateString("it-IT", {
+		weekday: "long",
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+}
