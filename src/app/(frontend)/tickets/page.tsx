@@ -7,7 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/Card";
-import { writeClient } from "../../../sanity/lib/client";
+import { readClient, writeClient } from "../../../sanity/lib/client";
 import { CheckIcon } from "lucide-react";
 import { auth } from "@/lib/auth";
 
@@ -30,7 +30,7 @@ type Ticket = {
 
 async function getTickets() {
 	// Biglietti giornalieri
-	const dailyTicket = await writeClient.fetch(
+	const dailyTicket = await readClient.fetch(
 		`*[_type == "giornaliero" && quantita >= 0][0..2]{ 
       _id, 
       _type,
@@ -41,7 +41,7 @@ async function getTickets() {
 	);
 
 	// Biglietti festival completo
-	const festTicket = await writeClient.fetch(
+	const festTicket = await readClient.fetch(
 		`*[_type == "festival" && quantita >= 0][0]{ 
       _id, 
       _type,
@@ -53,7 +53,7 @@ async function getTickets() {
 
 	// Biglietti singolo eventi
 
-	const singleEvent = await writeClient.fetch(
+	const singleEvent = await readClient.fetch(
 		`*[_type == "biglietto" && quantita >= 0][0...50]{ 
       biglietto ->{ 
 			eventName,
