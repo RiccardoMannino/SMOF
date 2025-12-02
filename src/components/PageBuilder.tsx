@@ -5,7 +5,7 @@ import { Features } from "@/components/blocks/Features";
 import { SplitImage } from "@/components/blocks/SplitImage";
 import { FAQs } from "@/components/blocks/FAQs";
 import { PAGE_QUERYResult } from "../sanity/types";
-import { client, readClient, writeClient } from "../sanity/lib/client";
+import { client, readClient } from "../sanity/lib/client";
 import { createDataAttribute } from "next-sanity";
 import { useOptimistic } from "next-sanity/hooks";
 import { Staff } from "@/components/blocks/Staff";

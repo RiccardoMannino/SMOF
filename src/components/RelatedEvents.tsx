@@ -54,7 +54,7 @@ export function RelatedEvents({
 					{events.map((event) => (
 						<li
 							key={event._key}
-							className="p-4 bg-blue-50 w-fit flex-shrink-0 rounded-2xl"
+							className="p-4 bg-blue-50 w-fit shrink-0 rounded-2xl"
 							data-sanity={createDataAttribute({
 								...createDataAttributeConfig,
 								id: documentId,
