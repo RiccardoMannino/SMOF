@@ -10,7 +10,7 @@ import { sanityFetch } from "../../../sanity/lib/live";
 import { urlFor } from "../../../sanity/lib/image";
 import { PageBuilder } from "@/components/PageBuilder";
 import { CustomSelect } from "@/components/CustomSelect";
-import { dataAnno, dataGiornaliera } from "@/lib/date";
+import { dataGiornaliera } from "@/lib/date";
 import { ArrowBigLeft } from "lucide-react";
 
 export default async function Page({

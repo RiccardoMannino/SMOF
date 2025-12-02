@@ -44,7 +44,7 @@ export default async function Cart({ email }: { email: string }) {
 								</p>
 								<p className="text-center px-6 py-4  ">{nome.quantita}</p>
 								<p className="text-center px-6 py-4 ">€{nome.prezzo}</p>
-								<p className="min-w-0 px-6 py-4 col-start-4  overflow-hidden">
+								<p className="min-w-0 max-w-4 px-6 py-4 col-start-4  overflow-hidden">
 									{nome.id_biglietto}
 								</p>
 								<form
