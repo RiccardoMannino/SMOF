@@ -1,7 +1,7 @@
 // app/api/create-checkout/route.ts
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { client } from "../../../sanity/lib/client";
+import { client, readClient } from "../../../sanity/lib/client";
 import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 		}
 
 		// Recupera i dati del biglietto da Sanity usando il tipo di biglietto specificato
-		const ticket = await client.fetch(
+		const ticket = await readClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{ 
         biglietto, 
         prezzo, 
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       }`,
 			{ ticketId, ticketType }
 		);
-		const singleTicket = await client.fetch(
+		const singleTicket = await readClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{ 
         biglietto->{
 				eventName
