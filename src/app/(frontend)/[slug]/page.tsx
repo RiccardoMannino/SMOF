@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -105,7 +107,7 @@ export default async function Page({
 										>
 											{partnerSingolo.immagine ? (
 												<Image
-													className=" hover:scale-105 transition-transform self-center p-2 max-sm:h-[12rem] object-contain"
+													className=" hover:scale-105 transition-transform self-center p-2 max-sm:h-48 object-contain"
 													src={urlFor(partnerSingolo?.immagine)
 														.maxWidth(200)
 														.minHeight(299)

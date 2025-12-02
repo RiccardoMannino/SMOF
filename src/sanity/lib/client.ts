@@ -5,7 +5,7 @@ import { apiVersion, dataset, projectId } from "../env";
 export const writeClient = createClient({
 	projectId,
 	dataset,
-	apiVersion,
+	apiVersion: apiVersion,
 	useCdn: false, // Necessario per scrivere
 	stega: { studioUrl: "https://smof.sanity.studio" },
 	token: process.env.SANITY_API_WRITE_TOKEN,
@@ -15,7 +15,7 @@ export const writeClient = createClient({
 export const readClient = createClient({
 	projectId,
 	dataset,
-	apiVersion,
+	apiVersion: apiVersion,
 	useCdn: true, // Veloce grazie alla CDN
 	stega: { studioUrl: "https://smof.sanity.studio" },
 	// Nessun token necessario per le letture pubbliche

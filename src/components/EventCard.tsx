@@ -25,7 +25,7 @@ export function EventCard(props: EVENTS_QUERYResult[0]) {
 				<CardHeader>
 					<CardTitle className="flex justify-between">
 						<h2 className="text-2xl sm:text-3xl  w-fit text-pretty  text-olive group-hover:text-chocolate transition-colors relative">
-							<span className="relative z-[1]">{eventName}</span>
+							<span className="relative z-1">{eventName}</span>
 							<span className="bg-mustard z-0 absolute inset-0 rounded-lg opacity-0 transition-all group-hover:opacity-100 group-hover:scale-y-110 group-hover:scale-x-105 scale-75" />
 						</h2>
 					</CardTitle>

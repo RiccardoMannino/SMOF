@@ -31,7 +31,7 @@ export default function Page() {
 							width={200}
 							alt="logo"
 							height={200}
-							className="max-sm:w-[160px] max-sm:h-[70px] max-sm:self-center mb-2"
+							className="max-sm:w-40 max-sm:h-[70px] max-sm:self-center mb-2"
 						/>
 						<div className="flex flex-col gap-3 font-medium">
 							<p>
