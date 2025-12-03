@@ -57,7 +57,7 @@ export default async function Page() {
 				</h1>
 				{/* Newsletter Section */}
 				<section className="my-20 flex justify-center">
-					<div className="bg-ivory p-5 rounded-2xl flex flex-col w-fit justify-center">
+					{/* <div className="bg-ivory p-5 rounded-2xl flex flex-col w-fit justify-center">
 						{session?.user?.email ? (
 							<NewsletterForm
 								context="home"
@@ -70,20 +70,20 @@ export default async function Page() {
 								aggiornato sui nostri eventi
 							</h1>
 						)}
-					</div>
+					</div> */}
 				</section>
 				{/* Video Section */}
-				{/* Event Section */}
+
 				<section className="my-20">
-					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
+					{/* <h1 className="text-2xl sm:text-3xl md:text-4xl mt-20 font-bold text-mustard ">
 						Eventi
 					</h1>
-					{/*Tutti gli eventi */}
+
 					<div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 gap-24 py-12 items-center place-items-center">
 						{eventi.map((event) => (
 							<EventCard key={event._id} {...event} />
 						))}
-					</div>
+					</div> */}
 				</section>
 				<div className="flex justify-center mb-20">
 					<InfiniteMovingCards image={partner} speed="slow" />

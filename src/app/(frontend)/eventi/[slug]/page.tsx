@@ -97,10 +97,11 @@ export default async function Page({
 							<span className="font-bold">Equipaggiamento:</span>{" "}
 							{evento?.equipaggiamento}
 						</p>
-						<p className="prose">
+						{/* da aggiungere succesivamente */}
+						{/* <p className="prose">
 							<span className="font-bold">Costo:</span> {evento.biglietto}€ per
 							persona
-						</p>
+						</p> */}
 						{/* TODO: aggiungere bottone di acquisto (se loggati) */}
 						{/* {session?.user?.email ? (
 							<button

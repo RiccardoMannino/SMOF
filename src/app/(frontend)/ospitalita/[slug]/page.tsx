@@ -31,7 +31,7 @@ export default async function Page({
 					/>
 				) : null}
 				{ospitalita?.descrizione ? (
-					<div className="bg-ivory p-4 rounded-2xl text-xl text-center  my-20">
+					<div className="bg-ivory p-4 rounded-2xl text-xl text-justify  my-20">
 						<PortableText
 							value={ospitalita?.descrizione}
 							components={components}

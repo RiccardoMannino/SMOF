@@ -153,7 +153,7 @@ export default async function Page({
 				</h1>
 
 				{page.contenuto && (
-					<p className="text-xl mb-10 sm:mb-3 sm:text-2xl lg:text-3xl lg:mb-20 max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5  whitespace-pre-line">
+					<p className="text-xl mb-10 sm:mb-3  lg:mb-20 max-md:text-center tracking-tight text-chocolate bg-ivory rounded-2xl p-5  whitespace-pre-line">
 						{page?.contenuto}
 					</p>
 				)}

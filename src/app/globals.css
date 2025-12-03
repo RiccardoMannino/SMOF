@@ -18,9 +18,6 @@
 @layer theme {
 	:root {
 		/* Font */
-		/* --font-family-cabin: "Cabin", sans-serif;
-		--font-family-nunito: "Nunito", sans-serif; */
-		--font-family-berlin: "Berlin Sans FB", sans-serif;
 		--font-family-verdana: "Verdana", sans-serif;
 	}
 }
@@ -32,7 +29,6 @@
 @layer base {
 	h1,
 	h2 {
-		font-family: var(--font-family-berlin);
 		font-weight: 400;
 	}
 
@@ -46,7 +42,6 @@
 	h5,
 	h6,
 	p {
-		font-family: var(--font-family-verdana);
 		font-weight: 400;
 	}
 }
