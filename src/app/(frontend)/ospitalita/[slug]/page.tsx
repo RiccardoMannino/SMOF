@@ -43,7 +43,7 @@ export default async function Page({
 											<Image
 												src={urlFor(value).auto("format").url()}
 												alt={value.alt || "immagine"}
-												className="float-right ml-8 mb-4 mr-2 w-2/4 rounded-lg"
+												className="md:float-right ml-8 mb-4 mr-2 w-2/4 max-md:w-full max-md:ml-0 rounded-lg "
 												width={1800}
 												height={680}
 											/>
@@ -51,7 +51,6 @@ export default async function Page({
 								},
 							}}
 						/>
-						<div className="clear-both" />
 					</div>
 				) : null}
 
