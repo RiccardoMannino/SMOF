@@ -21,7 +21,7 @@ export default async function Page({
 				<h3 className="text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10">
 					{ospitalita?.luogo}
 				</h3>
-				{ospitalita?.immagine ? (
+				{/* {ospitalita?.immagine ? (
 					<Image
 						src={urlFor(ospitalita?.immagine).auto("format").url()}
 						className="h-auto  object-cover rounded-lg gap-10"
@@ -29,13 +29,29 @@ export default async function Page({
 						height="480"
 						alt="thumbnail"
 					/>
-				) : null}
+				) : null} */}
 				{ospitalita?.descrizione ? (
-					<div className="bg-ivory p-4 rounded-2xl text-xl text-justify  my-20">
+					<div className="bg-ivory p-4 rounded-2xl text-xl text-justify my-20">
 						<PortableText
 							value={ospitalita?.descrizione}
-							components={components}
+							components={{
+								...components,
+								types: {
+									...(components as any).types,
+									image: ({ value }: any) =>
+										value ? (
+											<Image
+												src={urlFor(value).auto("format").url()}
+												alt={value.alt || "immagine"}
+												className="float-right ml-8 mb-4 mr-2 w-2/4 rounded-lg"
+												width={1800}
+												height={680}
+											/>
+										) : null,
+								},
+							}}
 						/>
+						<div className="clear-both" />
 					</div>
 				) : null}
 
