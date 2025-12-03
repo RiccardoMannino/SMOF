@@ -44,7 +44,7 @@ export async function Header() {
 		<header className=" flex flex-col items-center justify-between w-full pb-6 rounded-t-none rounded-b-lg bg-ivory ">
 			<div className="flex justify-end self-end w-full z-80">
 				<div className="flex gap-2.5 justify-between p-2 bg-forest/50 w-full text-ivory">
-					<div className="flex gap-2">
+					<div className="flex gap-2 items-center">
 						<Link
 							href={
 								"https://www.facebook.com/profile.php?id=61564533287297&sk=reels_tab"
@@ -82,8 +82,8 @@ export async function Header() {
 						</Link>
 					</div>
 					<div className="flex gap-2 items-center">
-						<span className="font-bold max-sm:text-xs flex self-center">
-							11 - 13 settembre 2026 |
+						<span className="font-bold max-sm:text-xs flex self-center max-[350px]:text-center">
+							11-12-13 settembre 2026
 						</span>
 						{session?.user?.email ? (
 							<>
