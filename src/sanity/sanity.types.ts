@@ -343,7 +343,7 @@ export type Eventi = {
   _updatedAt: string;
   _rev: string;
   eventName?: string;
-  eventType?: "Trekking" | "Trail" | "Yoga" | "Dog Trekking" | "Musica" | "Smof Grill";
+  eventType?: "Inaugurazione" | "Trekking" | "Trail" | "Yoga" | "Dog Trekking" | "Musica" | "Smof Grill";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
@@ -529,7 +529,7 @@ export type EVENTS_QUERYResult = Array<{
   data: string | null;
   slug: Slug | null;
   eventName: string | null;
-  eventType: "Dog Trekking" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
+  eventType: "Dog Trekking" | "Inaugurazione" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
   eventDescription: BlockContent | null;
   immagine: {
     asset?: {
@@ -685,7 +685,7 @@ export type EVENT_QUERYResult = {
   _id: string;
   eventName: string | null;
   specifiche: BlockContent | null;
-  eventType: "Dog Trekking" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
+  eventType: "Dog Trekking" | "Inaugurazione" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
   biglietto: number | null;
   immagine: {
     asset?: {

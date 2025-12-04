@@ -20,6 +20,7 @@ export const event = defineType({
 			type: "string",
 			options: {
 				list: [
+					"Inaugurazione",
 					"Trekking",
 					"Trail",
 					"Yoga",
@@ -41,7 +42,6 @@ export const event = defineType({
 			name: "equipaggiamento", // nome usato nella query
 			title: "Equipaggiamento", // titolo nell'editor
 			type: "string",
-			validation: (e) => e.required(),
 		}),
 		defineField({
 			name: "specifiche", // nome usato nella query

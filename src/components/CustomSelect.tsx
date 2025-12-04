@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import * as motion from "motion/react-client";
 import { dataGiornaliera } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
 import { EVENTS_QUERYResult } from "../sanity/sanity.types";
+import { ArrowBigDown, ArrowBigUp } from "lucide-react";
+import { AnimatePresence } from "motion/react";
 
 export function CustomSelect({
 	data,
@@ -14,6 +16,7 @@ export function CustomSelect({
 	eventi: EVENTS_QUERYResult;
 	data: string[];
 	tipo: (
+		| "Inaugurazione"
 		| "Dog Trekking"
 		| "Musica"
 		| "Smof Grill"
@@ -26,6 +29,7 @@ export function CustomSelect({
 	const validTypes = tipo.filter((t) => t !== null) as string[];
 
 	const [select, setSelect] = useState(data.at(0));
+	const [open, setOpen] = useState(false);
 
 	const [type, setType] = useState(
 		validTypes.reduce(
@@ -83,24 +87,47 @@ export function CustomSelect({
 					))}
 				</div>
 			</div>
-			<div className="flex max-md:flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
-				<p className=" ">Tipo evento</p>
+			<div className="flex flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
+				<div
+					onClick={() => setOpen(!open)}
+					className="flex gap-2 hover:cursor-pointer"
+				>
+					<p className=" ">Seleziona tipo evento</p>
+					<motion.button
+						animate={{ rotate: !open ? 0 : 180 }}
+						transition={{ duration: 0.5, delay: 0 }}
+						className="flex gap-2"
+					>
+						{open ? <ArrowBigUp /> : <ArrowBigDown />}
+					</motion.button>
+				</div>
 
-				{tipo.map((t, idx) => (
-					<div key={idx} className="flex items-center gap-1">
-						<input
-							className="accent-chocolate hover:cursor-pointer"
-							key={idx}
-							type="checkbox"
-							checked={type[t as string]}
-							onChange={() => handleTypeChange(t as string)}
-							value={t as string}
-							name={t as string}
-							id={`checkbox-${t}`}
-						/>
-						<label htmlFor={`checkbox-${t}`}>{t}</label>
-					</div>
-				))}
+				<AnimatePresence>
+					{open && (
+						<motion.div
+							initial={{ opacity: 0, y: -20 }}
+							exit={{ opacity: 0, y: -20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.3 }}
+							className="flex flex-col items-center gap-1 relative group"
+						>
+							{tipo.map((t, idx) => (
+								<div key={idx} className="flex gap-2">
+									<input
+										className="accent-chocolate hover:cursor-pointer"
+										type="checkbox"
+										checked={type[t as string]}
+										onChange={() => handleTypeChange(t as string)}
+										value={t as string}
+										name={t as string}
+										id={`checkbox-${t}`}
+									/>
+									<label htmlFor={`checkbox-${t}`}>{t}</label>
+								</div>
+							))}
+						</motion.div>
+					)}
+				</AnimatePresence>
 			</div>
 			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-10">
 				{/* Eventi filtrabili */}

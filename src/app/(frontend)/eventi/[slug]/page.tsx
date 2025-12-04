@@ -93,10 +93,12 @@ export default async function Page({
 							<span className="font-bold">Punto Raduno:</span>
 							{evento?.raduno}
 						</p>
-						<p className="prose">
-							<span className="font-bold">Equipaggiamento:</span>{" "}
-							{evento?.equipaggiamento}
-						</p>
+						{evento.equipaggiamento && (
+							<p className="prose">
+								<span className="font-bold">Equipaggiamento:</span>{" "}
+								{evento?.equipaggiamento}
+							</p>
+						)}
 						{/* TODO: aggiungere bottone di acquisto (se loggati) */}
 						{/* da aggiungere succesivamente */}
 						{/* <p className="prose">

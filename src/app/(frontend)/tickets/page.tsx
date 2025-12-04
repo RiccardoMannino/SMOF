@@ -85,7 +85,11 @@ export default async function page() {
 			<h1 className="text-2xl max-sm:text-center  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
 				Informazioni Ticket
 			</h1>
-			<div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
+
+			<p className="mt-28 text-2xl text-mustard">
+				Ticket non disponibili al momento
+			</p>
+			{/* <div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
 				<h1 className="text-center text-3xl sm:text-4xl mb-6">
 					Tipi di ticket
 				</h1>
@@ -171,10 +175,9 @@ export default async function page() {
 						</CardFooter>
 					</Card>
 				</div>
-			</div>
+			</div> */}
 
-			{/* Ticket Giornalieri */}
-			{sessione?.user?.email ? (
+			{/* {sessione?.user?.email ? (
 				<>
 					<section className="max-w-4xl mx-auto my-10 p-8">
 						<h1 className="text-3xl font-bold text-mustard text-center mb-6">
@@ -228,13 +231,11 @@ export default async function page() {
 						</div>
 					</section>
 
-					{/* Ticket Festival */}
 					<section className="max-w-4xl mx-auto my-10 p-8">
 						<h1 className="text-3xl font-bold text-mustard mb-6 text-center">
 							Biglietto Festival
 						</h1>
 
-						{/* Visto che è un singolo ticket non lo mappiamo */}
 						{tickets.festTicket && (
 							<div className="grid gap-8 md:grid-cols-2">
 								<div className="bg-ivory shadow-md rounded-lg p-6 border border-chocolate/20">
@@ -258,7 +259,7 @@ export default async function page() {
 				<p className="text-center text-mustard text-2xl">
 					Accedi per poter visionare i biglietti disponibili
 				</p>
-			)}
+			)} */}
 		</main>
 	);
 }
