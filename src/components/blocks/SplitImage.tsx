@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from "../../sanity/lib/image";
-import { PAGE_QUERYResult } from "../../sanity/types";
+import { PAGE_QUERYResult } from "../../sanity/sanity.types";
 import { stegaClean } from "next-sanity";
 import { components } from "../../sanity/portableTextComponent";
 import { PortableText } from "next-sanity";

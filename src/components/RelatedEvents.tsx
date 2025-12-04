@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { createDataAttribute } from "next-sanity";
-import { EVENT_QUERYResult } from "../sanity/types";
+import { EVENT_QUERYResult } from "../sanity/sanity.types";
 import { client } from "../sanity/lib/client";
 import { useOptimistic } from "next-sanity/hooks";
 

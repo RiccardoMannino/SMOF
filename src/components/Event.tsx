@@ -1,7 +1,7 @@
 // import { Speaker } from "@/components/Speaker";
 import { components } from "../sanity/portableTextComponent";
 import { PortableText } from "next-sanity";
-import { EVENT_QUERYResult } from "../sanity/types";
+import { EVENT_QUERYResult } from "../sanity/sanity.types";
 
 import { Title } from "@/components/Title";
 import { urlFor } from "../sanity/lib/image";

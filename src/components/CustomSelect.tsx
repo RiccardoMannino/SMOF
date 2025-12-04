@@ -4,7 +4,7 @@ import React from "react";
 import { dataGiornaliera } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
-import { EVENTS_QUERYResult } from "../sanity/types";
+import { EVENTS_QUERYResult } from "../sanity/sanity.types";
 
 export function CustomSelect({
 	data,

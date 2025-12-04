@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PAGE_QUERYResult } from "../../sanity/types";
+import { PAGE_QUERYResult } from "../../sanity/sanity.types";
 import { urlFor } from "../../sanity/lib/image";
 import Image from "next/image";
 import { motion } from "motion/react";

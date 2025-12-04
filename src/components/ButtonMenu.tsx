@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { User2Icon, LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
-import { LIST_PAGE_QUERYResult } from "../sanity/types";
+import { LIST_PAGE_QUERYResult } from "../sanity/sanity.types";
 
 import { Session } from "next-auth";
 import Image from "next/image";

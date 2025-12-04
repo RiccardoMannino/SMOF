@@ -4,7 +4,7 @@ import { Hero } from "@/components/blocks/Hero";
 import { Features } from "@/components/blocks/Features";
 import { SplitImage } from "@/components/blocks/SplitImage";
 import { FAQs } from "@/components/blocks/FAQs";
-import { PAGE_QUERYResult } from "../sanity/types";
+import { PAGE_QUERYResult } from "../sanity/sanity.types";
 import { client, readClient } from "../sanity/lib/client";
 import { createDataAttribute } from "next-sanity";
 import { useOptimistic } from "next-sanity/hooks";
