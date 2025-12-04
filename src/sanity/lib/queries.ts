@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 export const EVENTS_QUERY =
 	defineQuery(`*[_type == 'eventi' && defined(slug.current)][0...120]
     {
-  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{
+  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{
     speakerName,
     speakerImage
   }}`);
