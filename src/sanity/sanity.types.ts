@@ -523,7 +523,7 @@ export type AllSanitySchemaTypes = Ospitalita | BlockContent | SanityImageCrop |
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
-// Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
+// Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
 export type EVENTS_QUERYResult = Array<{
   _id: string;
   data: string | null;
@@ -973,7 +973,7 @@ export type HOME_PAGE_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto ,equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
+    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
     "*[_type == \"biglietto\"]{\n  _id , prezzo, quantita , biglietto ,\n}": TICKET_QUERYResult;
     "*[type == \"giornaliero\"]{\n  prezzo , quantita, bigliettoGiorno\n}": DAILY_TICKET_QUERYResult;
     "*[type == \"festival\"]{\n  prezzo, quantita, biglietto \n}": FESTIVAL_TICKET_QUERYResult;
