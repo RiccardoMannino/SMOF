@@ -1572,6 +1572,14 @@
         },
         "optional": true
       },
+      "descrizione": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "blockContent"
+        },
+        "optional": true
+      },
       "slug": {
         "type": "objectAttribute",
         "value": {
@@ -1950,15 +1958,27 @@
           "of": [
             {
               "type": "string",
-              "value": "escursione"
+              "value": "Trekking"
             },
             {
               "type": "string",
-              "value": "conferenza"
+              "value": "Trail"
             },
             {
               "type": "string",
-              "value": "yoga"
+              "value": "Yoga"
+            },
+            {
+              "type": "string",
+              "value": "Dog Trekking"
+            },
+            {
+              "type": "string",
+              "value": "Musica"
+            },
+            {
+              "type": "string",
+              "value": "Smof Grill"
             }
           ]
         },

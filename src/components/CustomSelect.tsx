@@ -13,7 +13,15 @@ export function CustomSelect({
 }: {
 	eventi: EVENTS_QUERYResult;
 	data: string[];
-	tipo: ("conferenza" | "escursione" | "yoga" | null)[];
+	tipo: (
+		| "Dog Trekking"
+		| "Musica"
+		| "Smof Grill"
+		| "Trail"
+		| "Trekking"
+		| "Yoga"
+		| null
+	)[];
 }) {
 	const validTypes = tipo.filter((t) => t !== null) as string[];
 

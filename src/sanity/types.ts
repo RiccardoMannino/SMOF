@@ -276,6 +276,7 @@ export type Page = {
   title?: string;
   intestazione?: string;
   contenuto?: string;
+  descrizione?: BlockContent;
   slug?: Slug;
   content?: PageBuilder;
   mainImage?: {
@@ -342,7 +343,7 @@ export type Eventi = {
   _updatedAt: string;
   _rev: string;
   eventName?: string;
-  eventType?: "escursione" | "conferenza" | "yoga";
+  eventType?: "Trekking" | "Trail" | "Yoga" | "Dog Trekking" | "Musica" | "Smof Grill";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
@@ -528,7 +529,7 @@ export type EVENTS_QUERYResult = Array<{
   data: string | null;
   slug: Slug | null;
   eventName: string | null;
-  eventType: "conferenza" | "escursione" | "yoga" | null;
+  eventType: "Dog Trekking" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
   eventDescription: BlockContent | null;
   immagine: {
     asset?: {
@@ -684,7 +685,7 @@ export type EVENT_QUERYResult = {
   _id: string;
   eventName: string | null;
   specifiche: BlockContent | null;
-  eventType: "conferenza" | "escursione" | "yoga" | null;
+  eventType: "Dog Trekking" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
   biglietto: number | null;
   immagine: {
     asset?: {
@@ -745,8 +746,9 @@ export type SINGLE_AUTH_USERResult = {
   email: string | null;
 } | null;
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  mainImage ,...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
+// Query: *[_type == "page" && slug.current == $slug][0]{ descrizione[]{  ..., },  mainImage ,...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
 export type PAGE_QUERYResult = {
+  descrizione?: BlockContent;
   mainImage?: {
     asset?: {
       _ref: string;
@@ -871,6 +873,7 @@ export type HOME_PAGE_QUERYResult = {
     title?: string;
     intestazione?: string;
     contenuto?: string;
+    descrizione?: BlockContent;
     slug?: Slug;
     content: Array<{
       _key: string;
@@ -983,7 +986,7 @@ declare module "@sanity/client" {
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
     "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;
     "*[_type == \"user\" && uid == $uid][0]{\n    email\n  }": SINGLE_AUTH_USERResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n  mainImage ,...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n descrizione[]{\n  ...,\n }, \n mainImage ,...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
     "\n  *[_type == \"page\"]\n  {\n    title,\n    ordine,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, ordine asc)\n": LIST_PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;
   }

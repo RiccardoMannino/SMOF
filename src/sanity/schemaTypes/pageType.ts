@@ -20,6 +20,10 @@ export const pageType = defineType({
 			type: "text",
 		}),
 		defineField({
+			name: "descrizione",
+			type: "blockContent",
+		}),
+		defineField({
 			name: "slug",
 			type: "slug",
 			options: {

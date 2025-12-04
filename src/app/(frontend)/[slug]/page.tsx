@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -12,6 +13,8 @@ import { PageBuilder } from "@/components/PageBuilder";
 import { CustomSelect } from "@/components/CustomSelect";
 import { dataGiornaliera } from "@/lib/date";
 import { ArrowBigLeft } from "lucide-react";
+import { PortableText } from "next-sanity";
+import { components } from "@/sanity/portableTextComponent";
 
 export default async function Page({
 	params,
@@ -157,6 +160,29 @@ export default async function Page({
 						{page?.contenuto}
 					</p>
 				)}
+				{page?.descrizione ? (
+					<div className="bg-ivory p-4 rounded-2xl text-xl text-justify my-20  whitespace-pre-line">
+						<PortableText
+							value={page?.descrizione}
+							components={{
+								...components,
+								types: {
+									...(components as any).types,
+									image: ({ value }: any) =>
+										value ? (
+											<Image
+												src={urlFor(value).auto("format").url()}
+												alt={value.alt || "immagine"}
+												className="md:float-right ml-8 mb-4 mr-2 w-2/4 max-md:w-full max-md:ml-0 rounded-lg"
+												width={1800}
+												height={680}
+											/>
+										) : null,
+								},
+							}}
+						/>
+					</div>
+				) : null}
 			</section>
 			{page.content ? (
 				<PageBuilder

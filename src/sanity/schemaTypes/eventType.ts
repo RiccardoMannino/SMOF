@@ -19,7 +19,14 @@ export const event = defineType({
 			title: "Tipo Evento", // titolo nell'editor
 			type: "string",
 			options: {
-				list: ["escursione", "conferenza", "yoga"], // tipo evento
+				list: [
+					"Trekking",
+					"Trail",
+					"Yoga",
+					"Dog Trekking",
+					"Musica",
+					"Smof Grill",
+				], // tipo evento
 				layout: "dropdown",
 			},
 			validation: (e) => e.required(),

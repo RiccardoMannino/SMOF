@@ -78,7 +78,10 @@ export const SINGLE_AUTH_USER =
 
 export const PAGE_QUERY =
 	defineQuery(`*[_type == "page" && slug.current == $slug][0]{
-  mainImage ,...,
+ descrizione[]{
+  ...,
+ }, 
+ mainImage ,...,
   content[]{
     ...,
     _type == "faqs" => {
