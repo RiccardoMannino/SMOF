@@ -89,7 +89,7 @@ export function Hero({ images, text }: HeroProps) {
 							initial={{ transform: "translateX(-300px)" }}
 							animate={{ transform: "translateX(0px)" }}
 							transition={{ type: "spring" }}
-							className="max-[360px]:text-[13px] min-[400px]:text-xl max-lg:text-center mb-7 md:text-4xl lg:text-5xl xl:text-7xl whitespace-pre-line tracking-tight text-mustard font-bold lg:mr-2 max-md:mb-3.5"
+							className="max-[360px]:text-[13px] min-[400px]:text-xl max-lg:text-center mb-7 md:text-4xl lg:text-5xl xl:text-7xl whitespace-pre-line tracking-tight text-mustard font-bold lg:mr-2 max-md:mb-3.5 items-center"
 						>
 							{text.toUpperCase()}
 						</motion.h1>
@@ -105,7 +105,7 @@ export function Hero({ images, text }: HeroProps) {
 					onMouseLeave={() => {
 						setHover(false);
 					}}
-					className={`flex mb-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl max-md:row-start-2 max-md:row-end-2 mt-8`}
+					className={`flex mb-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl max-md:row-start-2 max-md:row-end-2 max-md:mt-8`}
 				>
 					{images.map((image) => (
 						<motion.div
