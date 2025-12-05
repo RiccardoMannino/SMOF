@@ -1,25 +1,47 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "motion/react";
-import { User2Icon, LogOutIcon } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-
-import { LIST_PAGE_QUERYResult } from "../sanity/sanity.types";
+import { ArrowDown } from "lucide-react";
+import {
+	LIST_PAGE_QUERYResult,
+	OSPITALITA_QUERYResult,
+} from "../sanity/sanity.types";
 
 import { Session } from "next-auth";
 import Image from "next/image";
 
 type PageProps = LIST_PAGE_QUERYResult;
+type OspitalitaProps = OSPITALITA_QUERYResult;
 
 export default function ButtonMenu({
 	list,
+	ospitalita,
 	session,
 }: {
 	list: PageProps;
+	ospitalita: OspitalitaProps;
 	session: Session | null;
 }) {
 	const [open, setOpen] = useState(false);
+	const [isSelected, setIsSelected] = useState(false);
+	const [indice, setIndice] = useState<string | null>(null);
+
+	function handleSelect(index: string) {
+		setIndice(index);
+		setIsSelected(true);
+
+		if (indice === index && isSelected) {
+			setIsSelected(!isSelected);
+		}
+	}
+
+	function handleOpenClose() {
+		setOpen(!open);
+		setIndice(null);
+		setIsSelected(false);
+	}
 
 	return (
 		<>
@@ -40,7 +62,7 @@ export default function ButtonMenu({
 					</Link>
 					<motion.button
 						className={`z-60 rounded hover:cursor-pointer hidden max-[899px]:flex `}
-						onClick={() => setOpen(!open)}
+						onClick={handleOpenClose}
 					>
 						<motion.svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +116,7 @@ export default function ButtonMenu({
 				}}
 			>
 				<motion.ul
+					role="list"
 					initial={false}
 					animate={open ? "open" : "closed"}
 					variants={{
@@ -127,18 +150,57 @@ export default function ButtonMenu({
 							}}
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.95 }}
-							className="w-fit rounded-md p-1 text-xl font-medium text-chocolate transition-colors duration-700  hover:text-rust "
+							className="w-fit rounded-md p-1 text-xl font-medium text-chocolate group relative transition-colors duration-700  hover:text-rust "
 							key={link.slug}
 						>
-							{link.slug ? (
+							{link.title === "Ospitalità" ? (
+								<div
+									className={"flex gap-2 justify-center "}
+									onClick={() => handleSelect(link._id)}
+								>
+									{/* <p>{link.title}</p>
+									 */}
+									{link.title}
+									<motion.button
+										animate={{
+											rotate: isSelected && link._id === indice ? 180 : 0,
+										}}
+										transition={{ duration: 0.5, delay: 0 }}
+									>
+										<ArrowDown />
+									</motion.button>
+								</div>
+							) : (
 								<Link
-									href={link?.slug.toString()}
+									href={link?.slug as string}
 									onClick={() => setOpen(false)}
 									className=""
 								>
 									{link.title}
 								</Link>
-							) : null}
+							)}
+							<AnimatePresence>
+								{isSelected && link._id === indice && (
+									<motion.div
+										className={` ${(isSelected && indice === link._id && "group-hover:flex flex-col overflow-y-scroll") || "hidden"}  rounded-md w-fit self-center border border-white mt-3 max-h-48 `}
+										transition={{ duration: 0.3 }}
+										initial={{ opacity: 0, y: -20 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: -20 }}
+									>
+										{ospitalita.map((el) => (
+											<Link
+												key={el._id}
+												href={`/ospitalita/${el.slug?.current}`}
+												className="hover:text-rust transition-colors font-semibold flex flex-col text-center relative"
+												onClick={() => setOpen(false)}
+											>
+												<motion.h6 className=" my-2">{el.luogo}</motion.h6>
+											</Link>
+										))}
+									</motion.div>
+								)}
+							</AnimatePresence>
 						</motion.li>
 					))}
 				</motion.ul>
