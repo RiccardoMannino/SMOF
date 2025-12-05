@@ -172,7 +172,7 @@ export default function ButtonMenu({
 								</div>
 							) : (
 								<Link
-									href={link?.slug as string}
+									href={`/${link?.slug}`}
 									onClick={() => setOpen(false)}
 									className=""
 								>
