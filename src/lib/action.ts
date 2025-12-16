@@ -201,6 +201,63 @@ export async function deleteSingleItem(email: string, item: number) {
 	revalidatePath("/carrello");
 }
 
+export async function aggiungiQuantita(
+	email: string | null | undefined,
+	updateFields: nuovoOggetto,
+	id_biglietto: string,
+	quantita: number
+) {
+	// Recupera l'oggetto esistente se presente
+	const { data, error } = await supabase
+		.from("oggetti_carrello")
+		.select("quantita")
+		.eq("email", email)
+		.eq("id_biglietto", id_biglietto);
+
+	if (error) {
+		throw new Error("Errore nella lettura del carrello");
+	}
+
+	// variabile creata per la visualizzazione del toast
+	let resultMessage = "";
+
+	if (data && data.length >= 0) {
+		// L'oggetto esiste già: aggiorno la quantità
+		const nuovaQuantita = data[0]?.quantita + 1;
+		const nuovoUpdateFields = { ...updateFields, quantita: nuovaQuantita };
+
+		//aggiorna la quantità del carrello
+		const { error: updateError } = await supabase
+			.from("oggetti_carrello")
+			.update(nuovoUpdateFields)
+			.eq("email", email)
+			.eq("id_biglietto", id_biglietto)
+			.select();
+
+		if (updateError) {
+			throw new Error("Errore nell'aggiornamento della quantità");
+		}
+
+		resultMessage = "Quantità biglietto aggiornata con successo! 🛒";
+	} else {
+		//altrimenti se l'oggetto non esiste: inserisco come nuovo elemento
+		const { error: insertError } = await supabase
+			.from("oggetti_carrello")
+			.insert(updateFields);
+
+		if (insertError) {
+			throw new Error("Errore nell'inserimento nuovo oggetto");
+		}
+
+		resultMessage = "Biglietto aggiunto al carrello! 🎉";
+	}
+
+	revalidatePath("/carrello");
+	revalidatePath("/ticket");
+
+	return { data, message: resultMessage };
+}
+
 export async function signInAction() {
 	await signIn("google", { redirectTo: "/utente" });
 }

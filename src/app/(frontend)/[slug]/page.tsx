@@ -165,9 +165,12 @@ export default async function Page({
 						<PortableText
 							value={page?.descrizione}
 							components={{
+								// tutto components
 								...components,
 								types: {
+									//tutto components types
 									...(components as any).types,
+									// sostituisce il componente del tipo image con questo
 									image: ({ value }: any) =>
 										value ? (
 											<Image

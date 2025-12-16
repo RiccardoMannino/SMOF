@@ -12,6 +12,7 @@ type Carrello = { carrello: OggettoCarrello[] };
 type AzioniCarrello = {
 	aggiungiArticolo: (articleData: OggettoCarrello) => void;
 	eliminaArticolo: (articleData: OggettoCarrello) => void;
+	incrementaQuantita?: (articleData: OggettoCarrello) => void;
 	svuotaCarrello: (carrello: OggettoCarrello[]) => void;
 };
 
