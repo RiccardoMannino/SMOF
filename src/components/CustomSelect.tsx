@@ -72,8 +72,8 @@ export function CustomSelect({
 
 	return (
 		<>
-			<div className="flex max-[440px]:flex-col max-[440px]:gap-5 w-full gap-3">
-				<div className="flex gap-2 self-center bg-ivory p-6 rounded-2xl w-full justify-around">
+			<div className="flex  w-full gap-3">
+				<div className="flex max-[440px]:flex-col max-[440px]:gap-5 gap-2 self-center bg-ivory p-6 rounded-2xl w-full justify-around">
 					{data.map((d, idx) => (
 						<button
 							key={idx}
