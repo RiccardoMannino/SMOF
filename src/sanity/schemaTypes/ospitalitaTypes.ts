@@ -32,5 +32,11 @@ export const ospitalita = defineType({
 			type: "blockContent",
 			validation: (e) => e.required(),
 		}),
+		defineField({
+			name: "bedAndBreakfast",
+			title: "Lista B&B",
+			type: "array",
+			of: [{ type: "reference", to: [{ type: "dormire" }] }],
+		}),
 	],
 });

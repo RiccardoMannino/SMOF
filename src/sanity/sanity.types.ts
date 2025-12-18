@@ -13,6 +13,18 @@
  */
 
 // Source: schema.json
+export type Dormire = {
+  _id: string;
+  _type: "dormire";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  denominazione?: string;
+  indirizzo?: string;
+  contatti?: string;
+  web?: string;
+};
+
 export type Ospitalita = {
   _id: string;
   _type: "ospitalita";
@@ -34,6 +46,13 @@ export type Ospitalita = {
     _type: "image";
   };
   descrizione?: BlockContent;
+  bedAndBreakfast?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "dormire";
+  }>;
 };
 
 export type BlockContent = Array<{
@@ -519,7 +538,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Ospitalita | BlockContent | SanityImageCrop | SanityImageHotspot | Slug | Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Navbar | Speaker | Eventi | Partner | User | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Dormire | Ospitalita | BlockContent | SanityImageCrop | SanityImageHotspot | Slug | Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Navbar | Speaker | Eventi | Partner | User | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
@@ -641,7 +660,7 @@ export type SINGLE_GALLERY_QUERYResult = {
   titolo: string | null;
 } | null;
 // Variable: SINGLE_OSPITALITA_QUERY
-// Query: *[_type == "ospitalita" && slug.current == $slug][0]{  _id , immagine , luogo , descrizione }
+// Query: *[_type == "ospitalita" && slug.current == $slug][0]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }}
 export type SINGLE_OSPITALITA_QUERYResult = {
   _id: string;
   immagine: {
@@ -658,9 +677,15 @@ export type SINGLE_OSPITALITA_QUERYResult = {
   } | null;
   luogo: string | null;
   descrizione: BlockContent | null;
+  bedAndBreakfast: Array<{
+    denominazione: string | null;
+    indirizzo: string | null;
+    contatti: string | null;
+    web: string | null;
+  }> | null;
 } | null;
 // Variable: OSPITALITA_QUERY
-// Query: *[_type == "ospitalita" && defined(slug.current)]{  _id , immagine , luogo , descrizione , slug}
+// Query: *[_type == "ospitalita" && defined(slug.current)]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }, slug , }
 export type OSPITALITA_QUERYResult = Array<{
   _id: string;
   immagine: {
@@ -677,6 +702,12 @@ export type OSPITALITA_QUERYResult = Array<{
   } | null;
   luogo: string | null;
   descrizione: BlockContent | null;
+  bedAndBreakfast: Array<{
+    denominazione: string | null;
+    indirizzo: string | null;
+    contatti: string | null;
+    web: string | null;
+  }> | null;
   slug: Slug | null;
 }>;
 // Variable: EVENT_QUERY
@@ -980,8 +1011,8 @@ declare module "@sanity/client" {
     "*[_type == \"partner\" ]{\n  _id ,nome , tipo, link ,immagine\n}": PARTNER_QUERYResult;
     "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
-    "*[_type == \"ospitalita\" && slug.current == $slug][0]{\n  _id , immagine , luogo , descrizione \n}": SINGLE_OSPITALITA_QUERYResult;
-    "*[_type == \"ospitalita\" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , slug\n}": OSPITALITA_QUERYResult;
+    "*[_type == \"ospitalita\" && slug.current == $slug][0]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }\n}": SINGLE_OSPITALITA_QUERYResult;
+    "*[_type == \"ospitalita\" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}": OSPITALITA_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
     "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;

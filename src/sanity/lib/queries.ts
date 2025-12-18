@@ -38,11 +38,21 @@ export const SINGLE_GALLERY_QUERY =
 }`);
 export const SINGLE_OSPITALITA_QUERY =
 	defineQuery(`*[_type == "ospitalita" && slug.current == $slug][0]{
-  _id , immagine , luogo , descrizione 
+  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{
+    denominazione,
+    indirizzo,
+    contatti,
+    web
+  }
 }`);
 export const OSPITALITA_QUERY =
 	defineQuery(`*[_type == "ospitalita" && defined(slug.current)]{
-  _id , immagine , luogo , descrizione , slug
+  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{
+    denominazione,
+    indirizzo,
+    contatti,
+    web
+  }, slug , 
 }`);
 
 export const EVENT_QUERY =

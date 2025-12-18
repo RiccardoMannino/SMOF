@@ -54,7 +54,7 @@ export default async function Page({
 					</div>
 				) : null}
 
-				{ospitalita?.luogo === "San Martino delle Scale " ? (
+				{ospitalita?.luogo === "San Martino delle Scale " && (
 					<iframe
 						className="w-full h-80 rounded-2xl"
 						src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=it&amp;q=San%20Martino%20delle%20Scale+(SMOF)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
@@ -62,7 +62,8 @@ export default async function Page({
 						allowFullScreen
 						title="Mappa SMOF"
 					/>
-				) : (
+				)}
+				{ospitalita?.luogo === " Monreale" && (
 					<iframe
 						className="w-full h-80 rounded-2xl"
 						width="100%"
