@@ -39,8 +39,7 @@ export default async function Page({
 				<h3
 					className={`${ospitalita?.luogo === "Dove Dormire" && "hidden "} text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10`}
 				>
-					{ospitalita?.luogo === "San Martino delle Scale" ||
-						(ospitalita?.luogo === "Monreale" && ospitalita.luogo)}
+					{ospitalita?.luogo}
 				</h3>
 				{/* {ospitalita?.immagine ? (
 					<Image
@@ -84,7 +83,7 @@ export default async function Page({
 						title="Mappa SMOF"
 					/>
 				)}
-				{ospitalita?.luogo === " Monreale" && (
+				{ospitalita?.luogo === "Monreale" && (
 					<iframe
 						className="w-full h-80 rounded-2xl"
 						width="100%"
@@ -117,7 +116,9 @@ export default async function Page({
 							<TableBody>
 								{dormire.map((dorm) => (
 									<TableRow className="text-lg" key={dorm.denominazione}>
-										<TableCell className="p-4">{dorm.denominazione}</TableCell>
+										<TableCell className="p-4 font-semibold">
+											{dorm.denominazione}
+										</TableCell>
 										<TableCell className="whitespace-pre-line p-4">
 											{dorm.contatti}
 										</TableCell>
