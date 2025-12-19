@@ -1,9 +1,22 @@
 import Image from "next/image";
 import { urlFor } from "../../../../sanity/lib/image";
 import { sanityFetch } from "../../../../sanity/lib/live";
-import { SINGLE_OSPITALITA_QUERY } from "../../../../sanity/lib/queries";
+import {
+	DORMIRE_QUERY,
+	SINGLE_OSPITALITA_QUERY,
+} from "../../../../sanity/lib/queries";
 import { PortableText } from "next-sanity";
 import { components } from "@/sanity/portableTextComponent";
+import {
+	Table,
+	TableBody,
+	TableCaption,
+	TableCell,
+	TableFooter,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/Table";
 
 export default async function Page({
 	params,
@@ -15,11 +28,19 @@ export default async function Page({
 		params: await params,
 	});
 
+	const { data: dormire } = await sanityFetch({
+		query: DORMIRE_QUERY,
+		params: await params,
+	});
+
 	return (
 		<div className="flex flex-col items-center justify-center  gap-5 w-full">
 			<div className="container mx-auto flex flex-col max-sm:p-6  p-10 text-chocolate">
-				<h3 className="text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10">
-					{ospitalita?.luogo}
+				<h3
+					className={`${ospitalita?.luogo === "Dove Dormire" && "hidden "} text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10`}
+				>
+					{ospitalita?.luogo === "San Martino delle Scale" ||
+						(ospitalita?.luogo === "Monreale" && ospitalita.luogo)}
 				</h3>
 				{/* {ospitalita?.immagine ? (
 					<Image
@@ -70,6 +91,43 @@ export default async function Page({
 						height="600"
 						src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Monreale+(SMOF)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
 					/>
+				)}
+
+				{(await params).slug === "dove-dormire" && (
+					<>
+						<h1
+							className={` text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-10 mb-20`}
+						>
+							Ospitalità
+						</h1>
+						<h2 className="text-center text-2xl max-sm:text-center md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty  mb-10">
+							{ospitalita?.luogo}
+						</h2>
+						<Table className="bg-ivory rounded-2xl p-4">
+							<TableHeader>
+								<TableRow className="text-lg">
+									<TableHead className="font-semibold p-4">
+										Denominazione
+									</TableHead>
+									<TableHead className="font-semibold p-4">Contatti</TableHead>
+									<TableHead className="font-semibold p-4">Indirizzo</TableHead>
+									<TableHead className="font-semibold p-4">Web</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{dormire.map((dorm) => (
+									<TableRow className="text-lg" key={dorm.denominazione}>
+										<TableCell className="p-4">{dorm.denominazione}</TableCell>
+										<TableCell className="whitespace-pre-line p-4">
+											{dorm.contatti}
+										</TableCell>
+										<TableCell className="p-4">{dorm.indirizzo}</TableCell>
+										<TableCell className="p-4">{dorm.web}</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</>
 				)}
 			</div>
 		</div>

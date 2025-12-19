@@ -18,7 +18,7 @@ export const dormireType = defineType({
 		defineField({
 			name: "contatti",
 			title: "Contatti",
-			type: "string",
+			type: "text",
 		}),
 		defineField({
 			name: "web",

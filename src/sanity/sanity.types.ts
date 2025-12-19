@@ -684,6 +684,22 @@ export type SINGLE_OSPITALITA_QUERYResult = {
     web: string | null;
   }> | null;
 } | null;
+// Variable: SINGLE_DORMIRE_QUERY
+// Query: *[_type == "dormire" && slug.current == $slug][0]{  denominazione, indirizzo, contatti, web}
+export type SINGLE_DORMIRE_QUERYResult = {
+  denominazione: string | null;
+  indirizzo: string | null;
+  contatti: string | null;
+  web: string | null;
+} | null;
+// Variable: DORMIRE_QUERY
+// Query: *[_type == "dormire"]{  denominazione, indirizzo, contatti, web}
+export type DORMIRE_QUERYResult = Array<{
+  denominazione: string | null;
+  indirizzo: string | null;
+  contatti: string | null;
+  web: string | null;
+}>;
 // Variable: OSPITALITA_QUERY
 // Query: *[_type == "ospitalita" && defined(slug.current)]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }, slug , }
 export type OSPITALITA_QUERYResult = Array<{
@@ -1012,6 +1028,8 @@ declare module "@sanity/client" {
     "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
     "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
     "*[_type == \"ospitalita\" && slug.current == $slug][0]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }\n}": SINGLE_OSPITALITA_QUERYResult;
+    "*[_type == \"dormire\" && slug.current == $slug][0]{\n  denominazione, indirizzo, contatti, web\n}": SINGLE_DORMIRE_QUERYResult;
+    "*[_type == \"dormire\"]{\n  denominazione, indirizzo, contatti, web\n}": DORMIRE_QUERYResult;
     "*[_type == \"ospitalita\" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}": OSPITALITA_QUERYResult;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
     "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;

@@ -30,7 +30,6 @@ export const ospitalita = defineType({
 			name: "descrizione", // nome usato nella query
 			title: "Descrizione località", // titolo nell'editor
 			type: "blockContent",
-			validation: (e) => e.required(),
 		}),
 		defineField({
 			name: "bedAndBreakfast",

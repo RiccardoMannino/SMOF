@@ -45,6 +45,14 @@ export const SINGLE_OSPITALITA_QUERY =
     web
   }
 }`);
+
+export const SINGLE_DORMIRE_QUERY =
+	defineQuery(`*[_type == "dormire" && slug.current == $slug][0]{
+  denominazione, indirizzo, contatti, web
+}`);
+export const DORMIRE_QUERY = defineQuery(`*[_type == "dormire"]{
+  denominazione, indirizzo, contatti, web
+}`);
 export const OSPITALITA_QUERY =
 	defineQuery(`*[_type == "ospitalita" && defined(slug.current)]{
   _id , immagine , luogo , descrizione , bedAndBreakfast[]->{
