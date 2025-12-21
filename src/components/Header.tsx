@@ -70,7 +70,10 @@ export async function Header() {
 								alt="link Instagram"
 							/>
 						</Link>
-						<Link href={""} target="_blank">
+						<Link
+							href={"https://www.youtube.com/@Sanmartinooutdoorfest"}
+							target="_blank"
+						>
 							<Image
 								src={YoutubeWhite}
 								height={25}

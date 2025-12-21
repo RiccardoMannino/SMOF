@@ -99,35 +99,41 @@ export default async function Page({
 						>
 							Ospitalità
 						</h1>
-						<h2 className="text-center text-2xl max-sm:text-center md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty  mb-10">
+						<h2 className="text-center text-2xl max-sm:text-center md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mb-10">
 							{ospitalita?.luogo}
 						</h2>
-						<Table className="bg-ivory rounded-2xl p-4">
-							<TableHeader>
-								<TableRow className="text-lg">
-									<TableHead className="font-semibold p-4">
-										Denominazione
-									</TableHead>
-									<TableHead className="font-semibold p-4">Contatti</TableHead>
-									<TableHead className="font-semibold p-4">Indirizzo</TableHead>
-									<TableHead className="font-semibold p-4">Web</TableHead>
-								</TableRow>
-							</TableHeader>
-							<TableBody>
-								{dormire.map((dorm) => (
-									<TableRow className="text-lg" key={dorm.denominazione}>
-										<TableCell className="p-4 font-semibold">
-											{dorm.denominazione}
-										</TableCell>
-										<TableCell className="whitespace-pre-line p-4">
-											{dorm.contatti}
-										</TableCell>
-										<TableCell className="p-4">{dorm.indirizzo}</TableCell>
-										<TableCell className="p-4">{dorm.web}</TableCell>
+						<div className="relative">
+							<Table className="bg-ivory rounded-2xl ">
+								<TableHeader>
+									<TableRow className="text-lg">
+										<TableHead className="font-semibold p-4">
+											Denominazione
+										</TableHead>
+										<TableHead className="font-semibold p-4">
+											Contatti
+										</TableHead>
+										<TableHead className="font-semibold p-4">
+											Indirizzo
+										</TableHead>
+										<TableHead className="font-semibold p-4">Web</TableHead>
 									</TableRow>
-								))}
-							</TableBody>
-						</Table>
+								</TableHeader>
+								<TableBody>
+									{dormire.map((dorm) => (
+										<TableRow className="text-lg" key={dorm.denominazione}>
+											<TableCell className="p-4 font-semibold">
+												{dorm.denominazione}
+											</TableCell>
+											<TableCell className="whitespace-pre-line p-4">
+												{dorm.contatti}
+											</TableCell>
+											<TableCell className="p-4">{dorm.indirizzo}</TableCell>
+											<TableCell className="p-4">{dorm.web}</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							</Table>
+						</div>
 					</>
 				)}
 			</div>

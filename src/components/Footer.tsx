@@ -58,7 +58,7 @@ export async function Footer() {
 				},
 				{
 					nome: "Youtube",
-					href: "",
+					href: "https://www.youtube.com/@Sanmartinooutdoorfest",
 					icona: (
 						<Image
 							src={Youtube}
