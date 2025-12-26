@@ -35,7 +35,9 @@ export default async function Page({
 
 	return (
 		<div className="flex flex-col items-center justify-center  gap-5 w-full">
-			<div className="container mx-auto flex flex-col max-sm:p-6  p-10 text-chocolate">
+			<div
+				className={`container mx-auto flex flex-col max-sm:p-6 pb-10 text-chocolate`}
+			>
 				<h3
 					className={`${ospitalita?.luogo === "Dove Dormire" && "hidden "} text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-20 mb-10`}
 				>
@@ -103,7 +105,7 @@ export default async function Page({
 							{ospitalita?.luogo}
 						</h2>
 						<div className="relative">
-							<Table className="bg-ivory rounded-2xl ">
+							<Table className="bg-ivory rounded-2xl  ">
 								<TableHeader>
 									<TableRow className="text-lg">
 										<TableHead className="font-semibold p-4">

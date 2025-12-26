@@ -23,7 +23,7 @@ export const dormireType = defineType({
 		defineField({
 			name: "web",
 			title: "Sito Web",
-			type: "url",
+			type: "string",
 		}),
 	],
 });
