@@ -97,11 +97,11 @@ export default async function Page({
 				{(await params).slug === "dove-dormire" && (
 					<>
 						<h1
-							className={` text-center text-2xl max-sm:text-center  md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mt-10 mb-20`}
+							className={`text-center text-[clamp(2rem,5vw+0.5rem,3rem)] font-semibold text-mustard mt-20 mb-20`}
 						>
 							Ospitalità
 						</h1>
-						<h2 className="text-center text-2xl max-sm:text-center md:text-3xl lg:text-5xl font-semibold text-mustard text-pretty mb-10">
+						<h2 className="text-center text-[clamp(2rem,5vw+0.5rem,2.5rem)] font-semibold text-mustard mb-10">
 							{ospitalita?.luogo}
 						</h2>
 						<div className="relative">

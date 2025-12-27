@@ -3,7 +3,6 @@ import { sanityFetch } from "../../../sanity/lib/live";
 import { urlFor } from "../../../sanity/lib/image";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
 
 export default async function Page() {
 	const { data: galleria } = await sanityFetch({
@@ -12,10 +11,10 @@ export default async function Page() {
 
 	return (
 		<div className="container mx-auto flex flex-col gap-10 my-10 max-sm:p-4">
-			<h1 className="text-2xl text-center md:text-3xl lg:text-5xl  text-mustard text-pretty mb-10">
+			<h1 className="text-center text-[clamp(2rem,5vw+0.5rem,3rem)] font-semibold  text-mustard text-pretty mb-10">
 				Gallerie
 			</h1>
-			<div className="grid grid-cols-3 max-sm:grid-cols-1 gap-6">
+			<div className="grid grid-cols-3 max-sm:grid-cols-1 max-lg:grid-cols-2 gap-6">
 				{galleria.map((el) => (
 					<div
 						className="flex max-sm:flex-col w-full justify-center items-center bg-ivory rounded-2xl p-4"
