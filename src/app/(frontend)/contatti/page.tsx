@@ -6,7 +6,6 @@ type IFormInput = {
 	nome: string;
 	cognome: string;
 	email: string;
-	telefono: string;
 	messaggio: string;
 };
 
