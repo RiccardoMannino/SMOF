@@ -12,7 +12,7 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: src\sanity\extract.json
 export type Dormire = {
   _id: string;
   _type: "dormire";
@@ -25,6 +25,20 @@ export type Dormire = {
   web?: string;
 };
 
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type DormireReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "dormire";
+};
+
 export type Ospitalita = {
   _id: string;
   _type: "ospitalita";
@@ -34,58 +48,49 @@ export type Ospitalita = {
   luogo?: string;
   slug?: Slug;
   immagine?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
   };
   descrizione?: BlockContent;
-  bedAndBreakfast?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "dormire";
-  }>;
+  bedAndBreakfast?: Array<
+    {
+      _key: string;
+    } & DormireReference
+  >;
 };
 
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  listItem?: "bullet";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-  _key: string;
-}>;
+export type BlockContent = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }
+>;
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
@@ -118,12 +123,7 @@ export type Galleria = {
   titolo?: string;
   slug?: Slug;
   images?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -154,18 +154,20 @@ export type Giornaliero = {
   quantita?: number;
 };
 
+export type EventiReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "eventi";
+};
+
 export type Biglietto = {
   _id: string;
   _type: "biglietto";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  biglietto?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "eventi";
-  };
+  biglietto?: EventiReference;
   prezzo?: string;
   quantita?: number;
 };
@@ -175,12 +177,7 @@ export type Staff = {
   nome?: string;
   descrizione?: string;
   immagini?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -189,18 +186,20 @@ export type Staff = {
   }>;
 };
 
+export type PageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "page";
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  homePage?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  };
+  homePage?: PageReference;
 };
 
 export type SplitImage = {
@@ -209,12 +208,7 @@ export type SplitImage = {
   title?: string;
   testo?: BlockContent;
   image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -227,12 +221,7 @@ export type Hero = {
   title?: string;
   text?: string;
   images?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -252,16 +241,21 @@ export type Features = {
   }>;
 };
 
+export type FaqReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "faq";
+};
+
 export type Faqs = {
   _type: "faqs";
   title?: string;
-  faqs?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "faq";
-  }>;
+  faqs?: Array<
+    {
+      _key: string;
+    } & FaqReference
+  >;
 };
 
 export type Faq = {
@@ -274,17 +268,23 @@ export type Faq = {
   body?: BlockContent;
 };
 
-export type PageBuilder = Array<{
-  _key: string;
-} & Hero | {
-  _key: string;
-} & Staff | {
-  _key: string;
-} & SplitImage | {
-  _key: string;
-} & Features | {
-  _key: string;
-} & Faqs>;
+export type PageBuilder = Array<
+  | ({
+      _key: string;
+    } & Hero)
+  | ({
+      _key: string;
+    } & Staff)
+  | ({
+      _key: string;
+    } & SplitImage)
+  | ({
+      _key: string;
+    } & Features)
+  | ({
+      _key: string;
+    } & Faqs)
+>;
 
 export type Page = {
   _id: string;
@@ -299,12 +299,7 @@ export type Page = {
   slug?: Slug;
   content?: PageBuilder;
   mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -316,12 +311,7 @@ export type Page = {
 export type Navbar = {
   _type: "Navbar";
   navbarLogo?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -342,12 +332,7 @@ export type Speaker = {
   _rev: string;
   speakerName?: string;
   speakerImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -362,27 +347,27 @@ export type Eventi = {
   _updatedAt: string;
   _rev: string;
   eventName?: string;
-  eventType?: "Inaugurazione" | "Trekking" | "Trail" | "Yoga" | "Dog Trekking" | "Musica" | "Smof Grill";
+  eventType?:
+    | "Inaugurazione"
+    | "Trekking"
+    | "Trail"
+    | "Yoga"
+    | "Dog Trekking"
+    | "Musica"
+    | "Smof Grill";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
   eventDescription?: BlockContent;
-  relatedEvents?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "eventi";
-  }>;
+  relatedEvents?: Array<
+    {
+      _key: string;
+    } & EventiReference
+  >;
   slug?: Slug;
   data?: string;
   immagine?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -390,12 +375,7 @@ export type Eventi = {
     _type: "image";
   };
   immagineEvento?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -415,12 +395,7 @@ export type Partner = {
   tipo?: string;
   link?: string;
   immagine?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -475,6 +450,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette;
   lqip?: string;
   blurHash?: string;
+  thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
 };
@@ -538,25 +514,73 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Dormire | Ospitalita | BlockContent | SanityImageCrop | SanityImageHotspot | Slug | Galleria | Festival | Giornaliero | Biglietto | Staff | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Navbar | Speaker | Eventi | Partner | User | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes =
+  | Dormire
+  | SanityImageAssetReference
+  | DormireReference
+  | Ospitalita
+  | BlockContent
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
+  | Galleria
+  | Festival
+  | Giornaliero
+  | EventiReference
+  | Biglietto
+  | Staff
+  | PageReference
+  | SiteSettings
+  | SplitImage
+  | Hero
+  | Features
+  | FaqReference
+  | Faqs
+  | Faq
+  | PageBuilder
+  | Page
+  | Navbar
+  | Speaker
+  | Eventi
+  | Partner
+  | User
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/sanity/lib/queries.ts
+
+type ArrayOf<T> = Array<
+  T & {
+    _key: string;
+  }
+>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: EVENTS_QUERY
 // Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
-export type EVENTS_QUERYResult = Array<{
+export type EVENTS_QUERY_RESULT = Array<{
   _id: string;
   data: string | null;
   slug: Slug | null;
   eventName: string | null;
-  eventType: "Dog Trekking" | "Inaugurazione" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
+  eventType:
+    | "Dog Trekking"
+    | "Inaugurazione"
+    | "Musica"
+    | "Smof Grill"
+    | "Trail"
+    | "Trekking"
+    | "Yoga"
+    | null;
   eventDescription: BlockContent | null;
   immagine: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -567,12 +591,7 @@ export type EVENTS_QUERYResult = Array<{
   biglietto: number | null;
   equipaggiamento: string | null;
   immagineEvento: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -581,56 +600,51 @@ export type EVENTS_QUERYResult = Array<{
   } | null;
   speakers: null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: TICKET_QUERY
 // Query: *[_type == "biglietto"]{  _id , prezzo, quantita , biglietto ,}
-export type TICKET_QUERYResult = Array<{
+export type TICKET_QUERY_RESULT = Array<{
   _id: string;
   prezzo: string | null;
   quantita: number | null;
-  biglietto: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "eventi";
-  } | null;
+  biglietto: EventiReference | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: DAILY_TICKET_QUERY
 // Query: *[type == "giornaliero"]{  prezzo , quantita, bigliettoGiorno}
-export type DAILY_TICKET_QUERYResult = Array<never>;
+export type DAILY_TICKET_QUERY_RESULT = Array<never>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: FESTIVAL_TICKET_QUERY
 // Query: *[type == "festival"]{  prezzo, quantita, biglietto }
-export type FESTIVAL_TICKET_QUERYResult = Array<never>;
+export type FESTIVAL_TICKET_QUERY_RESULT = Array<never>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: PARTNER_QUERY
 // Query: *[_type == "partner" ]{  _id ,nome , tipo, link ,immagine}
-export type PARTNER_QUERYResult = Array<{
+export type PARTNER_QUERY_RESULT = Array<{
   _id: string;
   nome: string | null;
   tipo: string | null;
   link: string | null;
   immagine: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
   } | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: GALLERIES_QUERY
 // Query: *[_type == "galleria" && defined(slug.current)][0...20]{_id , images , titolo , slug}
-export type GALLERIES_QUERYResult = Array<{
+export type GALLERIES_QUERY_RESULT = Array<{
   _id: string;
   images: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -640,17 +654,14 @@ export type GALLERIES_QUERYResult = Array<{
   titolo: string | null;
   slug: Slug | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: SINGLE_GALLERY_QUERY
 // Query: *[_type == "galleria" && slug.current == $slug][0]{  _id , images , titolo }
-export type SINGLE_GALLERY_QUERYResult = {
+export type SINGLE_GALLERY_QUERY_RESULT = {
   _id: string;
   images: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -659,17 +670,14 @@ export type SINGLE_GALLERY_QUERYResult = {
   }> | null;
   titolo: string | null;
 } | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: SINGLE_OSPITALITA_QUERY
 // Query: *[_type == "ospitalita" && slug.current == $slug][0]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }}
-export type SINGLE_OSPITALITA_QUERYResult = {
+export type SINGLE_OSPITALITA_QUERY_RESULT = {
   _id: string;
   immagine: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -684,33 +692,34 @@ export type SINGLE_OSPITALITA_QUERYResult = {
     web: string | null;
   }> | null;
 } | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: SINGLE_DORMIRE_QUERY
 // Query: *[_type == "dormire" && slug.current == $slug][0]{  denominazione, indirizzo, contatti, web}
-export type SINGLE_DORMIRE_QUERYResult = {
+export type SINGLE_DORMIRE_QUERY_RESULT = {
   denominazione: string | null;
   indirizzo: string | null;
   contatti: string | null;
   web: string | null;
 } | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: DORMIRE_QUERY
 // Query: *[_type == "dormire"]{  denominazione, indirizzo, contatti, web}
-export type DORMIRE_QUERYResult = Array<{
+export type DORMIRE_QUERY_RESULT = Array<{
   denominazione: string | null;
   indirizzo: string | null;
   contatti: string | null;
   web: string | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: OSPITALITA_QUERY
 // Query: *[_type == "ospitalita" && defined(slug.current)]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }, slug , }
-export type OSPITALITA_QUERYResult = Array<{
+export type OSPITALITA_QUERY_RESULT = Array<{
   _id: string;
   immagine: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -726,21 +735,26 @@ export type OSPITALITA_QUERYResult = Array<{
   }> | null;
   slug: Slug | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: EVENT_QUERY
 // Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
-export type EVENT_QUERYResult = {
+export type EVENT_QUERY_RESULT = {
   _id: string;
   eventName: string | null;
   specifiche: BlockContent | null;
-  eventType: "Dog Trekking" | "Inaugurazione" | "Musica" | "Smof Grill" | "Trail" | "Trekking" | "Yoga" | null;
+  eventType:
+    | "Dog Trekking"
+    | "Inaugurazione"
+    | "Musica"
+    | "Smof Grill"
+    | "Trail"
+    | "Trekking"
+    | "Yoga"
+    | null;
   biglietto: number | null;
   immagine: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -748,12 +762,7 @@ export type EVENT_QUERYResult = {
     _type: "image";
   } | null;
   immagineEvento: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -772,14 +781,18 @@ export type EVENT_QUERYResult = {
     slug: Slug | null;
   }> | null;
 } | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: EVENTS_SLUGS_QUERY
 // Query: *[_type == "eventi" && defined(slug.current)]{   "slug": slug.current}
-export type EVENTS_SLUGS_QUERYResult = Array<{
+export type EVENTS_SLUGS_QUERY_RESULT = Array<{
   slug: string | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: AUTH_USERS
 // Query: *[_type == "user"] {  _id,  name,  email,  profileImage,  uid,  subscribeNewsletter,}
-export type AUTH_USERSResult = Array<{
+export type AUTH_USERS_RESULT = Array<{
   _id: string;
   name: string | null;
   email: string | null;
@@ -787,22 +800,21 @@ export type AUTH_USERSResult = Array<{
   uid: string | null;
   subscribeNewsletter: boolean | null;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: SINGLE_AUTH_USER
 // Query: *[_type == "user" && uid == $uid][0]{    email  }
-export type SINGLE_AUTH_USERResult = {
+export type SINGLE_AUTH_USER_RESULT = {
   email: string | null;
 } | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0]{ descrizione[]{  ..., },  mainImage ,...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
-export type PAGE_QUERYResult = {
+export type PAGE_QUERY_RESULT = {
   descrizione?: BlockContent;
   mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -817,226 +829,210 @@ export type PAGE_QUERYResult = {
   intestazione?: string;
   contenuto?: string;
   slug?: Slug;
-  content: Array<{
-    _key: string;
-    _type: "faqs";
-    title?: string;
-    faqs: Array<{
-      _id: string;
-      _type: "faq";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      body?: BlockContent;
-    }> | null;
-  } | {
-    _key: string;
-    _type: "features";
-    title?: string;
-    features?: Array<{
-      title?: string;
-      text?: string;
-      _type: "feature";
-      _key: string;
-    }>;
-  } | {
-    _key: string;
-    _type: "hero";
-    title?: string;
-    text?: string;
-    images?: Array<{
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-      _key: string;
-    }>;
-  } | {
-    _key: string;
-    _type: "splitImage";
-    orientation?: "imageLeft" | "imageRight";
-    title?: string;
-    testo?: BlockContent;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  } | {
-    _key: string;
-    _type: "staff";
-    nome?: string;
-    descrizione?: string;
-    immagini?: Array<{
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-      _key: string;
-    }>;
-  }> | null;
+  content: Array<
+    | {
+        _key: string;
+        _type: "faqs";
+        title?: string;
+        faqs: Array<{
+          _id: string;
+          _type: "faq";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          body?: BlockContent;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "features";
+        title?: string;
+        features?: Array<{
+          title?: string;
+          text?: string;
+          _type: "feature";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "hero";
+        title?: string;
+        text?: string;
+        images?: Array<{
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "splitImage";
+        orientation?: "imageLeft" | "imageRight";
+        title?: string;
+        testo?: BlockContent;
+        image?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "staff";
+        nome?: string;
+        descrizione?: string;
+        immagini?: Array<{
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+          _key: string;
+        }>;
+      }
+  > | null;
   ordine?: number;
 } | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: LIST_PAGE_QUERY
 // Query: *[_type == "page"]  {    title,    ordine,    _id,    "slug": slug.current,    "Home": slug.current == "/"  }  | order(Home desc, ordine asc)
-export type LIST_PAGE_QUERYResult = Array<{
+export type LIST_PAGE_QUERY_RESULT = Array<{
   title: string | null;
   ordine: number | null;
   _id: string;
   slug: string | null;
   Home: boolean | false;
 }>;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: HOME_PAGE_QUERY
 // Query: *[_id == "siteSettings"][0]{    homePage->{      ...,      content[]{        ...,        _type == "faqs" => {          ...,          faqs[]->        }      }          }  }
-export type HOME_PAGE_QUERYResult = {
-  homePage: null;
-} | {
-  homePage: {
-    _id: string;
-    _type: "page";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    intestazione?: string;
-    contenuto?: string;
-    descrizione?: BlockContent;
-    slug?: Slug;
-    content: Array<{
-      _key: string;
-      _type: "faqs";
-      title?: string;
-      faqs: Array<{
+export type HOME_PAGE_QUERY_RESULT =
+  | {
+      homePage: null;
+    }
+  | {
+      homePage: {
         _id: string;
-        _type: "faq";
+        _type: "page";
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
         title?: string;
-        body?: BlockContent;
-      }> | null;
-    } | {
-      _key: string;
-      _type: "features";
-      title?: string;
-      features?: Array<{
-        title?: string;
-        text?: string;
-        _type: "feature";
-        _key: string;
-      }>;
-    } | {
-      _key: string;
-      _type: "hero";
-      title?: string;
-      text?: string;
-      images?: Array<{
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        intestazione?: string;
+        contenuto?: string;
+        descrizione?: BlockContent;
+        slug?: Slug;
+        content: Array<
+          | {
+              _key: string;
+              _type: "faqs";
+              title?: string;
+              faqs: Array<{
+                _id: string;
+                _type: "faq";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: string;
+                body?: BlockContent;
+              }> | null;
+            }
+          | {
+              _key: string;
+              _type: "features";
+              title?: string;
+              features?: Array<{
+                title?: string;
+                text?: string;
+                _type: "feature";
+                _key: string;
+              }>;
+            }
+          | {
+              _key: string;
+              _type: "hero";
+              title?: string;
+              text?: string;
+              images?: Array<{
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }>;
+            }
+          | {
+              _key: string;
+              _type: "splitImage";
+              orientation?: "imageLeft" | "imageRight";
+              title?: string;
+              testo?: BlockContent;
+              image?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            }
+          | {
+              _key: string;
+              _type: "staff";
+              nome?: string;
+              descrizione?: string;
+              immagini?: Array<{
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }>;
+            }
+        > | null;
+        mainImage?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
         };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-        _key: string;
-      }>;
-    } | {
-      _key: string;
-      _type: "splitImage";
-      orientation?: "imageLeft" | "imageRight";
-      title?: string;
-      testo?: BlockContent;
-      image?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-    } | {
-      _key: string;
-      _type: "staff";
-      nome?: string;
-      descrizione?: string;
-      immagini?: Array<{
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-        _key: string;
-      }>;
-    }> | null;
-    mainImage?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    ordine?: number;
-  } | null;
-} | null;
+        ordine?: number;
+      } | null;
+    }
+  | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERYResult;
-    "*[_type == \"biglietto\"]{\n  _id , prezzo, quantita , biglietto ,\n}": TICKET_QUERYResult;
-    "*[type == \"giornaliero\"]{\n  prezzo , quantita, bigliettoGiorno\n}": DAILY_TICKET_QUERYResult;
-    "*[type == \"festival\"]{\n  prezzo, quantita, biglietto \n}": FESTIVAL_TICKET_QUERYResult;
-    "*[_type == \"partner\" ]{\n  _id ,nome , tipo, link ,immagine\n}": PARTNER_QUERYResult;
-    "*[_type == \"galleria\" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}": GALLERIES_QUERYResult;
-    "*[_type == \"galleria\" && slug.current == $slug][0]{\n  _id , images , titolo \n}": SINGLE_GALLERY_QUERYResult;
-    "*[_type == \"ospitalita\" && slug.current == $slug][0]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }\n}": SINGLE_OSPITALITA_QUERYResult;
-    "*[_type == \"dormire\" && slug.current == $slug][0]{\n  denominazione, indirizzo, contatti, web\n}": SINGLE_DORMIRE_QUERYResult;
-    "*[_type == \"dormire\"]{\n  denominazione, indirizzo, contatti, web\n}": DORMIRE_QUERYResult;
-    "*[_type == \"ospitalita\" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}": OSPITALITA_QUERYResult;
-    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERYResult;
-    "*[_type == \"eventi\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": EVENTS_SLUGS_QUERYResult;
-    "*[_type == \"user\"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}": AUTH_USERSResult;
-    "*[_type == \"user\" && uid == $uid][0]{\n    email\n  }": SINGLE_AUTH_USERResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n descrizione[]{\n  ...,\n }, \n mainImage ,...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
-    "\n  *[_type == \"page\"]\n  {\n    title,\n    ordine,\n    _id,\n    \"slug\": slug.current,\n    \"Home\": slug.current == \"/\"\n  }\n  | order(Home desc, ordine asc)\n": LIST_PAGE_QUERYResult;
-    "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;
+    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERY_RESULT;
+    '*[_type == "biglietto"]{\n  _id , prezzo, quantita , biglietto ,\n}': TICKET_QUERY_RESULT;
+    '*[type == "giornaliero"]{\n  prezzo , quantita, bigliettoGiorno\n}': DAILY_TICKET_QUERY_RESULT;
+    '*[type == "festival"]{\n  prezzo, quantita, biglietto \n}': FESTIVAL_TICKET_QUERY_RESULT;
+    '*[_type == "partner" ]{\n  _id ,nome , tipo, link ,immagine\n}': PARTNER_QUERY_RESULT;
+    '*[_type == "galleria" && defined(slug.current)][0...20]{\n_id , images , titolo , slug\n}': GALLERIES_QUERY_RESULT;
+    '*[_type == "galleria" && slug.current == $slug][0]{\n  _id , images , titolo \n}': SINGLE_GALLERY_QUERY_RESULT;
+    '*[_type == "ospitalita" && slug.current == $slug][0]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }\n}': SINGLE_OSPITALITA_QUERY_RESULT;
+    '*[_type == "dormire" && slug.current == $slug][0]{\n  denominazione, indirizzo, contatti, web\n}': SINGLE_DORMIRE_QUERY_RESULT;
+    '*[_type == "dormire"]{\n  denominazione, indirizzo, contatti, web\n}': DORMIRE_QUERY_RESULT;
+    '*[_type == "ospitalita" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}': OSPITALITA_QUERY_RESULT;
+    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERY_RESULT;
+    '*[_type == "eventi" && defined(slug.current)]{ \n  "slug": slug.current\n}': EVENTS_SLUGS_QUERY_RESULT;
+    '*[_type == "user"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}': AUTH_USERS_RESULT;
+    '*[_type == "user" && uid == $uid][0]{\n    email\n  }': SINGLE_AUTH_USER_RESULT;
+    '*[_type == "page" && slug.current == $slug][0]{\n descrizione[]{\n  ...,\n }, \n mainImage ,...,\n  content[]{\n    ...,\n    _type == "faqs" => {\n      ...,\n      faqs[]->\n    }\n  }\n}': PAGE_QUERY_RESULT;
+    '\n  *[_type == "page"]\n  {\n    title,\n    ordine,\n    _id,\n    "slug": slug.current,\n    "Home": slug.current == "/"\n  }\n  | order(Home desc, ordine asc)\n': LIST_PAGE_QUERY_RESULT;
+    '*[_id == "siteSettings"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == "faqs" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }': HOME_PAGE_QUERY_RESULT;
   }
 }

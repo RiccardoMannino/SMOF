@@ -4,7 +4,7 @@ import * as motion from "motion/react-client";
 import { dataGiornaliera } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
-import { EVENTS_QUERYResult } from "../sanity/sanity.types";
+import { EVENTS_QUERY_RESULT } from "../sanity/sanity.types";
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 
@@ -13,7 +13,7 @@ export function CustomSelect({
 	eventi,
 	tipo,
 }: {
-	eventi: EVENTS_QUERYResult;
+	eventi: EVENTS_QUERY_RESULT;
 	data: string[];
 	tipo: (
 		| "Inaugurazione"
@@ -37,8 +37,8 @@ export function CustomSelect({
 				acc[currentType] = false;
 				return acc;
 			},
-			{} as Record<string, boolean>
-		)
+			{} as Record<string, boolean>,
+		),
 	);
 
 	const handleTypeChange = (typ: string) => {
@@ -50,7 +50,6 @@ export function CustomSelect({
 		}
 	};
 
-	//  da studiare
 	const filteredEvents = eventi.filter((event) => {
 		// filtro per anno
 		const isYearMatch = dataGiornaliera(event.data) === select;

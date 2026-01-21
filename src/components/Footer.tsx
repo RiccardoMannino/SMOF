@@ -22,7 +22,7 @@ export async function Footer() {
 				{ nome: "Eventi", href: "eventi" },
 				{ nome: "Partners", href: "partners" },
 				{ nome: "Ticket", href: "ticket" },
-				{ nome: "Ospitalità", href: "ospitalità" },
+				{ nome: "Ospitalità", href: "ospitalita" },
 				{ nome: "Programma", href: "programma" },
 				{ nome: "Galleria", href: "galleria" },
 			],
@@ -152,9 +152,10 @@ export async function Footer() {
 
 			<div className="flex flex-col">
 				<p className="text-sm text-center text-chocolate mt-10">
-					© SMOF by Effetto Outdoor - Natura e Territorio APS. Tutti i diritti
-					riservati.
+					© SMOF by Effetto Outdoor - Natura e Territorio APS ETS. Tutti i
+					diritti riservati.
 				</p>
+				<p className="text-center text-sm text-chocolate">C.F. 97386790824</p>
 				<Link
 					href="https://www.riccardomannino.it"
 					target="_blank"

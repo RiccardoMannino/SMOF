@@ -1,21 +1,69 @@
 "use client";
 import Image from "next/image";
-import { useForm, SubmitHandler } from "react-hook-form";
+import emailjs from "@emailjs/browser";
+import { useRef, useState } from "react";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 type IFormInput = {
 	nome: string;
 	cognome: string;
 	email: string;
 	messaggio: string;
+	termini: boolean;
+};
+
+type ConfigData = {
+	emailJsPublicKey: string;
+	emailJsServiceId: string;
+	emailJsTemplateId: string;
 };
 
 export default function Page() {
+	const [isSending, setIsSending] = useState(false);
+
+	const form = useRef(null);
+
+	const sendEmail = async (data: FieldValues) => {
+		try {
+			setIsSending(true);
+
+			const response = await fetch("/api/config");
+
+			if (!response.ok) {
+				throw new Error("Impossibile recuperare la configurazione");
+			}
+
+			const config: ConfigData = await response.json();
+
+			const formData = {
+				nome: data.nome,
+				cognome: data.cognome,
+				email: data.email,
+				messaggio: data.messaggio,
+				termini: data.termini,
+			};
+
+			await emailjs.send(
+				config.emailJsServiceId,
+				config.emailJsTemplateId,
+				formData,
+				config.emailJsPublicKey,
+			);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setIsSending(false);
+			reset();
+		}
+	};
+
 	const {
 		register,
 		handleSubmit,
-		// formState: { errors },
+		watch,
+		reset,
+		formState: { errors },
 	} = useForm<IFormInput>();
-	const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
 	return (
 		<section className="container mx-auto mb-14 max-sm:mb-8 max-w-5xl px-2 ">
@@ -41,8 +89,8 @@ export default function Page() {
 							<p>effettooutdoor@gmail.com</p>
 							<p>PEC effettooutdoor@postecertifica.it</p>
 							<p>C.F. 97386790824</p>
-							<p>cell. +39 3396178587</p>
-							<p>cell. +39 3932802378 (segreteria)</p>
+							<p>cell. +39 3520940274</p>
+							{/* <p>cell. +39 3932802378 (segreteria)</p> */}
 						</div>
 					</div>
 					<div className="w-fit">
@@ -50,7 +98,8 @@ export default function Page() {
 							Per informazioni Compila il Form
 						</h2>
 						<form
-							onSubmit={() => handleSubmit(onSubmit)}
+							ref={form}
+							onSubmit={() => handleSubmit(sendEmail)}
 							className="flex flex-col h-full p-4 gap-4 font-semibold"
 						>
 							<label>Nome</label>
@@ -77,6 +126,17 @@ export default function Page() {
 								className="border-2 border-chocolate rounded p-2"
 								{...(register("messaggio"), { required: true })}
 							/>
+							<div className="flex gap-2 ">
+								<input
+									type="checkbox"
+									className="accent-chocolate hover:cursor-pointer self-start mt-2"
+									{...(register("termini"), { required: true })}
+								/>
+								<label className="">
+									ho letto l'informativa e presto il consenso al trattamento dei
+									dati personali
+								</label>
+							</div>
 							<button
 								type="submit"
 								className="border-2 border-chocolate rounded p-2 w-fit hover:cursor-pointer hover:text-ivory hover:bg-chocolate transition-colors"

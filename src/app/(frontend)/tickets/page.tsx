@@ -37,7 +37,7 @@ async function getTickets() {
       biglietto, 
       prezzo, 
       quantita,
-    }`
+    }`,
 	);
 
 	// Biglietti festival completo
@@ -48,7 +48,7 @@ async function getTickets() {
       biglietto, 
       prezzo, 
       quantita,
-    }`
+    }`,
 	);
 
 	// Biglietti singolo eventi
@@ -62,7 +62,7 @@ async function getTickets() {
       _type,
       prezzo, 
       quantita,
-    }`
+    }`,
 	);
 
 	return {
@@ -86,7 +86,7 @@ export default async function page() {
 				Informazioni Ticket
 			</h1>
 
-			<p className="mt-28 text-2xl text-mustard">
+			<p className="mt-28 text-2xl text-mustard max-sm:text-center">
 				Ticket non disponibili al momento
 			</p>
 			{/* <div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
