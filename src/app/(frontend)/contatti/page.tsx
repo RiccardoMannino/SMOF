@@ -99,17 +99,19 @@ export default function Page() {
 						</h2>
 						<form
 							ref={form}
-							onSubmit={() => handleSubmit(sendEmail)}
+							onSubmit={handleSubmit(sendEmail)}
 							className="flex flex-col h-full p-4 gap-4 font-semibold"
 						>
 							<label>Nome</label>
 							<input
+								placeholder="Nome"
 								className="border-2 border-chocolate rounded p-2"
 								{...register("nome", { required: true, maxLength: 20 })}
 							/>
 							<label>Cognome</label>
 							<input
 								className="border-2 border-chocolate rounded p-2"
+								placeholder="Cognome"
 								{...register("cognome", {
 									required: true,
 									pattern: /^[A-Za-z]+$/i,
@@ -119,10 +121,15 @@ export default function Page() {
 							<input
 								className="border-2 border-chocolate rounded p-2"
 								type="email"
-								{...(register("email"), { required: true })}
+								placeholder="Email"
+								{...register("email", {
+									required: true,
+									pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+								})}
 							/>
 							<label>Messaggio</label>
 							<textarea
+								placeholder="Messaggio"
 								className="border-2 border-chocolate rounded p-2"
 								{...(register("messaggio"), { required: true })}
 							/>
@@ -138,10 +145,11 @@ export default function Page() {
 								</label>
 							</div>
 							<button
+								disabled={isSending}
 								type="submit"
 								className="border-2 border-chocolate rounded p-2 w-fit hover:cursor-pointer hover:text-ivory hover:bg-chocolate transition-colors"
 							>
-								Invia messaggio
+								{isSending ? "Invio in corso..." : "Invia Messaggio"}
 							</button>
 						</form>
 					</div>
