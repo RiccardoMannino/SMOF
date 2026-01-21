@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { PAGE_QUERYResult } from "../../sanity/sanity.types";
+import { PAGE_QUERY_RESULT } from "../../sanity/sanity.types";
 import { urlFor } from "../../sanity/lib/image";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { createPortal } from "react-dom";
 
 export type StaffProps = Extract<
-	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
 	{ _type: "staff" }
 >;
 
@@ -63,7 +63,7 @@ export function Staff({ ...props }: StaffProps) {
 							</div>
 						</motion.div>
 					),
-					document.body
+					document.body,
 				)
 				//fine modale
 			}

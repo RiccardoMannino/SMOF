@@ -4,11 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { urlFor } from "../../sanity/lib/image";
-import { PAGE_QUERYResult } from "../../sanity/sanity.types";
+import { PAGE_QUERY_RESULT } from "../../sanity/sanity.types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@sanity/icons";
 
 type HeroProps = Extract<
-	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
 	{ _type: "hero" }
 >;
 

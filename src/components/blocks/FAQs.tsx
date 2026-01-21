@@ -1,4 +1,4 @@
-import { PAGE_QUERYResult } from "../../sanity/sanity.types";
+import { PAGE_QUERY_RESULT } from "../../sanity/sanity.types";
 import {
 	Accordion,
 	AccordionContent,
@@ -8,7 +8,7 @@ import {
 import { PortableText } from "next-sanity";
 
 type FAQsProps = Extract<
-	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
 	{ _type: "faqs" }
 >;
 
