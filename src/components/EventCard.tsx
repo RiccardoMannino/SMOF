@@ -1,9 +1,9 @@
 // import { Speaker } from "@/components/Speaker";
-import { EVENTS_QUERYResult } from "../sanity/sanity.types";
+import { EVENTS_QUERY_RESULT } from "../sanity/sanity.types";
 import { urlFor } from "../sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
-import { dataFormattata } from "@/lib/date";
+
 import {
 	Card,
 	CardAction,
@@ -13,7 +13,7 @@ import {
 	CardTitle,
 } from "./ui/Card";
 
-export function EventCard(props: EVENTS_QUERYResult[0]) {
+export function EventCard(props: EVENTS_QUERY_RESULT[0]) {
 	const { speakers, immagine, data, eventType, eventName } = props;
 
 	return (

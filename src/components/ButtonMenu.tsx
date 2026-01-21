@@ -5,15 +5,15 @@ import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import {
-	LIST_PAGE_QUERYResult,
-	OSPITALITA_QUERYResult,
+	LIST_PAGE_QUERY_RESULT,
+	OSPITALITA_QUERY_RESULT,
 } from "../sanity/sanity.types";
 
 import { Session } from "next-auth";
 import Image from "next/image";
 
-type PageProps = LIST_PAGE_QUERYResult;
-type OspitalitaProps = OSPITALITA_QUERYResult;
+type PageProps = LIST_PAGE_QUERY_RESULT;
+type OspitalitaProps = OSPITALITA_QUERY_RESULT;
 
 export default function ButtonMenu({
 	list,

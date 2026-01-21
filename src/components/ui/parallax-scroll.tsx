@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "motion/react";
-import { SINGLE_GALLERY_QUERYResult } from "../../sanity/sanity.types";
+import { SINGLE_GALLERY_QUERY_RESULT } from "../../sanity/sanity.types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { urlFor } from "../../sanity/lib/image";
@@ -11,7 +11,7 @@ export const ParallaxScroll = ({
 	immagini,
 	className,
 }: {
-	immagini: SINGLE_GALLERY_QUERYResult;
+	immagini: SINGLE_GALLERY_QUERY_RESULT;
 	className?: string;
 }) => {
 	const gridRef = useRef<HTMLDivElement>(null);

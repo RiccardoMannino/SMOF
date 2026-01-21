@@ -1,14 +1,14 @@
 // import { Speaker } from "@/components/Speaker";
 import { components } from "../sanity/portableTextComponent";
 import { PortableText } from "next-sanity";
-import { EVENT_QUERYResult } from "../sanity/sanity.types";
+import { EVENT_QUERY_RESULT } from "../sanity/sanity.types";
 
 import { Title } from "@/components/Title";
 import { urlFor } from "../sanity/lib/image";
 import Image from "next/image";
 import { dataFormattata } from "@/lib/date";
 
-export function Event(props: NonNullable<EVENT_QUERYResult>) {
+export function Event(props: NonNullable<EVENT_QUERY_RESULT>) {
 	const { eventName, data, immagine, eventDescription, eventType } = props;
 	//  speakers,
 

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { urlFor } from "../../sanity/lib/image";
-import { PARTNER_QUERYResult } from "../../sanity/sanity.types";
+import { PARTNER_QUERY_RESULT } from "../../sanity/sanity.types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ export const InfiniteMovingCards = ({
 	pauseOnHover = true,
 	className,
 }: {
-	image: PARTNER_QUERYResult;
+	image: PARTNER_QUERY_RESULT;
 
 	direction?: "left" | "right";
 	speed?: "fast" | "normal" | "slow";
@@ -50,12 +50,12 @@ export const InfiniteMovingCards = ({
 			if (direction === "left") {
 				containerRef.current.style.setProperty(
 					"--animation-direction",
-					"forwards"
+					"forwards",
 				);
 			} else {
 				containerRef.current.style.setProperty(
 					"--animation-direction",
-					"reverse"
+					"reverse",
 				);
 			}
 		}
@@ -78,7 +78,7 @@ export const InfiniteMovingCards = ({
 			ref={containerRef}
 			className={cn(
 				"scroller relative z-20 max-w-7xl overflow-hidden mask-[linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]",
-				className
+				className,
 			)}
 		>
 			<ul
@@ -86,7 +86,7 @@ export const InfiniteMovingCards = ({
 				className={cn(
 					"flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4",
 					start && "animate-scroll",
-					pauseOnHover && "hover:paused"
+					pauseOnHover && "hover:paused",
 				)}
 			>
 				{image.map((item) => (

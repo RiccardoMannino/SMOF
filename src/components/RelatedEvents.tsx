@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { createDataAttribute } from "next-sanity";
-import { EVENT_QUERYResult } from "../sanity/sanity.types";
+import { EVENT_QUERY_RESULT } from "../sanity/sanity.types";
 import { client } from "../sanity/lib/client";
 import { useOptimistic } from "next-sanity/hooks";
 
@@ -18,18 +18,18 @@ export function RelatedEvents({
 	documentId,
 	documentType,
 }: {
-	relatedEvents: NonNullable<EVENT_QUERYResult>["relatedEvents"];
+	relatedEvents: NonNullable<EVENT_QUERY_RESULT>["relatedEvents"];
 	documentId: string;
 	documentType: string;
 }) {
 	const events = useOptimistic<
-		NonNullable<EVENT_QUERYResult>["relatedEvents"] | undefined,
-		NonNullable<EVENT_QUERYResult>
+		NonNullable<EVENT_QUERY_RESULT>["relatedEvents"] | undefined,
+		NonNullable<EVENT_QUERY_RESULT>
 	>(relatedEvents, (state, action) => {
 		if (action.id === documentId && action?.document?.relatedEvents) {
 			// Optimistic document only has _ref values, not resolved references
 			return action.document.relatedEvents.map(
-				(event) => state?.find((p) => p._key === event._key) ?? event
+				(event) => state?.find((p) => p._key === event._key) ?? event,
 			);
 		}
 		return state;

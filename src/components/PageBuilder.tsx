@@ -4,14 +4,14 @@ import { Hero } from "@/components/blocks/Hero";
 import { Features } from "@/components/blocks/Features";
 import { SplitImage } from "@/components/blocks/SplitImage";
 import { FAQs } from "@/components/blocks/FAQs";
-import { PAGE_QUERYResult } from "../sanity/sanity.types";
+import { PAGE_QUERY_RESULT } from "../sanity/sanity.types";
 import { client, readClient } from "../sanity/lib/client";
 import { createDataAttribute } from "next-sanity";
 import { useOptimistic } from "next-sanity/hooks";
 import { Staff } from "@/components/blocks/Staff";
 
 type PageBuilderProps = {
-	content: NonNullable<PAGE_QUERYResult>["content"];
+	content: NonNullable<PAGE_QUERY_RESULT>["content"];
 	documentId: string;
 	documentType: string;
 	className?: string;
@@ -32,12 +32,12 @@ export function PageBuilder({
 }: PageBuilderProps) {
 	// blocchi
 	const blocks = useOptimistic<
-		NonNullable<PAGE_QUERYResult>["content"] | undefined,
-		NonNullable<PAGE_QUERYResult>
+		NonNullable<PAGE_QUERY_RESULT>["content"] | undefined,
+		NonNullable<PAGE_QUERY_RESULT>
 	>(content, (state, action) => {
 		if (action.id === documentId) {
 			return action?.document?.content?.map(
-				(block) => state?.find((s) => s._key === block?._key) || block
+				(block) => state?.find((s) => s._key === block?._key) || block,
 			);
 		}
 		return state;
