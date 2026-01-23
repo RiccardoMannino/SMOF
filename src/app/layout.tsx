@@ -20,7 +20,6 @@ export default function RootLayout({
 					draggable={false}
 					pauseOnHover
 					theme="light"
-					transition={Bounce}
 				/>
 			</body>
 		</html>

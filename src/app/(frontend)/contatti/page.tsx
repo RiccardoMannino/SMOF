@@ -2,6 +2,7 @@
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
+import { toast, Slide } from "react-toastify";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 type IFormInput = {
@@ -49,8 +50,29 @@ export default function Page() {
 				formData,
 				config.emailJsPublicKey,
 			);
+
+			toast.success(
+				(t) => (
+					<div
+						className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
+					>
+						Messaggio inviato con successo ✅
+					</div>
+				),
+				{ transition: Slide },
+			);
 		} catch (error) {
 			console.error(error);
+			toast.error(
+				(t) => (
+					<div
+						className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
+					>
+						Errore nell&apos;invio del messaggio ⛔
+					</div>
+				),
+				{ transition: Slide },
+			);
 		} finally {
 			setIsSending(false);
 			reset();
