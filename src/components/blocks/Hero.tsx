@@ -98,16 +98,16 @@ export function Hero({ images, text }: HeroProps) {
 
 				{/* container contenente il carosello */}
 				<div
-					ref={containerRef}
-					onMouseEnter={() => {
-						setHover(true);
-					}}
-					onMouseLeave={() => {
-						setHover(false);
-					}}
+					// ref={containerRef}
+					// onMouseEnter={() => {
+					// 	setHover(true);
+					// }}
+					// onMouseLeave={() => {
+					// 	setHover(false);
+					// }}
 					className={`flex mb-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl max-md:row-start-2 max-md:row-end-2 max-md:mt-8`}
 				>
-					{images.map((image) => (
+					{/* {images.map((image) => (
 						<motion.div
 							initial={{ transform: "translateX(300px)" }}
 							animate={{ transform: "translateX(0px)" }}
@@ -124,9 +124,23 @@ export function Hero({ images, text }: HeroProps) {
 								className="object-cover w-full "
 							/>
 						</motion.div>
-					))}
+					))} */}
+					<motion.div
+						initial={{ transform: "translateX(300px)" }}
+						animate={{ transform: "translateX(0px)" }}
+						transition={{ type: "spring" }}
+						className="min-w-full max-h-max relative flex "
+					>
+						<video
+							autoPlay
+							controls
+							muted
+							src={"/Video_promo.mov"}
+							className="rounded-2xl"
+						/>
+					</motion.div>
 				</div>
-				<div className="flex gap-5 max-sm:gap-2 max-md:col-start-1 col-start-2 place-self-center max-md:row-start-3 max-md:row-end-3">
+				{/* <div className="flex gap-5 max-sm:gap-2 max-md:col-start-1 col-start-2 place-self-center max-md:row-start-3 max-md:row-end-3">
 					<button
 						onClick={prev}
 						className={`w-fit bg-black/20 text-white p-2 rounded-full hover:bg-black/40 hover:cursor-pointer transition color`}
@@ -139,7 +153,7 @@ export function Hero({ images, text }: HeroProps) {
 					>
 						<ChevronRightIcon className="h-4 w-4 md:h-8 md:w-8 " />
 					</button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

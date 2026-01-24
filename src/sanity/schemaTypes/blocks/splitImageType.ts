@@ -38,8 +38,16 @@ export const splitImageType = defineType({
 			type: "blockContent",
 		}),
 		defineField({
-			name: "image",
-			type: "image",
+			name: "images", // nome usato nella query
+			title: "Immagini", // titolo nell'editor
+			type: "array", // tipo del field
+			of: [{ type: "image", options: { hotspot: true } }],
+			validation: (Rule) => Rule.required().min(1),
+			description: "Inserisci le immagini per il carosello.",
 		}),
+		// defineField({
+		// 	name: "image",
+		// 	type: "image",
+		// }),
 	],
 });

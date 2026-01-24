@@ -207,13 +207,14 @@ export type SplitImage = {
   orientation?: "imageLeft" | "imageRight";
   title?: string;
   testo?: BlockContent;
-  image?: {
+  images?: Array<{
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  };
+    _key: string;
+  }>;
 };
 
 export type Hero = {
@@ -875,13 +876,14 @@ export type PAGE_QUERY_RESULT = {
         orientation?: "imageLeft" | "imageRight";
         title?: string;
         testo?: BlockContent;
-        image?: {
+        images?: Array<{
           asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
-        };
+          _key: string;
+        }>;
       }
     | {
         _key: string;
@@ -977,13 +979,14 @@ export type HOME_PAGE_QUERY_RESULT =
               orientation?: "imageLeft" | "imageRight";
               title?: string;
               testo?: BlockContent;
-              image?: {
+              images?: Array<{
                 asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 _type: "image";
-              };
+                _key: string;
+              }>;
             }
           | {
               _key: string;
