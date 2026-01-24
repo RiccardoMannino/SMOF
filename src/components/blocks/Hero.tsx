@@ -1,82 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import Image from "next/image";
-import { urlFor } from "../../sanity/lib/image";
 import { PAGE_QUERY_RESULT } from "../../sanity/sanity.types";
-import { ChevronLeftIcon, ChevronRightIcon } from "@sanity/icons";
 
 type HeroProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
 	{ _type: "hero" }
 >;
 
-export function Hero({ images, text }: HeroProps) {
-	const [index, setIndex] = useState(0);
-	const [hover, setHover] = useState(false);
-
-	const containerRef = useRef<HTMLDivElement>(null);
-	// ref che ci serve per l'intervallo di tempo da una slide all'altra
-	const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-	// slide totali : se la lunghezza dello slider è null o undefined ritorna 0
-	const totalSlides = images?.length ?? 0;
-
-	//  funzione per lo scroll del container
-	const scrollToSlide = (i: number) => {
-		// containar che scorre in modo fluido grazie allo smooth
-		containerRef.current?.scrollTo({
-			left: containerRef.current.clientWidth * i,
-			behavior: "smooth",
-		});
-	};
-
-	// funzione per andare avanti di pagina
-	const next = useCallback(() => {
-		const nextIndex = (index + 1) % totalSlides;
-		setIndex(nextIndex);
-		scrollToSlide(nextIndex);
-	}, [index, totalSlides]);
-
-	// funzione che ci serve per stoppare lo slider all'hover vedi sotto
-	const stop = useCallback(() => {
-		const stoptIndex = index % totalSlides;
-		setIndex(stoptIndex);
-	}, [index, totalSlides]);
-
-	// funzione per andare indietro di pagina
-	const prev = () => {
-		const prevIndex = (index - 1 + totalSlides) % totalSlides;
-		setIndex(prevIndex);
-		scrollToSlide(prevIndex);
-	};
-
-	// effetto utilizzato per fare andare in autoplay lo slider e stopparlo all'hover dell'immagine
-	useEffect(() => {
-		if (totalSlides <= 1) return;
-
-		if (hover) {
-			// al passaggio del mouse il carosello si stoppa
-			stop();
-		} else
-			//quando usciamo dall'area dell'immagine riparte il carosello
-			intervalRef.current = setInterval(() => {
-				next();
-			}, 3000);
-
-		// funzione di cleanup che ci permette di far ripartire il carosello se hover è falso
-		return () => {
-			if (intervalRef.current && !hover) clearInterval(intervalRef?.current);
-		};
-	}, [index, totalSlides, next, hover, stop]);
-
-	// se non ci sono immagini ritorna null
-	if (!images || images.length === 0) return null;
-
+export function Hero({ text }: HeroProps) {
 	return (
 		<div className="relative w-full overflow-hidden ">
-			{/* Carosello sulla destra e Testo di benvenuto a sinistra */}
+			{/* Video sulla destra e Testo di benvenuto a sinistra */}
 			<div
 				className={`${text && "max-md:grid-cols-1 max-md:grid-rows-[120px_1fr_50px]"} grid-cols-2 justify-center grid max-h-max w-full`}
 			>
@@ -96,35 +31,10 @@ export function Hero({ images, text }: HeroProps) {
 					) : null}
 				</div>
 
-				{/* container contenente il carosello */}
+				{/* container contenente il video */}
 				<div
-					// ref={containerRef}
-					// onMouseEnter={() => {
-					// 	setHover(true);
-					// }}
-					// onMouseLeave={() => {
-					// 	setHover(false);
-					// }}
 					className={`flex mb-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide rounded-2xl max-md:row-start-2 max-md:row-end-2 max-md:mt-8`}
 				>
-					{/* {images.map((image) => (
-						<motion.div
-							initial={{ transform: "translateX(300px)" }}
-							animate={{ transform: "translateX(0px)" }}
-							transition={{ type: "spring" }}
-							key={image._key}
-							className="min-w-full max-h-max relative flex flex-row-reverse"
-						>
-							<Image
-								src={urlFor(image).width(1600).height(1200).url()}
-								alt="carosello"
-								quality={90}
-								width={800}
-								height={600}
-								className="object-cover w-full "
-							/>
-						</motion.div>
-					))} */}
 					<motion.div
 						initial={{ transform: "translateX(300px)" }}
 						animate={{ transform: "translateX(0px)" }}
@@ -135,7 +45,7 @@ export function Hero({ images, text }: HeroProps) {
 							autoPlay
 							controls
 							muted
-							src={"/Video_promo.mov"}
+							src={"/Video.mov"}
 							className="rounded-2xl"
 						/>
 					</motion.div>
