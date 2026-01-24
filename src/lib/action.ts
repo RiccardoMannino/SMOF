@@ -8,10 +8,6 @@ import { supabase } from "./supabase";
 
 import { revalidatePath, revalidateTag } from "next/cache";
 
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-// 	apiVersion: "2025-06-30.basil",
-// });
-
 type Uid = {
 	uid: string | undefined;
 	subscribeNewsletter?: boolean;
@@ -33,7 +29,7 @@ export async function createOrUpdateUser(userData: User & Uid) {
 		// Prima controlla se l'utente esiste già
 		const existingUser = await readClient.fetch(
 			`*[_type == "user" && uid == $uid][0]`,
-			{ uid }
+			{ uid },
 		);
 		console.log(existingUser);
 		if (existingUser) {
@@ -87,7 +83,7 @@ export async function updateNewsletterSubscription(subscribe: boolean) {
 		// Trova l'utente tramite email (più affidabile dell'ID)
 		const existingUser = await readClient.fetch(
 			`*[_type == "user" && email == $email][0]`,
-			{ email: userEmail }
+			{ email: userEmail },
 		);
 
 		if (!existingUser) {
@@ -119,7 +115,7 @@ export async function createCart(
 	email: string | null | undefined,
 	updateFields: nuovoOggetto,
 	id_biglietto: string,
-	quantita: number
+	quantita: number,
 ) {
 	// Recupera l'oggetto esistente se presente
 	const { data, error } = await supabase
@@ -205,7 +201,7 @@ export async function aggiungiQuantita(
 	email: string | null | undefined,
 	updateFields: nuovoOggetto,
 	id_biglietto: string,
-	quantita: number
+	quantita: number,
 ) {
 	// Recupera l'oggetto esistente se presente
 	const { data, error } = await supabase

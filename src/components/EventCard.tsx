@@ -29,8 +29,6 @@ export function EventCard(props: EVENTS_QUERY_RESULT[0]) {
 							<span className="bg-mustard z-0 absolute inset-0 rounded-lg opacity-0 transition-all group-hover:opacity-100 group-hover:scale-y-110 group-hover:scale-x-105 scale-75" />
 						</h2>
 					</CardTitle>
-
-					<CardAction></CardAction>
 				</CardHeader>
 				<CardContent className="self-center max-lg:w-full">
 					{immagine ? (

@@ -1,13 +1,8 @@
 import { PageBuilder } from "@/components/PageBuilder";
 import { sanityFetch } from "../../sanity/lib/live";
-import {
-	EVENTS_QUERY,
-	HOME_PAGE_QUERY,
-	PARTNER_QUERY,
-} from "../../sanity/lib/queries";
+import { HOME_PAGE_QUERY, PARTNER_QUERY } from "../../sanity/lib/queries";
 
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
-import { getNewsletterStatus } from "@/lib/getNewsletterStatus";
 import Image from "next/image";
 import { urlFor } from "../../sanity/lib/image";
 
@@ -16,17 +11,9 @@ export default async function Page() {
 		query: HOME_PAGE_QUERY,
 	});
 
-	const { data: eventi } = await sanityFetch({
-		query: EVENTS_QUERY,
-	});
-
 	const { data: partner } = await sanityFetch({
 		query: PARTNER_QUERY,
 	});
-
-	const { session, isSubscribed } = await getNewsletterStatus();
-
-	// console.log("sottoscritto alla newsletter:", isSubscribed);
 
 	// home page
 	return page?.homePage?.content ? (

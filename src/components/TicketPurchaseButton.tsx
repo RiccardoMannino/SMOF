@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { createCart } from "@/lib/action";
 import { toast } from "react-toastify";
@@ -62,7 +63,7 @@ export function TicketPurchaseButton({
 
 			if (!response.ok) {
 				throw new Error(
-					data.message || "Errore durante la creazione del checkout"
+					data.message || "Errore durante la creazione del checkout",
 				);
 			}
 			// Ottieni la URL della sessione e reindirizza
@@ -94,7 +95,7 @@ export function TicketPurchaseButton({
 				email,
 				nuovoOggetto,
 				nuovoOggetto.id_biglietto,
-				nuovoOggetto.quantita
+				nuovoOggetto.quantita,
 			),
 			{
 				pending: "Aggiornamento carrello in corso...",
@@ -114,7 +115,7 @@ export function TicketPurchaseButton({
 						return `Operazione fallita: ${errorObject.message || errorObject.toString() || "Errore generico"}`;
 					},
 				},
-			}
+			},
 		);
 	}
 
