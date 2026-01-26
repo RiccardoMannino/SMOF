@@ -103,11 +103,10 @@ export default function Page() {
 							className="max-sm:w-40 max-sm:h-[70px] max-sm:self-center mb-2"
 						/>
 						<div className="flex flex-col gap-3 font-medium">
-							<p>
-								Effetto Outdoor – natura e territorio APS ETS Via Ninnì Cassarà
-								8,San Martino delle Scale-Monreale (PA)
+							<p className="font-semibold">
+								Effetto Outdoor – natura e territorio APS ETS
 							</p>
-
+							<p>Via Ninnì Cassarà 8,San Martino delle Scale - Monreale (PA)</p>
 							<p>effettooutdoor@gmail.com</p>
 							<p>PEC effettooutdoor@postecertifica.it</p>
 							<p>C.F. 97386790824</p>
@@ -162,7 +161,7 @@ export default function Page() {
 									{...(register("termini"), { required: true })}
 								/>
 								<label className="">
-									ho letto l'informativa e presto il consenso al trattamento dei
+									Ho letto l'informativa e presto il consenso al trattamento dei
 									dati personali
 								</label>
 							</div>

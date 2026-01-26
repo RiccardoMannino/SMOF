@@ -5,7 +5,7 @@ import { dataGiornaliera } from "@/lib/date";
 import { useState } from "react";
 import { EventCard } from "./EventCard";
 import { EVENTS_QUERY_RESULT } from "../sanity/sanity.types";
-import { ArrowBigDown, ArrowBigUp } from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, LucideLightbulb } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 
 export function CustomSelect({
@@ -128,6 +128,13 @@ export function CustomSelect({
 					)}
 				</AnimatePresence>
 			</div>
+			<p className="flex gap-2 text-ivory font-semibold">
+				<span>
+					<LucideLightbulb />
+				</span>
+				Il programma è in costante aggiornamento , nuovi eventi verranno
+				aggiunti presto!!
+			</p>
 			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-10">
 				{/* Eventi filtrabili */}
 				{filteredEvents.map((event) => (

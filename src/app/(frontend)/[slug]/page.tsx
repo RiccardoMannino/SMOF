@@ -34,7 +34,7 @@ export default async function Page({
 
 	// elimina i doppioni degli anni di tutti gli eventi, fattibile anche con la GROQ di sanity
 	const dateEventi = Array.from(
-		new Set(eventi.map((date) => dataGiornaliera(date.data)))
+		new Set(eventi.map((date) => dataGiornaliera(date.data))),
 	);
 
 	// Tipi eventi non duplicati , fattibile anche con la GROQ di sanity
@@ -79,7 +79,7 @@ export default async function Page({
 		// raggruppa i partner per tipo
 		const partnerRaggruppati = Object.groupBy(
 			partner,
-			(pa) => pa?.tipo as string
+			(pa) => pa?.tipo as string,
 		);
 
 		return (
@@ -130,7 +130,7 @@ export default async function Page({
 									))}
 								</div>
 							</div>
-						)
+						),
 					)}
 				</div>
 			</main>

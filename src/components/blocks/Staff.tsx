@@ -72,18 +72,29 @@ export function Staff({ ...props }: StaffProps) {
 			<div className="relative flex-col flex gap-4 bg-ivory text-chocolate p-5 rounded-2xl hover:bg-ivory/90 transition-colors text-xl sm:text-2xl lg:text-3xl xl:text-4xl tracking-tight max-sm:w-80 max-sm:self-center">
 				{immagini
 					? immagini.map((image) => (
-							<Image
+							<div
 								key={image._key}
-								src={urlFor(image).width(400).height(400).url()}
-								alt={`${nome}`}
-								width={400}
-								height={400}
-								className="rounded-2xl cursor-pointer object-cover max-sm:w-80 self-center max-sm:h-80 h-52 w-fit  "
-								onClick={() => handleImage(image)}
-							/>
+								className="relative flex flex-col items-center gap-3"
+							>
+								<Image
+									src={urlFor(image).width(400).height(400).url()}
+									alt={`${nome}`}
+									width={400}
+									height={400}
+									className="rounded-2xl cursor-pointer object-cover max-sm:w-80 self-center max-sm:h-80 h-52 w-fit  "
+								/>
+								<p className="text-center font-medium">{nome}</p>
+								<button
+									className={
+										"bg-mustard rounded-2xl w-fit p-2 self-center cursor-pointer"
+									}
+									onClick={() => handleImage(image)}
+								>
+									Biografia
+								</button>
+							</div>
 						))
 					: null}
-				<p className="text-center font-medium">{nome}</p>
 			</div>
 		</section>
 	);
