@@ -145,7 +145,7 @@ export default async function Page({
 
 		return (
 			<main className="container mx-auto p-12 flex flex-col gap-6 text-3xl">
-				<h1 className="text-center text-mustard font-semibold mb-5">
+				<h1 className="text-center text-mustard font-semibold mb-5 clamp">
 					Ospitalità
 				</h1>
 				<div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4 justify-items-center ">
