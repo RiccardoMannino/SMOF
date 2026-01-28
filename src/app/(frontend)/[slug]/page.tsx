@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -6,6 +5,7 @@ import {
 	PAGE_QUERY,
 	EVENTS_QUERY,
 	PARTNER_QUERY,
+	OSPITALITA_QUERY,
 } from "../../../sanity/lib/queries";
 import { sanityFetch } from "../../../sanity/lib/live";
 import { urlFor } from "../../../sanity/lib/image";
@@ -15,6 +15,7 @@ import { dataGiornaliera } from "@/lib/date";
 import { ArrowBigLeft } from "lucide-react";
 import { PortableText } from "next-sanity";
 import { components } from "@/sanity/portableTextComponent";
+import { Card, CardContent, CardTitle } from "@/components/ui/Card";
 
 export default async function Page({
 	params,
@@ -137,9 +138,46 @@ export default async function Page({
 		);
 	}
 
-	// if ((await params).slug === "ospitalita") {
-	// 	return <div>Ancora noiiii</div>;
-	// }
+	if ((await params).slug === "ospitalita") {
+		const { data: ospitalita } = await sanityFetch({
+			query: OSPITALITA_QUERY,
+		});
+
+		return (
+			<main className="container mx-auto p-12 flex flex-col gap-6 text-3xl">
+				<h1 className="text-center text-mustard font-semibold mb-5">
+					Ospitalità
+				</h1>
+				<div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4 justify-items-center ">
+					{ospitalita.map((osp) => (
+						<Card
+							key={osp._id}
+							className="bg-ivory text-chocolate text-center text-2xl 
+							"
+						>
+							<Link
+								href={`ospitalita/${osp.slug?.current}`}
+								className="flex flex-col gap-3"
+							>
+								<CardTitle className="">{osp.luogo}</CardTitle>
+								<CardContent>
+									{osp.immagine ? (
+										<Image
+											className="rounded-2xl"
+											src={urlFor(osp.immagine).auto("format").url()}
+											alt={page?.intestazione || ""}
+											width="1800"
+											height="480"
+										/>
+									) : null}
+								</CardContent>
+							</Link>
+						</Card>
+					))}
+				</div>
+			</main>
+		);
+	}
 
 	return page ? (
 		<>
