@@ -84,12 +84,12 @@ export function Staff({ ...props }: StaffProps) {
 									alt={`${nome}`}
 									width={400}
 									height={400}
-									className="rounded-2xl cursor-pointer object-cover max-sm:w-80 self-center max-sm:h-80 h-52 w-fit  "
+									className="rounded-2xl object-cover max-sm:w-80 self-center max-sm:h-80 h-52 w-fit  "
 								/>
 								<p className="text-center font-medium">{nome}</p>
 								<button
 									className={
-										"bg-mustard rounded-2xl w-fit p-2 self-center cursor-pointer"
+										"bg-mustard rounded-2xl w-fit p-2 self-center cursor-pointer text-xl"
 									}
 									onClick={() => handleImage(image)}
 								>

@@ -163,7 +163,7 @@ export default async function Page({
 								<CardContent>
 									{osp.immagine ? (
 										<Image
-											className="rounded-2xl"
+											className="rounded-2xl h-72"
 											src={urlFor(osp.immagine).auto("format").url()}
 											alt={page?.intestazione || ""}
 											width="1800"
