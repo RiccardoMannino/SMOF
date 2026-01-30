@@ -45,9 +45,7 @@ export async function Header() {
 				<div className="flex gap-2.5 justify-between p-2 bg-forest/50 w-full text-ivory">
 					<div className="flex gap-2 items-center">
 						<Link
-							href={
-								"https://www.facebook.com/profile.php?id=61564533287297&sk=reels_tab"
-							}
+							href={"https://www.facebook.com/profile.php?id=61586684685045"}
 							target="_blank"
 						>
 							<Image
@@ -58,10 +56,7 @@ export async function Header() {
 								alt="link facebook"
 							/>
 						</Link>
-						<Link
-							href={"https://www.instagram.com/effetto.outdoor/"}
-							target="_blank"
-						>
+						<Link href={"https://www.instagram.com/smof_fest/"} target="_blank">
 							<Image
 								src={InstagramWhite}
 								height={25}

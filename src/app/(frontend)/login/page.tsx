@@ -8,7 +8,7 @@ export default async function page() {
 	const session = await auth();
 
 	return (
-		<section className=" flex justify-center items-center h-[30rem]">
+		<section className=" flex justify-center items-center h-120">
 			<div className="flex flex-col gap-6 p-2 items-center justify-center bg-ivory rounded-2xl">
 				<Image src={"/logo_smof.png"} alt="smof" width={100} height={120} />
 				{!session?.user?.email ? (
@@ -28,10 +28,10 @@ export default async function page() {
 						</h2>
 						<Link
 							href={"/"}
-							className="text-3xl flex items-center  font-semibold w-full text-center text-chocolate"
+							className="text-3xl flex items-center justify-center gap-4 font-semibold w-full text-center text-chocolate"
 						>
 							<ArrowLeft />
-							<span className="self-center">Torna alla home</span>
+							<span className="">Torna alla home</span>
 						</Link>
 					</>
 				)}
