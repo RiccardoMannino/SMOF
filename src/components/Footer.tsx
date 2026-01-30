@@ -32,7 +32,7 @@ export async function Footer() {
 			link: [
 				{
 					nome: "Facebook",
-					href: "https://www.facebook.com/profile.php?id=61564533287297&sk=reels_tab",
+					href: "https://www.facebook.com/profile.php?id=61586684685045",
 					icona: (
 						<Image
 							src={Facebook}
@@ -45,7 +45,7 @@ export async function Footer() {
 				},
 				{
 					nome: "Instagram",
-					href: "https://www.instagram.com/effetto.outdoor/",
+					href: "https://www.instagram.com/smof_fest/",
 					icona: (
 						<Image
 							src={Instagram}
