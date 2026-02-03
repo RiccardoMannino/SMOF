@@ -152,7 +152,7 @@ export default function Page() {
 							<textarea
 								placeholder="Messaggio"
 								className="border-2 border-chocolate rounded p-2"
-								{...(register("messaggio"), { required: true })}
+								{...register("messaggio", { required: true })}
 							/>
 							<div className="flex gap-2 ">
 								<input
