@@ -52,26 +52,23 @@ export default function Page() {
 			);
 
 			toast(
-				(t) => (
-					<div
-						className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
-					>
-						Messaggio inviato con successo ✅
-					</div>
-				),
-				{ transition: Slide },
+				<div className="w-full flex gap-4 justify-center py-4 text-chocolate">
+					Messaggio inviato con successo ✅
+				</div>,
+				{
+					transition: Slide,
+					style: { background: "#fdf6ec" },
+				},
 			);
 		} catch (error) {
 			console.error(error);
 			toast(
-				(t) => (
-					<div
-						className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
-					>
-						Errore nell&apos;invio del messaggio ⛔
-					</div>
-				),
-				{ transition: Slide },
+				<div
+					className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
+				>
+					Errore nell&apos;invio del messaggio ⛔
+				</div>,
+				{ transition: Slide, style: { background: "#fdf6ec" } },
 			);
 		} finally {
 			setIsSending(false);
