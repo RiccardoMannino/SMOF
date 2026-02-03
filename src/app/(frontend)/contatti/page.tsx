@@ -51,7 +51,7 @@ export default function Page() {
 				config.emailJsPublicKey,
 			);
 
-			toast.success(
+			toast(
 				(t) => (
 					<div
 						className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
@@ -63,7 +63,7 @@ export default function Page() {
 			);
 		} catch (error) {
 			console.error(error);
-			toast.error(
+			toast(
 				(t) => (
 					<div
 						className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
@@ -152,8 +152,13 @@ export default function Page() {
 							<textarea
 								placeholder="Messaggio"
 								className="border-2 border-chocolate rounded p-2"
-								{...register("messaggio", { required: true })}
+								{...register("messaggio", {
+									required: true,
+									maxLength: 250,
+									minLength: 30,
+								})}
 							/>
+
 							<div className="flex gap-2 ">
 								<input
 									type="checkbox"
