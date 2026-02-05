@@ -22,12 +22,15 @@ type ConfigData = {
 export default function Page() {
 	const [isSending, setIsSending] = useState(false);
 
+	// riferimento al form
 	const form = useRef(null);
 
+	// funzione per inviare email
 	const sendEmail = async (data: FieldValues) => {
 		try {
 			setIsSending(true);
 
+			// recupera la configurazione dall'API
 			const response = await fetch("/api/config");
 
 			if (!response.ok) {
@@ -44,6 +47,7 @@ export default function Page() {
 				termini: data.termini,
 			};
 
+			// invia l'email usando emailjs
 			await emailjs.send(
 				config.emailJsServiceId,
 				config.emailJsTemplateId,
@@ -51,6 +55,7 @@ export default function Page() {
 				config.emailJsPublicKey,
 			);
 
+			// notifica di successo
 			toast(
 				<div className="w-full flex gap-4 justify-center py-4 text-chocolate">
 					Messaggio inviato con successo ✅
@@ -62,6 +67,7 @@ export default function Page() {
 			);
 		} catch (error) {
 			console.error(error);
+			// notifica di errore
 			toast(
 				<div
 					className={`rounded-full bg-ivory px-6 py-4 text-chocolate shadow-md`}
@@ -84,12 +90,13 @@ export default function Page() {
 		formState: { errors },
 	} = useForm<IFormInput>();
 
+	// osserva i cambiamenti nel form
 	const formValue = watch();
 
 	return (
 		<section className="container mx-auto mb-14 max-sm:mb-8 max-w-5xl px-2 ">
 			<div className="max-h-max">
-				<h1 className="text-2xl sm:text-3xl md:text-5xl mt-20 font-bold text-center max-sm:mb-5 mb-20 text-mustard">
+				<h1 className="text-[clamp(2rem,4vw+1rem,3rem)] mt-20 font-bold text-center max-sm:mb-10 mb-20 text-mustard">
 					Contatti
 				</h1>
 				<div className="grid grid-cols-1  max-sm:place-items-center sm:grid-cols-[350px_1fr] gap-8 h-full w-full bg-ivory text-chocolate rounded-2xl p-4">
