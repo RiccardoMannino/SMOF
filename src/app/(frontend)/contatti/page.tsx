@@ -84,6 +84,8 @@ export default function Page() {
 		formState: { errors },
 	} = useForm<IFormInput>();
 
+	const formValue = watch();
+
 	return (
 		<section className="container mx-auto mb-14 max-sm:mb-8 max-w-5xl px-2 ">
 			<div className="max-h-max">
@@ -123,12 +125,12 @@ export default function Page() {
 							<label>Nome</label>
 							<input
 								placeholder="Nome"
-								className="border-2 border-chocolate rounded p-2"
+								className="border-2 border-chocolate rounded p-2 focus:ring-chocolate  focus:ring-3 focus:outline-none"
 								{...register("nome", { required: true, maxLength: 20 })}
 							/>
 							<label>Cognome</label>
 							<input
-								className="border-2 border-chocolate rounded p-2"
+								className="border-2 border-chocolate rounded p-2 focus:ring-chocolate  focus:ring-3 focus:outline-none"
 								placeholder="Cognome"
 								{...register("cognome", {
 									required: true,
@@ -137,7 +139,7 @@ export default function Page() {
 							/>
 							<label>Email</label>
 							<input
-								className="border-2 border-chocolate rounded p-2"
+								className="border-2 border-chocolate rounded p-2 focus:ring-chocolate  focus:ring-3 focus:outline-none"
 								type="email"
 								placeholder="Email"
 								{...register("email", {
@@ -148,13 +150,17 @@ export default function Page() {
 							<label>Messaggio</label>
 							<textarea
 								placeholder="Messaggio"
-								className="border-2 border-chocolate rounded p-2"
+								className="border-2 border-chocolate rounded p-2 focus:ring-chocolate  focus:ring-3 focus:outline-none"
 								{...register("messaggio", {
 									required: true,
 									maxLength: 250,
 									minLength: 30,
 								})}
 							/>
+							<p className="mt-2 text-lg text-chocolate font-semibold">
+								Caratteri Digitati: {formValue.messaggio?.length || 0} / 250
+								<br /> (inserisci minimo 30 caratteri)
+							</p>
 
 							<div className="flex gap-2 ">
 								<input
