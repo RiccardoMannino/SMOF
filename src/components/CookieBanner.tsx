@@ -37,7 +37,7 @@ export default function CookieBanner() {
 					initial={{ opacity: 0 }}
 					className="bg-ivory max-w-7xl max-sm:w-full max-sm:max-w-96 mx-auto max-sm:h-96 fixed max-sm:bottom-4  bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-2xl text-sm text-chocolate z-50 max-sm:overflow-y-scroll"
 				>
-					<div className="flex flex-col  items-center gap-4 text-xl">
+					<div className="flex flex-col  items-center gap-4 text-xl max-sm:text-base">
 						<h1 className="self-start">🍪 Cookie Banner</h1>
 						<p className="text-justify">
 							Questo sito utilizza esclusivamente cookie tecnici necessari al

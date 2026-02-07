@@ -1,6 +1,6 @@
 export default function page() {
 	return (
-		<section className="px-4 py-8 max-w-6xl mx-auto text-[clamp(1rem,3vw+2rem,1.5rem)] flex flex-col gap-6 bg-ivory rounded-lg my-10 text-chocolate">
+		<section className="px-4 py-8 max-w-6xl mx-auto max-sm:text-lg text-xl flex flex-col gap-6 bg-ivory rounded-lg my-10 text-chocolate">
 			<div>
 				<h1 className="font-semibold">🍪 COOKIE POLICY – smofest.it</h1>
 			</div>
