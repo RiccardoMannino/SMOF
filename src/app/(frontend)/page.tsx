@@ -5,6 +5,7 @@ import { HOME_PAGE_QUERY, PARTNER_QUERY } from "../../sanity/lib/queries";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
 import Image from "next/image";
 import { urlFor } from "../../sanity/lib/image";
+import CookieBanner from "@/components/CookieBanner";
 
 export default async function Page() {
 	const { data: page } = await sanityFetch({
@@ -18,6 +19,7 @@ export default async function Page() {
 	// home page
 	return page?.homePage?.content ? (
 		<>
+			<CookieBanner />
 			<main className="grid grid-cols-1 pt-4 px-4">
 				{/* top section */}
 				<section className="mb-8 md:p-8 flex flex-col">

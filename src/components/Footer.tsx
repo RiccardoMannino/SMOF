@@ -74,9 +74,9 @@ export async function Footer() {
 		{
 			titolo: "Legale",
 			link: [
-				{ nome: "Privacy Policy", href: "" },
-				{ nome: "Termini di Servizio", href: "" },
-				{ nome: "Cookie Policy", href: "" },
+				{ nome: "Privacy Policy", href: "privacy" },
+				{ nome: "Termini di Servizio", href: "termini" },
+				{ nome: "Cookie Policy", href: "cookie" },
 			],
 		},
 		{

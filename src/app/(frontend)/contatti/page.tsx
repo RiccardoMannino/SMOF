@@ -4,6 +4,7 @@ import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
 import { toast, Slide } from "react-toastify";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import Link from "next/link";
 
 type IFormInput = {
 	nome: string;
@@ -176,8 +177,15 @@ export default function Page() {
 									{...(register("termini"), { required: true })}
 								/>
 								<label className="">
-									Ho letto l'informativa e presto il consenso al trattamento dei
-									dati personali
+									Ho letto{" "}
+									<Link
+										target="_blank"
+										className="hover:underline transition-all"
+										href={"/privacy"}
+									>
+										l'informativa
+									</Link>{" "}
+									e presto il consenso al trattamento dei dati personali
 								</label>
 							</div>
 							<button
