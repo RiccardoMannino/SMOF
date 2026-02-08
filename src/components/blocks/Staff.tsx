@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { createPortal } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { s } from "motion/react-client";
 
 export type StaffProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
@@ -31,9 +32,12 @@ export function Staff({ ...props }: StaffProps) {
 
 	const open = active !== null;
 
+	// Ottieni lo slug dallo search params
+	const staffSlug = searchParams.get("staff");
+
 	// Apre la modale e imposta l'immagine attiva
 	const handleImage = () => {
-		route.push(`/chi-siamo?staff=${slug?.current}`);
+		return route.push(`/chi-siamo?staff=${slug?.current}`);
 	};
 
 	// Chiude la modale
@@ -44,17 +48,12 @@ export function Staff({ ...props }: StaffProps) {
 
 	// Effetto per sincronizzare lo stato con l'URL
 	useEffect(() => {
-		// Ottieni lo slug dallo search params
-		const staffSlug = searchParams.get("staff");
-
-		// Se lo slug corrisponde a quello dello staff, apri la modale
-		if (staffSlug === slug?.current) {
-			// Se lo slug corrisponde, apri la modale con l'immagine attiva
-			if (immagini && immagini.length > 0) {
-				setActive(immagini[0]); // Puoi scegliere quale immagine mostrare
-			}
+		// Se lo slug corrisponde a quello dello staff, apri la modale con l'immagine attiva
+		if (staffSlug === slug?.current && immagini && immagini.length > 0) {
+			// Se lo slug corrisponde, apri la modale
+			setActive(immagini[0]);
 		}
-	}, []);
+	}, [immagini]);
 
 	return (
 		<section className="overflow-hidden">
