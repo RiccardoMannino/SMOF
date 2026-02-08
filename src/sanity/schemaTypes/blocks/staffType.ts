@@ -23,5 +23,13 @@ export const staffType = defineType({
 			validation: (Rule) => Rule.required().min(1),
 			description: "Inserisci le immagini dello staff.",
 		}),
+		defineField({
+			name: "slug", // valore usato nella query
+			title: "Slug", // titolo nell'editor
+			type: "slug", // tipo del field
+			options: {
+				source: "nome",
+			},
+		}),
 	],
 });

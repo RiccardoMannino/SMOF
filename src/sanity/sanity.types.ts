@@ -184,6 +184,7 @@ export type Staff = {
     _type: "image";
     _key: string;
   }>;
+  slug?: Slug;
 };
 
 export type PageReference = {
@@ -898,6 +899,7 @@ export type PAGE_QUERY_RESULT = {
           _type: "image";
           _key: string;
         }>;
+        slug?: Slug;
       }
   > | null;
   ordine?: number;
@@ -1001,6 +1003,7 @@ export type HOME_PAGE_QUERY_RESULT =
                 _type: "image";
                 _key: string;
               }>;
+              slug?: Slug;
             }
         > | null;
         mainImage?: {

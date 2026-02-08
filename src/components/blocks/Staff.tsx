@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { PAGE_QUERY_RESULT } from "../../sanity/sanity.types";
+import { useEffect, useState } from "react";
+import { PAGE_QUERY_RESULT, Slug } from "../../sanity/sanity.types";
 import { urlFor } from "../../sanity/lib/image";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { createPortal } from "react-dom";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export type StaffProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
@@ -13,10 +15,16 @@ export type StaffProps = Extract<
 >;
 
 export function Staff({ ...props }: StaffProps) {
-	const { nome, descrizione, immagini } = props;
+	const { nome, descrizione, immagini, slug } = props;
+
+	const searchParams = useSearchParams();
+	const route = useRouter(); // Hook per la navigazione
 
 	// type che non può essere null o undefined cioè non nullable
 	type ImageType = NonNullable<StaffProps["immagini"]>[number];
+	type StaffType = NonNullable<
+		StaffProps["slug"]
+	>[Slug["current"] extends string ? number : never];
 
 	// Stato per aprire/chiudere
 	const [active, setActive] = useState<ImageType | null>(null);
@@ -24,22 +32,37 @@ export function Staff({ ...props }: StaffProps) {
 	const open = active !== null;
 
 	// Apre la modale e imposta l'immagine attiva
-	const handleImage = (image: ImageType) => {
-		setActive(image);
+	const handleImage = () => {
+		route.push(`/chi-siamo?staff=${slug?.current}`);
 	};
 
 	// Chiude la modale
 	const handleClose = () => {
 		setActive(null);
+		route.back(); // Torna alla pagina precedente
 	};
+
+	// Effetto per sincronizzare lo stato con l'URL
+	useEffect(() => {
+		// Ottieni lo slug dallo search params
+		const staffSlug = searchParams.get("staff");
+
+		// Se lo slug corrisponde a quello dello staff, apri la modale
+		if (staffSlug === slug?.current) {
+			// Se lo slug corrisponde, apri la modale con l'immagine attiva
+			if (immagini && immagini.length > 0) {
+				setActive(immagini[0]); // Puoi scegliere quale immagine mostrare
+			}
+		}
+	}, []);
 
 	return (
 		<section className="overflow-hidden">
 			{/* se open visualizza la modale */}
 			{
-				createPortal(
-					open && (
-						// modale
+				open &&
+					// modale
+					createPortal(
 						<AnimatePresence>
 							<motion.div
 								initial={{ opacity: 0 }}
@@ -64,10 +87,10 @@ export function Staff({ ...props }: StaffProps) {
 									</p>
 								</div>
 							</motion.div>
-						</AnimatePresence>
-					),
-					document.body,
-				)
+						</AnimatePresence>,
+						document.body,
+					)
+
 				//fine modale
 			}
 
@@ -91,7 +114,7 @@ export function Staff({ ...props }: StaffProps) {
 									className={
 										"bg-mustard rounded-2xl w-fit p-2 self-center cursor-pointer text-xl"
 									}
-									onClick={() => handleImage(image)}
+									onClick={handleImage}
 								>
 									Biografia
 								</button>
