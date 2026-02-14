@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { createPortal } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { s } from "motion/react-client";
 
 export type StaffProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERY_RESULT>["content"]>[number],
@@ -23,9 +22,6 @@ export function Staff({ ...props }: StaffProps) {
 
 	// type che non può essere null o undefined cioè non nullable
 	type ImageType = NonNullable<StaffProps["immagini"]>[number];
-	type StaffType = NonNullable<
-		StaffProps["slug"]
-	>[Slug["current"] extends string ? number : never];
 
 	// Stato per aprire/chiudere
 	const [active, setActive] = useState<ImageType | null>(null);
@@ -89,7 +85,6 @@ export function Staff({ ...props }: StaffProps) {
 						</AnimatePresence>,
 						document.body,
 					)
-
 				//fine modale
 			}
 

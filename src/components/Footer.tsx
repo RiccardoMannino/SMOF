@@ -21,7 +21,7 @@ export async function Footer() {
 				{ nome: "Chi siamo", href: "chi-siamo" },
 				{ nome: "Eventi", href: "eventi" },
 				{ nome: "Partners", href: "partners" },
-				{ nome: "Ticket", href: "ticket" },
+				{ nome: "Ticket", href: "tickets" },
 				{ nome: "Ospitalità", href: "ospitalita" },
 				{ nome: "Programma", href: "programma" },
 				{ nome: "Galleria", href: "galleria" },

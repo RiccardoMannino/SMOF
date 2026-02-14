@@ -1,11 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
-import {
-	GALLERIES_QUERY,
-	LIST_PAGE_QUERY,
-	OSPITALITA_QUERY,
-} from "../sanity/lib/queries";
+import { LIST_PAGE_QUERY, OSPITALITA_QUERY } from "../sanity/lib/queries";
 import { signOutAction } from "@/lib/action";
 import YoutubeWhite from "../../public/youtube-white.svg";
 import InstagramWhite from "../../public/instagram-white.svg";
@@ -20,9 +16,6 @@ export async function Header() {
 		query: LIST_PAGE_QUERY,
 	});
 
-	const { data: galleria } = await sanityFetch({
-		query: GALLERIES_QUERY,
-	});
 	const { data: ospitalita } = await sanityFetch({
 		query: OSPITALITA_QUERY,
 	});
@@ -82,29 +75,32 @@ export async function Header() {
 						<span className="font-bold max-sm:text-xs flex self-center max-[350px]:text-center">
 							11-12-13 settembre 2026
 						</span>
+						{/* TODO: raggruppare all'interno dell'immagine utente al passaggio del mouse carrello e nome utente*/}
 						{session?.user?.email ? (
 							<>
-								<Link
-									href="/utente"
-									className="flex items-center max-sm:text-xs"
-								>
-									<Image
-										src={session?.user?.image as string}
-										alt="avatar"
-										width={24}
-										height={24}
-										className="rounded-full mr-1 cursor-pointer"
-									/>
-									<p>
-										{session.user.name?.toUpperCase().slice(0, 1)}
-										<span>
-											{session.user.name?.slice(1).split(" ").slice(0, 1)}
-										</span>
-									</p>
-								</Link>
-								<Link href={"/carrello"}>
-									<ShoppingCart className="stroke-ivory " size={18} />
-								</Link>
+								<li className="group flex items-center relative">
+									<Link
+										href="/utente"
+										className="flex items-center max-sm:text-xs group-hover:flex flex-col"
+									>
+										<Image
+											src={session?.user?.image as string}
+											alt="avatar"
+											width={24}
+											height={24}
+											className="rounded-full mr-1 cursor-pointer "
+										/>
+										<p>
+											{session.user.name?.toUpperCase().slice(0, 1)}
+											<span>
+												{session.user.name?.slice(1).split(" ").slice(0, 1)}
+											</span>
+										</p>
+									</Link>
+									<Link href={"/carrello"}>
+										<ShoppingCart className="stroke-ivory " size={18} />
+									</Link>
+								</li>
 								<form action={signOutAction} className=" ">
 									<button
 										type="submit"
