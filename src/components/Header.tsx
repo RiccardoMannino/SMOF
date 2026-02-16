@@ -75,7 +75,7 @@ export async function Header() {
 						<span className="font-bold max-sm:text-xs flex self-center max-[350px]:text-center">
 							11-12-13 settembre 2026
 						</span>
-						{/* TODO: raggruppare all'interno dell'immagine utente al passaggio del mouse carrello e nome utente*/}
+
 						{session?.user?.email ? (
 							<>
 								<li className="group flex items-center relative">
@@ -90,7 +90,7 @@ export async function Header() {
 											height={24}
 											className="rounded-full mr-1 cursor-pointer "
 										/>
-										<p className="hidden  absolute left-0 group-hover:flex items-center gap-1 font-semibold text-ivory transition-colors">
+										<p className="hidden  absolute top-6 left-0 group-hover:flex items-center font-semibold text-ivory transition-all  bg-forest px-2 py-1 rounded-md">
 											{session.user.name?.toUpperCase().slice(0, 1)}
 											<span>
 												{session.user.name?.slice(1).split(" ").slice(0, 1)}
