@@ -90,7 +90,7 @@ export async function Header() {
 											height={24}
 											className="rounded-full mr-1 cursor-pointer "
 										/>
-										<p>
+										<p className="hidden group-hover:flex items-center gap-1 font-semibold text-ivory transition-colors">
 											{session.user.name?.toUpperCase().slice(0, 1)}
 											<span>
 												{session.user.name?.slice(1).split(" ").slice(0, 1)}
