@@ -75,6 +75,7 @@ export function Staff({ ...props }: StaffProps) {
 										alt={`${nome}`}
 										width={1200}
 										height={800}
+										priority
 										className="w-full min-h-96 max-sm:min-h-64 object-contain  self-center cursor-pointer rounded-2xl"
 									/>
 									<p className="text-center whitespace-pre-line font-semibold w-fit">
@@ -101,6 +102,7 @@ export function Staff({ ...props }: StaffProps) {
 									alt={`${nome}`}
 									width={400}
 									height={400}
+									priority
 									className="rounded-2xl object-cover max-sm:w-80 self-center max-sm:h-80 h-52 w-fit  "
 								/>
 								<p className="text-center font-medium">{nome}</p>

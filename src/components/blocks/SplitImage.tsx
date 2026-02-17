@@ -112,6 +112,7 @@ export function SplitImage({
 									width={800}
 									height={600}
 									className="object-cover w-full "
+									priority
 								/>
 							</motion.div>
 						))

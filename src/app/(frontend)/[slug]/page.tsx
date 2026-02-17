@@ -138,6 +138,8 @@ export default async function Page({
 		);
 	}
 
+	// Pagina Ospitalità
+
 	if ((await params).slug === "ospitalita") {
 		const { data: ospitalita } = await sanityFetch({
 			query: OSPITALITA_QUERY,
