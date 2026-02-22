@@ -119,8 +119,8 @@ export default async function Page({
 													src={urlFor(partnerSingolo?.immagine)
 														.maxWidth(200)
 														.minHeight(299)
-														.quality(80)
-														.auto("format")
+														.quality(70)
+														.format("webp")
 														.url()}
 													alt={partnerSingolo?.nome || ""}
 													width="220"
@@ -166,7 +166,10 @@ export default async function Page({
 									{osp.immagine ? (
 										<Image
 											className="rounded-2xl h-72"
-											src={urlFor(osp.immagine).auto("format").url()}
+											src={urlFor(osp.immagine)
+												.format("webp")
+												.quality(70)
+												.url()}
 											alt={page?.intestazione || ""}
 											width="1800"
 											height="480"
@@ -187,7 +190,7 @@ export default async function Page({
 				{page.mainImage ? (
 					<Image
 						className="rounded-2xl"
-						src={urlFor(page?.mainImage).auto("format").url()}
+						src={urlFor(page?.mainImage).format("webp").quality(70).url()}
 						alt={page?.intestazione || ""}
 						width="1800"
 						height="480"
@@ -216,7 +219,7 @@ export default async function Page({
 									image: ({ value }: any) =>
 										value ? (
 											<Image
-												src={urlFor(value).auto("format").url()}
+												src={urlFor(value).format("webp").quality(70).url()}
 												alt={value.alt || "immagine"}
 												className="md:float-right ml-8 mb-4 mr-2 w-2/4 max-md:w-full max-md:ml-0 rounded-lg"
 												width={1800}

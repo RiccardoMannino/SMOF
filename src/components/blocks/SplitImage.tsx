@@ -109,7 +109,7 @@ export function SplitImage({
 									src={urlFor(image)
 										.width(595)
 										.height(496)
-										.quality(80)
+										.quality(70)
 										.format("webp")
 										.url()}
 									alt="carosello"
