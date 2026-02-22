@@ -106,7 +106,12 @@ export function SplitImage({
 								className="min-w-full max-h-max relative flex flex-row-reverse"
 							>
 								<Image
-									src={urlFor(image).width(1600).height(1200).url()}
+									src={urlFor(image)
+										.width(595)
+										.height(496)
+										.quality(80)
+										.format("webp")
+										.url()}
 									alt="carosello"
 									quality={90}
 									width={800}

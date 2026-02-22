@@ -103,7 +103,7 @@ export const InfiniteMovingCards = ({
 										.maxWidth(200)
 										.minHeight(299)
 										.quality(80)
-										.auto("format")
+										.format("webp")
 										.url()}
 									className="hover:scale-105 px-2 transition-transform"
 									width="200"

@@ -26,7 +26,10 @@ export default async function Page() {
 					{page.homePage?.mainImage ? (
 						<Image
 							className="rounded-2xl "
-							src={urlFor(page?.homePage?.mainImage).auto("format").url()}
+							src={urlFor(page?.homePage?.mainImage)
+								.auto("format")
+								.format("webp")
+								.url()}
 							alt={page?.homePage.intestazione || ""}
 							width="1800"
 							height="480"
