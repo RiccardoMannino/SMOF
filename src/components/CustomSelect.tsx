@@ -23,6 +23,7 @@ export function CustomSelect({
 		| "Trail"
 		| "Trekking"
 		| "Yoga"
+		| "Sicurezza in Natura"
 		| null
 	)[];
 }) {

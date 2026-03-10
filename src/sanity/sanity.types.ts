@@ -356,7 +356,8 @@ export type Eventi = {
     | "Yoga"
     | "Dog Trekking"
     | "Musica"
-    | "Smof Grill";
+    | "Smof Grill"
+    | "Sicurezza in Natura";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
@@ -577,6 +578,7 @@ export type EVENTS_QUERY_RESULT = Array<{
     | "Dog Trekking"
     | "Inaugurazione"
     | "Musica"
+    | "Sicurezza in Natura"
     | "Smof Grill"
     | "Trail"
     | "Trekking"
@@ -751,6 +753,7 @@ export type EVENT_QUERY_RESULT = {
     | "Dog Trekking"
     | "Inaugurazione"
     | "Musica"
+    | "Sicurezza in Natura"
     | "Smof Grill"
     | "Trail"
     | "Trekking"

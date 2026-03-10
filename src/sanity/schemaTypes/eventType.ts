@@ -27,6 +27,7 @@ export const event = defineType({
 					"Dog Trekking",
 					"Musica",
 					"Smof Grill",
+					"Sicurezza in Natura",
 				], // tipo evento
 				layout: "dropdown",
 			},
