@@ -3,7 +3,7 @@ import { EVENT_QUERY } from "../../../../sanity/lib/queries";
 import { PortableText } from "next-sanity";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { dataFormattata } from "@/lib/date";
+import { dataFormattata, dataFineEvento } from "@/lib/date";
 import { urlFor } from "../../../../sanity/lib/image";
 import { components } from "../../../../sanity/portableTextComponent";
 import { RelatedEvents } from "@/components/RelatedEvents";
@@ -38,7 +38,7 @@ export default async function Page({
 
 			if (!response.ok) {
 				throw new Error(
-					data.message || "Errore durante la creazione del checkout"
+					data.message || "Errore durante la creazione del checkout",
 				);
 			}
 			// Ottieni la URL della sessione e reindirizza
@@ -56,8 +56,8 @@ export default async function Page({
 	}
 
 	// TODO: collegare l'evento all'acquisto da questa sezione di sito
-	console.log("params", await params);
-	console.log("evento", evento.eventName);
+	// console.log("params", await params);
+	// console.log("evento", evento.eventName);
 
 	return (
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">
@@ -71,7 +71,10 @@ export default async function Page({
 					{evento?.eventDescription ? (
 						<div className="prose mt-2">
 							<span className="font-bold">Data evento:</span>{" "}
-							{dataFormattata(evento?.data)}
+							{dataFormattata(evento?.data)}{" "}
+							{evento?.dataFine
+								? `alle ore ${dataFineEvento(evento?.dataFine)}`
+								: null}
 							<PortableText
 								value={evento?.eventDescription}
 								components={components}

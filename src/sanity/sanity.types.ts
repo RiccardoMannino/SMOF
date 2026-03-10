@@ -368,6 +368,7 @@ export type Eventi = {
   >;
   slug?: Slug;
   data?: string;
+  dataFine?: string;
   immagine?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -565,10 +566,11 @@ type ArrayOf<T> = Array<
 
 // Source: src\sanity\lib\queries.ts
 // Variable: EVENTS_QUERY
-// Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
+// Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , data, dataFine , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
 export type EVENTS_QUERY_RESULT = Array<{
   _id: string;
   data: string | null;
+  dataFine: string | null;
   slug: Slug | null;
   eventName: string | null;
   eventType:
@@ -740,7 +742,7 @@ export type OSPITALITA_QUERY_RESULT = Array<{
 
 // Source: src\sanity\lib\queries.ts
 // Variable: EVENT_QUERY
-// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
+// Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, dataFine, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
 export type EVENT_QUERY_RESULT = {
   _id: string;
   eventName: string | null;
@@ -772,6 +774,7 @@ export type EVENT_QUERY_RESULT = {
     _type: "image";
   } | null;
   data: string | null;
+  dataFine: string | null;
   eventDescription: BlockContent | null;
   raduno: string | null;
   equipaggiamento: string | null;
@@ -1022,7 +1025,7 @@ export type HOME_PAGE_QUERY_RESULT =
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERY_RESULT;
+    "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , data, dataFine , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERY_RESULT;
     '*[_type == "biglietto"]{\n  _id , prezzo, quantita , biglietto ,\n}': TICKET_QUERY_RESULT;
     '*[type == "giornaliero"]{\n  prezzo , quantita, bigliettoGiorno\n}': DAILY_TICKET_QUERY_RESULT;
     '*[type == "festival"]{\n  prezzo, quantita, biglietto \n}': FESTIVAL_TICKET_QUERY_RESULT;
@@ -1033,7 +1036,7 @@ declare module "@sanity/client" {
     '*[_type == "dormire" && slug.current == $slug][0]{\n  denominazione, indirizzo, contatti, web\n}': SINGLE_DORMIRE_QUERY_RESULT;
     '*[_type == "dormire"]{\n  denominazione, indirizzo, contatti, web\n}': DORMIRE_QUERY_RESULT;
     '*[_type == "ospitalita" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}': OSPITALITA_QUERY_RESULT;
-    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERY_RESULT;
+    "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, dataFine, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERY_RESULT;
     '*[_type == "eventi" && defined(slug.current)]{ \n  "slug": slug.current\n}': EVENTS_SLUGS_QUERY_RESULT;
     '*[_type == "user"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}': AUTH_USERS_RESULT;
     '*[_type == "user" && uid == $uid][0]{\n    email\n  }': SINGLE_AUTH_USER_RESULT;

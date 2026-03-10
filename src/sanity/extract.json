@@ -2050,6 +2050,13 @@
         },
         "optional": true
       },
+      "dataFine": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "immagine": {
         "type": "objectAttribute",
         "value": {

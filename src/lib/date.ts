@@ -17,6 +17,13 @@ export function dataAnno(data: string | null) {
 		year: "numeric",
 	});
 }
+export function dataFineEvento(data: string | null) {
+	return new Date(data as string).toLocaleString("it-IT", {
+		timeZone: "Europe/Rome",
+		hour: "2-digit",
+		minute: "2-digit",
+	});
+}
 
 export function dataGiornaliera(data: string | null) {
 	return new Date(data as string).toLocaleDateString("it-IT", {

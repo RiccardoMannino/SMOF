@@ -72,6 +72,11 @@ export const event = defineType({
 			validation: (e) => e.required(),
 		}),
 		defineField({
+			name: "dataFine", // nome usato nella query
+			title: "Fine evento",
+			type: "datetime",
+		}),
+		defineField({
 			name: "immagine", // nome usato nella query
 			title: "immagine Card",
 			type: "image",
