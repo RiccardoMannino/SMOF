@@ -14,7 +14,7 @@ import {
 } from "./ui/Card";
 
 export function EventCard(props: EVENTS_QUERY_RESULT[0]) {
-	const { speakers, immagine, data, eventType, eventName } = props;
+	const { speakers, immagine, dateEvento, eventType, eventName } = props;
 
 	return (
 		<Link
