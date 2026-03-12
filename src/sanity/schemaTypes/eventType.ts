@@ -67,15 +67,18 @@ export const event = defineType({
 			options: { source: "eventName" },
 		}),
 		defineField({
-			name: "data", // nome usato nella query
-			title: "Data evento",
-			type: "datetime",
-			validation: (e) => e.required(),
+			name: "dateEvento",
+			title: "Date dell'evento",
+			type: "array",
+			// Qui definiamo che l'array contiene date
+			of: [{ type: "datetime" }],
 		}),
 		defineField({
 			name: "dataFine", // nome usato nella query
 			title: "Fine evento",
-			type: "datetime",
+			type: "array",
+			// Qui definiamo che l'array contiene date
+			of: [{ type: "datetime" }],
 		}),
 		defineField({
 			name: "immagine", // nome usato nella query

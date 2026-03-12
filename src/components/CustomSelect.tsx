@@ -14,7 +14,7 @@ export function CustomSelect({
 	tipo,
 }: {
 	eventi: EVENTS_QUERY_RESULT;
-	data: string[];
+	data: Set<string | undefined>;
 	tipo: (
 		| "Inaugurazione"
 		| "Dog Trekking"
@@ -29,7 +29,7 @@ export function CustomSelect({
 }) {
 	const validTypes = tipo.filter((t) => t !== null) as string[];
 
-	const [select, setSelect] = useState(data.at(0));
+	const [select, setSelect] = useState(Array.from(data)[0]); // inizializza con il primo elemento dell'array o una stringa vuota se l'array è vuoto
 	const [open, setOpen] = useState(false);
 
 	const [type, setType] = useState(
@@ -51,19 +51,34 @@ export function CustomSelect({
 		}
 	};
 
-	const filteredEvents = eventi.filter((event) => {
-		// filtro per anno
-		const isYearMatch = dataGiornaliera(event.data) === select;
+	const dateEventi = Array.from(
+		new Set(
+			eventi.map((date) =>
+				date.dateEvento?.map((data) => dataGiornaliera(data)),
+			),
+		),
+	)
+		.flat()
+		.sort()
+		.reverse();
 
-		// tipi selezionati (es. ["conferenza", "yoga"])
+	console.log(dateEventi.sort().reverse());
+
+	const filteredEvents = eventi.filter((event) => {
+		// Converti le date dell'evento nel formato dei giorni (es. "sabato 12 settembre 2026")
+		const eventDays =
+			event?.dateEvento?.map((date) => dataGiornaliera(date)) || [];
+
+		// Controlla se il giorno selezionato è tra i giorni dell'evento
+		const isDayMatch = eventDays.includes(select as string);
+		if (!isDayMatch) return false;
+
+		// tipi selezionati (es. ["Yoga", "Trekking"])
 		const selectedTypes = Object.entries(type)
 			.filter(([, value]) => value)
 			.map(([key]) => key);
 
-		// se l'anno non corrisponde, scarta subito
-		if (!isYearMatch) return false;
-
-		// se nessun checkbox è selezionato, mostra tutti gli eventi di quell'anno
+		// se nessun tipo è selezionato, mostra tutti gli eventi del giorno
 		if (selectedTypes.length === 0) return true;
 
 		// altrimenti mostra solo gli eventi il cui eventType è uno di quelli selezionati
@@ -74,17 +89,25 @@ export function CustomSelect({
 		<>
 			<div className="flex  w-full gap-3">
 				<div className="flex max-[440px]:flex-col max-[440px]:gap-5 gap-2 self-center bg-ivory p-6 rounded-2xl w-full justify-around">
-					{data.map((d, idx) => (
-						<button
-							key={idx}
-							onClick={() => setSelect(d)}
-							className={
-								select === d ? "font-semibold bg-mustard rounded-2xl p-2  " : ""
-							}
-						>
-							<span>{d}</span>
-						</button>
-					))}
+					{/* se undefined lo salta e trova solo i risultati */}
+					{Array.from(data)
+						// filtrare i non undefined per mostrare solo i risultati con valori
+						.filter((d) => d !== undefined)
+						.sort()
+						.reverse()
+						.map((d, idx) => (
+							<button
+								key={idx}
+								onClick={() => setSelect(d)}
+								className={
+									select === d
+										? "font-semibold bg-mustard rounded-2xl p-2  "
+										: ""
+								}
+							>
+								<span>{d}</span>
+							</button>
+						))}
 				</div>
 			</div>
 			<div className="flex flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">

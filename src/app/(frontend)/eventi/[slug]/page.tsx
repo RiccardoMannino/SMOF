@@ -69,12 +69,17 @@ export default async function Page({
 					</h1>
 					{/* descrizione evento */}
 					{evento?.eventDescription ? (
-						<div className="prose mt-2">
-							<span className="font-bold">Data evento:</span>{" "}
-							{dataFormattata(evento?.data)}{" "}
-							{evento?.dataFine
-								? `alle ore ${dataFineEvento(evento?.dataFine)}`
-								: null}
+						<div className="prose mt-2   ">
+							<div className="flex flex-col  gap-1.5">
+								<span className="font-bold">Data evento:</span>{" "}
+								{evento?.dateEvento
+									?.map((data) => dataFormattata(data))
+									.join(" e il ")}{" "}
+								{evento?.dataFine
+									? `fino alle ore ${evento?.dataFine.map((data) => dataFineEvento(data)).pop()}`
+									: null}
+							</div>
+
 							<PortableText
 								value={evento?.eventDescription}
 								components={components}

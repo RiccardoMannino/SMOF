@@ -9,7 +9,8 @@ import Image from "next/image";
 import { dataFormattata } from "@/lib/date";
 
 export function Event(props: NonNullable<EVENT_QUERY_RESULT>) {
-	const { eventName, data, immagine, eventDescription, eventType } = props;
+	const { eventName, dateEvento, immagine, eventDescription, eventType } =
+		props;
 	//  speakers,
 
 	return (
@@ -17,7 +18,7 @@ export function Event(props: NonNullable<EVENT_QUERY_RESULT>) {
 			<header className="lg:col-span-12 flex flex-col gap-4 items-start">
 				<div className="flex gap-4 items-center">
 					<span>{eventType}</span>
-					<span>{dataFormattata(data)}</span>
+					<span>{dateEvento?.map((data) => dataFormattata(data))}</span>
 				</div>
 				<Title>{eventName}</Title>
 				{/* <Speaker speaker={speakers} /> */}

@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 export const EVENTS_QUERY =
 	defineQuery(`*[_type == 'eventi' && defined(slug.current)][0...120]
     {
-  _id , data, dataFine , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{
+  _id , dateEvento, dataFine , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{
     speakerName,
     speakerImage
   }}`);
@@ -65,7 +65,7 @@ export const OSPITALITA_QUERY =
 
 export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{
-  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, data, dataFine, eventDescription, raduno, equipaggiamento , speakers->{
+  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, dateEvento, dataFine, eventDescription, raduno, equipaggiamento , speakers->{
     speakerName,
     speakerImage
   }, relatedEvents[]{
