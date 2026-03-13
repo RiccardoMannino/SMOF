@@ -72,11 +72,11 @@ export default async function Page({
 						<div className="prose mt-2   ">
 							<div className="flex flex-col  gap-1.5">
 								<span className="font-bold">Data evento:</span>{" "}
-								{evento?.dateEvento
+								{`Raduno ${evento?.dateEvento
 									?.map((data) => dataFormattata(data))
-									.join(" e il ")}{" "}
+									.join(" e il ")}`}{" "}
 								{evento?.dataFine
-									? `fino alle ore ${evento?.dataFine.map((data) => dataFineEvento(data)).pop()}`
+									? ` fino alle ore ${evento?.dataFine.map((data) => dataFineEvento(data)).pop()}`
 									: null}
 							</div>
 

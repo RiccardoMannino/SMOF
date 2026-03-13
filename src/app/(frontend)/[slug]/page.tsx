@@ -42,7 +42,7 @@ export default async function Page({
 		),
 	);
 
-	const aspie = new Set([...dateEventi].sort().flat());
+	const dataOrdinata = new Set([...dateEventi].sort().flat());
 
 	// Tipi eventi non duplicati , fattibile anche con la GROQ di sanity
 	const tipiEventi = Array.from(new Set(eventi.map((tipo) => tipo.eventType)));
@@ -63,7 +63,7 @@ export default async function Page({
 				</h1>
 
 				<div className="flex flex-col md:grid  md:grid-flow-row   gap-24 py-12 items-center max-sm:w-full">
-					<CustomSelect data={aspie} eventi={eventi} tipo={tipiEventi} />
+					<CustomSelect data={dataOrdinata} eventi={eventi} tipo={tipiEventi} />
 				</div>
 				<Link
 					href="/"
