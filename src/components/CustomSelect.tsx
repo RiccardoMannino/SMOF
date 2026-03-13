@@ -159,7 +159,7 @@ export function CustomSelect({
 				Il programma è in costante aggiornamento , nuovi eventi verranno
 				aggiunti presto!!
 			</p>
-			<div className="flex w-full max-lg:flex-col max-lg:self-center gap-10">
+			<div className="grid w-full grid-cols-3 max-sm:grid-cols-1 max-lg:self-center gap-10 ">
 				{/* Eventi filtrabili */}
 				{filteredEvents.map((event) => (
 					<EventCard key={event._id} {...event} />
