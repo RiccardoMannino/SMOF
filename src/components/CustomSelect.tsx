@@ -16,6 +16,7 @@ export function CustomSelect({
 	eventi: EVENTS_QUERY_RESULT;
 	data: Set<string | undefined>;
 	tipo: (
+		| "Documentario"
 		| "Inaugurazione"
 		| "Dog Trekking"
 		| "Musica"

@@ -11,6 +11,14 @@ export function dataFormattata(data: string | null | undefined) {
 	});
 }
 
+export function dataGiornoMese(data: string | null) {
+	return new Date(data as string).toLocaleString("it-IT", {
+		timeZone: "Europe/Rome",
+		day: "2-digit",
+		month: "long",
+	});
+}
+
 // funzione che restituisce solo l'anno
 export function dataAnno(data: string | null) {
 	return new Date(data as string).toLocaleString("it-IT", {

@@ -56,8 +56,6 @@ export default async function Page({
 	}
 
 	// TODO: collegare l'evento all'acquisto da questa sezione di sito
-	// console.log("params", await params);
-	// console.log("evento", evento.eventName);
 
 	return (
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">

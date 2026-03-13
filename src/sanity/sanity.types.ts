@@ -350,6 +350,7 @@ export type Eventi = {
   _rev: string;
   eventName?: string;
   eventType?:
+    | "Documentario"
     | "Inaugurazione"
     | "Trekking"
     | "Trail"
@@ -575,6 +576,7 @@ export type EVENTS_QUERY_RESULT = Array<{
   slug: Slug | null;
   eventName: string | null;
   eventType:
+    | "Documentario"
     | "Dog Trekking"
     | "Inaugurazione"
     | "Musica"
@@ -750,6 +752,7 @@ export type EVENT_QUERY_RESULT = {
   eventName: string | null;
   specifiche: BlockContent | null;
   eventType:
+    | "Documentario"
     | "Dog Trekking"
     | "Inaugurazione"
     | "Musica"

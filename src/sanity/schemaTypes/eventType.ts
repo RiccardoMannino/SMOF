@@ -20,6 +20,7 @@ export const event = defineType({
 			type: "string",
 			options: {
 				list: [
+					"Documentario",
 					"Inaugurazione",
 					"Trekking",
 					"Trail",
