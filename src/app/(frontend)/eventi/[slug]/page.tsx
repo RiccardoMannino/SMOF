@@ -72,7 +72,7 @@ export default async function Page({
 								<span className="font-bold">Data evento:</span>{" "}
 								{`Raduno ${evento?.dateEvento
 									?.map((data) => dataFormattata(data))
-									.join(" e il ")}`}{" "}
+									.join(" , ")}`}{" "}
 								{evento?.dataFine
 									? ` fino alle ore ${evento?.dataFine.map((data) => dataFineEvento(data)).pop()}`
 									: null}
