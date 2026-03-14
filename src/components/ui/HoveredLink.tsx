@@ -19,7 +19,10 @@ export default function HoveredLink({
 			onMouseLeave={() => setActive(false)}
 		>
 			{children}
-			<motion.div layout className="absolute bg-ivory rounded-2xl p-2 right-72">
+			<motion.div
+				layout
+				className="absolute bg-ivory rounded-2xl p-2 right-89 top-28 "
+			>
 				{active && ospitalita}
 			</motion.div>
 		</div>
