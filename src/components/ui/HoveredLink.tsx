@@ -21,7 +21,7 @@ export default function HoveredLink({
 			{children}
 			<motion.div
 				layout
-				className="absolute bg-ivory rounded-2xl p-2 right-89 top-28 "
+				className="absolute bg-ivory rounded-2xl p-2 right-89 top-28 text-center "
 			>
 				{active && ospitalita}
 			</motion.div>
