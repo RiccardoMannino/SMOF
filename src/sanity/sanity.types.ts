@@ -168,7 +168,6 @@ export type Biglietto = {
   _updatedAt: string;
   _rev: string;
   biglietto?: EventiReference;
-  prezzo?: string;
   quantita?: number;
 };
 
@@ -611,10 +610,10 @@ export type EVENTS_QUERY_RESULT = Array<{
 
 // Source: src\sanity\lib\queries.ts
 // Variable: TICKET_QUERY
-// Query: *[_type == "biglietto"]{  _id , prezzo, quantita , biglietto ,}
+// Query: *[_type == "biglietto"]{  _id , prezzo, quantita , biglietto ,  "prezzo": biglietto->biglietto,}
 export type TICKET_QUERY_RESULT = Array<{
   _id: string;
-  prezzo: string | null;
+  prezzo: number | null;
   quantita: number | null;
   biglietto: EventiReference | null;
 }>;
@@ -802,7 +801,7 @@ export type EVENTS_SLUGS_QUERY_RESULT = Array<{
 
 // Source: src\sanity\lib\queries.ts
 // Variable: AUTH_USERS
-// Query: *[_type == "user"] {  _id,  name,  email,  profileImage,  uid,  subscribeNewsletter,}
+// Query: *[_type == "user"] {  _id,  name,  email,  profileImage,  uid,  subscribeNewsletter,  role}
 export type AUTH_USERS_RESULT = Array<{
   _id: string;
   name: string | null;
@@ -810,6 +809,7 @@ export type AUTH_USERS_RESULT = Array<{
   profileImage: string | null;
   uid: string | null;
   subscribeNewsletter: boolean | null;
+  role: "admin" | "user" | null;
 }>;
 
 // Source: src\sanity\lib\queries.ts
@@ -1032,7 +1032,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'eventi' && defined(slug.current)][0...120]\n    {\n  _id , dateEvento, dataFine , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{\n    speakerName,\n    speakerImage\n  }}": EVENTS_QUERY_RESULT;
-    '*[_type == "biglietto"]{\n  _id , prezzo, quantita , biglietto ,\n}': TICKET_QUERY_RESULT;
+    '*[_type == "biglietto"]{\n  _id , prezzo, quantita , biglietto ,  "prezzo": biglietto->biglietto,\n}': TICKET_QUERY_RESULT;
     '*[type == "giornaliero"]{\n  prezzo , quantita, bigliettoGiorno\n}': DAILY_TICKET_QUERY_RESULT;
     '*[type == "festival"]{\n  prezzo, quantita, biglietto \n}': FESTIVAL_TICKET_QUERY_RESULT;
     '*[_type == "partner" ]{\n  _id ,nome , tipo, link ,immagine\n}': PARTNER_QUERY_RESULT;
@@ -1044,7 +1044,7 @@ declare module "@sanity/client" {
     '*[_type == "ospitalita" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}': OSPITALITA_QUERY_RESULT;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, dateEvento, dataFine, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERY_RESULT;
     '*[_type == "eventi" && defined(slug.current)]{ \n  "slug": slug.current\n}': EVENTS_SLUGS_QUERY_RESULT;
-    '*[_type == "user"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n}': AUTH_USERS_RESULT;
+    '*[_type == "user"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n  role\n}': AUTH_USERS_RESULT;
     '*[_type == "user" && uid == $uid][0]{\n    email\n  }': SINGLE_AUTH_USER_RESULT;
     '*[_type == "page" && slug.current == $slug][0]{\n descrizione[]{\n  ...,\n }, \n mainImage ,...,\n  content[]{\n    ...,\n    _type == "faqs" => {\n      ...,\n      faqs[]->\n    }\n  }\n}': PAGE_QUERY_RESULT;
     '\n  *[_type == "page"]\n  {\n    title,\n    ordine,\n    _id,\n    "slug": slug.current,\n    "Home": slug.current == "/"\n  }\n  | order(Home desc, ordine asc)\n': LIST_PAGE_QUERY_RESULT;

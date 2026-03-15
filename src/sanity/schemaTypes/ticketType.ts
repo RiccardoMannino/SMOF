@@ -6,18 +6,24 @@ export const biglietto = defineType({
 	title: "Biglietto Singolo Evento",
 	type: "document",
 	icon: TicketIcon,
+	preview: {
+		select: {
+			title: "biglietto.eventName",
+			subtitle: "biglietto.biglietto",
+		},
+		prepare({ title, subtitle }) {
+			return {
+				title: title || "Biglietto senza evento",
+				subtitle: subtitle ? `€${subtitle}` : "Prezzo non impostato",
+			};
+		},
+	},
 	fields: [
 		defineField({
 			name: "biglietto",
 			title: "Nome Ticket",
 			type: "reference",
 			to: [{ type: "eventi" }],
-			validation: (e) => e.required(),
-		}),
-		defineField({
-			name: "prezzo",
-			title: "Prezzo",
-			type: "string",
 			validation: (e) => e.required(),
 		}),
 		defineField({
