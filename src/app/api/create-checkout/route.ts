@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 		if (!supportedTicketTypes.includes(ticketType)) {
 			return NextResponse.json(
 				{ message: "Tipo di biglietto non supportato" },
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 
@@ -26,42 +26,32 @@ export async function POST(req: Request) {
 		const ticket = await readClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{ 
         biglietto, 
-        prezzo, 
+        "prezzo": biglietto->biglietto, 
         quantita 
       }`,
-			{ ticketId, ticketType }
+			{ ticketId, ticketType },
 		);
 		const singleTicket = await readClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{ 
         biglietto->{
 				eventName
 				}, 
-        prezzo, 
+        "prezzo": biglietto->biglietto, 
         quantita 
       }`,
-			{ ticketId, ticketType }
+			{ ticketId, ticketType },
 		);
 
 		if (!ticket || ticket.quantita < quantity) {
 			return NextResponse.json(
 				{ message: "Biglietti non disponibili" },
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 		if (!singleTicket || singleTicket.quantita < quantity) {
 			return NextResponse.json(
 				{ message: "Biglietti non disponibili" },
-				{ status: 400 }
-			);
-		}
-
-		// Converti il prezzo da stringa a numero se necessario
-		const priceInCents = parseInt(ticket.prezzo.replace(/[^\d]/g, "")) * 100;
-
-		if (isNaN(priceInCents)) {
-			return NextResponse.json(
-				{ message: "Formato prezzo non valido" },
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 
@@ -81,7 +71,7 @@ export async function POST(req: Request) {
 								ticketId,
 							},
 						},
-						unit_amount: priceInCents, // Prezzo in centesimi
+						unit_amount: Math.round(ticket.prezzo * 100), // Prezzo in centesimi
 					},
 
 					// adjustable_quantity: {
@@ -92,11 +82,11 @@ export async function POST(req: Request) {
 					quantity: quantity,
 				},
 			],
-			customer_email: sessione?.user?.email,
+			// customer_email: sessione?.user?.email,
 			mode: "payment",
 			success_url:
 				`${process.env.NEXTAUTH_URL}/success?session_id={CHECKOUT_SESSION_ID}` ||
-				`http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID`,
+				`http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url:
 				`${process.env.NEXTAUTH_URL}/ticket` || `http://localhost:3000/ticket`,
 			metadata: {

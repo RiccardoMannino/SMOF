@@ -128,9 +128,9 @@ export async function Header() {
 
 			<div className="flex max-[899px]:flex-col items-center justify-between w-full p-4 mr-2 ml-2">
 				<ButtonMenu list={pages} session={session} ospitalita={ospitalita} />
-				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate">
+				<ul className="hidden min-[899px]:flex items-center gap-4 font-semibold  text-chocolate ">
 					{pages?.map((page) => (
-						<li key={page._id} className="hover:cursor-pointer">
+						<li key={page._id} className="hover:cursor-pointer  ">
 							{page.title === "Ospitalità" ? (
 								<>
 									<HoveredLink ospitalita={<>{linkOspitalita}</>}>

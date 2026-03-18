@@ -114,9 +114,9 @@ export function CustomSelect({
 			<div className="flex flex-col h-auto gap-2 bg-ivory text-chocolate max-md:w-full w-fit rounded-2xl p-4">
 				<div
 					onClick={() => setOpen(!open)}
-					className="flex gap-2 hover:cursor-pointer"
+					className="flex max-md:self-center gap-2 hover:cursor-pointer"
 				>
-					<p className=" ">Seleziona tipo evento</p>
+					<p className="">Seleziona tipo evento</p>
 					<motion.button
 						animate={{ rotate: !open ? 0 : 180 }}
 						transition={{ duration: 0.5, delay: 0 }}
@@ -160,7 +160,7 @@ export function CustomSelect({
 				Il programma è in costante aggiornamento , nuovi eventi verranno
 				aggiunti presto!!
 			</p>
-			<div className="grid w-full grid-cols-3 max-sm:grid-cols-1 max-lg:self-center gap-10 ">
+			<div className="grid w-full lg:grid-cols-3 grid-cols-2 max-md:grid-cols-1 max-lg:self-center gap-10 ">
 				{/* Eventi filtrabili */}
 				{filteredEvents.map((event) => (
 					<EventCard key={event._id} {...event} />
