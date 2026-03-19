@@ -18,13 +18,15 @@ export function CustomSelect({
 	tipo: (
 		| "Documentario"
 		| "Inaugurazione"
+		| "Trekking"
+		| "Trail"
+		| "Yoga"
 		| "Dog Trekking"
 		| "Musica"
 		| "Smof Grill"
-		| "Trail"
-		| "Trekking"
-		| "Yoga"
-		| "Sicurezza in Natura"
+		| "Workshop"
+		| "Orienteering"
+		| "Visite Guidate"
 		| null
 	)[];
 }) {
