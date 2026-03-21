@@ -357,7 +357,9 @@ export type Eventi = {
     | "Dog Trekking"
     | "Musica"
     | "Smof Grill"
-    | "Sicurezza in Natura";
+    | "Workshop"
+    | "Orienteering"
+    | "Visite Guidate";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
@@ -579,10 +581,12 @@ export type EVENTS_QUERY_RESULT = Array<{
     | "Dog Trekking"
     | "Inaugurazione"
     | "Musica"
-    | "Sicurezza in Natura"
+    | "Orienteering"
     | "Smof Grill"
     | "Trail"
     | "Trekking"
+    | "Visite Guidate"
+    | "Workshop"
     | "Yoga"
     | null;
   eventDescription: BlockContent | null;
@@ -755,10 +759,12 @@ export type EVENT_QUERY_RESULT = {
     | "Dog Trekking"
     | "Inaugurazione"
     | "Musica"
-    | "Sicurezza in Natura"
+    | "Orienteering"
     | "Smof Grill"
     | "Trail"
     | "Trekking"
+    | "Visite Guidate"
+    | "Workshop"
     | "Yoga"
     | null;
   biglietto: number | null;

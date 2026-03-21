@@ -52,7 +52,7 @@ export default async function Page({
 		query: PARTNER_QUERY,
 	});
 
-	console.log("pagina attuale:", (await params).slug);
+	// console.log("pagina attuale:", (await params).slug);
 
 	// Pagina Eventi
 	if ((await params).slug === `eventi`) {

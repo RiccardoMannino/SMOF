@@ -65,7 +65,7 @@ export function CustomSelect({
 		.sort()
 		.reverse();
 
-	console.log(dateEventi.sort().reverse());
+	// console.log(dateEventi.sort().reverse());
 
 	const filteredEvents = eventi.filter((event) => {
 		// Converti le date dell'evento nel formato dei giorni (es. "sabato 12 settembre 2026")

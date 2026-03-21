@@ -1978,7 +1978,15 @@
             },
             {
               "type": "string",
-              "value": "Sicurezza in Natura"
+              "value": "Workshop"
+            },
+            {
+              "type": "string",
+              "value": "Orienteering"
+            },
+            {
+              "type": "string",
+              "value": "Visite Guidate"
             }
           ]
         },
