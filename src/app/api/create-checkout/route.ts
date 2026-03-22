@@ -10,9 +10,8 @@ export async function POST(req: Request) {
 	try {
 		const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 		const body = await req.json();
-		const { ticketId, ticketType, quantity } = body;
+		const { ticketId, ticketType, quantity, sessione: sessioneData } = body; // 👈 aggiungi sessioneData
 
-		// Definisci un mapping dei tipi di biglietti supportati
 		const supportedTicketTypes = ["giornaliero", "biglietto", "festival"];
 
 		if (!supportedTicketTypes.includes(ticketType)) {
@@ -22,67 +21,111 @@ export async function POST(req: Request) {
 			);
 		}
 
-		// Recupera i dati del biglietto da Sanity usando il tipo di biglietto specificato
-		const ticket = await readClient.fetch(
-			`*[_type == $ticketType && _id == $ticketId][0]{ 
-        biglietto, 
-        "prezzo": biglietto->biglietto, 
-        quantita 
-      }`,
-			{ ticketId, ticketType },
-		);
+		// Query unica per biglietto singolo (con sessioni)
 		const singleTicket = await readClient.fetch(
-			`*[_type == $ticketType && _id == $ticketId][0]{ 
-        biglietto->{
-				eventName
-				}, 
-        "prezzo": biglietto->biglietto, 
-        quantita 
+			`*[_type == $ticketType && _id == $ticketId][0]{
+        biglietto->{ eventName },
+        prezzo,
+        quantita,
+        sessioni
       }`,
 			{ ticketId, ticketType },
 		);
 
-		if (!ticket || ticket.quantita < quantity) {
-			return NextResponse.json(
-				{ message: "Biglietti non disponibili" },
-				{ status: 400 },
-			);
-		}
-		if (!singleTicket || singleTicket.quantita < quantity) {
-			return NextResponse.json(
-				{ message: "Biglietti non disponibili" },
-				{ status: 400 },
-			);
+		// Query per festival/giornaliero
+		const ticket = await readClient.fetch(
+			`*[_type == $ticketType && _id == $ticketId][0]{
+        biglietto,
+        prezzo,
+        quantita
+      }`,
+			{ ticketId, ticketType },
+		);
+
+		// 👇 Per biglietti singoli con sessioni, controlla la quantità della sessione scelta
+		if (ticketType === "biglietto") {
+			if (!singleTicket) {
+				return NextResponse.json(
+					{ message: "Biglietto non trovato" },
+					{ status: 400 },
+				);
+			}
+
+			// Se ha sessioni, verifica quella selezionata
+			if (singleTicket.sessioni?.length > 0) {
+				const sessioneScelta = singleTicket.sessioni.find(
+					(s: { dataSelezionata: string; quantita: number }) => s.dataSelezionata === sessioneData,
+				);
+
+				if (!sessioneScelta) {
+					return NextResponse.json(
+						{ message: "Sessione non trovata" },
+						{ status: 400 },
+					);
+				}
+
+				if (sessioneScelta.quantita < quantity) {
+					return NextResponse.json(
+						{ message: "Biglietti non disponibili per questa sessione" },
+						{ status: 400 },
+					);
+				}
+			} else {
+				// Biglietto singolo senza sessioni (vecchio comportamento)
+				if (singleTicket.quantita < quantity) {
+					return NextResponse.json(
+						{ message: "Biglietti non disponibili" },
+						{ status: 400 },
+					);
+				}
+			}
+		} else {
+			// festival / giornaliero
+			if (!ticket || ticket.quantita < quantity) {
+				return NextResponse.json(
+					{ message: "Biglietti non disponibili" },
+					{ status: 400 },
+				);
+			}
 		}
 
-		// Crea una sessione di checkout
-		const session = await stripe.checkout.sessions.create({
+		const eventName =
+			ticketType === "biglietto"
+				? singleTicket.biglietto?.eventName
+				: ticket.biglietto;
+
+		const prezzo =
+			ticketType === "biglietto" ? singleTicket.prezzo : ticket.prezzo;
+
+		// Crea sessione Stripe
+		const stripeSession = await stripe.checkout.sessions.create({
 			payment_method_types: ["card"],
 			line_items: [
 				{
 					price_data: {
 						currency: "eur",
 						product_data: {
-							name:
-								ticketType === "biglietto"
-									? singleTicket.biglietto.eventName
-									: ticket.biglietto,
-							metadata: {
-								ticketId,
-							},
+							name: eventName,
+							// 👇 Aggiungi la data sessione al nome prodotto se presente
+							...(sessioneData && {
+								description: `Sessione: ${new Date(sessioneData).toLocaleString(
+									"it-IT",
+									{
+										weekday: "long",
+										day: "2-digit",
+										month: "long",
+										hour: "2-digit",
+										minute: "2-digit",
+									},
+								)}`,
+							}),
+							metadata: { ticketId },
 						},
-						unit_amount: Math.round(ticket.prezzo * 100), // Prezzo in centesimi
+						unit_amount: Math.round(prezzo * 100),
 					},
-
-					// adjustable_quantity: {
-					// 	enabled: true,
-					// 	minimum: 1,
-					// 	maximum: ticket.quantita, // Usa la quantità disponibile dallo schema
-					// },
 					quantity: quantity,
 				},
 			],
-			// customer_email: sessione?.user?.email,
 			mode: "payment",
 			success_url:
 				`${process.env.NEXTAUTH_URL}/success?session_id={CHECKOUT_SESSION_ID}` ||
@@ -90,17 +133,15 @@ export async function POST(req: Request) {
 			cancel_url:
 				`${process.env.NEXTAUTH_URL}/ticket` || `http://localhost:3000/ticket`,
 			metadata: {
-				ticketId: ticketId,
-				ticketType: ticketType,
-				name:
-					ticketType === "biglietto"
-						? singleTicket.biglietto?.eventName
-						: ticket.biglietto,
+				ticketId,
+				ticketType,
+				name: eventName,
 				quantita: quantity,
+				sessione: sessioneData ?? "", // 👈 passa la data ISO al metadata Stripe
 			},
 		} as Stripe.Checkout.SessionCreateParams);
 
-		return NextResponse.json({ url: session.url });
+		return NextResponse.json({ url: stripeSession.url });
 	} catch (error) {
 		console.error("Error creating checkout session:", error);
 		return NextResponse.json({ message: "Errore nel server" }, { status: 500 });

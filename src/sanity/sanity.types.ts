@@ -168,7 +168,13 @@ export type Biglietto = {
   _updatedAt: string;
   _rev: string;
   biglietto?: EventiReference;
-  quantita?: number;
+  sessioni?: Array<{
+    dataSelezionata?: string;
+    quantita?: number;
+    _type: "sessione";
+    _key: string;
+  }>;
+  prezzo?: number;
 };
 
 export type Staff = {
@@ -618,7 +624,7 @@ export type EVENTS_QUERY_RESULT = Array<{
 export type TICKET_QUERY_RESULT = Array<{
   _id: string;
   prezzo: number | null;
-  quantita: number | null;
+  quantita: null;
   biglietto: EventiReference | null;
 }>;
 
