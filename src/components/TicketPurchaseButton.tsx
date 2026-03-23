@@ -27,7 +27,7 @@ type SingleTicket = {
 		eventName: string;
 	};
 	prezzo: number;
-	quantita: number;
+	quantita: number; // ⚠️ Sempre NULL per biglietti singoli - la vera quantità è in sessioni[].quantita
 	sessioni: Sessione[];
 };
 
@@ -65,6 +65,13 @@ export function TicketPurchaseButton({
 	const handlePurchase = async () => {
 		setIsLoading(true);
 		try {
+			// console.log("[CLIENT] Inizio acquisto:", {
+			// 	ticketId: ticket._id,
+			// 	ticketType: ticket._type,
+			// 	quantity,
+			// 	sessioneScelta: sessioneSelezionata?.dataSelezionata,
+			// 	quantitaDisponibile,
+			// });
 			const response = await fetch("/api/create-checkout", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

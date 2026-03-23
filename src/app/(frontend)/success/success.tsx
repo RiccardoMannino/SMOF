@@ -35,12 +35,19 @@ export default function Success({
 					{
 						_id: data?.session?.ticketId,
 						_type: data?.session?.ticketType,
-						name: data?.session?.metadata,
+						name: data?.session?.eventName || data?.session?.nome_biglietto,
 						price: (data?.session?.amount_total / 100).toFixed(2),
 						quantity: data?.session?.quantita,
 					},
 				],
 			};
+
+			console.log("[SUCCESS-PAGE] 💾 Ordine salvato nello store:", {
+				orderId: newOrder.orderId,
+				ticketType: newOrder.items[0]._type,
+				quantita: newOrder.items[0].quantity,
+				prezzo: newOrder.items[0].price,
+			});
 
 			// Chiamiamo l'azione dello store per salvare l'ordine
 			aggiungiOrdine(newOrder);
@@ -62,40 +69,96 @@ export default function Success({
 	}
 
 	return (
-		<div className="max-w-2xl mx-auto p-8">
-			<div className="bg-ivory border text-chocolate px-4 py-3 rounded mb-6">
-				<h1 className="text-2xl font-bold">Pagamento riuscito!</h1>
+		<div className="max-w-4xl mx-auto p-8">
+			<div className="bg-ivory border-2 border-mustard text-chocolate px-6 py-4 rounded-lg mb-6">
+				<h1 className="text-3xl font-bold">✓ Pagamento riuscito!</h1>
+				<p className="text-lg mt-2">Il tuo biglietto è stato confermato</p>
 			</div>
 
-			<div className="bg-white text-chocolate shadow-md rounded px-8 pt-6 pb-8 mb-4">
-				<h2 className="text-xl mb-4">Dettagli dell&apos;ordine:</h2>
+			<div className="grid gap-6 md:grid-cols-2">
+				{/* Dettagli ordine */}
+				<div className="bg-white text-chocolate shadow-md rounded-lg px-6 py-6 border border-chocolate/20">
+					<h2 className="text-xl font-bold text-mustard mb-4">
+						Dati personali
+					</h2>
+					<div className="space-y-3">
+						<p>
+							<strong>Nome:</strong> {data?.session?.customer_name || "N/A"}
+						</p>
+						<p>
+							<strong>Email:</strong> {data?.session?.customer_email}
+						</p>
+						<p>
+							<strong>ID Ordine:</strong> <br />
+							<span className="text-sm font-mono">{data?.session?.id}</span>
+						</p>
+						<p>
+							<strong>Data:</strong> {new Date().toLocaleDateString("it-IT")}
+						</p>
+					</div>
+				</div>
 
-				<div className="mb-4">
-					<p>
-						<strong>Nome:</strong> {data?.session?.customer_name}
-					</p>
+				{/* Dettagli biglietto */}
+				<div className="bg-ivory text-chocolate shadow-md rounded-lg px-6 py-6 border border-chocolate/20">
+					<h2 className="text-xl font-bold text-mustard mb-4">
+						Biglietto acquistato
+					</h2>
+					<div className="space-y-3">
+						<p>
+							<strong>Tipo:</strong> {data?.session?.tipo_ticket}
+						</p>
+						<p>
+							<strong>Nome:</strong>{" "}
+							{data?.session?.eventName || data?.session?.nome_biglietto}
+						</p>
+						<p>
+							<strong>Quantità:</strong> {data?.session?.quantita}
+						</p>
+						{data?.session?.sessione && (
+							<p>
+								<strong>Data/Ora:</strong> <br />
+								{new Date(data.session.sessione).toLocaleString("it-IT")}
+							</p>
+						)}
+					</div>
+				</div>
+			</div>
 
-					<p>
-						<strong>Email:</strong> {data?.session?.customer_email}
-					</p>
-
-					<p>
-						<strong>Stato del pagamento:</strong>{" "}
-						{data?.session?.payment_status === "paid" ? "Pagato" : ""}
-					</p>
-
-					<p>Biglietto Acquistato: {data?.session.metadata}</p>
-					<p>Quantità: {data?.session?.quantita}</p>
-
-					<p>
-						<strong>Totale pagato:</strong>{" "}
-						{(data?.session?.amount_total / 100).toFixed(2)}€
+			{/* Riepilogo pagamento */}
+			<div className="bg-white text-chocolate shadow-md rounded-lg px-6 py-6 border border-mustard/30 mt-6">
+				<h2 className="text-xl font-bold text-mustard mb-4">
+					Riepilogo pagamento
+				</h2>
+				<div className="space-y-3 border-t pt-4">
+					<div className="flex justify-between">
+						<span>Prezzo unitario:</span>
+						<span>€{(data?.session?.prezzo_unitario || 0).toFixed(2)}</span>
+					</div>
+					<div className="flex justify-between">
+						<span>Quantità:</span>
+						<span>x{data?.session?.quantita}</span>
+					</div>
+					<div className="flex justify-between border-t pt-2 font-bold text-lg">
+						<span>Totale pagato:</span>
+						<span className="text-rust">
+							€{(data?.session?.amount_total / 100).toFixed(2)}
+						</span>
+					</div>
+					<p className="text-sm text-gray-600 mt-2">
+						<strong>Stato:</strong>{" "}
+						{data?.session?.payment_status === "paid" ? "✓ Pagato" : "Pendente"}
 					</p>
 				</div>
 			</div>
 
-			<div className="text-center">
-				<Link href="/" className="text-mustard">
+			<div className="text-center mt-8">
+				<p className="text-chocolate mb-4">
+					Un email di conferma è stato inviato a {data?.session?.customer_email}
+				</p>
+				<Link
+					href="/"
+					className="inline-block px-6 py-3 bg-mustard text-ivory rounded-lg hover:bg-rust transition-colors font-semibold"
+				>
 					Torna alla home
 				</Link>
 			</div>

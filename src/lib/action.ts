@@ -19,6 +19,7 @@ type nuovoOggetto = {
 	nome: string | { eventName: string };
 	prezzo: number;
 	quantita: number;
+	sessione?: string; // ← data ISO della sessione scelta
 };
 
 export async function createOrUpdateUser(userData: User & Uid) {
