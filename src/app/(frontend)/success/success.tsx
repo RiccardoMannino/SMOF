@@ -36,7 +36,7 @@ export default function Success({
 						_id: data?.session?.ticketId,
 						_type: data?.session?.ticketType,
 						name: data?.session?.eventName || data?.session?.nome_biglietto,
-						price: (data?.session?.amount_total / 100).toFixed(2),
+						price: (Number(data?.session?.amount_total ?? 0) / 100).toFixed(2),
 						quantity: data?.session?.quantita,
 					},
 				],
@@ -77,7 +77,7 @@ export default function Success({
 
 			<div className="grid gap-6 md:grid-cols-2">
 				{/* Dettagli ordine */}
-				<div className="bg-white text-chocolate shadow-md rounded-lg px-6 py-6 border border-chocolate/20">
+				<div className="bg-ivory text-chocolate shadow-md rounded-lg px-6 py-6 border border-chocolate/20">
 					<h2 className="text-xl font-bold text-mustard mb-4">
 						Dati personali
 					</h2>
@@ -90,7 +90,9 @@ export default function Success({
 						</p>
 						<p>
 							<strong>ID Ordine:</strong> <br />
-							<span className="text-sm font-mono">{data?.session?.id}</span>
+							<span className="text-sm font-mono overflow-hidden text-ellipsis block max-w-full">
+								{data?.session?.id}
+							</span>
 						</p>
 						<p>
 							<strong>Data:</strong> {new Date().toLocaleDateString("it-IT")}
@@ -125,14 +127,16 @@ export default function Success({
 			</div>
 
 			{/* Riepilogo pagamento */}
-			<div className="bg-white text-chocolate shadow-md rounded-lg px-6 py-6 border border-mustard/30 mt-6">
+			<div className="bg-ivory text-chocolate shadow-md rounded-lg px-6 py-6 border border-mustard/30 mt-6">
 				<h2 className="text-xl font-bold text-mustard mb-4">
 					Riepilogo pagamento
 				</h2>
 				<div className="space-y-3 border-t pt-4">
 					<div className="flex justify-between">
 						<span>Prezzo unitario:</span>
-						<span>€{(data?.session?.prezzo_unitario || 0).toFixed(2)}</span>
+						<span>
+							€{Number(data?.session?.prezzo_unitario ?? 0).toFixed(2)}
+						</span>
 					</div>
 					<div className="flex justify-between">
 						<span>Quantità:</span>
@@ -141,7 +145,7 @@ export default function Success({
 					<div className="flex justify-between border-t pt-2 font-bold text-lg">
 						<span>Totale pagato:</span>
 						<span className="text-rust">
-							€{(data?.session?.amount_total / 100).toFixed(2)}
+							€{(Number(data?.session?.amount_total ?? 0) / 100).toFixed(2)}
 						</span>
 					</div>
 					<p className="text-sm text-gray-600 mt-2">
@@ -152,12 +156,12 @@ export default function Success({
 			</div>
 
 			<div className="text-center mt-8">
-				<p className="text-chocolate mb-4">
-					Un email di conferma è stato inviato a {data?.session?.customer_email}
+				<p className="text-ivory font-bold mb-4">
+					Un email di conferma è stata inviata a {data?.session?.customer_email}
 				</p>
 				<Link
 					href="/"
-					className="inline-block px-6 py-3 bg-mustard text-ivory rounded-lg hover:bg-rust transition-colors font-semibold"
+					className="inline-block px-6 py-3 bg-mustard text-ivory rounded-lg hover:bg-mustard/85 transition-colors font-semibold"
 				>
 					Torna alla home
 				</Link>

@@ -65,13 +65,13 @@ export function TicketPurchaseButton({
 	const handlePurchase = async () => {
 		setIsLoading(true);
 		try {
-			// console.log("[CLIENT] Inizio acquisto:", {
-			// 	ticketId: ticket._id,
-			// 	ticketType: ticket._type,
-			// 	quantity,
-			// 	sessioneScelta: sessioneSelezionata?.dataSelezionata,
-			// 	quantitaDisponibile,
-			// });
+			console.log("[CLIENT] Inizio acquisto:", {
+				ticketId: ticket._id,
+				ticketType: ticket._type,
+				quantity,
+				sessioneScelta: sessioneSelezionata?.dataSelezionata,
+				quantitaDisponibile,
+			});
 			const response = await fetch("/api/create-checkout", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
