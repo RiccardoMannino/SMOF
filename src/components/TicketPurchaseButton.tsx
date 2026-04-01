@@ -62,6 +62,7 @@ export function TicketPurchaseButton({
 		? sessioneSelezionata.quantita
 		: ticket.quantita;
 
+	// funzione per gestire l'acquisto diretto, crea una sessione di checkout e reindirizza alla pagina di pagamento
 	const handlePurchase = async () => {
 		setIsLoading(true);
 		try {
@@ -98,6 +99,7 @@ export function TicketPurchaseButton({
 		}
 	};
 
+	// funzione per aggiungere al carrello, chiama l'action createCart con i dati necessari e mostra notifiche con react-toastify
 	function handleAddCart() {
 		const nuovoOggetto: nuovoOggetto = {
 			id_biglietto: ticket._id,

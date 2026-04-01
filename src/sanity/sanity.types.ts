@@ -357,6 +357,8 @@ export type Eventi = {
   eventType?:
     | "Documentario"
     | "Inaugurazione"
+    | "Educazione Ambientale"
+    | "Corsi"
     | "Trekking"
     | "Trail"
     | "Yoga"
@@ -583,8 +585,10 @@ export type EVENTS_QUERY_RESULT = Array<{
   slug: Slug | null;
   eventName: string | null;
   eventType:
+    | "Corsi"
     | "Documentario"
     | "Dog Trekking"
+    | "Educazione Ambientale"
     | "Inaugurazione"
     | "Musica"
     | "Orienteering"
@@ -754,6 +758,39 @@ export type OSPITALITA_QUERY_RESULT = Array<{
 }>;
 
 // Source: src\sanity\lib\queries.ts
+// Variable: SINGLE_BIGLIETTO_QUERY
+// Query: *[_type == "biglietto"][0]{		biglietto->{		eventName,		  slug,		},	prezzo,  _id,  "sessioni": sessioni[] | order(data asc) {    _key,    data,    quantita  }}
+export type SINGLE_BIGLIETTO_QUERY_RESULT = {
+  biglietto: {
+    eventName: string | null;
+    slug: Slug | null;
+  } | null;
+  prezzo: number | null;
+  _id: string;
+  sessioni: Array<{
+    _key: string;
+    data: null;
+    quantita: number | null;
+  }> | null;
+} | null;
+
+// Source: src\sanity\lib\queries.ts
+// Variable: EVENT_TICKETS_QUERY
+// Query: *[_type == "biglietto" && biglietto->slug.current == $slug][0]{  _id,  prezzo,  biglietto->{     biglietto   },  sessioni[] {    _key,    dataSelezionata,    quantita  }}
+export type EVENT_TICKETS_QUERY_RESULT = {
+  _id: string;
+  prezzo: number | null;
+  biglietto: {
+    biglietto: number | null;
+  } | null;
+  sessioni: Array<{
+    _key: string;
+    dataSelezionata: string | null;
+    quantita: number | null;
+  }> | null;
+} | null;
+
+// Source: src\sanity\lib\queries.ts
 // Variable: EVENT_QUERY
 // Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, dateEvento, dataFine, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
 export type EVENT_QUERY_RESULT = {
@@ -761,8 +798,10 @@ export type EVENT_QUERY_RESULT = {
   eventName: string | null;
   specifiche: BlockContent | null;
   eventType:
+    | "Corsi"
     | "Documentario"
     | "Dog Trekking"
+    | "Educazione Ambientale"
     | "Inaugurazione"
     | "Musica"
     | "Orienteering"
@@ -1054,6 +1093,8 @@ declare module "@sanity/client" {
     '*[_type == "dormire" && slug.current == $slug][0]{\n  denominazione, indirizzo, contatti, web\n}': SINGLE_DORMIRE_QUERY_RESULT;
     '*[_type == "dormire"]{\n  denominazione, indirizzo, contatti, web\n}': DORMIRE_QUERY_RESULT;
     '*[_type == "ospitalita" && defined(slug.current)]{\n  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{\n    denominazione,\n    indirizzo,\n    contatti,\n    web\n  }, slug , \n}': OSPITALITA_QUERY_RESULT;
+    '*[_type == "biglietto"][0]{\n\t\tbiglietto->{\n\t\teventName,\t\n\t  slug,\n\t\t},\n\tprezzo,\n  _id,\n  "sessioni": sessioni[] | order(data asc) {\n    _key,\n    data,\n    quantita\n  }\n}': SINGLE_BIGLIETTO_QUERY_RESULT;
+    '*[_type == "biglietto" && biglietto->slug.current == $slug][0]{\n  _id,\n  prezzo,\n  biglietto->{ \n    biglietto \n  },\n  sessioni[] {\n    _key,\n    dataSelezionata,\n    quantita\n  }\n}': EVENT_TICKETS_QUERY_RESULT;
     "*[_type == 'eventi' && slug.current == $slug][0]{\n  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, dateEvento, dataFine, eventDescription, raduno, equipaggiamento , speakers->{\n    speakerName,\n    speakerImage\n  }, relatedEvents[]{\n    _key, // necessario per il drag and drop\n    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente\n  }}": EVENT_QUERY_RESULT;
     '*[_type == "eventi" && defined(slug.current)]{ \n  "slug": slug.current\n}': EVENTS_SLUGS_QUERY_RESULT;
     '*[_type == "user"] {\n  _id,\n  name,\n  email,\n  profileImage,\n  uid,\n  subscribeNewsletter,\n  role\n}': AUTH_USERS_RESULT;

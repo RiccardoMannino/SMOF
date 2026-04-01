@@ -12,7 +12,7 @@ export default async function Cart({ email }: { email: string }) {
 	// totale carrello
 	const totale = vediCarrello?.reduce(
 		(acc, curr) => acc + curr.prezzo * curr.quantita,
-		0
+		0,
 	);
 
 	// funzione svuota carrello

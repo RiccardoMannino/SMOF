@@ -22,6 +22,8 @@ export const event = defineType({
 				list: [
 					"Documentario",
 					"Inaugurazione",
+					"Educazione Ambientale",
+					"Corsi",
 					"Trekking",
 					"Trail",
 					"Yoga",
@@ -40,7 +42,6 @@ export const event = defineType({
 			name: "raduno", // nome usato nella query
 			title: "Punto Raduno", // titolo nell'editor
 			type: "string",
-			validation: (e) => e.required(),
 		}),
 		defineField({
 			name: "equipaggiamento", // nome usato nella query
@@ -78,7 +79,7 @@ export const event = defineType({
 		}),
 		defineField({
 			name: "dataFine", // nome usato nella query
-			title: "Fine evento",
+			title: "Fine raduno",
 			type: "array",
 			// Qui definiamo che l'array contiene date
 			of: [{ type: "datetime" }],

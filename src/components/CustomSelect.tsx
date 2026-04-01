@@ -17,6 +17,8 @@ export function CustomSelect({
 	data: Set<string | undefined>;
 	tipo: (
 		| "Documentario"
+		| "Educazione Ambientale"
+		| "Corsi"
 		| "Inaugurazione"
 		| "Trekking"
 		| "Trail"
@@ -32,7 +34,7 @@ export function CustomSelect({
 }) {
 	const validTypes = tipo.filter((t) => t !== null) as string[];
 
-	const [select, setSelect] = useState(Array.from(data)[0]); // inizializza con il primo elemento dell'array o una stringa vuota se l'array è vuoto
+	const [select, setSelect] = useState(Array.from(data)[2]); // inizializza con il primo elemento dell'array o una stringa vuota se l'array è vuoto
 	const [open, setOpen] = useState(false);
 
 	const [type, setType] = useState(
@@ -135,7 +137,7 @@ export function CustomSelect({
 							exit={{ opacity: 0, y: -20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3 }}
-							className="flex flex-col items-center gap-1 relative group"
+							className="flex max-lg:flex-col items-center gap-1 relative group"
 						>
 							{tipo.map((t, idx) => (
 								<div key={idx} className="flex gap-2">

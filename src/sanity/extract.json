@@ -1998,6 +1998,14 @@
             },
             {
               "type": "string",
+              "value": "Educazione Ambientale"
+            },
+            {
+              "type": "string",
+              "value": "Corsi"
+            },
+            {
+              "type": "string",
               "value": "Trekking"
             },
             {

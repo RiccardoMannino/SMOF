@@ -1,12 +1,17 @@
 import { sanityFetch } from "../../../../sanity/lib/live";
-import { EVENT_QUERY } from "../../../../sanity/lib/queries";
+import { Fragment } from "react";
+import {
+	EVENT_QUERY,
+	EVENT_TICKETS_QUERY,
+} from "../../../../sanity/lib/queries";
 import { PortableText } from "next-sanity";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { dataFormattata, dataFineEvento } from "@/lib/date";
+import { dataFormattata, dataFineEvento, dataSoloData } from "@/lib/date";
 import { urlFor } from "../../../../sanity/lib/image";
 import { components } from "../../../../sanity/portableTextComponent";
 import { RelatedEvents } from "@/components/RelatedEvents";
+import { EventTicketPurchase } from "@/components/EventTicketPurchase";
 import Image from "next/image";
 import { ArrowBigLeft, MapPin } from "lucide-react";
 import { auth } from "@/lib/auth";
@@ -16,46 +21,26 @@ export default async function Page({
 }: {
 	params: Promise<{ slug: string }>;
 }) {
+	// Risolvi i parametri prima di usarli nelle query
+	const resolvedParams = await params;
+
+	// Fetch dei dati dell'evento e dei biglietti associati
 	const { data: evento } = await sanityFetch({
 		query: EVENT_QUERY,
-		params: await params,
+		params: resolvedParams,
 	});
 
-	async function handlePurchase() {
-		try {
-			// Crea una sessione di checkout
-			const response = await fetch("/api/create-checkout", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					ticketId: evento?._id,
-					ticketType: evento?.eventName,
-					quantity: 1,
-				}),
-			});
+	const { data: eventTickets } = await sanityFetch({
+		query: EVENT_TICKETS_QUERY,
+		params: resolvedParams,
+	});
 
-			const data = await response.json();
-
-			if (!response.ok) {
-				throw new Error(
-					data.message || "Errore durante la creazione del checkout",
-				);
-			}
-			// Ottieni la URL della sessione e reindirizza
-			window.location.href = data.url;
-		} catch (error) {
-			console.error("Errore:", error);
-			alert("Si è verificato un errore. Riprova più tardi.");
-		}
-	}
-
+	// sessione utente autenticato google
 	const session = await auth();
 
 	if (!evento) {
 		notFound();
 	}
-
-	// TODO: collegare l'evento all'acquisto da questa sezione di sito
 
 	return (
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">
@@ -70,12 +55,33 @@ export default async function Page({
 						<div className="prose mt-2   ">
 							<div className="flex flex-col  gap-1.5">
 								<span className="font-bold">Data evento:</span>{" "}
-								{`Raduno ${evento?.dateEvento
-									?.map((data) => dataFormattata(data))
-									.join(" , ")}`}{" "}
-								{evento?.dataFine
-									? ` fino alle ore ${evento?.dataFine.map((data) => dataFineEvento(data)).pop()}`
-									: null}
+								{evento.eventName ===
+								"Corso di Alimurgia - Piante spontanee alimentari in Sicilia" ? (
+									evento?.dateEvento
+										?.map((data) => dataFormattata(data))
+										.join(" ")
+								) : (
+									<>
+										{evento?.dateEvento?.map((data, index) => {
+											const dataFine = evento?.dataFine?.[index];
+											return (
+												<Fragment key={index}>
+													{dataSoloData(data)} raduno dalle ore{" "}
+													{dataFineEvento(data)}
+													{dataFine
+														? ` alle ore ${dataFineEvento(dataFine)}`
+														: ""}
+													{index < (evento?.dateEvento?.length ?? 0) - 1 && (
+														<>
+															{""}
+															<br />
+														</>
+													)}
+												</Fragment>
+											);
+										})}
+									</>
+								)}
 							</div>
 
 							<PortableText
@@ -94,31 +100,43 @@ export default async function Page({
 						</div>
 					) : null}
 					<div className="flex flex-col gap-2">
-						<p className="flex items-center gap-1.5 prose  ">
-							<MapPin className="fill-red-500 stroke-white" size={64} />{" "}
-							<span className="font-bold">Punto Raduno:</span>
-							{evento?.raduno}
-						</p>
+						{evento.raduno && (
+							<p className="flex items-center gap-1.5 prose  ">
+								<MapPin className="fill-red-500 stroke-white" size={64} />{" "}
+								<span className="font-bold">Punto Raduno:</span>
+								{evento?.raduno}
+							</p>
+						)}
 						{evento.equipaggiamento && (
 							<p className="prose">
 								<span className="font-bold">Equipaggiamento:</span>{" "}
 								{evento?.equipaggiamento}
 							</p>
-						)}
-						{/* TODO: aggiungere bottone di acquisto (se loggati) */}
-						{/* da aggiungere succesivamente */}
-						{/* <p className="prose">
-							<span className="font-bold">Costo:</span> {evento.biglietto}€ per
-							persona
-						</p> */}
-						{/* {session?.user?.email ? (
-							<button
-								onClick={handlePurchase}
-								className="bg-chocolate text-ivory rounded-2xl w-fit p-2 cursor-pointer font-semibold"
-							>
-								Acquista Ticket
-							</button>
-						) : null} */}
+						)}{" "}
+						{/* Bottone di acquisto  funzionante solo se loggati*/}
+						<div className="mt-4 w-full flex justify-center min-h-10">
+							<EventTicketPurchase
+								ticketId={eventTickets?._id || ""}
+								eventName={evento.eventName}
+								sessioni={
+									eventTickets?.sessioni?.filter(
+										(s) =>
+											s?.dataSelezionata &&
+											s?.quantita !== null &&
+											s?.quantita !== undefined,
+									) as Parameters<typeof EventTicketPurchase>[0]["sessioni"]
+								}
+								prezzoTicket={
+									eventTickets?.prezzo ||
+									eventTickets?.biglietto?.biglietto ||
+									evento.biglietto ||
+									0
+								}
+								prezzoEvento={evento?.biglietto}
+								// Passa lo stato di autenticazione dell'utente al componente di acquisto
+								loggedIn={false}
+							/>
+						</div>
 					</div>
 				</div>
 				{/* immagine evento */}

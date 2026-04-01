@@ -5,12 +5,19 @@ import { client, readClient } from "../../../sanity/lib/client";
 import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
+	// sessione utente autenticato google
 	const sessione = await auth();
 
 	try {
 		const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 		const body = await req.json();
-		const { ticketId, ticketType, quantity, sessione: sessioneData } = body;
+		const {
+			ticketId,
+			ticketType,
+			quantity,
+			sessione: sessioneData,
+			sessions,
+		} = body;
 
 		console.log("[CHECKOUT] Dati ricevuti:", {
 			ticketId,
@@ -19,6 +26,9 @@ export async function POST(req: Request) {
 			sessioneData: sessioneData
 				? `Sessione: ${new Date(sessioneData).toLocaleString("it-IT")}`
 				: "Nessuna sessione",
+			sessions: sessions
+				? `${sessions.length} sessioni`
+				: "Nessun array sessioni",
 		});
 
 		// Ottieni il dominio dalla request per evitare problemi con NEXTAUTH_URL
@@ -45,6 +55,7 @@ export async function POST(req: Request) {
     prezzo,
     quantita,
     sessioni[]{
+      _key,
       dataSelezionata,
       quantita,
     }
@@ -70,7 +81,6 @@ export async function POST(req: Request) {
 			// I biglietti singoli DEVONO SEMPRE avere sessioni
 			// Per ogni sessione è specificato: dataSelezionata, quantita, _key
 			// L'utente sceglie una sessione specifica durante il checkout
-			// sessioneData contiene la data della sessione scelta
 			// ==========================================
 			if (!singleTicket) {
 				return NextResponse.json(
@@ -87,22 +97,62 @@ export async function POST(req: Request) {
 				);
 			}
 
-			// Verifica la sessione selezionata
-			const sessioneScelta = singleTicket.sessioni.find(
-				(s: { dataSelezionata: string; quantita: number }) =>
-					s.dataSelezionata === sessioneData,
-			);
+			// Se arriva un array di sessioni (multiple), validalo
+			if (sessions && Array.isArray(sessions) && sessions.length > 0) {
+				// Validazione per acquisto multiplo
+				let totalQuantityCheck = 0;
+				sessions.forEach(
+					(sessionData: {
+						dataSelezionata: string;
+						quantitaAcquistata: number;
+						quantitaDisponibile?: number;
+					}) => {
+						const sessioneScelta = singleTicket.sessioni.find(
+							(s: { dataSelezionata: string; quantita: number }) =>
+								s.dataSelezionata === sessionData.dataSelezionata,
+						);
 
-			if (!sessioneScelta) {
-				return NextResponse.json(
-					{ message: "Sessione non trovata" },
-					{ status: 400 },
+						if (!sessioneScelta) {
+							throw new Error("Una o più sessioni non trovate");
+						}
+
+						if (sessioneScelta.quantita < sessionData.quantitaAcquistata) {
+							throw new Error(
+								`Biglietti non disponibili per la sessione ${new Date(
+									sessionData.dataSelezionata,
+								).toLocaleString(
+									"it-IT",
+								)} (disponibili: ${sessioneScelta.quantita}, richiesti: ${sessionData.quantitaAcquistata})`,
+							);
+						}
+
+						totalQuantityCheck += sessionData.quantitaAcquistata;
+					},
 				);
-			}
+			} else if (sessioneData) {
+				// Singola sessione (modalità backward compatibility)
+				const sessioneScelta = singleTicket.sessioni.find(
+					(s: { dataSelezionata: string; quantita: number }) =>
+						s.dataSelezionata === sessioneData,
+				);
 
-			if (sessioneScelta.quantita < quantity) {
+				if (!sessioneScelta) {
+					return NextResponse.json(
+						{ message: "Sessione non trovata" },
+						{ status: 400 },
+					);
+				}
+
+				if (sessioneScelta.quantita < quantity) {
+					return NextResponse.json(
+						{ message: "Biglietti non disponibili per questa sessione" },
+						{ status: 400 },
+					);
+				}
+			} else {
+				// Nessuna sessione specificata
 				return NextResponse.json(
-					{ message: "Biglietti non disponibili per questa sessione" },
+					{ message: "Nessuna sessione selezionata" },
 					{ status: 400 },
 				);
 			}
@@ -124,10 +174,40 @@ export async function POST(req: Request) {
 		const prezzo =
 			ticketType === "biglietto" ? singleTicket.prezzo : ticket.prezzo;
 
-		// Crea sessione Stripe
-		const stripeSession = await stripe.checkout.sessions.create({
-			payment_method_types: ["card"],
-			line_items: [
+		// Costruisci i line items
+		let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+
+		if (sessions && Array.isArray(sessions) && sessions.length > 0) {
+			// Multiple sessioni
+			lineItems = sessions.map(
+				(sessionData: {
+					dataSelezionata: string;
+					quantitaAcquistata: number;
+					quantitaDisponibile?: number;
+				}) => ({
+					price_data: {
+						currency: "eur",
+						product_data: {
+							name: eventName,
+							description: `Sessione: ${new Date(
+								sessionData.dataSelezionata,
+							).toLocaleString("it-IT", {
+								weekday: "long",
+								day: "2-digit",
+								month: "long",
+								hour: "2-digit",
+								minute: "2-digit",
+							})}`,
+							metadata: { ticketId },
+						},
+						unit_amount: Math.round(prezzo * 100),
+					},
+					quantity: sessionData.quantitaAcquistata,
+				}),
+			);
+		} else {
+			// Single line item (backward compatibility)
+			lineItems = [
 				{
 					price_data: {
 						currency: "eur",
@@ -152,7 +232,13 @@ export async function POST(req: Request) {
 					},
 					quantity: quantity,
 				},
-			],
+			];
+		}
+
+		// Crea sessione Stripe
+		const stripeSession = await stripe.checkout.sessions.create({
+			payment_method_types: ["card"],
+			line_items: lineItems,
 			mode: "payment",
 			success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${baseUrl}/ticket`,
@@ -160,8 +246,26 @@ export async function POST(req: Request) {
 				ticketId,
 				ticketType,
 				name: eventName,
-				quantita: quantity,
+				quantita:
+					quantity ||
+					(sessions
+						? sessions.reduce(
+								(acc: number, s: { quantitaAcquistata: number }) =>
+									acc + s.quantitaAcquistata,
+								0,
+							)
+						: 0),
 				...(sessioneData && { sessione: sessioneData }), // 👈 passa SOLO se esiste
+				// Aggiungi le sessioni come JSON stringificato per acquisti multipli
+				...(sessions &&
+					sessions.length > 0 && {
+						sessioni: JSON.stringify(
+							sessions.map((s: any) => ({
+								dataSelezionata: s.dataSelezionata,
+								quantitaAcquistata: s.quantitaAcquistata,
+							})),
+						),
+					}),
 			},
 		} as Stripe.Checkout.SessionCreateParams);
 

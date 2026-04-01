@@ -34,6 +34,21 @@ export async function GET(req: Request) {
 		const quantitaAcquistata = Number(session.metadata?.quantita);
 		const eventName = session.metadata?.name;
 
+		// Per acquisti multipli, leggi l'array di sessioni
+		let sessioniAcquistate: Array<{
+			dataSelezionata: string;
+			quantitaAcquistata: number;
+		}> = [];
+		if (session.metadata?.sessioni) {
+			try {
+				sessioniAcquistate = JSON.parse(session.metadata.sessioni);
+			} catch (e) {
+				console.log(
+					"[SUCCESS] Sessioni non parsabile, usando sessioneData singolo",
+				);
+			}
+		}
+
 		// console.log("[SUCCESS] Dati ricevuti da Stripe:", {
 		// 	ticketId,
 		// 	ticketType,
@@ -132,8 +147,77 @@ export async function GET(req: Request) {
 
 				console.log("[SUCCESS] Sessioni disponibili:", ticket.sessioni.length);
 
-				// Per biglietti singoli, sessioneData è OBBLIGATORIO
-				if (!sessioneData) {
+				// Se abbiamo un array di sessioni (acquisto multiplo)
+				if (sessioniAcquistate.length > 0) {
+					console.log(
+						"[SUCCESS] Elaborando acquisto multiplo con",
+						sessioniAcquistate.length,
+						"sessioni",
+					);
+
+					// Aggiorna la quantità per ogni sessione acquistata
+					const nuoveSessioni = ticket.sessioni.map((sessione: any) => {
+						const sessioneAcquistata = sessioniAcquistate.find(
+							(s) => s.dataSelezionata === sessione.dataSelezionata,
+						);
+
+						if (sessioneAcquistata) {
+							const nuovaQuantita = Math.max(
+								0,
+								sessione.quantita - sessioneAcquistata.quantitaAcquistata,
+							);
+							console.log(
+								`[SUCCESS] Sessione ${sessione.dataSelezionata}: ${sessione.quantita} -> ${nuovaQuantita}`,
+							);
+							return { ...sessione, quantita: nuovaQuantita };
+						}
+						return sessione;
+					});
+
+					await writeClient
+						.patch(ticket._id)
+						.set({ sessioni: nuoveSessioni })
+						.commit();
+				}
+				// Se abbiamo una singola sessione (modalità backward compatibility)
+				else if (sessioneData) {
+					console.log(
+						"[SUCCESS] Elaborando acquisto singolo per sessione:",
+						sessioneData,
+					);
+
+					const sessioneIndex = ticket.sessioni.findIndex(
+						(s: { dataSelezionata: string }) =>
+							s.dataSelezionata === sessioneData,
+					);
+
+					if (sessioneIndex === -1) {
+						console.error(
+							"[SUCCESS] Sessione non trovata per data:",
+							sessioneData,
+						);
+						return NextResponse.json(
+							{ message: "Sessione non trovata" },
+							{ status: 400 },
+						);
+					}
+
+					const sessioneCorrente = ticket.sessioni[sessioneIndex];
+					const nuovaQuantita = Math.max(
+						0,
+						sessioneCorrente.quantita - quantitaAcquistata,
+					);
+
+					// Ricostruisci l'array di sessioni con la quantità aggiornata
+					const nuoveSessioni = ticket.sessioni.map((s: any, i: number) =>
+						i === sessioneIndex ? { ...s, quantita: nuovaQuantita } : s,
+					);
+
+					await writeClient
+						.patch(ticket._id)
+						.set({ sessioni: nuoveSessioni })
+						.commit();
+				} else {
 					console.error(
 						"[SUCCESS] Errore: biglietto singolo senza sessione specifica",
 					);
@@ -144,59 +228,6 @@ export async function GET(req: Request) {
 						{ status: 400 },
 					);
 				}
-
-				console.log("[SUCCESS] Cercando sessione con data:", sessioneData);
-				const sessioneIndex = ticket.sessioni.findIndex(
-					(s: { dataSelezionata: string }) =>
-						s.dataSelezionata === sessioneData,
-				);
-
-				if (sessioneIndex === -1) {
-					console.error(
-						"[SUCCESS] Sessione non trovata per data:",
-						sessioneData,
-					);
-					console.error(
-						"[SUCCESS] Date disponibili:",
-						ticket.sessioni.map((s: any) => s.dataSelezionata),
-					);
-					return NextResponse.json(
-						{ message: "Sessione non trovata" },
-						{ status: 400 },
-					);
-				}
-
-				const sessioneCorrente = ticket.sessioni[sessioneIndex];
-				const nuovaQuantita = Math.max(
-					0,
-					sessioneCorrente.quantita - quantitaAcquistata,
-				);
-
-				// console.log(
-				// 	"[SUCCESS] 🎟️ Aggiornamento quantità sessione biglietto singolo:",
-				// 	{
-				// 		ticketId,
-				// 		sessioneData: new Date(sessioneData).toLocaleString("it-IT"),
-				// 		quantitaAcquistata,
-				// 		quantitaPrima: sessioneCorrente.quantita,
-				// 		quantitaDopo: nuovaQuantita,
-				// 	},
-				// );
-
-				// Ricostruisci l'array di sessioni con la quantità aggiornata
-				const nuoveSessioni = ticket.sessioni.map((s: any, i: number) =>
-					i === sessioneIndex ? { ...s, quantita: nuovaQuantita } : s,
-				);
-
-				console.log("[SUCCESS] 📊 Array sessioni aggiornato:", {
-					quantitaPrima: ticket.sessioni.map((s: any) => s.quantita),
-					quantitaDopo: nuoveSessioni.map((s: any) => s.quantita),
-				});
-
-				await writeClient
-					.patch(ticket._id)
-					.set({ sessioni: nuoveSessioni })
-					.commit();
 			} else {
 				// ==========================================
 				// BIGLIETTI FESTIVAL / GIORNALIERO

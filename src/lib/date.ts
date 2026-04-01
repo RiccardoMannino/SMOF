@@ -19,6 +19,16 @@ export function dataGiornoMese(data: string | null) {
 	});
 }
 
+// funzione per formattare solo data senza ora: 12 settembre 2026
+export function dataSoloData(data: string | null | undefined) {
+	return new Date(data as string).toLocaleString("it-IT", {
+		timeZone: "Europe/Rome",
+		day: "2-digit",
+		month: "long",
+		year: "numeric",
+	});
+}
+
 // funzione che restituisce solo l'anno
 export function dataAnno(data: string | null) {
 	return new Date(data as string).toLocaleString("it-IT", {

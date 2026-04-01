@@ -63,6 +63,35 @@ export const OSPITALITA_QUERY =
   }, slug , 
 }`);
 
+export const SINGLE_BIGLIETTO_QUERY = defineQuery(`*[_type == "biglietto"][0]{
+		biglietto->{
+		eventName,	
+	  slug,
+		},
+	prezzo,
+  _id,
+  "sessioni": sessioni[] | order(data asc) {
+    _key,
+    data,
+    quantita
+  }
+}`);
+
+// Biglietti per un singolo evento (basato sullo slug)
+export const EVENT_TICKETS_QUERY =
+	defineQuery(`*[_type == "biglietto" && biglietto->slug.current == $slug][0]{
+  _id,
+  prezzo,
+  biglietto->{ 
+    biglietto 
+  },
+  sessioni[] {
+    _key,
+    dataSelezionata,
+    quantita
+  }
+}`);
+
 export const EVENT_QUERY =
 	defineQuery(`*[_type == 'eventi' && slug.current == $slug][0]{
   _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, dateEvento, dataFine, eventDescription, raduno, equipaggiamento , speakers->{
