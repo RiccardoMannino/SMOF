@@ -1,33 +1,30 @@
 import { ArrowBigLeft } from "lucide-react";
 import Link from "next/link";
 import { CustomSelect } from "@/components/CustomSelect";
-import { EVENTS_QUERY_RESULT } from "@/sanity/sanity.types";
+import { dataGiornaliera } from "@/lib/date";
+import { sanityFetch } from "@/sanity/lib/live";
+import { EVENTS_QUERY } from "@/sanity/lib/queries";
 
 // Componente Eventi che riceve i dati ordinati, gli eventi e i tipi di eventi come props
-export default function Eventi({
-	dataOrdinata,
-	eventi,
-	tipiEventi,
-}: {
-	dataOrdinata: Set<string | undefined>;
-	eventi: EVENTS_QUERY_RESULT;
-	tipiEventi: (
-		| "Documentario"
-		| "Educazione Ambientale"
-		| "Corsi"
-		| "Inaugurazione"
-		| "Trekking"
-		| "Trail"
-		| "Yoga"
-		| "Dog Trekking"
-		| "Musica"
-		| "Smof Grill"
-		| "Workshop"
-		| "Orienteering"
-		| "Visite Guidate"
-		| null
-	)[];
-}) {
+export default async function Eventi() {
+	// query degli eventi
+	const { data: eventi } = await sanityFetch({
+		query: EVENTS_QUERY,
+	});
+
+	// elimina i doppioni degli anni di tutti gli eventi, fattibile anche con la GROQ di sanity
+	const dateEventi = Array.from(
+		new Set(
+			eventi.map((date) =>
+				date.dateEvento?.map((data) => dataGiornaliera(data)),
+			),
+		),
+	);
+
+	const dataOrdinata = new Set([...dateEventi].sort().flat());
+
+	// Tipi eventi non duplicati , fattibile anche con la GROQ di sanity
+	const tipiEventi = Array.from(new Set(eventi.map((tipo) => tipo.eventType)));
 	return (
 		<main className="container mx-auto bg-forest grid gap-6 p-12 max-sm:p-8">
 			<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard transition-colors">
