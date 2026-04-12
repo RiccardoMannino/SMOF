@@ -16,6 +16,7 @@ import { ArrowBigLeft } from "lucide-react";
 import { PortableText } from "next-sanity";
 import { components } from "@/sanity/portableTextComponent";
 import { Card, CardContent, CardTitle } from "@/components/ui/Card";
+import Eventi from "@/components/Eventi";
 
 export default async function Page({
 	params,
@@ -57,22 +58,11 @@ export default async function Page({
 	// Pagina Eventi
 	if ((await params).slug === `eventi`) {
 		return (
-			<main className="container mx-auto bg-forest grid gap-6 p-12 max-sm:p-8">
-				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard transition-colors">
-					Eventi
-				</h1>
-
-				<div className="flex flex-col md:grid container md:grid-flow-row   gap-24 py-12 items-center max-sm:w-full">
-					<CustomSelect data={dataOrdinata} eventi={eventi} tipo={tipiEventi} />
-				</div>
-				<Link
-					href="/"
-					className="flex gap-2 items-center text-lg sm:text-xl md:text-2xl font-semibold text-mustard"
-				>
-					<ArrowBigLeft className="hover:-translate-x-1.5 transition-all" />
-					Torna alla home
-				</Link>
-			</main>
+			<Eventi
+				dataOrdinata={dataOrdinata}
+				eventi={eventi}
+				tipiEventi={tipiEventi}
+			/>
 		);
 	}
 
