@@ -92,7 +92,7 @@ export function CustomSelect({
 
 	return (
 		<>
-			<div className="flex  w-full gap-3">
+			<div className="flex w-full gap-3">
 				<div className="flex max-[440px]:flex-col max-[440px]:gap-5 gap-2 self-center bg-ivory p-6 rounded-2xl w-full justify-around">
 					{/* se undefined lo salta e trova solo i risultati */}
 					{Array.from(data)
@@ -140,7 +140,7 @@ export function CustomSelect({
 							className="flex max-lg:flex-col items-center gap-1 relative group"
 						>
 							{tipo.map((t, idx) => (
-								<div key={idx} className="flex gap-2">
+								<div key={idx} className="flex gap-2 mr-2">
 									<input
 										className="accent-chocolate hover:cursor-pointer"
 										type="checkbox"

@@ -57,12 +57,12 @@ export default async function Page({
 	// Pagina Eventi
 	if ((await params).slug === `eventi`) {
 		return (
-			<main className="container mx-auto bg-forest grid grid-cols-1  gap-6 p-12 max-sm:p-8">
+			<main className="container mx-auto bg-forest grid gap-6 p-12 max-sm:p-8">
 				<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 font-bold text-mustard transition-colors">
 					Eventi
 				</h1>
 
-				<div className="flex flex-col md:grid  md:grid-flow-row   gap-24 py-12 items-center max-sm:w-full">
+				<div className="flex flex-col md:grid container md:grid-flow-row   gap-24 py-12 items-center max-sm:w-full">
 					<CustomSelect data={dataOrdinata} eventi={eventi} tipo={tipiEventi} />
 				</div>
 				<Link
