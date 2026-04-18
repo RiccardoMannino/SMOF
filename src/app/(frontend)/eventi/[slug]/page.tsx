@@ -44,10 +44,10 @@ export default async function Page({
 
 	return (
 		<main className="container mx-auto grid grid-cols-1 gap-6 p-12 max-md:p-6 max-sm:text-center ">
-			<div className="flex max-lg:gap-10 max-sm:flex-col-reverse gap-2 bg-ivory rounded-2xl p-5 text-chocolate min-h-80">
-				<div className="flex flex-col w-full">
+			<div className="flex max-lg:gap-10 max-lg:flex-col-reverse gap-2 bg-ivory rounded-2xl p-5 text-chocolate min-h-80">
+				<div className="flex flex-col w-full max-lg:text-justify">
 					{/* Titolo evento */}
-					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5   text-red-600">
+					<h1 className="text-2xl sm:text-3xl md:text-4xl mt-5 mb-5  max-lg:text-center text-red-600">
 						{evento?.eventName}
 					</h1>
 					{/* descrizione evento */}
@@ -66,7 +66,11 @@ export default async function Page({
 											const dataFine = evento?.dataFine?.[index];
 											return (
 												<Fragment key={index}>
-													{dataSoloData(data)} raduno dalle ore{" "}
+													{dataSoloData(data)}{" "}
+													{evento.eventName ===
+													"Mostra fotografia naturalistica siciliana"
+														? "dalle ore"
+														: "raduno dalle ore"}{" "}
 													{dataFineEvento(data)}
 													{dataFine
 														? ` alle ore ${dataFineEvento(dataFine)}`
@@ -99,9 +103,9 @@ export default async function Page({
 							/>
 						</div>
 					) : null}
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 ">
 						{evento.raduno && (
-							<p className="flex items-center gap-1.5 prose  ">
+							<p className="flex items-center gap-1.5 prose  mt-2">
 								<MapPin className="fill-red-500 stroke-white" size={64} />{" "}
 								<span className="font-bold">Punto Raduno:</span>
 								{evento?.raduno}
