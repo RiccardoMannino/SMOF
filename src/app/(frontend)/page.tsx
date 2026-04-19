@@ -6,6 +6,39 @@ import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCard";
 import Image from "next/image";
 import { urlFor } from "../../sanity/lib/image";
 import CookieBanner from "@/components/CookieBanner";
+import { Metadata } from "next";
+
+type Props = {
+	params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+	const params = (await props.params).slug;
+	const { data: page } = await sanityFetch({
+		query: HOME_PAGE_QUERY,
+		params: { slug: params },
+		// Metadata non deve mai contenere stega
+		stega: false,
+	});
+
+	return {
+		title: "SMOF - San Martino Outdoor Festival",
+		keywords: [
+			"San Martino Outdoor festival",
+			"SMOF",
+			"Eventi Oudoor San Martino delle scale",
+			"Festival San Martino",
+		],
+		openGraph: {
+			title:
+				page?.homePage?.intestazione || "SMOF - San Martino outdoor festival",
+			locale: "it_IT",
+			siteName: "SMOF - San Martino outdoor festival",
+			type: "website",
+			url: `https://www.smofest.it/`,
+		},
+	} satisfies Metadata;
+}
 
 export default async function Page() {
 	const { data: page } = await sanityFetch({

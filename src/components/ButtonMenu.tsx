@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import Link from "next/link";
-import { ArrowDown } from "lucide-react";
 import {
 	LIST_PAGE_QUERY_RESULT,
 	OSPITALITA_QUERY_RESULT,
 } from "../sanity/sanity.types";
+import { ArrowDown } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Session } from "next-auth";
-import Image from "next/image";
 
 type PageProps = LIST_PAGE_QUERY_RESULT;
 type OspitalitaProps = OSPITALITA_QUERY_RESULT;
@@ -56,14 +56,15 @@ export default function ButtonMenu({
 							src="/logo_smof.png"
 							alt="home"
 							height={50}
-							width={120}
-							className={`md:w-48 md:h-24`}
+							width={150}
+							className={`md:w-48 md:h-24 h-auto`}
 						/>
 					</Link>
 					<motion.button
-						className={`z-60 rounded hover:cursor-pointer hidden max-[899px]:flex `}
+						className={`z-60 rounded hover:cursor-pointer hidden max-[899px]:flex`}
 						onClick={handleOpenClose}
 					>
+						<span className="font-semibold text-cholate mr-2">Menù</span>
 						<motion.svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="size-7 "

@@ -10,6 +10,41 @@ import { components } from "@/sanity/portableTextComponent";
 import Eventi from "@/components/Eventi";
 import Partners from "@/components/Partners";
 import Ospitalita from "@/components/Ospitalita";
+import { Metadata } from "next";
+
+type Props = {
+	params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+	const params = (await props.params).slug;
+	const { data: page } = await sanityFetch({
+		query: PAGE_QUERY,
+		params: { slug: params },
+		// Metadata non deve mai contenere stega
+		stega: false,
+	});
+
+	return {
+		title:
+			page?.title === "Home"
+				? "SMOF - San Martino outdoor festival"
+				: `SMOF - ${page?.title}`,
+		keywords: [
+			"San Martino outdoor festival",
+			"SMOF",
+			"Eventi Oudoor San Martino delle scale",
+			"Festival San Martino",
+		],
+		openGraph: {
+			title: page?.title,
+			locale: "it_IT",
+			siteName: "SMOF - San Martino outdoor festival",
+			type: "website",
+			url: `https://www.smofest.it/`,
+		},
+	} satisfies Metadata;
+}
 
 export default async function Page({
 	params,
@@ -22,7 +57,7 @@ export default async function Page({
 		params: await params,
 	});
 
-	// console.log("pagina attuale:", (await params).slug);
+	console.log("pagina attuale:", (await params).slug);
 
 	// Pagina Eventi
 	if ((await params).slug === `eventi`) {
@@ -35,8 +70,8 @@ export default async function Page({
 	}
 
 	// Pagina Ospitalità
-	if ((await params).slug === "ospitalita") {
-		<Ospitalita page={page} />;
+	if ((await params).slug === `ospitalita`) {
+		return <Ospitalita />;
 	}
 
 	return page ? (

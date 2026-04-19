@@ -12,7 +12,9 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: src\sanity\extract.json
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
+// Source: src/sanity/extract.json
 export type Dormire = {
   _id: string;
   _type: "dormire";
@@ -567,15 +569,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
-
-type ArrayOf<T> = Array<
-  T & {
-    _key: string;
-  }
->;
-
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
 // Query: *[_type == 'eventi' && defined(slug.current)][0...120]    {  _id , dateEvento, dataFine , slug , eventName, eventType, eventDescription, immagine, raduno, biglietto , equipaggiamento, immagineEvento, speakers->{    speakerName,    speakerImage  }}
 export type EVENTS_QUERY_RESULT = Array<{
@@ -622,7 +616,7 @@ export type EVENTS_QUERY_RESULT = Array<{
   speakers: null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: TICKET_QUERY
 // Query: *[_type == "biglietto"]{  _id , prezzo, quantita , biglietto ,  "prezzo": biglietto->biglietto,}
 export type TICKET_QUERY_RESULT = Array<{
@@ -632,17 +626,17 @@ export type TICKET_QUERY_RESULT = Array<{
   biglietto: EventiReference | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: DAILY_TICKET_QUERY
 // Query: *[type == "giornaliero"]{  prezzo , quantita, bigliettoGiorno}
 export type DAILY_TICKET_QUERY_RESULT = Array<never>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: FESTIVAL_TICKET_QUERY
 // Query: *[type == "festival"]{  prezzo, quantita, biglietto }
 export type FESTIVAL_TICKET_QUERY_RESULT = Array<never>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: PARTNER_QUERY
 // Query: *[_type == "partner" ]{  _id ,nome , tipo, link ,immagine}
 export type PARTNER_QUERY_RESULT = Array<{
@@ -659,7 +653,7 @@ export type PARTNER_QUERY_RESULT = Array<{
   } | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: GALLERIES_QUERY
 // Query: *[_type == "galleria" && defined(slug.current)][0...20]{_id , images , titolo , slug}
 export type GALLERIES_QUERY_RESULT = Array<{
@@ -676,7 +670,7 @@ export type GALLERIES_QUERY_RESULT = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: SINGLE_GALLERY_QUERY
 // Query: *[_type == "galleria" && slug.current == $slug][0]{  _id , images , titolo }
 export type SINGLE_GALLERY_QUERY_RESULT = {
@@ -692,7 +686,7 @@ export type SINGLE_GALLERY_QUERY_RESULT = {
   titolo: string | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: SINGLE_OSPITALITA_QUERY
 // Query: *[_type == "ospitalita" && slug.current == $slug][0]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }}
 export type SINGLE_OSPITALITA_QUERY_RESULT = {
@@ -714,7 +708,7 @@ export type SINGLE_OSPITALITA_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: SINGLE_DORMIRE_QUERY
 // Query: *[_type == "dormire" && slug.current == $slug][0]{  denominazione, indirizzo, contatti, web}
 export type SINGLE_DORMIRE_QUERY_RESULT = {
@@ -724,7 +718,7 @@ export type SINGLE_DORMIRE_QUERY_RESULT = {
   web: string | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: DORMIRE_QUERY
 // Query: *[_type == "dormire"]{  denominazione, indirizzo, contatti, web}
 export type DORMIRE_QUERY_RESULT = Array<{
@@ -734,7 +728,7 @@ export type DORMIRE_QUERY_RESULT = Array<{
   web: string | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: OSPITALITA_QUERY
 // Query: *[_type == "ospitalita" && defined(slug.current)]{  _id , immagine , luogo , descrizione , bedAndBreakfast[]->{    denominazione,    indirizzo,    contatti,    web  }, slug , }
 export type OSPITALITA_QUERY_RESULT = Array<{
@@ -757,7 +751,7 @@ export type OSPITALITA_QUERY_RESULT = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: SINGLE_BIGLIETTO_QUERY
 // Query: *[_type == "biglietto"][0]{		biglietto->{		eventName,		  slug,		},	prezzo,  _id,  "sessioni": sessioni[] | order(data asc) {    _key,    data,    quantita  }}
 export type SINGLE_BIGLIETTO_QUERY_RESULT = {
@@ -774,7 +768,7 @@ export type SINGLE_BIGLIETTO_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: EVENT_TICKETS_QUERY
 // Query: *[_type == "biglietto" && biglietto->slug.current == $slug][0]{  _id,  prezzo,  biglietto->{     biglietto   },  sessioni[] {    _key,    dataSelezionata,    quantita  }}
 export type EVENT_TICKETS_QUERY_RESULT = {
@@ -790,7 +784,7 @@ export type EVENT_TICKETS_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: EVENT_QUERY
 // Query: *[_type == 'eventi' && slug.current == $slug][0]{  _id , eventName, specifiche , eventType, biglietto, immagine, immagineEvento, dateEvento, dataFine, eventDescription, raduno, equipaggiamento , speakers->{    speakerName,    speakerImage  }, relatedEvents[]{    _key, // necessario per il drag and drop    ...@->{_id, eventName, slug} // ricevi i campo dall' evento referente  }}
 export type EVENT_QUERY_RESULT = {
@@ -843,14 +837,14 @@ export type EVENT_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: EVENTS_SLUGS_QUERY
 // Query: *[_type == "eventi" && defined(slug.current)]{   "slug": slug.current}
 export type EVENTS_SLUGS_QUERY_RESULT = Array<{
   slug: string | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: AUTH_USERS
 // Query: *[_type == "user"] {  _id,  name,  email,  profileImage,  uid,  subscribeNewsletter,  role}
 export type AUTH_USERS_RESULT = Array<{
@@ -863,14 +857,14 @@ export type AUTH_USERS_RESULT = Array<{
   role: "admin" | "user" | null;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: SINGLE_AUTH_USER
 // Query: *[_type == "user" && uid == $uid][0]{    email  }
 export type SINGLE_AUTH_USER_RESULT = {
   email: string | null;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0]{ descrizione[]{  ..., },  mainImage ,...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
 export type PAGE_QUERY_RESULT = {
@@ -965,7 +959,7 @@ export type PAGE_QUERY_RESULT = {
   ordine?: number;
 } | null;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: LIST_PAGE_QUERY
 // Query: *[_type == "page"]  {    title,    ordine,    _id,    "slug": slug.current,    "Home": slug.current == "/"  }  | order(Home desc, ordine asc)
 export type LIST_PAGE_QUERY_RESULT = Array<{
@@ -976,7 +970,7 @@ export type LIST_PAGE_QUERY_RESULT = Array<{
   Home: boolean | false;
 }>;
 
-// Source: src\sanity\lib\queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
 // Query: *[_id == "siteSettings"][0]{    homePage->{      ...,      content[]{        ...,        _type == "faqs" => {          ...,          faqs[]->        }      }          }  }
 export type HOME_PAGE_QUERY_RESULT =
