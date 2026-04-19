@@ -95,7 +95,7 @@ export default async function Page({
 									image: ({ value }: any) =>
 										value ? (
 											<Image
-												src={urlFor(value).auto("format").url()}
+												src={urlFor(value).format("webp").quality(70).url()}
 												alt={value.alt || "immagine"}
 												className="md:float-right ml-8 mb-4 mr-2 w-2/4 max-md:w-full max-md:ml-0 rounded-lg "
 												width={1800}

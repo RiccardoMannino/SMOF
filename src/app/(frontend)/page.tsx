@@ -62,6 +62,7 @@ export default async function Page() {
 							src={urlFor(page?.homePage?.mainImage)
 								.auto("format")
 								.format("webp")
+								.quality(70)
 								.url()}
 							alt={page?.homePage.intestazione || ""}
 							width="1800"

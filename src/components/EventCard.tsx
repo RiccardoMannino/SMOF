@@ -33,7 +33,7 @@ export function EventCard(props: EVENTS_QUERY_RESULT[0]) {
 				<CardContent className="self-center max-lg:w-full">
 					{immagine ? (
 						<Image
-							src={urlFor(immagine).auto("format").url()}
+							src={urlFor(immagine).format("webp").quality(70).url()}
 							className="rounded-lg object-cover w-full self-center h-auto"
 							width={200}
 							height={400}

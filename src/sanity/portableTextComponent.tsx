@@ -11,8 +11,8 @@ export const components: PortableTextComponents = {
 					src={urlFor(props.value)
 						.width(600)
 						.height(400)
-						.quality(80)
-						.auto("format")
+						.format("webp")
+						.quality(70)
 						.url()}
 					alt={props?.value?.alt || ""}
 					width={600}

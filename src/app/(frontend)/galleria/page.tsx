@@ -29,10 +29,10 @@ export default async function Page() {
 							{el.images ? (
 								<Image
 									src={urlFor(el?.images[0])
-										.quality(90)
 										.width(500)
 										.height(350)
-										.auto("format")
+										.format("webp")
+										.quality(70)
 										.url()}
 									alt=""
 									width="500"

@@ -71,7 +71,7 @@ export function Staff({ ...props }: StaffProps) {
 								>
 									<p className="text-center font-bold">{nome}</p>
 									<Image
-										src={urlFor(active).url()}
+										src={urlFor(active).format("webp").quality(70).url()}
 										alt={`${nome}`}
 										width={1200}
 										height={800}
@@ -98,7 +98,12 @@ export function Staff({ ...props }: StaffProps) {
 								className="relative flex flex-col items-center gap-3"
 							>
 								<Image
-									src={urlFor(image).width(400).height(400).url()}
+									src={urlFor(image)
+										.width(400)
+										.height(400)
+										.format("webp")
+										.quality(70)
+										.url()}
 									alt={`${nome}`}
 									width={400}
 									height={400}
