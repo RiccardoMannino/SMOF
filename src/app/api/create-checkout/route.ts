@@ -2,10 +2,10 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { client, readClient } from "../../../sanity/lib/client";
+
 import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
-	// sessione utente autenticato google
 	const sessione = await auth();
 
 	try {
@@ -31,7 +31,6 @@ export async function POST(req: Request) {
 				: "Nessun array sessioni",
 		});
 
-		// Ottieni il dominio dalla request per evitare problemi con NEXTAUTH_URL
 		const protocol = req.headers.get("x-forwarded-proto") || "https";
 		const host =
 			req.headers.get("x-forwarded-host") ||
@@ -48,7 +47,6 @@ export async function POST(req: Request) {
 			);
 		}
 
-		// Query unica per biglietto singolo (con sessioni)
 		const singleTicket = await readClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{
     biglietto->{ eventName },
@@ -59,11 +57,10 @@ export async function POST(req: Request) {
       dataSelezionata,
       quantita,
     }
-  }`, // ← chiude il documento principale
+  }`,
 			{ ticketId, ticketType },
 		);
 
-		// Query per festival/giornaliero
 		const ticket = await readClient.fetch(
 			`*[_type == $ticketType && _id == $ticketId][0]{
         biglietto,
@@ -73,15 +70,7 @@ export async function POST(req: Request) {
 			{ ticketId, ticketType },
 		);
 
-		// 👇 Per biglietti singoli con sessioni, controlla la quantità della sessione scelta
 		if (ticketType === "biglietto") {
-			// ==========================================
-			// VALIDAZIONE BIGLIETTI SINGOLI
-			// ==========================================
-			// I biglietti singoli DEVONO SEMPRE avere sessioni
-			// Per ogni sessione è specificato: dataSelezionata, quantita, _key
-			// L'utente sceglie una sessione specifica durante il checkout
-			// ==========================================
 			if (!singleTicket) {
 				return NextResponse.json(
 					{ message: "Biglietto non trovato" },
@@ -89,7 +78,6 @@ export async function POST(req: Request) {
 				);
 			}
 
-			// Biglietti singoli DEVONO avere sessioni
 			if (!singleTicket.sessioni || singleTicket.sessioni.length === 0) {
 				return NextResponse.json(
 					{ message: "Nessuna sessione disponibile per questo biglietto" },
@@ -97,10 +85,7 @@ export async function POST(req: Request) {
 				);
 			}
 
-			// Se arriva un array di sessioni (multiple), validalo
 			if (sessions && Array.isArray(sessions) && sessions.length > 0) {
-				// Validazione per acquisto multiplo
-				let totalQuantityCheck = 0;
 				sessions.forEach(
 					(sessionData: {
 						dataSelezionata: string;
@@ -125,12 +110,9 @@ export async function POST(req: Request) {
 								)} (disponibili: ${sessioneScelta.quantita}, richiesti: ${sessionData.quantitaAcquistata})`,
 							);
 						}
-
-						totalQuantityCheck += sessionData.quantitaAcquistata;
 					},
 				);
 			} else if (sessioneData) {
-				// Singola sessione (modalità backward compatibility)
 				const sessioneScelta = singleTicket.sessioni.find(
 					(s: { dataSelezionata: string; quantita: number }) =>
 						s.dataSelezionata === sessioneData,
@@ -150,14 +132,12 @@ export async function POST(req: Request) {
 					);
 				}
 			} else {
-				// Nessuna sessione specificata
 				return NextResponse.json(
 					{ message: "Nessuna sessione selezionata" },
 					{ status: 400 },
 				);
 			}
 		} else {
-			// festival / giornaliero
 			if (!ticket || ticket.quantita < quantity) {
 				return NextResponse.json(
 					{ message: "Biglietti non disponibili" },
@@ -174,71 +154,60 @@ export async function POST(req: Request) {
 		const prezzo =
 			ticketType === "biglietto" ? singleTicket.prezzo : ticket.prezzo;
 
-		// Costruisci i line items
-		let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
-
-		if (sessions && Array.isArray(sessions) && sessions.length > 0) {
-			// Multiple sessioni
-			lineItems = sessions.map(
-				(sessionData: {
-					dataSelezionata: string;
-					quantitaAcquistata: number;
-					quantitaDisponibile?: number;
-				}) => ({
-					price_data: {
-						currency: "eur",
-						product_data: {
-							name: eventName,
-							description: `Sessione: ${new Date(
-								sessionData.dataSelezionata,
-							).toLocaleString("it-IT", {
-								weekday: "long",
-								day: "2-digit",
-								month: "long",
-								hour: "2-digit",
-								minute: "2-digit",
-							})}`,
-							metadata: { ticketId },
-						},
-						unit_amount: Math.round(prezzo * 100),
-					},
-					quantity: sessionData.quantitaAcquistata,
-				}),
-			);
-		} else {
-			// Single line item (backward compatibility)
-			lineItems = [
-				{
-					price_data: {
-						currency: "eur",
-						product_data: {
-							name: eventName,
-							// 👇 Aggiungi la data sessione al nome prodotto se presente
-							...(sessioneData && {
-								description: `Sessione: ${new Date(sessioneData).toLocaleString(
-									"it-IT",
-									{
-										weekday: "long",
-										day: "2-digit",
-										month: "long",
-										hour: "2-digit",
-										minute: "2-digit",
-									},
-								)}`,
-							}),
-							metadata: { ticketId },
-						},
-						unit_amount: Math.round(prezzo * 100),
-					},
-					quantity: quantity,
-				},
-			];
-		}
-
-		// Crea sessione Stripe
 		const stripeSession = await stripe.checkout.sessions.create({
 			payment_method_types: ["card"],
-			line_items: lineItems,
+			line_items:
+				sessions && Array.isArray(sessions) && sessions.length > 0
+					? sessions.map(
+							(sessionData: {
+								dataSelezionata: string;
+								quantitaAcquistata: number;
+								quantitaDisponibile?: number;
+							}) => ({
+								price_data: {
+									currency: "eur" as const,
+									product_data: {
+										name: eventName,
+										description: `Sessione: ${new Date(
+											sessionData.dataSelezionata,
+										).toLocaleString("it-IT", {
+											weekday: "long",
+											day: "2-digit",
+											month: "long",
+											hour: "2-digit",
+											minute: "2-digit",
+										})}`,
+										metadata: { ticketId },
+									},
+									unit_amount: Math.round(prezzo * 100),
+								},
+								quantity: sessionData.quantitaAcquistata,
+							}),
+						)
+					: [
+							{
+								price_data: {
+									currency: "eur" as const,
+									product_data: {
+										name: eventName,
+										...(sessioneData && {
+											description: `Sessione: ${new Date(
+												sessioneData,
+											).toLocaleString("it-IT", {
+												weekday: "long",
+												day: "2-digit",
+												month: "long",
+												hour: "2-digit",
+												minute: "2-digit",
+											})}`,
+										}),
+										metadata: { ticketId },
+									},
+									unit_amount: Math.round(prezzo * 100),
+								},
+								quantity: quantity,
+							},
+						],
 			mode: "payment",
 			success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${baseUrl}/ticket`,
@@ -255,19 +224,23 @@ export async function POST(req: Request) {
 								0,
 							)
 						: 0),
-				...(sessioneData && { sessione: sessioneData }), // 👈 passa SOLO se esiste
-				// Aggiungi le sessioni come JSON stringificato per acquisti multipli
+				...(sessioneData && { sessione: sessioneData }),
 				...(sessions &&
 					sessions.length > 0 && {
 						sessioni: JSON.stringify(
-							sessions.map((s: any) => ({
-								dataSelezionata: s.dataSelezionata,
-								quantitaAcquistata: s.quantitaAcquistata,
-							})),
+							sessions.map(
+								(s: {
+									dataSelezionata: string;
+									quantitaAcquistata: number;
+								}) => ({
+									dataSelezionata: s.dataSelezionata,
+									quantitaAcquistata: s.quantitaAcquistata,
+								}),
+							),
 						),
 					}),
 			},
-		} as Stripe.Checkout.SessionCreateParams);
+		});
 
 		return NextResponse.json({ url: stripeSession.url });
 	} catch (error) {

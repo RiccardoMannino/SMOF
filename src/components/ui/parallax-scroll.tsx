@@ -35,8 +35,8 @@ export const ParallaxScroll = ({
 							src={urlFor(im)
 								.width(400)
 								.height(400)
-								.quality(80)
-								.auto("format")
+								.format("webp")
+								.quality(70)
 								.url()}
 							className="h-auto w-full object-cover object-top-left rounded-lg gap-10"
 							height="400"
