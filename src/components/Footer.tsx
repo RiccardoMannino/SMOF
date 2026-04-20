@@ -102,6 +102,7 @@ export async function Footer() {
 							className=" flex-1 object-cover md:w-fit md:h-20 "
 							height={100}
 							width={150}
+							quality={70}
 						/>
 					</Link>
 

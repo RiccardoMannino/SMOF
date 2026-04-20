@@ -10,7 +10,13 @@ export default async function page() {
 	return (
 		<section className=" flex justify-center items-center h-120">
 			<div className="flex flex-col gap-6 p-2 items-center justify-center bg-ivory rounded-2xl">
-				<Image src={"/logo_smof.png"} alt="smof" width={100} height={120} />
+				<Image
+					src={"/logo_smof.png"}
+					alt="smof"
+					width={100}
+					height={120}
+					quality={70}
+				/>
 				{!session?.user?.email ? (
 					<>
 						<h2

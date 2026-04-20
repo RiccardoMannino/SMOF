@@ -57,6 +57,7 @@ export default function ButtonMenu({
 							alt="home"
 							height={50}
 							width={150}
+							quality={70}
 							className={`md:w-48 md:h-24 h-auto`}
 						/>
 					</Link>

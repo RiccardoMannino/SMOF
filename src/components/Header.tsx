@@ -37,6 +37,7 @@ export async function Header() {
 			<div className="flex justify-end self-end w-full z-80">
 				<div className="flex gap-2.5 justify-between p-2 bg-forest/50 w-full text-ivory">
 					<div className="flex gap-2 items-center">
+						{/* icone social con i link  */}
 						<Link
 							href={"https://www.facebook.com/profile.php?id=61586684685045"}
 							target="_blank"
@@ -72,6 +73,7 @@ export async function Header() {
 						</Link>
 					</div>
 					<div className="flex gap-2 items-center">
+						{/* date evento */}
 						<span className="font-bold max-sm:text-xs flex self-center max-[350px]:text-center">
 							11-12-13 settembre 2026
 						</span>
