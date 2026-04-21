@@ -134,14 +134,14 @@ export default async function page() {
 
 	// console.log("ticket", sessione?.user?.email);
 
-	console.log(
-		"📋 [PAGE] Biglietti singoli eventi - Quantità per sessione:",
-		tickets.singleEvent.map((ticket: any) => ({
-			evento: ticket.biglietto.eventName,
-			quantitaSessioni: ticket.sessioni.map((s: any) => s.quantita),
-			totaleSessioni: ticket.sessioni.length,
-		})),
-	);
+	// console.log(
+	// 	"📋 [PAGE] Biglietti singoli eventi - Quantità per sessione:",
+	// 	tickets.singleEvent.map((ticket: any) => ({
+	// 		evento: ticket.biglietto.eventName,
+	// 		quantitaSessioni: ticket.sessioni.map((s: any) => s.quantita),
+	// 		totaleSessioni: ticket.sessioni.length,
+	// 	})),
+	// );
 
 	return (
 		<main className="container mx-auto h-full min-h-screen">
@@ -151,7 +151,7 @@ export default async function page() {
 			<p className="mt-28 text-2xl text-mustard max-sm:text-center">
 				Ticket non disponibili al momento
 			</p>
-			<div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
+			{/* <div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
 				<h1 className="text-center text-3xl sm:text-4xl mb-6">
 					Tipi di ticket
 				</h1>
@@ -237,8 +237,8 @@ export default async function page() {
 						</CardFooter>
 					</Card>
 				</div>
-			</div>
-			{!sessione?.user?.email ? (
+			</div> */}
+			{/* {!sessione?.user?.email ? (
 				<>
 					<section className="max-w-4xl mx-auto my-10 p-8">
 						<h1 className="text-3xl font-bold text-mustard text-center mb-6">
@@ -320,7 +320,7 @@ export default async function page() {
 				<p className="text-center text-mustard text-2xl">
 					Accedi per poter visionare i biglietti disponibili
 				</p>
-			)}
+			)} */}
 		</main>
 	);
 }

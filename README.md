@@ -22,14 +22,14 @@ Una piattaforma web moderna e completa per la gestione e promozione del **San Ma
 
 SMOF è una piattaforma all-in-one che mira a:
 
-✅ **Promuovere il festival** - Showcasing di eventi, attività e esperienze outdoor
-✅ **Gestire i biglietti** - Sistema di prenotazione e acquisto di ticket (giornalieri, festival completo, custom)
-✅ **Autenticazione utenti** - Login sicuro tramite Google OAuth per accedere ai servizi
-✅ **Gestione ospitalità** - Elenco di strutture ricettive partner
-✅ **Gallery fotografica** - Showcase fotografico degli eventi passati
-✅ **Contact management** - Form di contatto con notifiche email
-✅ **Pagamento online** - Integrazione Stripe per transazioni sicure (in progress)
-✅ **Conformità legale** - Privacy Policy, Cookie Policy, Termini e Condizioni
+- ✅ **Promuovere il festival** - Showcasing di eventi, attività e esperienze outdoor
+- ✅ **Gestire i biglietti** - Sistema di prenotazione e acquisto di ticket (giornalieri, festival completo, custom)
+- ✅ **Autenticazione utenti** - Login sicuro tramite Google OAuth per accedere ai servizi
+- ✅ **Gestione ospitalità** - Elenco di strutture ricettive partner
+- ✅ **Gallery fotografica** - Showcase fotografico degli eventi passati
+- ✅ **Contact management** - Form di contatto con notifiche email
+- ✅ **Pagamento online** - Integrazione Stripe per transazioni sicure (in progress)
+- ✅ **Conformità legale** - Privacy Policy, Cookie Policy, Termini e Condizioni
 
 ---
 
@@ -296,14 +296,14 @@ npm run sanity deploy
 
 Il sito è completamente ottimizzato per i motori di ricerca:
 
-✅ **Sitemap dinamico** - `sitemap.xml` con tutte le pagine
-✅ **Robots.txt** - Configurazione crawling ottimale
-✅ **Metadati completi** - Title, description, keywords su ogni pagina
-✅ **Open Graph** - Preview social media (Facebook, LinkedIn)
-✅ **Twitter Card** - Tweet preview con immagine
-✅ **Canonical URLs** - URL duplicate prevention
-✅ **metadataBase** - URL base configurato (https://www.smofest.it)
-✅ **generateMetadata** - Server-side metadata generation
+- ✅ **Sitemap dinamico** - `sitemap.xml` con tutte le pagine
+- ✅ **Robots.txt** - Configurazione crawling ottimale
+- ✅ **Metadati completi** - Title, description, keywords su ogni pagina
+- ✅ **Open Graph** - Preview social media (Facebook, LinkedIn)
+- ✅ **Twitter Card** - Tweet preview con immagine
+- ✅ **Canonical URLs** - URL duplicate prevention
+- ✅ **metadataBase** - URL base configurato (https://www.smofest.it)
+- ✅ **generateMetadata** - Server-side metadata generation
 
 ---
 
@@ -330,24 +330,15 @@ Il sito è completamente ottimizzato per i motori di ricerca:
 
 ## 🔐 Sicurezza
 
-✅ Variabili d'ambiente protette
-✅ Autenticazione OAuth
-✅ Pagamenti PCI-DSS via Stripe
-✅ Rate limiting su API routes
-✅ CORS configurato
-✅ CSP headers
+- ✅ Variabili d'ambiente protette
+- ✅ Autenticazione OAuth
+- ✅ Pagamenti PCI-DSS via Stripe
+- ✅ Rate limiting su API routes
+- ✅ CORS configurato
+- ✅ CSP headers
 
 ---
 
-## 📧 Contatti & Support
-
-**Organizzazione**: Effetto Outdoor – Natura e Territorio APS ETS
-**Email**: effettooutdoor@gmail.com
-**Telefono**: +39 3520940274
-**Indirizzo**: Via Ninnì Cassarà 8, San Martino delle Scale - Monreale (PA)
-
----
-
-## 📄 Licenza
+## Licenza
 
 Questo progetto è privato e proprietario.

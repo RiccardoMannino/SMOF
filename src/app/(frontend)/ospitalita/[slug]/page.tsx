@@ -51,7 +51,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 					url: "/logo_smof.png",
 					width: 1200,
 					height: 630,
-					alt: "SMOF - San Martino Outdoor Festival",
+					alt: "SMOF - San Martino Outdoor Fest",
 				},
 			],
 		},
@@ -59,7 +59,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 			card: "summary_large_image",
 			title: `SMOF - Ospitalità: ${page?.luogo}`,
 			description:
-				`${page?.descrizione}` || "Ospitalità San Martino Outdoor Festival",
+				`${page?.descrizione}` || "Ospitalità San Martino Outdoor Fest",
 			images: ["/logo_smof.png"],
 		},
 	} satisfies Metadata;
