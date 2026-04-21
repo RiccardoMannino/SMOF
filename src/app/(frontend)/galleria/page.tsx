@@ -3,6 +3,46 @@ import { sanityFetch } from "../../../sanity/lib/live";
 import { urlFor } from "../../../sanity/lib/image";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return {
+		title: `SMOF - Gallerie`,
+		description:
+			"Esplora le gallerie fotografiche del San Martino Outdoor Festival",
+
+		keywords: [
+			"San Martino outdoor festival",
+			"SMOF",
+			"Eventi Oudoor San Martino delle scale",
+			"Festival San Martino",
+		],
+		openGraph: {
+			title: `SMOF - Gallerie`,
+			description:
+				"Esplora le gallerie fotografiche del San Martino Outdoor Festival",
+			locale: "it_IT",
+			siteName: "SMOF - San Martino outdoor festival",
+			type: "website",
+			url: `https://www.smofest.it/galleria`,
+			images: [
+				{
+					url: "/logo_smof.png",
+					width: 1200,
+					height: 630,
+					alt: "SMOF - San Martino Outdoor Festival",
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: "SMOF - Gallerie",
+			description:
+				"Esplora le gallerie fotografiche del San Martino Outdoor Festival",
+			images: ["/logo_smof.png"],
+		},
+	} satisfies Metadata;
+}
 
 export default async function Page() {
 	const { data: galleria } = await sanityFetch({

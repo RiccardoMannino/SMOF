@@ -33,7 +33,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 	});
 
 	return {
-		title: `SMOF - ${page?.luogo}`,
+		title: `SMOF - Ospitalità: ${page?.luogo}`,
 		keywords: [
 			"San Martino Outdoor festival",
 			"SMOF",
@@ -41,11 +41,26 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 			"Festival San Martino",
 		],
 		openGraph: {
-			title: "",
+			title: `SMOF - Ospitalità: ${page?.luogo}`,
 			locale: "it_IT",
 			siteName: "SMOF - San Martino outdoor festival",
 			type: "website",
 			url: `https://www.smofest.it/`,
+			images: [
+				{
+					url: "/logo_smof.png",
+					width: 1200,
+					height: 630,
+					alt: "SMOF - San Martino Outdoor Festival",
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: `SMOF - Ospitalità: ${page?.luogo}`,
+			description:
+				`${page?.descrizione}` || "Ospitalità San Martino Outdoor Festival",
+			images: ["/logo_smof.png"],
 		},
 	} satisfies Metadata;
 }

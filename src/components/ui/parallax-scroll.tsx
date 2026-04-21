@@ -38,6 +38,7 @@ export const ParallaxScroll = ({
 								.format("webp")
 								.quality(70)
 								.url()}
+							loading="eager"
 							className="h-auto w-full object-cover object-top-left rounded-lg gap-10"
 							height="400"
 							width="400"

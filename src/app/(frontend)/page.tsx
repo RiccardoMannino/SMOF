@@ -36,6 +36,21 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 			siteName: "SMOF - San Martino outdoor festival",
 			type: "website",
 			url: `https://www.smofest.it/`,
+			images: [
+				{
+					url: "/logo_smof.png",
+					width: 1200,
+					height: 630,
+					alt: "SMOF - San Martino Outdoor Festival",
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: "SMOF - San Martino Outdoor Festival",
+			description:
+				"San Martino Outdoor Festival - Natura, territorio e comunità",
+			images: ["/logo_smof.png"],
 		},
 	} satisfies Metadata;
 }
