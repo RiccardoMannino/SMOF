@@ -1,3 +1,47 @@
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return {
+		title: "SMOF - Privacy Policy",
+		description:
+			"Privacy Policy di SMOF - San Martino Outdoor Fest. Scopri come proteggiamo i tuoi dati personali secondo il GDPR.",
+		keywords: [
+			"privacy policy",
+			"protezione dati",
+			"GDPR",
+			"San Martino Outdoor Fest",
+			"SMOF",
+		],
+		openGraph: {
+			title: "SMOF - Privacy Policy",
+			description:
+				"Privacy Policy di SMOF - San Martino Outdoor Fest. Scopri come proteggiamo i tuoi dati personali.",
+			locale: "it_IT",
+			siteName: "SMOF - San Martino Outdoor Fest",
+			type: "website",
+			url: "https://www.smofest.it/privacy",
+			images: [
+				{
+					url: "/logo_smof.png",
+					width: 1200,
+					height: 630,
+					alt: "SMOF - San Martino Outdoor Fest",
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: "SMOF - Privacy Policy",
+			description:
+				"Privacy Policy di SMOF - Scopri come proteggiamo i tuoi dati personali.",
+			images: ["/logo_smof.png"],
+		},
+		alternates: {
+			canonical: "/privacy",
+		},
+	};
+}
+
 export default function page() {
 	return (
 		<section className="px-4 py-8 max-w-6xl mx-auto max-sm:text-lg text-xl flex flex-col gap-6 bg-ivory rounded-lg my-10 text-chocolate">

@@ -1,3 +1,44 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "SMOF - Cookie Policy",
+	description:
+		"Cookie Policy di SMOF - San Martino Outdoor Fest. Scopri quali cookie utilizziamo e come gestirli.",
+	keywords: [
+		"cookie policy",
+		"cookie",
+		"preferenze cookie",
+		"San Martino Outdoor Fest",
+		"SMOF",
+	],
+	openGraph: {
+		title: "SMOF - Cookie Policy",
+		description:
+			"Cookie Policy di SMOF - San Martino Outdoor Fest. Scopri quali cookie utilizziamo.",
+		type: "website",
+		locale: "it_IT",
+		url: "https://www.smofest.it/cookie",
+		images: [
+			{
+				url: "/logo_smof.png",
+				width: 1200,
+				height: 630,
+				alt: "SMOF - San Martino Outdoor Fest",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "SMOF - Cookie Policy",
+		description:
+			"Cookie Policy di SMOF - Scopri quali cookie utilizziamo e come gestirli.",
+		images: ["/logo_smof.png"],
+	},
+	alternates: {
+		canonical: "/cookie",
+	},
+};
+
 export default function page() {
 	return (
 		<section className="px-4 py-8 max-w-6xl mx-auto max-sm:text-lg text-xl flex flex-col gap-6 bg-ivory rounded-lg my-10 text-chocolate">

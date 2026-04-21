@@ -22,18 +22,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 	});
 
 	return {
-		title: "SMOF - San Martino Outdoor Festival",
+		title: "SMOF - San Martino Outdoor Fest",
 		keywords: [
-			"San Martino Outdoor festival",
+			"San Martino Outdoor Fest",
 			"SMOF",
 			"Eventi Oudoor San Martino delle scale",
 			"Festival San Martino",
 		],
 		openGraph: {
-			title:
-				page?.homePage?.intestazione || "SMOF - San Martino outdoor festival",
+			title: page?.homePage?.intestazione || "SMOF - San Martino Outdoor Fest",
 			locale: "it_IT",
-			siteName: "SMOF - San Martino outdoor festival",
+			siteName: "SMOF - San Martino Outdoor Fest",
 			type: "website",
 			url: `https://www.smofest.it/`,
 			images: [
@@ -41,15 +40,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 					url: "/logo_smof.png",
 					width: 1200,
 					height: 630,
-					alt: "SMOF - San Martino Outdoor Festival",
+					alt: "SMOF - San Martino Outdoor Fest",
 				},
 			],
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: "SMOF - San Martino Outdoor Festival",
-			description:
-				"San Martino Outdoor Festival - Natura, territorio e comunità",
+			title: "SMOF - San Martino Outdoor Fest",
+			description: "San Martino Outdoor Fest - Natura, territorio e comunità",
 			images: ["/logo_smof.png"],
 		},
 	} satisfies Metadata;

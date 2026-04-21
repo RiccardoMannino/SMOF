@@ -3,6 +3,36 @@ import { auth } from "@/lib/auth";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "SMOF - Login",
+	description:
+		"Accedi al tuo account SMOF - San Martino Outdoor Fest per gestire i tuoi biglietti e prenotazioni.",
+	keywords: ["login", "accedi", "SMOF", "San Martino Outdoor Festival"],
+	openGraph: {
+		title: "SMOF - Login",
+		description:
+			"Accedi al tuo account SMOF per gestire i tuoi biglietti e prenotazioni.",
+		type: "website",
+		locale: "it_IT",
+		images: [
+			{
+				url: "/logo_smof.png",
+				width: 1200,
+				height: 630,
+				alt: "SMOF - San Martino Outdoor Fest",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "SMOF - Login",
+		description:
+			"Accedi al tuo account SMOF per gestire i tuoi biglietti e prenotazioni.",
+		images: ["/logo_smof.png"],
+	},
+};
 
 export default async function page() {
 	const session = await auth();

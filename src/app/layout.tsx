@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html
-			lang="en"
+			lang="it"
 			suppressHydrationWarning={true}
 			title="SMOF - Il festival dell'outdoor Siciliano"
 		>

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 				url: "/logo_smof.png",
 				width: 1200,
 				height: 630,
-				alt: "SMOF - San Martino Outdoor Festival",
+				alt: "SMOF - San Martino Outdoor Fest",
 			},
 		],
 	},
