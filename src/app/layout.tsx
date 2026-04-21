@@ -1,6 +1,11 @@
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import Providers from "./providers";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	metadataBase: new URL("https://www.smofest.it"),
+};
 
 export default function RootLayout({
 	children,
