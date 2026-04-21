@@ -15,12 +15,42 @@ import { EventTicketPurchase } from "@/components/EventTicketPurchase";
 import Image from "next/image";
 import { ArrowBigLeft, MapPin } from "lucide-react";
 import { auth } from "@/lib/auth";
+import { Metadata } from "next";
 
-export default async function Page({
-	params,
-}: {
+type Props = {
 	params: Promise<{ slug: string }>;
-}) {
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+	const params = (await props.params).slug;
+	const { data: page } = await sanityFetch({
+		query: EVENT_QUERY,
+		params: { slug: params },
+		// Metadata non deve mai contenere stega
+		stega: false,
+	});
+	return {
+		title: `SMOF - ${page?.eventName}`,
+		keywords: [
+			`${page?.eventName}`,
+			"San Martino Outdoor festival",
+			"SMOF",
+			"Eventi Oudoor San Martino delle scale",
+			"Festival San Martino",
+		],
+		openGraph: {
+			title: `SMOF - ${page?.eventName}`,
+			description: ` Scopri di più su questo evento del San Martino Outdoor Festival`,
+			locale: "it_IT",
+			siteName: "SMOF - San Martino outdoor festival",
+			type: "website",
+			url: `https://www.smofest.it/eventi/${params}`,
+			images: ["/logo_smof.png"],
+		},
+	} satisfies Metadata;
+}
+
+export default async function Page({ params }: { params: Props }) {
 	// Risolvi i parametri prima di usarli nelle query
 	const resolvedParams = await params;
 
