@@ -55,10 +55,11 @@ export default function ButtonMenu({
 						<Image
 							src="/logo_smof.png"
 							alt="home"
+							loading="eager"
 							height={50}
 							width={150}
 							quality={70}
-							className={`md:w-48 md:h-24 h-auto`}
+							className={`md:w-48 md:h-24 h-auto w-auto`}
 						/>
 					</Link>
 					<motion.button
@@ -134,7 +135,7 @@ export default function ButtonMenu({
 							opacity: 0,
 						},
 					}}
-					className={`flex gap-1 relative flex-col items-center max-sm:justify-center justify-center bg-ivory text-sm w-full ${!open && "hidden"}`}
+					className={`flex gap-1 relative flex-col items-center max-sm:justify-center mt-10 justify-center bg-ivory text-sm w-full ${!open && "hidden"}`}
 				>
 					{/* voci menù */}
 					{list.map((link) => (
@@ -194,7 +195,7 @@ export default function ButtonMenu({
 											<Link
 												key={el._id}
 												href={`/ospitalita/${el.slug?.current}`}
-												className="hover:text-rust transition-colors font-semibold flex flex-col text-center relative"
+												className={`${isSelected && "hover:text-rust  "}transition-colors font-semibold flex flex-col text-center relative`}
 												onClick={() => setOpen(false)}
 											>
 												<motion.h6 className=" my-2">{el.luogo}</motion.h6>
