@@ -60,6 +60,7 @@ export default async function Page({ params }: { params: Props }) {
 		params: resolvedParams,
 	});
 
+	// Fetch dei biglietti associati all'evento
 	const { data: eventTickets } = await sanityFetch({
 		query: EVENT_TICKETS_QUERY,
 		params: resolvedParams,
@@ -68,6 +69,7 @@ export default async function Page({ params }: { params: Props }) {
 	// sessione utente autenticato google
 	const session = await auth();
 
+	// Se l'evento non esiste, mostra la pagina 404
 	if (!evento) {
 		notFound();
 	}
@@ -167,7 +169,7 @@ export default async function Page({ params }: { params: Props }) {
 									0
 								}
 								prezzoEvento={evento?.biglietto}
-								// Passa lo stato di autenticazione dell'utente al componente di acquisto
+								// Passa lo stato di autenticazione dell'utente al componente di acquisto , se loggati quindi possiamo acquistare altrimenti no
 								loggedIn={false}
 							/>
 						</div>
@@ -177,8 +179,11 @@ export default async function Page({ params }: { params: Props }) {
 				<div className="w-full self-center flex justify-center max-lg:self-start">
 					{evento?.immagineEvento ? (
 						<Image
-							className="rounded-2xl"
-							src={urlFor(evento?.immagineEvento).auto("format").url()}
+							className="rounded-2xl w-auto"
+							src={urlFor(evento?.immagineEvento)
+								.format("webp")
+								.quality(70)
+								.url()}
 							alt={evento?.immagine?.alt || ""}
 							width="500"
 							height="700"

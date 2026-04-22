@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 	title: "SMOF - Login",
 	description:
 		"Accedi al tuo account SMOF - San Martino Outdoor Fest per gestire i tuoi biglietti e prenotazioni.",
-	keywords: ["login", "accedi", "SMOF", "San Martino Outdoor Festival"],
+	keywords: ["login", "accedi", "SMOF", "San Martino Outdoor Fest"],
 	openGraph: {
 		title: "SMOF - Login",
 		description:

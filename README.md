@@ -1,6 +1,6 @@
 # 🏔️ SMOF - San Martino Outdoor Festival
 
-Una piattaforma web moderna e completa per la gestione e promozione del **San Martino Outdoor Festival** - un festival di eventi outdoor, escursioni e attività naturalistiche organizzato in Sicilia.
+Una piattaforma web moderna e completa per la gestione e promozione del **San Martino Outdoor Fest** - un festival di eventi outdoor, escursioni e attività naturalistiche organizzato in Sicilia.
 
 ---
 
