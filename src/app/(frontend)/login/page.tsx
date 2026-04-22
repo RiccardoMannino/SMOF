@@ -43,9 +43,11 @@ export default async function page() {
 				<Image
 					src={"/logo_smof.png"}
 					alt="smof"
-					width={100}
-					height={120}
-					quality={70}
+					width={200}
+					height={240}
+					quality={60}
+					sizes="100px"
+					priority
 				/>
 				{!session?.user?.email ? (
 					<>

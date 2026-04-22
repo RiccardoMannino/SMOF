@@ -100,9 +100,11 @@ export function ContactForm() {
 			<div className="mt-20 flex flex-col gap-3 pl-4 max-sm:mt-5">
 				<Image
 					src={"/logo_smof.png"}
-					width={200}
+					width={300}
 					alt="logo"
-					height={200}
+					height={300}
+					quality={60}
+					sizes="(max-width: 640px) 160px, 200px"
 					className="max-sm:w-40 max-sm:h-[70px] max-sm:self-center mb-2"
 				/>
 				<div className="flex flex-col gap-3 font-medium">

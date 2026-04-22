@@ -100,15 +100,17 @@ export const InfiniteMovingCards = ({
 							>
 								<Image
 									src={urlFor(item?.immagine)
-										.maxWidth(200)
-										.minHeight(299)
-										.quality(70)
+										.width(280)
+										.height(280)
+										.quality(60)
 										.format("webp")
 										.url()}
 									className="hover:scale-105 px-2 transition-transform"
-									width="200"
-									height="170"
+									width={140}
+									height={140}
+									sizes="(max-width: 768px) 100px, 140px"
 									alt={item?.nome || ""}
+									loading="lazy"
 								/>
 							</Link>
 						) : null}

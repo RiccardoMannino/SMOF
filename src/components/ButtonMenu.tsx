@@ -56,10 +56,12 @@ export default function ButtonMenu({
 							src="/logo_smof.png"
 							alt="home"
 							loading="eager"
-							height={50}
-							width={150}
-							quality={70}
+							height={100}
+							width={300}
+							quality={60}
+							sizes="(max-width: 768px) 120px, 192px"
 							className={`md:w-48 md:h-24 h-auto w-auto`}
+							priority
 						/>
 					</Link>
 					<motion.button

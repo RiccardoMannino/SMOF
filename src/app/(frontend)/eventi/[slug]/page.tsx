@@ -31,6 +31,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 	});
 	return {
 		title: `SMOF - ${page?.eventName}`,
+		description: `Scopri di più su questo evento del San Martino Outdoor Fest: ${page?.eventName}`,
 		keywords: [
 			`${page?.eventName}`,
 			"San Martino Outdoor Fest",
@@ -40,7 +41,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 		],
 		openGraph: {
 			title: `SMOF - ${page?.eventName}`,
-			description: ` Scopri di più su questo evento del San Martino Outdoor Fest`,
+			description: `Scopri di più su questo evento del San Martino Outdoor Fest`,
 			locale: "it_IT",
 			siteName: "SMOF - San Martino outdoor Fest",
 			type: "website",

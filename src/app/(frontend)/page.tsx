@@ -23,6 +23,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 	return {
 		title: "SMOF - San Martino Outdoor Fest",
+		description:
+			"San Martino Outdoor Fest - Natura, territorio e comunità. Scopri gli eventi outdoor e l'ospitalità a San Martino delle Scale.",
 		keywords: [
 			"San Martino Outdoor Fest",
 			"SMOF",

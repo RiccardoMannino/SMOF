@@ -101,8 +101,9 @@ export async function Footer() {
 							alt="SMOF"
 							className=" flex-1 object-cover md:w-fit md:h-20 "
 							height={100}
-							width={150}
-							quality={70}
+							width={300}
+							quality={60}
+							sizes="(max-width: 768px) 150px, 200px"
 						/>
 					</Link>
 

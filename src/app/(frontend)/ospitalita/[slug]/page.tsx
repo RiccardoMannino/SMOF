@@ -34,6 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 	return {
 		title: `SMOF - Ospitalità: ${page?.luogo}`,
+		description: `Scopri l'ospitalità a ${page?.luogo} durante il San Martino Outdoor Fest`,
 		keywords: [
 			"San Martino Outdoor Fest",
 			"SMOF",
