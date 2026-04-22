@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	return {
 		title: "SMOF - Tickets",
 		description:
-			"Acquista i tuoi biglietti per il festival Effetto Outdoor. Scegli tra ticket giornalieri, festival completo o custom. Escursioni, eventi outdoor e attività naturalistiche.",
+			"Acquista i tuoi biglietti per il festival. Scegli tra ticket giornalieri, festival completo o custom. Escursioni, eventi outdoor e attività naturalistiche.",
 		keywords: [
 			"biglietti",
 			"tickets",

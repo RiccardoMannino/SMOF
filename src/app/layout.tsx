@@ -16,7 +16,7 @@ export default function RootLayout({
 		<html
 			lang="it"
 			suppressHydrationWarning={true}
-			title="SMOF - Il festival dell'outdoor Siciliano"
+			title="SMOF - Il Festival dell'Outdoor Siciliano"
 		>
 			<body>
 				<Providers>{children}</Providers>

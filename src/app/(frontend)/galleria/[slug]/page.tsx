@@ -19,16 +19,16 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 	return {
 		title: `SMOF - Galleria (${page?.titolo})`,
 		keywords: [
-			"San Martino outdoor festival",
+			"San Martino Outdoor Fest",
 			"SMOF",
 			"Eventi Oudoor San Martino delle scale",
 			"Festival San Martino",
 		],
 		openGraph: {
 			title: `SMOF - Galleria (${page?.titolo})`,
-			description: `Esplora la galleria fotografica ${page?.titolo} del San Martino Outdoor Festival`,
+			description: `Esplora la galleria fotografica ${page?.titolo} del San Martino Outdoor Fest`,
 			locale: "it_IT",
-			siteName: "SMOF - San Martino outdoor festival",
+			siteName: "SMOF - San Martino Outdoor Fest",
 			type: "website",
 			url: `https://www.smofest.it/gallerie/${params}`,
 			images: [
@@ -36,7 +36,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 					url: "/logo_smof.png",
 					width: 1200,
 					height: 630,
-					alt: "SMOF - San Martino Outdoor Festival",
+					alt: "SMOF - San Martino Outdoor Fest",
 				},
 			],
 		},
