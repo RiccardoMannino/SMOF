@@ -107,17 +107,16 @@ export function SplitImage({
 							>
 								<Image
 									src={urlFor(image)
-										.width(1200)
-										.height(900)
+										.maxWidth(1200)
+										.maxHeight(900)
 										.quality(65)
 										.format("webp")
 										.url()}
 									alt="carosello"
-									width={1200}
-									height={900}
-									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px"
+									width={800}
+									height={600}
 									className="object-cover w-full "
-									priority={index === 0}
+									loading="lazy"
 								/>
 							</motion.div>
 						))
