@@ -148,9 +148,7 @@ export default async function page() {
 			<h1 className="text-2xl max-sm:text-center  sm:text-3xl md:text-4xl mt-7 font-bold text-mustard  transition-colors">
 				Informazioni Ticket
 			</h1>
-			<p className="mt-28 text-2xl text-mustard max-sm:text-center">
-				Ticket non disponibili al momento
-			</p>
+
 			{/* <div className="bg-ivory mx-auto  p-10 rounded-2xl my-20 w-full text-chocolate flex flex-col  relative">
 				<h1 className="text-center text-3xl sm:text-4xl mb-6">
 					Tipi di ticket
@@ -238,14 +236,14 @@ export default async function page() {
 					</Card>
 				</div>
 			</div> */}
-			{/* {!sessione?.user?.email ? (
+			{!sessione?.user?.email ? (
 				<>
-					<section className="max-w-4xl mx-auto my-10 p-8">
+					<section className="max-w-8xl mx-auto my-10 p-8">
 						<h1 className="text-3xl font-bold text-mustard text-center mb-6">
 							Biglietti Eventi Singoli
 						</h1>
 						{tickets.singleEvent && (
-							<div className="grid gap-8 md:grid-cols-2">
+							<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 								{tickets?.singleEvent?.map((ticket: SingleTicket) => (
 									<div
 										key={`${ticket._type}-${ticket._id}`}
@@ -320,7 +318,7 @@ export default async function page() {
 				<p className="text-center text-mustard text-2xl">
 					Accedi per poter visionare i biglietti disponibili
 				</p>
-			)} */}
+			)}
 		</main>
 	);
 }
