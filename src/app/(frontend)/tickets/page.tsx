@@ -236,7 +236,7 @@ export default async function page() {
 					</Card>
 				</div>
 			</div> */}
-			{!sessione?.user?.email ? (
+			{/* {!sessione?.user?.email ? (
 				<>
 					<section className="max-w-8xl mx-auto my-10 p-8">
 						<h1 className="text-3xl font-bold text-mustard text-center mb-6">
@@ -318,7 +318,7 @@ export default async function page() {
 				<p className="text-center text-mustard text-2xl">
 					Accedi per poter visionare i biglietti disponibili
 				</p>
-			)}
+			)} */}
 		</main>
 	);
 }
