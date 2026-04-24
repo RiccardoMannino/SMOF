@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import Providers from "./providers";
 import { Metadata } from "next";
@@ -20,16 +19,6 @@ export default function RootLayout({
 		>
 			<body>
 				<Providers>{children}</Providers>
-				<ToastContainer
-					position="top-right"
-					autoClose={3000}
-					hideProgressBar={false}
-					newestOnTop={false}
-					closeOnClick
-					draggable={false}
-					pauseOnHover
-					theme="light"
-				/>
 			</body>
 		</html>
 	);
