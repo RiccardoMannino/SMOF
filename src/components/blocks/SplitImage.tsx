@@ -107,8 +107,8 @@ export function SplitImage({
 							>
 								<Image
 									src={urlFor(image)
-										.maxWidth(800)
-										.maxHeight(600)
+										.width(800)
+										.height(600)
 										.quality(65)
 										.format("webp")
 										.url()}
