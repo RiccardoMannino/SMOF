@@ -2039,6 +2039,10 @@
             {
               "type": "string",
               "value": "Visite Guidate"
+            },
+            {
+              "type": "string",
+              "value": "Tour Mountain Bike"
             }
           ]
         },

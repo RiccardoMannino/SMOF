@@ -369,7 +369,8 @@ export type Eventi = {
     | "Smof Grill"
     | "Workshop"
     | "Orienteering"
-    | "Visite Guidate";
+    | "Visite Guidate"
+    | "Tour Mountain Bike";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
@@ -587,6 +588,7 @@ export type EVENTS_QUERY_RESULT = Array<{
     | "Musica"
     | "Orienteering"
     | "Smof Grill"
+    | "Tour Mountain Bike"
     | "Trail"
     | "Trekking"
     | "Visite Guidate"
@@ -800,6 +802,7 @@ export type EVENT_QUERY_RESULT = {
     | "Musica"
     | "Orienteering"
     | "Smof Grill"
+    | "Tour Mountain Bike"
     | "Trail"
     | "Trekking"
     | "Visite Guidate"
