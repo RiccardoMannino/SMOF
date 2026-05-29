@@ -10,9 +10,7 @@ import { components } from "@/sanity/portableTextComponent";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
