@@ -34,6 +34,7 @@ export const event = defineType({
           "Orienteering",
           "Visite Guidate",
           "Tour Mountain Bike",
+          "Convegno",
         ], // tipo evento
         layout: "dropdown",
       },

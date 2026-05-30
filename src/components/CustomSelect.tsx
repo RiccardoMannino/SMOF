@@ -30,6 +30,7 @@ export function CustomSelect({
     | "Orienteering"
     | "Visite Guidate"
     | "Tour Mountain Bike"
+    | "Convegno"
     | null
   )[];
 }) {
