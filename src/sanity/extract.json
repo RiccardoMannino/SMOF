@@ -2043,6 +2043,10 @@
             {
               "type": "string",
               "value": "Tour Mountain Bike"
+            },
+            {
+              "type": "string",
+              "value": "Convegno"
             }
           ]
         },

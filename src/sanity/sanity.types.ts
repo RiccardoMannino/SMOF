@@ -370,7 +370,8 @@ export type Eventi = {
     | "Workshop"
     | "Orienteering"
     | "Visite Guidate"
-    | "Tour Mountain Bike";
+    | "Tour Mountain Bike"
+    | "Convegno";
   raduno?: string;
   equipaggiamento?: string;
   specifiche?: BlockContent;
@@ -580,6 +581,7 @@ export type EVENTS_QUERY_RESULT = Array<{
   slug: Slug | null;
   eventName: string | null;
   eventType:
+    | "Convegno"
     | "Corsi"
     | "Documentario"
     | "Dog Trekking"
@@ -794,6 +796,7 @@ export type EVENT_QUERY_RESULT = {
   eventName: string | null;
   specifiche: BlockContent | null;
   eventType:
+    | "Convegno"
     | "Corsi"
     | "Documentario"
     | "Dog Trekking"
